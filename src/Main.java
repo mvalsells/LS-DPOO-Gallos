@@ -1,4 +1,4 @@
-import java.awt.Menu;
+
 
 public class Main  {
 
@@ -14,7 +14,7 @@ public class Main  {
         controllerCompetició = new ControllerCompeticio(competició, menu);
         // Executem el bucle infinit del programa, el qual serà gestionat pel controller
         //taulellController.comencaCompeticio();//cosa de Malé!!!!!!
-        //menu.mostraMenu();
+        controllerCompetició.executaMenu();
 
     }
 

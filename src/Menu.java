@@ -33,13 +33,13 @@ public class Menu {
         return opcio;
     }
 
-    public void executaOpcio(){
+    /*public void executaOpcio(){
 
     }
 
     public void executaMenu(){
 
-    }
+    }*/
 
     // Mètode per a mostrar un missatge per pantalla
     public void display(String s) {
