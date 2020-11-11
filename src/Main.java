@@ -1,9 +1,4 @@
-package sample;
-
-import sample.Competició;
-import sample.ControllerCompetició;
-
-import java.awt.*;
+import java.awt.Menu;
 
 public class Main  {
 
