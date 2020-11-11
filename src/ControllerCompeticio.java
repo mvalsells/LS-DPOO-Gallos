@@ -10,6 +10,12 @@ public class ControllerCompeticio {
             this.menu = menu;
 
         }
+        public void haComençat(){
+                if(!competició.haComençat()){
+
+                }
+
+        }
 
         public void executaMenu(){
                 int opcio = -1;
@@ -46,8 +52,6 @@ public class ControllerCompeticio {
 
         public void faseActual(){}
 
-        public void haComençat(){
 
-        }
 
 }
