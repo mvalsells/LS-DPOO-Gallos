@@ -8,6 +8,7 @@ public class ControllerCompeticio {
         public ControllerCompeticio (Competicio competició, Menu menu) {
             this.competició = competició;
             this.menu = menu;
+
         }
 
         public void registraUsuari(){}
