@@ -14,5 +14,15 @@ public class Json {
         dumpJSONElement(datos);
     }
 
+    public static void dumpJSONElement(JsonElement element){
+        //El método «dumpJSONElement» debe determinar el tipo de elemento que
+        // recibe como argumento (elemento simple, hashtable o array), y procesarlo en consecuencia.
+        //
+        //Si el elemento recibido es un elemento compuesto de otros
+        // elementos (array o hashtable), «dumpJSONElement» se llama a sí mismo recursivamente:
+
+
+    }
+
 
 }
