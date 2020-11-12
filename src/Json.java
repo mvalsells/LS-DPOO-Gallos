@@ -12,8 +12,18 @@ import java.util.Map.Entry;
 
 public class Json {
 
+    //Atributs
+    String fitxerCompeticio;
+    String fitxerBatalla;
 
-    public String fileToString (String fileName) throws IOException {
+    //Constructor
+    public Json (String fitxerCompeticio, String fitxerBatalla){
+        this.fitxerCompeticio = fitxerCompeticio;
+        this.fitxerBatalla = fitxerBatalla;
+    }
+
+    //Mètodes
+    private String fileToString (String fileName) throws IOException {
 
         FileReader fr;
         BufferedReader br;
@@ -31,6 +41,18 @@ public class Json {
 
         return sb.toString();
     }
+
+    public Competicio llegirCompeticio() throws IOException {
+        String json;
+        Competicio competicio;
+
+        json = fileToString(fitxerCompeticio);
+        competicio = new Competicio();
+
+        return  competicio;
+    }
+
+
 
     /*public static void main(String args[]) throws java.io.IOException {
         JsonParser parser = new JsonParser();

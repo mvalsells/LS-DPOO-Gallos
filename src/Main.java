@@ -20,9 +20,9 @@ public class Main  {
 
         Json json;
 
-        json = new Json();
+        json = new Json("src/competicio.json", "src/batalles.json");
 
-        System.out.print(json.fileToString("src/competicio.json"));
+        //System.out.print(json.fileToString("src/competicio.json"));
     }
 
 }
