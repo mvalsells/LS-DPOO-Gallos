@@ -9,8 +9,10 @@ import java.util.Map.Entry;
 public class Json {
     public static void main(String args[]) throws java.io.IOException {
         JsonParser parser = new JsonParser();
-        FileReader fr = new FileReader("datos.json");
+        FileReader fr = new FileReader("competició.json");
         JsonElement datos = parser.parse(fr);
         dumpJSONElement(datos);
+    }
+
 
 }
