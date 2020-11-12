@@ -1,6 +1,19 @@
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Competicio {
 
-    public Competicio(){}
+    //Atributs
+    private String name = new String();
+    private Date startDate = new Date();
+    private Date endDate = new Date();
+    private ArrayList<String> countries = new ArrayList<>();
+    private ArrayList<Fase> phases = new ArrayList<>();
+    private ArrayList<Rapero> rappers = new ArrayList<>();
+
+    public Competicio(String name, Date startDate, Date endDate, ArrayList countries, ArrayList phases){
+
+    }
 
     public boolean registraUsuari(){
         return false;

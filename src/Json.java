@@ -1,13 +1,15 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
 
-import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map.Entry;
 
 public class Json {
@@ -42,12 +44,48 @@ public class Json {
         return sb.toString();
     }
 
-    public Competicio llegirCompeticio() throws IOException {
+    public Competicio llegirCompeticio(String fileName) throws IOException, ParseException {
         String json;
         Competicio competicio;
 
-        json = fileToString(fitxerCompeticio);
-        competicio = new Competicio();
+        String name = new String();
+        Date startDate = new Date();
+        Date endDate = new Date();
+        ArrayList<String> countries = new ArrayList<>();
+        ArrayList<Fase> phases = new ArrayList<>();
+        Reader read = new FileReader(fileName);
+        JsonObject data = new JsonObject();
+        JsonObject jsonCompeteicio = new JsonObject();
+        SimpleDateFormat strToDate = new SimpleDateFormat("YYYY-MM-dd");
+        String strDate = new String();
+        JsonArray array = new JsonArray();
+
+        data = JsonParser.parseReader(read).getAsJsonObject();
+
+        // JSON  -> Variables
+
+        jsonCompeteicio = data.get("competition").getAsJsonObject();
+        name = jsonCompeteicio.get("name").getAsString();
+        strDate = jsonCompeteicio.get("startDate").getAsString();
+        startDate = strToDate.parse(strDate);
+        strDate = jsonCompeteicio.get("endDate").getAsString();
+        endDate = strToDate.parse(strDate);
+        array = jsonCompeteicio.get("phases").getAsJsonArray();
+
+        for (JsonElement jsonElement: array) {
+            float budget;
+            String country = new String();
+            JsonObject jsonPhase = new JsonObject();
+
+            jsonPhase = jsonElement.getAsJsonObject();
+
+            budget = jsonPhase.get("budget").getAsFloat();
+        }
+
+
+
+
+        competicio = new Competicio(name, startDate, endDate, countries, phases);
 
         return  competicio;
     }
@@ -70,8 +108,6 @@ public class Json {
 
 
     }
-
-
 
 
 }
