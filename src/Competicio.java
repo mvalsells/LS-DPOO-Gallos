@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -5,16 +6,23 @@ public class Competicio {
 
     //Atributs
     private String name = new String();
-    private Date startDate = new Date();
-    private Date endDate = new Date();
+    private LocalDate startDate;
+    private LocalDate endDate;
     private ArrayList<String> countries = new ArrayList<>();
     private ArrayList<Fase> phases = new ArrayList<>();
     private ArrayList<Rapero> rappers = new ArrayList<>();
 
-    public Competicio(String name, Date startDate, Date endDate, ArrayList countries, ArrayList phases){
-
+    //Constructor
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases){
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.countries = countries;
+        this.phases = phases;
     }
 
+
+    //Metodes
     public boolean registraUsuari(){
         return false;
     }
@@ -38,4 +46,15 @@ public class Competicio {
     public boolean haComençat(){
         return false;
     }
+
+
+    public void mostrarInfo() {
+        System.out.println("Nom: " + name);
+        System.out.println("Start date: " + startDate);
+        System.out.println("End date: " + endDate);
+        System.out.println("Array countries: " + countries);
+        System.out.println("Fases: " + phases);
+    }
+
+
 }

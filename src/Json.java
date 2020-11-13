@@ -8,6 +8,7 @@ import com.google.gson.JsonPrimitive;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map.Entry;
@@ -44,41 +45,37 @@ public class Json {
         return sb.toString();
     }*/
 
-    public Competicio llegirCompeticio(String fileName) throws IOException, ParseException {
+    public Competicio llegirCompeticio() throws IOException, ParseException {
         String json;
         Competicio competicio;
 
         String name = new String();
-        Date startDate = new Date();
-        Date endDate = new Date();
+        LocalDate startDate;
+        LocalDate endDate;
         ArrayList<String> countries = new ArrayList<>();
         ArrayList<String> phases = new ArrayList<>();
-        Reader read = new FileReader(fileName);
+        Reader read = new FileReader(fitxerCompeticio);
         JsonObject data = new JsonObject();
-        JsonObject jsonCompeteicio = new JsonObject();
+        JsonObject jsonCompeticio = new JsonObject();
         SimpleDateFormat strToDate = new SimpleDateFormat("YYYY-MM-dd");
         String strDate = new String();
         JsonArray array = new JsonArray();
 
-
-
         data = JsonParser.parseReader(read).getAsJsonObject();
-
-
-
-        
 
         // JSON  -> Variables
 
-        jsonCompeteicio = data.get("competition").getAsJsonObject();
-        name = jsonCompeteicio.get("name").getAsString();
+        jsonCompeticio = data.get("competition").getAsJsonObject();
+        name = jsonCompeticio.get("name").getAsString();
 
-        strDate = jsonCompeteicio.get("startDate").getAsString();
-        startDate = strToDate.parse(strDate);
-        strDate = jsonCompeteicio.get("endDate").getAsString();
-        endDate = strToDate.parse(strDate);
-        array = jsonCompeteicio.get("phases").getAsJsonArray();
+        //Llegir dades competició
+        strDate = jsonCompeticio.get("startDate").getAsString();
+        startDate = LocalDate.parse(strDate);
+        strDate = jsonCompeticio.get("endDate").getAsString();
+        endDate = LocalDate.parse(strDate);
+        array = jsonCompeticio.get("phases").getAsJsonArray();
 
+        //Llegir fases
         for (JsonElement jsonElement: array) {
             String budget = new String();
             String country = new String();
@@ -97,25 +94,16 @@ public class Json {
         }
 
         //array countries
-
-        array = jsonCompeteicio.get("countries").getAsJsonArray();
+        array = data.get("countries").getAsJsonArray();
         for(JsonElement jsonElement: array){
-            String pais = new String();
-            JsonObject jsonCompeticio = new JsonObject();
-            StringBuilder sb;
-            sb = new StringBuilder();
-            jsonCompeticio = jsonElement.getAsJsonObject();
-
-            pais = jsonCompeticio.getAsString();
-
-            sb.append(pais);
-            sb.append(",");
-            countries.add(sb.toString());
-
+            String pais = jsonElement.getAsString();
+            countries.add(pais);
         }
 
+        array = data.get("rappers").getAsJsonArray();
+        for (JsonElement jsonElement : array) {
 
-
+        }
 
         competicio = new Competicio(name, startDate, endDate, countries, phases);
 
