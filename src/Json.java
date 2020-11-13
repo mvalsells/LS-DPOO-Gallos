@@ -25,7 +25,7 @@ public class Json {
     }
 
     //Mètodes
-    private String fileToString (String fileName) throws IOException {
+    /*private String fileToString (String fileName) throws IOException {
 
         FileReader fr;
         BufferedReader br;
@@ -42,7 +42,7 @@ public class Json {
         }
 
         return sb.toString();
-    }
+    }*/
 
     public Competicio llegirCompeticio(String fileName) throws IOException, ParseException {
         String json;
@@ -52,7 +52,7 @@ public class Json {
         Date startDate = new Date();
         Date endDate = new Date();
         ArrayList<String> countries = new ArrayList<>();
-        ArrayList<Fase> phases = new ArrayList<>();
+        ArrayList<String> phases = new ArrayList<>();
         Reader read = new FileReader(fileName);
         JsonObject data = new JsonObject();
         JsonObject jsonCompeteicio = new JsonObject();
@@ -60,7 +60,10 @@ public class Json {
         String strDate = new String();
         JsonArray array = new JsonArray();
 
+
+
         data = JsonParser.parseReader(read).getAsJsonObject();
+
 
 
         
@@ -69,6 +72,7 @@ public class Json {
 
         jsonCompeteicio = data.get("competition").getAsJsonObject();
         name = jsonCompeteicio.get("name").getAsString();
+
         strDate = jsonCompeteicio.get("startDate").getAsString();
         startDate = strToDate.parse(strDate);
         strDate = jsonCompeteicio.get("endDate").getAsString();
@@ -76,13 +80,38 @@ public class Json {
         array = jsonCompeteicio.get("phases").getAsJsonArray();
 
         for (JsonElement jsonElement: array) {
-            float budget;
+            String budget = new String();
             String country = new String();
             JsonObject jsonPhase = new JsonObject();
-
+            StringBuilder sb;
+            sb = new StringBuilder();
             jsonPhase = jsonElement.getAsJsonObject();
 
-            budget = jsonPhase.get("budget").getAsFloat();
+            budget = jsonPhase.get("budget").getAsString();
+            country = jsonPhase.get("country").getAsString();
+            sb.append(budget);
+            sb.append(";");
+            sb.append(country);
+            //sb.toString();
+            phases.add(sb.toString());
+        }
+
+        //array countries
+
+        array = jsonCompeteicio.get("countries").getAsJsonArray();
+        for(JsonElement jsonElement: array){
+            String pais = new String();
+            JsonObject jsonCompeticio = new JsonObject();
+            StringBuilder sb;
+            sb = new StringBuilder();
+            jsonCompeticio = jsonElement.getAsJsonObject();
+
+            pais = jsonCompeticio.getAsString();
+
+            sb.append(pais);
+            sb.append(",");
+            countries.add(sb.toString());
+
         }
 
 

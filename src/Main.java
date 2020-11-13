@@ -21,6 +21,7 @@ public class Main  {
         Json json;
 
         json = new Json("src/competicio.json", "src/batalles.json");
+        //json.llegirCompeticio(json);
 
         //System.out.print(json.fileToString("src/competicio.json"));
     }
