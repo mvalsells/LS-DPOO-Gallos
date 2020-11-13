@@ -21,6 +21,53 @@ public class Competicio {
         this.phases = phases;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public ArrayList<String> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(ArrayList<String> countries) {
+        this.countries = countries;
+    }
+
+    public ArrayList<Fase> getPhases() {
+        return phases;
+    }
+
+    public void setPhases(ArrayList<Fase> phases) {
+        this.phases = phases;
+    }
+
+    public ArrayList<Rapero> getRappers() {
+        return rappers;
+    }
+
+    public void setRappers(ArrayList<Rapero> rappers) {
+        this.rappers = rappers;
+    }
 
     //Metodes
     public boolean registraUsuari(){

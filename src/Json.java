@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
 
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -89,13 +90,59 @@ public class Json {
             String pais = jsonElement.getAsString();
             countries.add(pais);
         }
-
+        competicio = new Competicio(name, startDate, endDate, countries, phases);
         array = data.get("rappers").getAsJsonArray();
-        for (JsonElement jsonElement : array) {
+        /*for (JsonElement jsonElement :array) {
+            //ArrayList<Rapero> raperos = new ArrayList<>();
+            String realName = new String();
+            String stageName = new String();
+            String bir = new String();
+            LocalDate birth;
+            String nationality = new String();
+            Integer level;
+            String url = new String();
+            URL photo;
 
+            //realName = jsonElement.getAsString();
+
+            String raperito = array.get(i).getAsString();
+            String raperos.get(i) = data.get("realName").getAsString();
+            stageName = raperos.get(i).getStageName();
+            birth = raperos.get(i).getBirth();
+            nationality = raperos.get(i).getNationality();
+            level = raperos.get(i).getLevel();
+
+            photo = raperos.get(i).getPhoto();
+            realName = jsonElement.getAsString();
+            stageName = jsonElement.getAsString();
+            bir = jsonElement.getAsString();
+            birth = LocalDate.parse(bir);
+            nationality = jsonElement.getAsString();
+            level = jsonElement.getAsInt();
+            url = jsonElement.getAsString();
+            photo = new URL("url");
+
+
+
+
+
+            //competicio.registraUsuari(nom, nomrapper....);
+
+        }*/
+        for(JsonElement jsonElement : array){
+            String realName = new String();
+            String stageName = new String();
+            String bir = new String();
+            LocalDate birth;
+            String nationality = new String();
+            Integer level;
+            String url = new String();
+            URL photo;
+
+            realName = jsonElement.getAsString();
         }
 
-        competicio = new Competicio(name, startDate, endDate, countries, phases);
+
 
         return  competicio;
     }
