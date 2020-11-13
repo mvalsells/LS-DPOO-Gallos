@@ -26,40 +26,30 @@ public class Json {
     }
 
     //Mètodes
-    /*private String fileToString (String fileName) throws IOException {
-
-        FileReader fr;
-        BufferedReader br;
-        StringBuilder sb;
-        String line;
-        fr = new FileReader(fileName);
-        br = new BufferedReader(fr);
-        sb = new StringBuilder();
-        line = br.readLine();
-
-        while (line != null ){
-            sb.append(line);
-            line = br.readLine();
-        }
-
-        return sb.toString();
-    }*/
-
     public Competicio llegirCompeticio() throws IOException, ParseException {
-        String json;
-        Competicio competicio;
 
+        //
+
+
+
+        //Vars competició
+        Competicio competicio;
         String name = new String();
         LocalDate startDate;
         LocalDate endDate;
         ArrayList<String> countries = new ArrayList<>();
         ArrayList<String> phases = new ArrayList<>();
+
+        //Llegir JSON
         Reader read = new FileReader(fitxerCompeticio);
         JsonObject data = new JsonObject();
         JsonObject jsonCompeticio = new JsonObject();
-        SimpleDateFormat strToDate = new SimpleDateFormat("YYYY-MM-dd");
         String strDate = new String();
         JsonArray array = new JsonArray();
+
+        //Altres
+
+
 
         data = JsonParser.parseReader(read).getAsJsonObject();
 

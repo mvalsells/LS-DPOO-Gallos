@@ -56,5 +56,4 @@ public class Competicio {
         System.out.println("Fases: " + phases);
     }
 
-
 }
