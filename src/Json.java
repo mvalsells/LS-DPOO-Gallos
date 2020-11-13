@@ -62,6 +62,9 @@ public class Json {
 
         data = JsonParser.parseReader(read).getAsJsonObject();
 
+
+        
+
         // JSON  -> Variables
 
         jsonCompeteicio = data.get("competition").getAsJsonObject();
