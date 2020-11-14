@@ -20,7 +20,7 @@ public class Main  {
 
         menu = new Menu();
         //competicio = new Competicio();
-        controllerCompeticio = new ControllerCompeticio(competicio, menu);
+        controllerCompeticio = new ControllerCompeticio();
         // Executem el bucle infinit del programa, el qual serà gestionat pel controller
         //taulellController.comencaCompeticio();//cosa de Malé!!!!!!
         controllerCompeticio.executaMenu();

@@ -10,11 +10,31 @@ public class Menu {
     }
 
     public void mostraMenu(Competicio competicio){
-        System.out.println("Welcome to competition: " + competicio.getName());
-        System.out.println("Starts on " + competicio.getStartDate());
-        System.out.println("Ends on " + competicio.getEndDate());
-        System.out.println("Phases: " + competicio.getPhases().size());
-        System.out.println("Currently: "+ competicio.getRappers().size()+ " participants");
+        //Nom
+        StringBuilder sb = new StringBuilder();
+        sb.append("Welcome to competition: ");
+        sb.append(competicio.getName());
+        System.out.println(sb.toString());
+        //Start
+        sb = new StringBuilder();
+        sb.append("Starts on ");
+        sb.append(competicio.getStartDate());
+        System.out.println(sb.toString());
+        //End
+        sb.append("Ends on ");
+        sb.append(competicio.getEndDate());
+        System.out.println(sb.toString());
+        //Phases
+        sb = new StringBuilder();
+        sb.append("Phases: ");
+        sb.append(competicio.numFase());
+        System.out.println(sb.toString());
+        //Participants
+        sb = new StringBuilder();
+        sb.append("Currently: ");
+        sb.append(competicio.numParticipants());
+        sb.append(" participants");
+        System.out.println(sb.toString());
 
         if(!competicio.haComençat()){
             System.out.println("\nCompetition hasn't started yet. Do you want to:");
@@ -33,7 +53,7 @@ public class Menu {
 
 
     public int demanaOpcio(){
-        System.out.print("\nChoose an option");
+        System.out.print("\nChoose an option: ");
         int opcio = scanner.nextInt();
         scanner.nextLine();
         return opcio;

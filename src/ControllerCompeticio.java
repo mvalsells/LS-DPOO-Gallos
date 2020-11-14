@@ -1,71 +1,66 @@
-
+import java.io.IOException;
+import java.time.LocalDate;
 
 public class ControllerCompeticio {
+    //Atributs
+    private Competicio competicio;        // Model de dades
+    private  Menu menu;              // Menu, interfície gràfica
 
-        private Competicio competició;        // Model de dades
-        private  Menu menu;              // Menu, interfície gràfica
+    //Constructor
+    public ControllerCompeticio () throws IOException {
+        Json json = new Json("src/competicio.json", "src/batalles.json");
+        competicio = json.llegirCompeticio();
+        menu = new Menu();
+    }
 
-        public ControllerCompeticio (Competicio competició, Menu menu) {
-            this.competició = competició;
-            this.menu = menu;
-
+    public void executaMenu() {
+        menu.mostraMenu(competicio);
+        int opcio = 0;
+        while (opcio != 1 || opcio != 2) {
+            //mostra menu i demana opcio
+            competicio.haComençat();
+            opcio = menu.demanaOpcio();
+            switch (opcio) {
+                case 1:
+                    if (!competicio.haComençat()) {
+                        //register
+                        System.out.println("Please, enter your personal information:");
+                        //competicio.registraUsuari()
+                    } else {
+                        //login
+                    }
+                    break;
+                case 2:
+                    System.out.println("\t\uD83C\uDDFA\uD83C\uDDF8");
+                    break;
+                default:
+                    menu.display("Please enter a rigth option! (1 or 2)");
+                    break;
+            }
         }
-        /*public void haComençat(){
-                int noinici;
-                if(!competició.haComençat()){
-                        noinici=0;
-                }
+    }
 
-        }*/
+    public boolean registraUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
+        return competicio.registraUsuari(realName, stageName, birth, nationality, level, photo);
+    }
 
-        public void executaMenu(){
+    public int numFase() {
+        return competicio.numFase();
+    }
 
-                int opcio = -1;
+    public int numParticipants() {
+        return competicio.numParticipants();
+    }
 
-                while(opcio != 2){
-                     //mostra menu i demana opcio
-                     menu.mostraMenu(competició);
-                     competició.haComençat();
-                     opcio = menu.demanaOpcio();
+    public boolean haAcabat() {
+        return competicio.haAcabat();
+    }
 
-                     switch (opcio){
-                             case 1:
-                                     if(!competició.haComençat()){
-                                             //register
-                                             System.out.println("Please, enter your personal information:");
-                                             //competició.registraUsuari()
-                                     }else{
-                                             //login
+    public int faseActual() {
+        return competicio.faseActual();
+    }
 
-
-                                     }
-
-                                     break;
-                             case 2:
-                                     System.out.println("\t\uD83C\uDDFA\uD83C\uDDF8");
-                                     break;
-                             default:
-                                     menu.display("Entra una opció correcta!");
-                                     break;
-                     }
-
-
-
-                }
-        }
-
-        public void registraUsuari(){
-
-        }
-
-        public void numFase(){}
-
-        public void numParticipants(){}
-
-        public void haAcabat(){}
-
-        public void faseActual(){}
-
-
-
+    public boolean haComençat() {
+        return competicio.haComençat();
+    }
 }
