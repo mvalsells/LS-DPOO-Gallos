@@ -1,15 +1,14 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Competicio {
 
     //Atributs
-    private String name = new String();
+    private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-    private ArrayList<String> countries = new ArrayList<>();
-    private ArrayList<Fase> phases = new ArrayList<>();
+    private ArrayList<String> countries;
+    private ArrayList<Fase> phases;
     private ArrayList<Rapero> rappers = new ArrayList<>();
 
     //Constructor
@@ -70,8 +69,10 @@ public class Competicio {
     }
 
     //Metodes
-    public boolean registraUsuari(){
-        return false;
+    public boolean registraUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo){
+
+
+        return true;
     }
 
     public int numFase(){

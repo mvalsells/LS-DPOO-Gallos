@@ -1,11 +1,9 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 
 public class Main  {
 
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException {
         // Creem el taulell, el seu controller i el Menú (Interfície Gràfica)
         /*Menu menu;
         Competicio competicio;
@@ -23,9 +21,9 @@ public class Main  {
 
         json = new Json("src/competicio.json", "src/batalles.json");
 
-        Competicio competicio = json.llegirCompeticio();
-        competicio.mostrarInfo();
-
+        //Competicio competicio = json.llegirCompeticio();
+        //competicio.mostrarInfo();
+        json.llegirTemes();
 
     }
 
