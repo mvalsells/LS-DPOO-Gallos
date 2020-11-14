@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Competicio {
 
@@ -10,6 +11,7 @@ public class Competicio {
     private LocalDate endDate;
     private ArrayList<String> countries;
     private ArrayList<Fase> phases;
+    private int numFases;
     private ArrayList<Rapero> raperos;
     private ArrayList<Tema> temes;
     private Json json = new Json("src/competicio.json", "src/batalles.json");
@@ -59,6 +61,9 @@ public class Competicio {
     }
 
     public ArrayList<Fase> getPhases() {
+        for(int i=0; i<phases.size(); i++){
+            numFases++;
+        }
         return phases;
     }
 
@@ -98,7 +103,13 @@ public class Competicio {
     }
 
     public boolean haComençat(){
-        return false;
+        java.util.Date fecha = new Date();
+        if(startDate.equals(fecha)){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 

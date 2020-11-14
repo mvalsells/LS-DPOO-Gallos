@@ -10,19 +10,22 @@ public class ControllerCompeticio {
             this.menu = menu;
 
         }
-        public void haComençat(){
+        /*public void haComençat(){
+                int noinici;
                 if(!competició.haComençat()){
-
+                        noinici=0;
                 }
 
-        }
+        }*/
 
         public void executaMenu(){
+
                 int opcio = -1;
 
                 while(opcio != 2){
                      //mostra menu i demana opcio
-                     menu.mostraMenu();
+                     menu.mostraMenu(competició);
+                     competició.haComençat();
                      opcio = menu.demanaOpcio();
 
                      switch (opcio){

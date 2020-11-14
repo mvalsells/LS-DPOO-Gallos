@@ -9,27 +9,31 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void mostraMenu(){
-        System.out.println("\tWelcome to competition:");
-        System.out.println("\tStarts on");
-        System.out.println("\tEnds on");
-        System.out.println("\tPhases:");
-        System.out.println("\tCurrently: participants");
+    public void mostraMenu(Competicio competicio){
+        System.out.println("Welcome to competition: " + competicio.getName());
+        System.out.println("Starts on " + competicio.getStartDate());
+        System.out.println("Ends on " + competicio.getEndDate());
+        System.out.println("Phases: " + competicio.getPhases().size());
+        System.out.println("Currently: "+ competicio.getRappers().size()+ " participants");
 
-        //if !start on
-        System.out.println("\t\tCompetition hasn't started yet. Do you want to:");
-        System.out.println("\t\t1. Register");
-        System.out.println("\t2. Leave");
+        if(!competicio.haComençat()){
+            System.out.println("\nCompetition hasn't started yet. Do you want to:");
+            System.out.println("\t1. Register");
+            System.out.println("\t2. Leave");
 
-        //if start on
-        System.out.println("\t\tCompetition started. Do you want to:");
-        System.out.println("\t\t1. Login");
-        System.out.println("\t2. Leave");
+        }else{
+            System.out.println("\nCompetition started. Do you want to:");
+            System.out.println("\t1. Login");
+            System.out.println("\t2. Leave");
+        }
+
 
     }
 
+
+
     public int demanaOpcio(){
-        System.out.print("Choose an option");
+        System.out.print("\nChoose an option");
         int opcio = scanner.nextInt();
         scanner.nextLine();
         return opcio;
