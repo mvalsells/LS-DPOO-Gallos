@@ -83,7 +83,7 @@ public class Competicio {
         //Comprovo si ja hi ha el rappero
         boolean existeixR=false;
         for(Rapero rapero : raperos){
-            if (stageName == rapero.getStageName()){
+            if (stageName.equals(rapero.getStageName())){
                 existeixR=true;
                 break;
             }
@@ -98,15 +98,13 @@ public class Competicio {
                 estat = 2;
             } else {
                 //Comprobo si existeix el pais
-                ArrayList<Pais> paisos = new ArrayList<>();
                 boolean existeixP = false;
-                for (Pais pais : paisos) {
-                    if (nationality == pais.getNomAngles()){
+                for (String pais : countries) {
+                    if (nationality.equals(pais)){
                         existeixP = true;
                         break;
                     }
                 }
-                existeixP = true; //temporal mentre no hi ha els paisos carregats
                 if (!existeixP) {
                     estat = 3;
                 } else {
@@ -115,36 +113,23 @@ public class Competicio {
             }
         }
 
+        //Si dades rapero OK
         if (estat==0) {
             //Creo rapero i el poso al arrayList
             Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo);
             raperos.add(rapero);
 
             //Afegir el rapero al JSON
-
+            json.escriureRapero(rapero);
         }
 
-
-        /*
-        1- Comprobar dades, rapera exiteix???, pais existeix?? data neixament és més gran q avui????
-        2- Crear rapero amb les dades ok
-        3- Afegir rapero al JSON
-             Opció
-              a- Afegir només el rapero al array
-              b- Eliminar array del json i tronar-los afegir tots
-         */
-
-
-
-
+        return estat;
         /* Llegenda return
         0 -> Dades correctes i guardat al JSON
         1 -> Nom artístic ja existeix
         2 -> Data neixament no valida
         3 -> País no existeix
-        4 -> URL foto no correcte???
         */
-        return estat;
     }
 
     public String nomGuanyador() {

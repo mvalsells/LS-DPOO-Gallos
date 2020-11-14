@@ -7,19 +7,31 @@ import java.util.ArrayList;
 
 public class ControllerCompeticio {
     //Atributs
-    private Competicio competicio;        // Model de dades
-    private  Menu menu;              // Menu, interfície gràfica
+    private final Competicio competicio;        // Model de dades
+    private final Menu menu;              // Menu, interfície gràfica
 
     //Constructor
-    public ControllerCompeticio () throws IOException {
+    public ControllerCompeticio() throws IOException {
         Json json = new Json("src/competicio.json", "src/batalles.json");
         competicio = json.llegirCompeticio();
         menu = new Menu();
     }
 
+    public static boolean validarFecha(String bir) {
+        try {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
+            formatoFecha.setLenient(false);
+            formatoFecha.parse(bir);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
+    }
+
     public void executaMenu() throws IOException {
         menu.welcome(competicio);
-        if (competicio.haAcabat()){
+        if (competicio.haAcabat()) {
             System.exit(0);
         }
         int opcio = 0;
@@ -29,13 +41,10 @@ public class ControllerCompeticio {
             switch (opcio) {
                 case 1:
                     if (!competicio.haComencat()) {
-                        int estatRegistre;
-                        do {
-                            //Demano dades registre
-                            estatRegistre = registrarUsuari();
-                            //Mostro el resultat del registre
-                            menu.resultatRegistre(estatRegistre);
-                        } while (estatRegistre != 0);
+                        //Demano dades registre
+                        int estatRegistre = registrarUsuari();
+                        //Mostro el resultat del registre
+                        menu.resultatRegistre(estatRegistre);
                     } else {
                         //login
                     }
@@ -52,64 +61,36 @@ public class ControllerCompeticio {
         }
     }
 
-
-    public int registrarUsuari() throws  IOException{
-        int estat=-1;
+    public int registrarUsuari() throws IOException {
+        int estat = -1;
         boolean fechaok = true;
-            ArrayList<String> dadesUsuari = menu.demanaInfoUser();
-            String realName = dadesUsuari.get(0);
-            String stageName = dadesUsuari.get(1);
-            String bir = dadesUsuari.get(2);
-            String nationality = dadesUsuari.get(3);
-            String nivell = dadesUsuari.get(4);
-            int level = Integer.parseInt(nivell);
-            String photo = dadesUsuari.get(5);
+        ArrayList<String> dadesUsuari = menu.demanaInfoUser();
+        String realName = dadesUsuari.get(0);
+        String stageName = dadesUsuari.get(1);
+        String bir = dadesUsuari.get(2);
+        String nationality = dadesUsuari.get(3);
+        String nivell = dadesUsuari.get(4);
+        int level = Integer.parseInt(nivell);
+        String photo = dadesUsuari.get(5);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-
-
-            fechaok = validarFecha(bir);
-            if(fechaok){
-                LocalDate birth = LocalDate.parse(bir, formatter);
-                estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
-            }else{
-                estat=2;
-            }
-
-            return estat;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-
-
-        // Array list -> tipus correcte
-
-        /*if ( data no format correcte) {
-            estat = 2;
+        fechaok = validarFecha(bir);
+        if (fechaok) {
+            LocalDate birth = LocalDate.parse(bir, formatter);
+            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
         } else {
-            estat = competicio.registreUsuari(Falta posra dades);
-        }*/
-
-        /* Llegenda return
-        0 -> Dades correctes i guardat al JSON
-        1 -> Nom artístic ja existeix
-        2 -> Data neixament no valida
-        3 -> País no existeix
-        4 -> URL foto no correcte???
-        */
-
-    }
-    public static boolean validarFecha(String bir){
-        try{
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
-            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
-            formatoFecha.setLenient(false);
-            formatoFecha.parse(bir);
+            estat = 2;
         }
-        catch (ParseException e){
-            return false;
-        }
-        return true;
+
+        return estat;
+            /* Llegenda return
+            0 -> Dades correctes i guardat al JSON
+            1 -> Nom artístic ja existeix
+            2 -> Data neixament no valida
+            3 -> País no existeix
+            */
     }
 
     public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {

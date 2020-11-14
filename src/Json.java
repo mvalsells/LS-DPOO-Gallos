@@ -160,4 +160,8 @@ public class Json {
 
     }
 
+    public void escriureRapero(Rapero rapero) {
+        System.out.println("*****************\nFalta implamentar la funció que guardar al JSON!!!!\n*****************");
+    }
+
 }

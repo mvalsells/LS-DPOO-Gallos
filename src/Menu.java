@@ -20,12 +20,12 @@ public class Menu {
         //Start
         sb = new StringBuilder();
         sb.append("Starts on ");
-        sb.append(competicio.getStartDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+        sb.append(competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
         System.out.println(sb.toString());
         //End
         sb = new StringBuilder();
         sb.append("Ends on ");
-        sb.append(competicio.getEndDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)));
+        sb.append(competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
         System.out.println(sb.toString());
         //Phases
         sb = new StringBuilder();
@@ -87,28 +87,27 @@ public class Menu {
     }
 
     public void resultatRegistre (int estat) {
+        System.out.println();
         switch (estat) {
             case 0:
-                System.out.println("Registration completed!\n--------------------------------------------------");
-                System.out.println("Press enter to go back to the main menu");
-                scanner.nextLine();
+                System.out.println("Registration completed!");
                 break;
             case 1:
                 System.out.println("A rapper with this artistic name already exists");
                 break;
             case 2:
-                System.out.println("Birth date has an invalid format");
+                System.out.println("Birth date format is invalid");
                 break;
             case 3:
-                System.out.println("Country does not exist in our system");
-                break;
-            case 4:
-                System.out.println("Photo URL has an invalid format");
+                System.out.println("Country is not accepted in this competition");
                 break;
             default:
                 System.out.println("The registration process returned an unexpected status error");
                 break;
         }
+        System.out.println("--------------------------------------------------");
+        System.out.println("Press enter to go back to the main menu");
+        scanner.nextLine();
     }
 
     // Mètode per a mostrar un missatge per pantalla
