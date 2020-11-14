@@ -77,10 +77,28 @@ public class Competicio {
     }
 
     //Metodes
-    public boolean registraUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo){
+    public int registreUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo){
+
+        /*
+        1- Comprobar dades, rapera exiteix???, pais existeix?? data neixament és més gran q avui????
+        2- Crear rapero amb les dades ok
+        3- Afegir rapero al JSON
+             Opció
+              a- Afegir només el rapero al array
+              b- Eliminar array del json i tronar-los afegir tots
+         */
 
 
-        return true;
+
+
+        /* Llegenda return
+        0 -> Dades correctes i guardat al JSON
+        1 -> Nom artístic ja existeix
+        2 -> Data neixament no valida
+        3 -> País no existeix
+        4 -> URL foto no correcte???
+        */
+        return 0;
     }
 
     public String nomGuanyador() {

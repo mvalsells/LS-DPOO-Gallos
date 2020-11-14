@@ -52,6 +52,16 @@ public class ControllerCompeticio {
 
     public int registrarUsuari() {
         ArrayList<String> dadesUsuari = menu.demanaInfoUser();
+        String realName = dadesUsuari.get(0);
+        int estat=-1;
+
+        // Array list -> tipus correcte
+
+        if (/* data no format correcte*/) {
+            estat = 2;
+        } else {
+            estat = competicio.registreUsuari(/*Falta posra dades*/);
+        }
 
         /* Llegenda return
         0 -> Dades correctes i guardat al JSON
@@ -60,11 +70,11 @@ public class ControllerCompeticio {
         3 -> País no existeix
         4 -> URL foto no correcte???
         */
-        return 0;
+        return estat;
     }
 
-    public boolean registraUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
-        return competicio.registraUsuari(realName, stageName, birth, nationality, level, photo);
+    public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
+        return competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
     }
 
     public int numFase() {
