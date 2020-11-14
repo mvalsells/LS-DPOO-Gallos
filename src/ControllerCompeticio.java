@@ -13,19 +13,18 @@ public class ControllerCompeticio {
         menu = new Menu();
     }
 
-    public void executaMenu() {
+    public void executaMenu() throws IOException {
         menu.welcome(competicio);
-        /*if (competicio.haAcabat()){
+        if (competicio.haAcabat()){
             System.exit(0);
-        }*/
+        }
         int opcio = 0;
-        while (opcio != 1 || opcio != 2) {
+        while (opcio != 1) {
             //mostra menu i demana opcio
-            competicio.haComençat();
             opcio = menu.demanaOpcio();
             switch (opcio) {
                 case 1:
-                    if (!competicio.haComençat()) {
+                    if (!competicio.haComencat()) {
                         //register
                         System.out.println("Please, enter your personal information:");
                         //competicio.registraUsuari()
@@ -34,7 +33,7 @@ public class ControllerCompeticio {
                     }
                     break;
                 case 2:
-                    System.out.println("\t\uD83C\uDDFA\uD83C\uDDF8");
+                    System.exit(0);
                     break;
                 default:
                     menu.display("Please enter a rigth option! (1 or 2)");
@@ -48,7 +47,7 @@ public class ControllerCompeticio {
     }
 
     public int numFase() {
-        return competicio.numFase();
+        return competicio.numFases();
     }
 
     public int numParticipants() {
@@ -63,7 +62,7 @@ public class ControllerCompeticio {
         return competicio.faseActual();
     }
 
-    public boolean haComençat() {
-        return competicio.haComençat();
+    public boolean haComencat() {
+        return competicio.haComencat();
     }
 }

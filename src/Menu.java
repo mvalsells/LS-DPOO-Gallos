@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Scanner;
@@ -9,7 +10,7 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void welcome(Competicio competicio){
+    public void welcome(Competicio competicio) throws IOException {
         //Nom
         StringBuilder sb = new StringBuilder();
         sb.append("Welcome to competition: ");
@@ -28,7 +29,7 @@ public class Menu {
         //Phases
         sb = new StringBuilder();
         sb.append("Phases: ");
-        sb.append(competicio.numFase());
+        sb.append(competicio.numFases());
         System.out.println(sb.toString());
         //Participants
         sb = new StringBuilder();
@@ -37,7 +38,7 @@ public class Menu {
         sb.append(" participants");
         System.out.println(sb.toString());
 
-        if(!competicio.haComençat()){
+        if(!competicio.haComencat()){
             System.out.println("\nCompetition hasn't started yet. Do you want to:");
             System.out.println("\t1. Register");
             System.out.println("\t2. Leave");
@@ -49,10 +50,11 @@ public class Menu {
         } else {
             sb = new StringBuilder();
             System.out.println("Competition has ended!");
-            sb.append("Thw winner is: ");
+            sb.append("The winner is: ");
             sb.append(competicio.nomGuanyador());
             System.out.println(sb.toString());
             System.out.println("Press enter to exit");
+            scanner.nextLine();
         }
 
 

@@ -11,7 +11,6 @@ public class Competicio {
     private LocalDate endDate;
     private ArrayList<String> countries;
     private ArrayList<Fase> phases;
-    private int numFases;
     private ArrayList<Rapero> raperos;
     private ArrayList<Tema> temes;
     private Json json = new Json("src/competicio.json", "src/batalles.json");
@@ -62,9 +61,6 @@ public class Competicio {
     }
 
     public ArrayList<Fase> getPhases() {
-        for(int i=0; i<phases.size(); i++){
-            numFases++;
-        }
         return phases;
     }
 
@@ -92,7 +88,7 @@ public class Competicio {
     }
 
 
-    public int numFase(){
+    public int numFases(){
         return phases.size();
     }
 
@@ -100,22 +96,26 @@ public class Competicio {
         return raperos.size();
     }
 
-    public boolean haAcabat(){
-        return true;
-    }
-
     public int faseActual(){
         return 2;
     }
 
-    public boolean haComençat(){
-        java.util.Date fecha = new Date();
-        if(startDate.equals(fecha)){
+    public boolean haAcabat(){
+        LocalDate avui = LocalDate.now();
+        if(avui.isAfter(endDate)){
             return true;
         }else{
             return false;
         }
+    }
 
+    public boolean haComencat(){
+        LocalDate avui = LocalDate.now();
+        if(avui.isAfter(startDate)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
