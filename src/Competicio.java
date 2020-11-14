@@ -78,6 +78,51 @@ public class Competicio {
 
     //Metodes
     public int registreUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo){
+        int estat;
+
+        //Comprovo si ja hi ha el rappero
+        boolean existeixR=false;
+        for(Rapero rapero : raperos){
+            if (stageName == rapero.getStageName()){
+                existeixR=true;
+                break;
+            }
+        }
+
+        if (existeixR){
+            estat = 1;
+        } else {
+            //Comprobo que la data de neixament no sigui més tard que avui
+            LocalDate avui = LocalDate.now();
+            if (avui.isBefore(birth)) {
+                estat = 2;
+            } else {
+                //Comprobo si existeix el pais
+                ArrayList<Pais> paisos = new ArrayList<>();
+                boolean existeixP = false;
+                for (Pais pais : paisos) {
+                    if (nationality == pais.getNomAngles()){
+                        existeixP = true;
+                        break;
+                    }
+                }
+                existeixP = true; //temporal mentre no hi ha els paisos carregats
+                if (!existeixP) {
+                    estat = 3;
+                } else {
+                    estat = 0;
+                }
+            }
+        }
+
+        if (estat==0) {
+            //Creo rapero i el poso al arrayList
+            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo);
+            raperos.add(rapero);
+
+            //Afegir el rapero al JSON
+        }
+
 
         /*
         1- Comprobar dades, rapera exiteix???, pais existeix?? data neixament és més gran q avui????
@@ -98,7 +143,7 @@ public class Competicio {
         3 -> País no existeix
         4 -> URL foto no correcte???
         */
-        return 0;
+        return estat;
     }
 
     public String nomGuanyador() {
