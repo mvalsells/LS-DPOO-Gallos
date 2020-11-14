@@ -104,9 +104,7 @@ public class Menu {
                 System.out.println("The registration process returned an unexpected status error");
                 break;
         }
-        System.out.println("--------------------------------------------------");
-        System.out.println("Press enter to go back to the main menu");
-        scanner.nextLine();
+        enterMainMenu();
     }
 
     //Obtenir Login
@@ -121,8 +119,13 @@ public class Menu {
         sb.append(login);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());
+        enterMainMenu();
     }
-
+    private void enterMainMenu(){
+        System.out.println("--------------------------------------------------");
+        System.out.println("Press enter to go back to the main menu");
+        scanner.nextLine();
+    }
     // Mètode per a mostrar un missatge per pantalla
     public void display(String s) {
         System.out.println(s);
