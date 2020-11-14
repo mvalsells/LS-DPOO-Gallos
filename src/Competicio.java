@@ -121,6 +121,7 @@ public class Competicio {
             raperos.add(rapero);
 
             //Afegir el rapero al JSON
+
         }
 
 
