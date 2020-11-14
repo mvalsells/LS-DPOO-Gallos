@@ -10,11 +10,13 @@ public class Rapero {
     private LocalDate birth;
     private String nationality;
     private int level;
-    private URL photo;
+
+    //canvi de URL-->string
+    private String photo;
 
     //Constructor
 
-    public Rapero(String realName, String stageName, LocalDate birth, String nationality, int level, URL photo) {
+    public Rapero(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
         this.realName = realName;
         this.stageName = stageName;
         this.birth = birth;
@@ -63,11 +65,11 @@ public class Rapero {
         this.level = level;
     }
 
-    public URL getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(URL photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 

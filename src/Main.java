@@ -21,7 +21,7 @@ public class Main  {
 
         json = new Json("src/competicio.json", "src/batalles.json");
 
-        //Competicio competicio = json.llegirCompeticio();
+        Competicio competicio = json.llegirCompeticio();
         //competicio.mostrarInfo();
         json.llegirTemes();
 

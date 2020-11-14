@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -75,11 +76,9 @@ public class Json {
             countries.add(pais);
         }
 
-        //Creació d'una competició amb les dades llegides
-        competicio = new Competicio(name, startDate, endDate, countries, phases);
-
         //Registrar raperos
         array = data.get("rappers").getAsJsonArray();
+        ArrayList<Rapero> raperos = new ArrayList<>();
         for(JsonElement jsonElement : array){
             //Atributs
             String realName;
@@ -88,8 +87,7 @@ public class Json {
             LocalDate birth;
             String nationality;
             int level;
-            String strPhoto;
-            //URL photo;
+            String photo;
 
             //Executar
             JsonObject jsonRappers = jsonElement.getAsJsonObject();
@@ -99,51 +97,25 @@ public class Json {
             birth = LocalDate.parse(strBirth);
             nationality = jsonRappers.get("nationality").getAsString();
             level = jsonRappers.get("level").getAsInt();
-            strPhoto = jsonRappers.get("photo").getAsString();
-            //photo = new URL(strPhoto);
+            photo = jsonRappers.get("photo").getAsString();
+
+
+            //guardar arraylist raperos
+            Rapero rapero = new Rapero(realName, stageName,birth,nationality, level, photo);
+            raperos.add(rapero);
 
             //Registrar rapero, si el nom artístic ja existeix és mostra un error
-            if (!competicio.registraUsuari(realName, stageName, birth, nationality, level, strPhoto)){
-                //Mirar com tractar correctament aquest error
+            /*if (!competicio.registraUsuari(realName, stageName, birth, nationality, level, photo)){
+                //Mirar com tractar correctament aquest error, aixo va a rapero no aqui
                 System.out.println("ERROR: Ja existeix usuari amb aquest nom artístic");
-            }
+            }*/
         }
 
-        /*for (JsonElement jsonElement :array) {
-            //ArrayList<Rapero> raperos = new ArrayList<>();
-            String realName = new String();
-            String stageName = new String();
-            String bir = new String();
-            LocalDate birth;
-            String nationality = new String();
-            Integer level;
-            String url = new String();
-            URL photo;
-
-            //realName = jsonElement.getAsString();
-
-            String raperito = array.get(i).getAsString();
-            String raperos.get(i) = data.get("realName").getAsString();
-            stageName = raperos.get(i).getStageName();
-            birth = raperos.get(i).getBirth();
-            nationality = raperos.get(i).getNationality();
-            level = raperos.get(i).getLevel();
-
-            photo = raperos.get(i).getPhoto();
-            realName = jsonElement.getAsString();
-            stageName = jsonElement.getAsString();
-            bir = jsonElement.getAsString();
-            birth = LocalDate.parse(bir);
-            nationality = jsonElement.getAsString();
-            level = jsonElement.getAsInt();
-            url = jsonElement.getAsString();
-            photo = new URL("url");
-
-            //competicio.registraUsuari(nom, nomrapper....);
-
-        }*/
+        //Creació d'una competició amb les dades llegides
+        competicio = new Competicio(name, startDate, endDate, countries, phases, raperos);
 
         return  competicio;
+
     }
 
     //Llegir temes

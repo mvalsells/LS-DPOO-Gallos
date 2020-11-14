@@ -9,15 +9,16 @@ public class Competicio {
     private LocalDate endDate;
     private ArrayList<String> countries;
     private ArrayList<Fase> phases;
-    private ArrayList<Rapero> rappers = new ArrayList<>();
+    private ArrayList<Rapero> raperos;
 
     //Constructor
-    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases){
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases,ArrayList raperos){
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.countries = countries;
         this.phases = phases;
+        this.raperos = raperos;
     }
 
     public String getName() {
@@ -61,11 +62,11 @@ public class Competicio {
     }
 
     public ArrayList<Rapero> getRappers() {
-        return rappers;
+        return raperos;
     }
 
     public void setRappers(ArrayList<Rapero> rappers) {
-        this.rappers = rappers;
+        this.raperos = rappers;
     }
 
     //Metodes
