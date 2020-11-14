@@ -55,7 +55,7 @@ public class Menu {
             sb.append(competicio.nomGuanyador());
             System.out.println(sb.toString());
             System.out.println("Press enter to exit");
-            scanner.nextLine();
+            scanner.nextLine(); //No ser perquè s'han de fer 2 enters
         }
 
 
@@ -84,6 +84,31 @@ public class Menu {
         System.out.print("- Photo URL: ");
         userData.add(scanner.nextLine());
         return userData;
+    }
+
+    public void resultatRegistre (int estat) {
+        switch (estat) {
+            case 0:
+                System.out.println("Registration completed!\n--------------------------------------------------");
+                System.out.println("Press enter to go back to the main menu");
+                scanner.nextLine();
+                break;
+            case 1:
+                System.out.println("A rapper with this artistic name already exists");
+                break;
+            case 2:
+                System.out.println("Birth date has an invalid format");
+                break;
+            case 3:
+                System.out.println("Country does not exist in our system");
+                break;
+            case 4:
+                System.out.println("Photo URL has an invalid format");
+                break;
+            default:
+                System.out.println("The registration process returned an unexpected status error");
+                break;
+        }
     }
 
     // Mètode per a mostrar un missatge per pantalla
