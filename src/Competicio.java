@@ -28,6 +28,7 @@ public class Competicio {
 
     }
 
+    //Getters & Setters
     public String getName() {
         return name;
     }
@@ -85,6 +86,11 @@ public class Competicio {
 
         return true;
     }
+
+    public String nomGuanyador() {
+        return "Pepito Grillo";
+    }
+
 
     public int numFase(){
         return 1;
