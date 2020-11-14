@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +10,7 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void welcome(Competicio competicio) throws IOException {
+    public void welcome(Competicio competicio) {
         //Nom
         StringBuilder sb = new StringBuilder();
         sb.append("Welcome to competition: ");
@@ -20,12 +19,12 @@ public class Menu {
         //Start
         sb = new StringBuilder();
         sb.append("Starts on ");
-        sb.append(competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+        sb.append(competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         System.out.println(sb.toString());
         //End
         sb = new StringBuilder();
         sb.append("Ends on ");
-        sb.append(competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+        sb.append(competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         System.out.println(sb.toString());
         //Phases
         sb = new StringBuilder();
@@ -96,7 +95,7 @@ public class Menu {
                 System.out.println("A rapper with this artistic name already exists");
                 break;
             case 2:
-                System.out.println("Birth date format is invalid");
+                System.out.println("Birth date is invalid");
                 break;
             case 3:
                 System.out.println("Country is not accepted in this competition");
@@ -108,6 +107,20 @@ public class Menu {
         System.out.println("--------------------------------------------------");
         System.out.println("Press enter to go back to the main menu");
         scanner.nextLine();
+    }
+
+    //Obtenir Login
+    public String obtenirLogin(){
+        System.out.print("Enter your artistic name: ");
+        return scanner.nextLine();
+    }
+    //Login no registrat
+    public void noRegistrat(String login){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Yo' bro, there's no \"");
+        sb.append(login);
+        sb.append("\" in ma' list.");
+        System.out.println(sb.toString());
     }
 
     // Mètode per a mostrar un missatge per pantalla

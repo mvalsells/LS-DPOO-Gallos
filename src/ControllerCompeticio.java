@@ -46,7 +46,14 @@ public class ControllerCompeticio {
                         //Mostro el resultat del registre
                         menu.resultatRegistre(estatRegistre);
                     } else {
-                        //login
+                        //Login
+                        String login = menu.obtenirLogin();
+                        if(competicio.ferLogin(login)) {
+                            //Anar Lobby
+                            System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
+                        } else {
+                            menu.noRegistrat(login);
+                        }
                     }
                     menu.welcome(competicio);
                     opcio = 0;

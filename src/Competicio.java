@@ -16,7 +16,7 @@ public class Competicio {
     private Json json = new Json("src/competicio.json", "src/batalles.json");
 
     //Constructor
-    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases,ArrayList raperos) throws FileNotFoundException {
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos) throws FileNotFoundException {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -130,6 +130,17 @@ public class Competicio {
         2 -> Data neixament no valida
         3 -> País no existeix
         */
+    }
+
+    public boolean ferLogin(String login){
+        boolean existex = false;
+        for (Rapero rapero : raperos){
+            if (login.equals(rapero.getStageName())){
+                existex = true;
+                break;
+            }
+        }
+        return existex;
     }
 
     public String nomGuanyador() {

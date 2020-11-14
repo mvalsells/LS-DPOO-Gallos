@@ -7,9 +7,13 @@ public class Pais {
     String regio;
     URL bandera;
 
+
+    //Constructor
+    public Pais(String nomAngles){
+        this.nomAngles=nomAngles;
+    }
+
     //Getters and Setters
-
-
     public String getNomAngles() {
         return nomAngles;
     }

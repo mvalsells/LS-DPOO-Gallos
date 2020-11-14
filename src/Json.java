@@ -31,7 +31,7 @@ public class Json {
         LocalDate startDate;
         LocalDate endDate;
         ArrayList<String> countries = new ArrayList<>();
-        ArrayList<String> phases = new ArrayList<>();
+        ArrayList<Fase> phases = new ArrayList<>();
 
         //Atributs llegir JSON
         Reader read = new FileReader(fitxerCompeticio);
@@ -54,19 +54,18 @@ public class Json {
 
         //Llegir fases
         for (JsonElement jsonElement: array) {
-            String budget;
-            String country;
+            float budget;
+            String strPais;
             JsonObject jsonPhase;
             StringBuilder sb;
             sb = new StringBuilder();
             jsonPhase = jsonElement.getAsJsonObject();
 
-            budget = jsonPhase.get("budget").getAsString();
-            country = jsonPhase.get("country").getAsString();
-            sb.append(budget);
-            sb.append(";");
-            sb.append(country);
-            phases.add(sb.toString());
+            budget = jsonPhase.get("budget").getAsFloat();
+            strPais = jsonPhase.get("country").getAsString();
+            Pais pais = new Pais(strPais);
+            Fase fase = new Fase(budget, pais);
+            phases.add(fase);
         }
 
         //Array countries
