@@ -1,5 +1,8 @@
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ControllerCompeticio {
@@ -50,18 +53,42 @@ public class ControllerCompeticio {
     }
 
 
-    public int registrarUsuari() {
-        ArrayList<String> dadesUsuari = menu.demanaInfoUser();
-        String realName = dadesUsuari.get(0);
+    public int registrarUsuari() throws  IOException{
         int estat=-1;
+        boolean fechaok = true;
+            ArrayList<String> dadesUsuari = menu.demanaInfoUser();
+            String realName = dadesUsuari.get(0);
+            String stageName = dadesUsuari.get(1);
+            String bir = dadesUsuari.get(2);
+            String nationality = dadesUsuari.get(3);
+            String nivell = dadesUsuari.get(4);
+            int level = Integer.parseInt(nivell);
+            String photo = dadesUsuari.get(5);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+
+
+            fechaok = validarFecha(bir);
+            if(fechaok){
+                LocalDate birth = LocalDate.parse(bir, formatter);
+                estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
+            }else{
+                estat=2;
+            }
+
+            return estat;
+
+
+
 
         // Array list -> tipus correcte
 
-        if (/* data no format correcte*/) {
+        /*if ( data no format correcte) {
             estat = 2;
         } else {
-            estat = competicio.registreUsuari(/*Falta posra dades*/);
-        }
+            estat = competicio.registreUsuari(Falta posra dades);
+        }*/
 
         /* Llegenda return
         0 -> Dades correctes i guardat al JSON
@@ -70,7 +97,19 @@ public class ControllerCompeticio {
         3 -> País no existeix
         4 -> URL foto no correcte???
         */
-        return estat;
+
+    }
+    public static boolean validarFecha(String bir){
+        try{
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
+            formatoFecha.setLenient(false);
+            formatoFecha.parse(bir);
+        }
+        catch (ParseException e){
+            return false;
+        }
+        return true;
     }
 
     public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
