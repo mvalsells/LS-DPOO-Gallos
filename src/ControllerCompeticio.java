@@ -30,7 +30,16 @@ public class ControllerCompeticio {
 
                      switch (opcio){
                              case 1:
-                                     System.out.println("\t\uD83D\uDE18");
+                                     if(!competició.haComençat()){
+                                             //register
+                                             System.out.println("Please, enter your personal information:");
+                                             //competició.registraUsuari()
+                                     }else{
+                                             //login
+
+
+                                     }
+
                                      break;
                              case 2:
                                      System.out.println("\t\uD83C\uDDFA\uD83C\uDDF8");
@@ -45,7 +54,9 @@ public class ControllerCompeticio {
                 }
         }
 
-        public void registraUsuari(){}
+        public void registraUsuari(){
+
+        }
 
         public void numFase(){}
 
