@@ -119,11 +119,12 @@ public class Json {
     }
 
     //Llegir temes
-    public void llegirTemes() throws FileNotFoundException {
+    public ArrayList llegirTemes() throws FileNotFoundException {
         //Atributs llegir JSON
         Reader read = new FileReader(fitxerBatalla);
         JsonObject data;
         JsonArray array;
+        ArrayList<Tema> temes = new ArrayList<>();
 
         //Obtenir dades
         data = JsonParser.parseReader(read).getAsJsonObject();
@@ -131,6 +132,7 @@ public class Json {
 
         for (JsonElement jsonElement : array) {
             JsonObject jsonTema = jsonElement.getAsJsonObject();
+            Tema tema;
             JsonArray arrayRhymes;
             String nom;
             ArrayList<String> estrofesN1 = new ArrayList<>();
@@ -149,12 +151,12 @@ public class Json {
                     estrofesN2.add(rhymesN2E.getAsString());
                 }
             }
+            tema = new Tema(nom, estrofesN1, estrofesN2);
+            temes.add(tema);
 
-            System.out.println("Nom: " + nom);
-            System.out.println("Estrofes N1: " + estrofesN1);
-            System.out.println("Estrofes N2: "+estrofesN2);
-            System.out.println("------------------------------------------------------------------------------------");
         }
+
+        return temes;
 
     }
 

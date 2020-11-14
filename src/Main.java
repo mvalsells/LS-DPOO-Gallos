@@ -23,7 +23,9 @@ public class Main  {
 
         Competicio competicio = json.llegirCompeticio();
         //competicio.mostrarInfo();
-        json.llegirTemes();
+        //json.llegirTemes();
+
+
 
     }
 

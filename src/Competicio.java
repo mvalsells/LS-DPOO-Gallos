@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -10,15 +11,19 @@ public class Competicio {
     private ArrayList<String> countries;
     private ArrayList<Fase> phases;
     private ArrayList<Rapero> raperos;
+    private ArrayList<Tema> temes;
+    private Json json = new Json("src/competicio.json", "src/batalles.json");
 
     //Constructor
-    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases,ArrayList raperos){
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList countries, ArrayList phases,ArrayList raperos) throws FileNotFoundException {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.countries = countries;
         this.phases = phases;
         this.raperos = raperos;
+        temes = json.llegirTemes();
+
     }
 
     public String getName() {
