@@ -14,7 +14,10 @@ public class ControllerCompeticio {
     }
 
     public void executaMenu() {
-        menu.mostraMenu(competicio);
+        menu.welcome(competicio);
+        /*if (competicio.haAcabat()){
+            System.exit(0);
+        }*/
         int opcio = 0;
         while (opcio != 1 || opcio != 2) {
             //mostra menu i demana opcio

@@ -93,11 +93,11 @@ public class Competicio {
 
 
     public int numFase(){
-        return 1;
+        return phases.size();
     }
 
     public int numParticipants(){
-        return 2;
+        return raperos.size();
     }
 
     public boolean haAcabat(){
