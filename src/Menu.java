@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -60,8 +61,6 @@ public class Menu {
 
     }
 
-
-
     public int demanaOpcio(){
         System.out.print("\nChoose an option: ");
         int opcio = scanner.nextInt();
@@ -69,13 +68,23 @@ public class Menu {
         return opcio;
     }
 
-    /*public void executaOpcio(){
-
+    public ArrayList<String> demanaInfoUser() {
+        ArrayList<String> userData = new ArrayList<>();
+        System.out.println("--------------------------------------------------");
+        System.out.print("- Full name: ");
+        userData.add(scanner.nextLine());
+        System.out.print("- Artistic name: ");
+        userData.add(scanner.nextLine());
+        System.out.print("- Birth date (dd/MM/YYYY): ");
+        userData.add(scanner.nextLine());
+        System.out.print("- Country: ");
+        userData.add(scanner.nextLine());
+        System.out.print("- Level: ");
+        userData.add(scanner.nextLine());
+        System.out.print("- Photo URL: ");
+        userData.add(scanner.nextLine());
+        return userData;
     }
-
-    public void executaMenu(){
-
-    }*/
 
     // Mètode per a mostrar un missatge per pantalla
     public void display(String s) {

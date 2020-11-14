@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ControllerCompeticio {
     //Atributs
@@ -25,9 +26,7 @@ public class ControllerCompeticio {
             switch (opcio) {
                 case 1:
                     if (!competicio.haComencat()) {
-                        //register
-                        System.out.println("Please, enter your personal information:");
-                        //competicio.registraUsuari()
+                        registraUsuari();
                     } else {
                         //login
                     }
@@ -42,7 +41,12 @@ public class ControllerCompeticio {
         }
     }
 
-    public boolean registraUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
+
+    public void registraUsuari() {
+        ArrayList<String> dadesUsuari = menu.demanaInfoUser();
+    }
+
+    public boolean registraUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
         return competicio.registraUsuari(realName, stageName, birth, nationality, level, photo);
     }
 
