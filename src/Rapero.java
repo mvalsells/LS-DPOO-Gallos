@@ -7,6 +7,7 @@ public class Rapero {
     //Atributs
     private String realName = new String();
     private String stageName;
+    private String strBirth;
     private LocalDate birth;
     private String nationality;
     private int level;

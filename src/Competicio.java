@@ -1,11 +1,13 @@
+import com.google.gson.JsonObject;
+
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Competicio {
 
     //Atributs
+    private JsonObject competition;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -13,10 +15,13 @@ public class Competicio {
     private ArrayList<Fase> phases;
     private ArrayList<Rapero> raperos;
     private ArrayList<Tema> temes;
+    private JsonObject data;
     private Json json = new Json("src/competicio.json", "src/batalles.json");
+    private String rappers;
 
     //Constructor
-    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos) throws FileNotFoundException {
+    public Competicio(JsonObject competition, String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
+        this.competition=competition;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,8 +29,10 @@ public class Competicio {
         this.phases = phases;
         this.raperos = raperos;
         temes = json.llegirTemes();
+        this.data = data;
 
     }
+
 
     //Getters & Setters
     public String getName() {
@@ -120,7 +127,11 @@ public class Competicio {
             raperos.add(rapero);
 
             //Afegir el rapero al JSON
-            json.escriureRapero(rapero);
+            try {
+                json.escriureRapero(competition, countries, raperos);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
 
         return estat;
@@ -167,6 +178,20 @@ public class Competicio {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Competicio{" +
+                "name='" + name + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", countries=" + countries +
+                ", phases=" + phases +
+                ", raperos=" + raperos +
+                ", temes=" + temes +
+                ", json=" + json +
+                '}';
     }
 
     public boolean haComencat(){
