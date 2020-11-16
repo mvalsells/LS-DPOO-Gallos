@@ -19,7 +19,8 @@ public class ControllerCompeticio {
 
     public static boolean validarFecha(String bir) {
         try {
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/YYYY");
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
             //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
@@ -70,22 +71,21 @@ public class ControllerCompeticio {
 
     public int registrarUsuari() throws IOException {
         int estat = -1;
-        boolean fechaok = true;
         ArrayList<String> dadesUsuari = menu.demanaInfoUser();
         String realName = dadesUsuari.get(0);
         String stageName = dadesUsuari.get(1);
-        String bir = dadesUsuari.get(2);
+        String birthInput = dadesUsuari.get(2);
         String nationality = dadesUsuari.get(3);
         String nivell = dadesUsuari.get(4);
         int level = Integer.parseInt(nivell);
         String photo = dadesUsuari.get(5);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-        fechaok = validarFecha(bir);
-        if (fechaok) {
-            LocalDate birth = LocalDate.parse(bir, formatter);
+        if (validarFecha(birthInput)) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate birthLocalDate = LocalDate.parse(birthInput, formatter);
+            String birth = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
         } else {
             estat = 2;
@@ -100,9 +100,9 @@ public class ControllerCompeticio {
             */
     }
 
-    public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) throws IOException {
+    /*public int registreUsuariCompeticio(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
         return competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
-    }
+    }*/
 
     public int numFase() {
         return competicio.numFases();

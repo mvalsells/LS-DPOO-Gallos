@@ -97,7 +97,7 @@ public class Json {
             String realName;
             String stageName;
             String strBirth;
-            LocalDate birth;
+            String birth;
             String nationality;
             int level;
             String photo;
@@ -106,8 +106,7 @@ public class Json {
             JsonObject jsonRappers = jsonElement.getAsJsonObject();
             realName = jsonRappers.get("realName").getAsString();
             stageName = jsonRappers.get("stageName").getAsString();
-            strBirth = jsonRappers.get("birth").getAsString();
-            birth = LocalDate.parse(strBirth);
+            birth = jsonRappers.get("birth").getAsString();
             nationality = jsonRappers.get("nationality").getAsString();
             level = jsonRappers.get("level").getAsInt();
             photo = jsonRappers.get("photo").getAsString();
@@ -178,33 +177,20 @@ public class Json {
 
         JsonObject data = llegirData();
         JsonObject jsonCompeticio = competicioJsonObject(data);
-        String rappero = new String();
-        String rap = new String();
-        //birthday=raperos.toString();
+
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
 
-        /*for(int i=0; i<raperos.size(); i++ ){
-            //birthday=raperos.get(i).getBirth().toString();
-            rap = raperos.get(i).toString();
-            rappero = rappero+rap;
-        }*/
 
-        String jsonCountries = gson.toJson(countries);
-        String jsonRappero = gson.toJson(raperos);
-        String jsonCompe = gson.toJson(jsonCompeticio);
-        //System.out.println(jsonCompe);
-        //System.out.println(jsonCountries);
-        //System.out.println(jsonRappero);
+        JsonObject tot = new JsonObject();
+        tot.add("competition", jsonCompeticio);
+        tot.add("countries", gson.toJsonTree(countries));
+        tot.add("rappers", gson.toJsonTree(raperos));
 
-        rappero = raperos.toString();
+        String json = gson.toJson(tot);
 
-        CopiaCompeticio compe = new CopiaCompeticio(jsonCompeticio, countries, rappero);
-
-        String json = gson.toJson(compe);
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio1.json"))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio.json"))) {
             bw.write(json);
             System.out.println("Fichero creado");
         } catch (IOException ex) {

@@ -7,8 +7,8 @@ public class Rapero {
     //Atributs
     private String realName = new String();
     private String stageName;
-    private String strBirth;
-    private LocalDate birth;
+    //private String strBirth;
+    private String  birth;
     private String nationality;
     private int level;
 
@@ -17,7 +17,7 @@ public class Rapero {
 
     //Constructor
 
-    public Rapero(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
+    public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
         this.realName = realName;
         this.stageName = stageName;
         this.birth = birth;
@@ -42,11 +42,11 @@ public class Rapero {
         this.stageName = stageName;
     }
 
-    public LocalDate getBirth() {
+    public String getBirth() {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
+    public void setBirth(String birth) {
         this.birth = birth;
     }
 
@@ -72,6 +72,10 @@ public class Rapero {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public LocalDate getBirthLocalDate(){
+        return LocalDate.parse(birth);
     }
 
     @Override

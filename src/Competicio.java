@@ -3,6 +3,7 @@ import com.google.gson.JsonObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Competicio {
@@ -85,7 +86,7 @@ public class Competicio {
     }
 
     //Metodes
-    public int registreUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) throws IOException {
+    public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
         int estat;
 
         //Comprovo si ja hi ha el rappero
@@ -102,7 +103,7 @@ public class Competicio {
         } else {
             //Comprobo que la data de neixament no sigui més tard que avui
             LocalDate avui = LocalDate.now();
-            if (avui.isBefore(birth)) {
+            if (avui.isBefore(LocalDate.parse(birth, DateTimeFormatter.ofPattern("yyyy-MM-dd")))) {
                 estat = 2;
             } else {
                 //Comprobo si existeix el pais
