@@ -51,6 +51,7 @@ public class ControllerCompeticio {
                         String login = menu.obtenirLogin();
                         if(competicio.ferLogin(login)) {
                             //Anar Lobby
+
                             System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
                         } else {
                             menu.noRegistrat(login);
