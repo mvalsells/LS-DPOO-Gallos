@@ -21,6 +21,18 @@ public class Json {
     }
 
     //Mètodes
+
+    private JsonObject competicioJsonObject(JsonObject data) {
+        JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
+        return jsonCompeticio;
+    }
+
+    private JsonObject llegirData() throws FileNotFoundException {
+        Reader read = new FileReader(fitxerCompeticio);
+        JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
+        return data;
+    }
+
     public Competicio llegirCompeticio() throws IOException {
         //Atributs competició
         Competicio competicio;
@@ -32,16 +44,17 @@ public class Json {
         ArrayList<Fase> phases = new ArrayList<>();
 
         //Atributs llegir JSON
-        Reader read = new FileReader(fitxerCompeticio);
+        //Reader read = new FileReader(fitxerCompeticio);
         JsonObject data;
         JsonObject jsonCompeticio;
         String strDate;
         JsonArray array;
 
         //Execució
-        data = JsonParser.parseReader(read).getAsJsonObject();
-        competition = data.get("competition").getAsJsonObject();
-        jsonCompeticio = data.get("competition").getAsJsonObject();
+        //data = JsonParser.parseReader(read).getAsJsonObject();
+        data=llegirData();
+        //jsonCompeticio = data.get("competition").getAsJsonObject();
+        jsonCompeticio = competicioJsonObject(data);
         name = jsonCompeticio.get("name").getAsString();
 
         //Llegir dades competició
@@ -113,7 +126,7 @@ public class Json {
 
 
         //Creació d'una competició amb les dades llegides
-        competicio = new Competicio(competition, name, startDate, endDate, countries, phases, raperos,data);
+        competicio = new Competicio(name, startDate, endDate, countries, phases, raperos,data);
 
         return  competicio;
 
@@ -161,53 +174,10 @@ public class Json {
 
     }
 
-    /*public void escriureRapero(ArrayList<Rapero> raperos, ArrayList<String> countries, String name, LocalDate startDate, LocalDate endDate, ArrayList<Fase> phases)  {
+    public void escriureRapero(ArrayList<String> countries, ArrayList<Rapero> raperos) throws IOException {
 
-        Competicio competicio = null;
-
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting().serializeNulls();
-        Gson gson = builder.create();
-        try {
-
-
-            competicio = new Competicio(name, startDate, endDate, countries, phases, raperos);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String json = gson.toJson(competicio);
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio1.json"))) {
-            bw.write(json);
-            System.out.println("Fichero creado");
-        } catch (IOException ex) {
-            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-
-
-    }*/
-
-    public void escriureRapero(Rapero rapero, JsonObject data) {
-
-       /* Rapero rapero = null;
-        GsonBuilder builder = new GsonBuilder();
-        builder.setPrettyPrinting().serializeNulls();
-        Gson gson = builder.create();
-
-        rapero = new Rapero ( realName, stageName, birth, nationality, level, photo);
-        String json = gson.toJson(rapero);*/
-
-        JsonObject jObject  = new JsonObject();
-        jObject.getAsJsonObject("rappers").addProperty(String.valueOf(rapero),1);
-        System.out.println(jObject);
-
-    }
-
-    public void escriureRapero(JsonObject competition, ArrayList<String> countries, ArrayList<Rapero> raperos) throws FileNotFoundException {
-
-        CopiaCompeticio copia = null;
+        JsonObject data = llegirData();
+        JsonObject jsonCompeticio = competicioJsonObject(data);
         String rappero = new String();
         String rap = new String();
         //birthday=raperos.toString();
@@ -221,11 +191,18 @@ public class Json {
             rappero = rappero+rap;
         }*/
 
+        String jsonCountries = gson.toJson(countries);
+        String jsonRappero = gson.toJson(raperos);
+        String jsonCompe = gson.toJson(jsonCompeticio);
+        //System.out.println(jsonCompe);
+        //System.out.println(jsonCountries);
+        //System.out.println(jsonRappero);
 
+        rappero = raperos.toString();
 
-        copia = new CopiaCompeticio(competition, countries, rappero);
+        CopiaCompeticio compe = new CopiaCompeticio(jsonCompeticio, countries, rappero);
 
-        String json = gson.toJson(copia);
+        String json = gson.toJson(compe);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio1.json"))) {
             bw.write(json);

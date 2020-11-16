@@ -100,7 +100,7 @@ public class ControllerCompeticio {
             */
     }
 
-    public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) {
+    public int registreUsuariCompeticio(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) throws IOException {
         return competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
     }
 

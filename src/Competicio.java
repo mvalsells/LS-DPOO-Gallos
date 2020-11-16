@@ -1,13 +1,14 @@
 import com.google.gson.JsonObject;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Competicio {
 
     //Atributs
-    private JsonObject competition;
+    //private JsonObject competition;
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -20,8 +21,8 @@ public class Competicio {
     private String rappers;
 
     //Constructor
-    public Competicio(JsonObject competition, String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
-        this.competition=competition;
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
+        //this.competition=competition;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -84,7 +85,7 @@ public class Competicio {
     }
 
     //Metodes
-    public int registreUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo){
+    public int registreUsuari(String realName, String stageName, LocalDate birth, String nationality, int level, String photo) throws IOException {
         int estat;
 
         //Comprovo si ja hi ha el rappero
@@ -128,7 +129,7 @@ public class Competicio {
 
             //Afegir el rapero al JSON
             try {
-                json.escriureRapero(competition, countries, raperos);
+                json.escriureRapero(countries, raperos);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
