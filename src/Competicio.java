@@ -166,12 +166,46 @@ public class Competicio {
     }
 
     public int numParticipants(){
+
+
         return raperos.size();
     }
 
-    public int faseActual(){
-        return 2;
+    public int numParticipants(String login, int fase){
+        if(faseActual(fase)==1){
+            int random = 0;
+
+            while(raperos.get(random).getStageName().equals(login)){
+                random = (int) (Math.random() * raperos.size());
+            }
+            raperos.remove(random);
+        }
+
+        return raperos.size();
     }
+
+    /*public int faseActual(){
+        return 2;
+    }*/
+    public int faseActual(int fase){
+        if(numFases()==3){
+            if(fase == 2){
+                fase ++;
+            }
+            fase++;
+
+        }else{
+            if(fase==0){
+                fase = fase+1;
+            }
+            else{
+                fase = fase+2;
+            }
+        }
+        return fase;
+    }
+
+
 
     public boolean haAcabat(){
         LocalDate avui = LocalDate.now();

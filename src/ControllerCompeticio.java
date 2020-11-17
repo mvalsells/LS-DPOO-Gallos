@@ -48,8 +48,15 @@ public class ControllerCompeticio {
                         menu.resultatRegistre(estatRegistre);
                     } else {
                         //Login
+                        int fase =0;
                         String login = menu.obtenirLogin();
                         if(competicio.ferLogin(login)) {
+
+                            competicio.faseActual(fase);
+
+                            if(faseActual(fase)==1){
+                                competicio.numParticipants(login,fase);
+                            }
                             //Anar Lobby
 
                             System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
@@ -117,8 +124,8 @@ public class ControllerCompeticio {
         return competicio.haAcabat();
     }
 
-    public int faseActual() {
-        return competicio.faseActual();
+    public int faseActual(int fase) {
+        return competicio.faseActual(fase);
     }
 
     public boolean haComencat() {
