@@ -121,6 +121,24 @@ public class Menu {
         System.out.println(sb.toString());
         enterMainMenu();
     }
+
+    //login si registrat
+    public void Registrat( int fase, int fases, String contrincant){
+        /*StringBuilder sb = new StringBuilder();
+        sb.append("Yo' bro, there's no \"");
+        sb.append(fase);
+        sb.append("\" in ma' list.");
+        System.out.println(sb.toString());*/
+        System.out.println("--------------------------------------------------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Phases: \"");
+        sb.append(contrincant);
+        sb.append("/\"");
+        sb.append(fases);
+        System.out.println(sb.toString());
+
+    }
+
     private void enterMainMenu(){
         System.out.println("--------------------------------------------------");
         System.out.println("Press enter to go back to the main menu");

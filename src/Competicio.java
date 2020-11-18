@@ -171,15 +171,21 @@ public class Competicio {
         return raperos.size();
     }
 
-    public int numParticipants(String login, int fase){
-        if(faseActual(fase)==1){
-            int random = 0;
+    public int numParticipants(String login, int fase, int random, String contrincant){
+        if(faseActual()==1){
+             random = 0;
 
             while(raperos.get(random).getStageName().equals(login)){
                 random = (int) (Math.random() * raperos.size());
             }
             raperos.remove(random);
         }
+        random = 0;
+        while(raperos.get(random).getStageName().equals(login)){
+            random = (int) (Math.random() * raperos.size());
+        }
+        contrincant = raperos.get(random).getStageName();
+
 
         return raperos.size();
     }
@@ -187,22 +193,9 @@ public class Competicio {
     /*public int faseActual(){
         return 2;
     }*/
-    public int faseActual(int fase){
-        if(numFases()==3){
-            if(fase == 2){
-                fase ++;
-            }
-            fase++;
+    public int faseActual(){
 
-        }else{
-            if(fase==0){
-                fase = fase+1;
-            }
-            else{
-                fase = fase+2;
-            }
-        }
-        return fase;
+        return 1;
     }
 
 
@@ -214,6 +207,14 @@ public class Competicio {
         }else{
             return false;
         }
+    }
+
+    public int comencarfase1(){
+        if(numParticipants()%2!=0){
+            //numParticipants(login,fase, random, contrincant);
+
+        }
+        return 1;
     }
 
     @Override

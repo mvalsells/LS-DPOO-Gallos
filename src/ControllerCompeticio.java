@@ -48,18 +48,23 @@ public class ControllerCompeticio {
                         menu.resultatRegistre(estatRegistre);
                     } else {
                         //Login
+                        //cambuar tot a string no dependencia
                         int fase =0;
+                        int random = 0;
+                        String contrincant = new String();
                         String login = menu.obtenirLogin();
                         if(competicio.ferLogin(login)) {
 
-                            competicio.faseActual(fase);
+                            competicio.faseActual();
 
                             if(faseActual(fase)==1){
-                                competicio.numParticipants(login,fase);
+
+                                competicio.numParticipants(login,fase, random, contrincant);
+                                menu.Registrat(fase, numFase(), contrincant);
                             }
                             //Anar Lobby
 
-                            System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
+                            //System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
                         } else {
                             menu.noRegistrat(login);
                         }
@@ -125,7 +130,7 @@ public class ControllerCompeticio {
     }
 
     public int faseActual(int fase) {
-        return competicio.faseActual(fase);
+        return competicio.faseActual();
     }
 
     public boolean haComencat() {
