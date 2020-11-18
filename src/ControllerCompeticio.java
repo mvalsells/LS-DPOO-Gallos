@@ -30,13 +30,13 @@ public class ControllerCompeticio {
         return true;
     }
 
-    public void executaMenu() throws IOException {
+    public void executaMenu() throws IOException, InterruptedException {
         menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
         if (competicio.haAcabat()) {
             System.exit(0);
         }
         int opcio = 0;
-        while (opcio != 1) {
+        while (opcio != 2 && opcio !=4) {
             //mostra menu i demana opcio
             opcio = menu.demanaOpcio();
             switch (opcio) {
@@ -77,20 +77,25 @@ public class ControllerCompeticio {
                                 }
                             } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4);
 
-                            switch (opcio){
-                                case 1:
-                                    //doBattle();
-                                    break;
-                                case 2:
-                                    menu.showRanking();
-                                    break;
-                                case 3:
-                                    //createProfile();
-                                    break;
-                                case 4:
-                                    //leaveCompetition();
-                                    break;
-                            }
+                            do {
+                                switch (opcio){
+                                    case 1:
+                                        menu.doBattle(0);
+                                        break;
+                                    case 2:
+                                        menu.showRanking();
+                                        break;
+                                    case 3:
+                                        menu.createProfile();
+                                        break;
+                                    case 4:
+                                        menu.leaveCompetition();
+                                        break;
+                                }
+                                menu.Registrat();
+                                opcio = menu.demanaOpcio();
+                            }while (opcio!=4);
+
 
                             //Anar Lobby
 
@@ -100,7 +105,7 @@ public class ControllerCompeticio {
                         }
                     }
                     //menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
-                    opcio = 0;
+                    //opcio = 0;
                     break;
                 case 2:
                     System.exit(0);

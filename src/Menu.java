@@ -148,11 +148,45 @@ public class Menu {
         System.out.print("\n4. Leave competition ");
 
     }
+    public void doBattle(int coin) throws InterruptedException {
+        System.out.println("--------------------------------------------------");
+        System.out.println("Topic:");
 
+
+        System.out.println("\nA coin is tossed in the air and...");
+        Thread.sleep(1000);
+        switch (coin){
+            case 0:
+                System.out.println("your turn! Drop it!");
+                System.out.println("\n\nYour turn!");
+                System.out.println("Enter your verse:");
+                scanner.next();
+                scanner.nextLine();
+                System.out.println("\n...");
+                scanner.nextLine();
+
+        }
+
+
+    }
     public void showRanking(){
         System.out.println("---------------------------------");
         System.out.println("Pos.  |  Name  |  Score");
         System.out.println("---------------------------------");
+        scanner.nextLine();
+    }
+
+    public void createProfile(){
+        System.out.println("Yo' bro, you're not ready for this yet");
+        scanner.nextLine();
+    }
+
+    public void leaveCompetition() throws InterruptedException {
+        System.out.println("And the winer is...");
+        //Ponemos a "Dormir" el programa durante los ms que queremos
+        Thread.sleep(2*1000);
+        System.out.println("albert");
+        scanner.nextLine();
     }
 
     private void enterMainMenu(){
