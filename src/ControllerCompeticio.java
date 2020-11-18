@@ -50,31 +50,10 @@ public class ControllerCompeticio {
                         //Login
 
                         //crearParelles();
+
+
                         //simularBatalles();
                         //mostrarInfoMenu();
-                        do {
-                            opcio = menu.demanaOpcio();
-                            if (opcio != 1 || opcio != 2 || opcio != 3 || opcio !=5){
-                                menu.display("Number introduced not corresponding to the menu");
-                            }
-                        } while (opcio != 1 || opcio != 2 || opcio != 3 || opcio !=5);
-
-                        switch (opcio){
-                            case 1:
-                                //doBattle();
-                                break;
-                            case 2:
-                                //showRanking();
-                                break;
-                            case 3:
-                                //createProfile();
-                                break;
-                            case 4:
-                                //leaveCompetition();
-                                break;
-                        }
-
-
                         //cambiar tot a string no dependencia
                         int fase =0;
                         int random = 0;
@@ -82,13 +61,37 @@ public class ControllerCompeticio {
                         String login = menu.obtenirLogin();
                         if(competicio.ferLogin(login)) {
 
-                            competicio.faseActual();
+                            /*competicio.faseActual();
 
                             if(faseActual(fase)==1){
 
                                 competicio.numParticipants(login,fase, random, contrincant);
-                                menu.Registrat(fase, numFase(), contrincant);
+                                menu.Registrat();
+                            }*/
+                            menu.Registrat();
+                            do {
+                                opcio = menu.demanaOpcio();
+                                if (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4){
+                                    menu.display("Number introduced not corresponding to the menu");
+                                    menu.Registrat();
+                                }
+                            } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4);
+
+                            switch (opcio){
+                                case 1:
+                                    //doBattle();
+                                    break;
+                                case 2:
+                                    menu.showRanking();
+                                    break;
+                                case 3:
+                                    //createProfile();
+                                    break;
+                                case 4:
+                                    //leaveCompetition();
+                                    break;
                             }
+
                             //Anar Lobby
 
                             //System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
@@ -96,7 +99,7 @@ public class ControllerCompeticio {
                             menu.noRegistrat(login);
                         }
                     }
-                    menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
+                    //menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
                     opcio = 0;
                     break;
                 case 2:

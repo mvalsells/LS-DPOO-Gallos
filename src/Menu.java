@@ -127,7 +127,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat( int fase, int fases, String contrincant){
+    public void Registrat(){
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -136,11 +136,23 @@ public class Menu {
         System.out.println("--------------------------------------------------");
         StringBuilder sb = new StringBuilder();
         sb.append("Phases: \"");
-        sb.append(contrincant);
+        //sb.append(contrincant);
         sb.append("/\"");
-        sb.append(fases);
+        //sb.append(fases);
         System.out.println(sb.toString());
+        System.out.println("--------------------------------------------------");
 
+        System.out.print("\n1. Start the battle ");
+        System.out.print("\n2. Show ranking ");
+        System.out.print("\n3. Create profile ");
+        System.out.print("\n4. Leave competition ");
+
+    }
+
+    public void showRanking(){
+        System.out.println("---------------------------------");
+        System.out.println("Pos.  |  Name  |  Score");
+        System.out.println("---------------------------------");
     }
 
     private void enterMainMenu(){
