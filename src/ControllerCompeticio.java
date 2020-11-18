@@ -31,7 +31,7 @@ public class ControllerCompeticio {
     }
 
     public void executaMenu() throws IOException {
-        menu.welcome(competicio);
+        menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
         if (competicio.haAcabat()) {
             System.exit(0);
         }
@@ -48,7 +48,34 @@ public class ControllerCompeticio {
                         menu.resultatRegistre(estatRegistre);
                     } else {
                         //Login
-                        //cambuar tot a string no dependencia
+
+                        //crearParelles();
+                        //simularBatalles();
+                        //mostrarInfoMenu();
+                        do {
+                            opcio = menu.demanaOpcio();
+                            if (opcio != 1 || opcio != 2 || opcio != 3 || opcio !=5){
+                                menu.display("Number introduced not corresponding to the menu");
+                            }
+                        } while (opcio != 1 || opcio != 2 || opcio != 3 || opcio !=5);
+
+                        switch (opcio){
+                            case 1:
+                                //doBattle();
+                                break;
+                            case 2:
+                                //showRanking();
+                                break;
+                            case 3:
+                                //createProfile();
+                                break;
+                            case 4:
+                                //leaveCompetition();
+                                break;
+                        }
+
+
+                        //cambiar tot a string no dependencia
                         int fase =0;
                         int random = 0;
                         String contrincant = new String();
@@ -69,7 +96,7 @@ public class ControllerCompeticio {
                             menu.noRegistrat(login);
                         }
                     }
-                    menu.welcome(competicio);
+                    menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
                     opcio = 0;
                     break;
                 case 2:

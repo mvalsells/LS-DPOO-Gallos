@@ -10,54 +10,58 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void welcome(Competicio competicio) {
+    public void welcome(String name, String startDate, String endDate, int numFases, int numParticipants, String nomGuanyador, int estat) {
         //Nom
         StringBuilder sb = new StringBuilder();
         sb.append("Welcome to competition: ");
-        sb.append(competicio.getName());
+        sb.append(name);
         System.out.println(sb.toString());
         //Start
         sb = new StringBuilder();
         sb.append("Starts on ");
-        sb.append(competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        sb.append(startDate);
         System.out.println(sb.toString());
         //End
         sb = new StringBuilder();
         sb.append("Ends on ");
-        sb.append(competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        sb.append(endDate);
         System.out.println(sb.toString());
         //Phases
         sb = new StringBuilder();
         sb.append("Phases: ");
-        sb.append(competicio.numFases());
+        sb.append(numFases);
         System.out.println(sb.toString());
         //Participants
         sb = new StringBuilder();
         sb.append("Currently: ");
-        sb.append(competicio.numParticipants());
+        sb.append(numParticipants);
         sb.append(" participants");
         System.out.println(sb.toString());
 
-        if(!competicio.haComencat()){
-            System.out.println("\nCompetition hasn't started yet. Do you want to:");
-            System.out.println("\t1. Register");
-            System.out.println("\t2. Leave");
-
-        } else if (!competicio.haAcabat()){
-            System.out.println("\nCompetition started. Do you want to:");
-            System.out.println("\t1. Login");
-            System.out.println("\t2. Leave");
-        } else {
-            sb = new StringBuilder();
-            System.out.println("Competition has ended!");
-            sb.append("The winner is: ");
-            sb.append(competicio.nomGuanyador());
-            System.out.println(sb.toString());
-            System.out.println("Press enter to exit");
-            scanner.nextLine(); //No ser perquè s'han de fer 2 enters
+        switch (estat){
+            case 0:
+                //No ha començat
+                System.out.println("\nCompetition hasn't started yet. Do you want to:");
+                System.out.println("\t1. Register");
+                System.out.println("\t2. Leave");
+                break;
+            case 1:
+                System.out.println("\nCompetition started. Do you want to:");
+                System.out.println("\t1. Login");
+                System.out.println("\t2. Leave");
+                break;
+            case 2:
+                sb = new StringBuilder();
+                System.out.println("Competition has ended!");
+                sb.append("The winner is: ");
+                sb.append(nomGuanyador);
+                System.out.println(sb.toString());
+                System.out.println("Press enter to exit");
+                scanner.nextLine(); //No ser perquè s'han de fer 2 enters
+                break;
+            default:
+                System.out.println("Valor d'estat inesperat!!!!, Espero 0, 1 o 2");
         }
-
-
     }
 
     public int demanaOpcio(){
@@ -101,7 +105,7 @@ public class Menu {
                 System.out.println("Country is not accepted in this competition");
                 break;
             default:
-                System.out.println("The registration process returned an unexpected status error");
+                System.out.println("The registration process returned an unexpected estat number");
                 break;
         }
         enterMainMenu();

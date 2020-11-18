@@ -85,6 +85,9 @@ public class Competicio {
         this.raperos = rappers;
     }
 
+    public int getNumFases() { return phases.size();}
+    public int getNumParticipants(){ return raperos.size();}
+
     //Metodes
     public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
         int estat;
@@ -247,6 +250,16 @@ public class Competicio {
         System.out.println("End date: " + endDate);
         System.out.println("Array countries: " + countries);
         System.out.println("Fases: " + phases);
+    }
+
+    public int estat() {
+        if (!haComencat()){
+            return 0;
+        } else if (!haAcabat()){
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
 }
