@@ -89,7 +89,7 @@ public class Competicio {
     public int getNumParticipants(){ return raperos.size();}
 
     //Metodes
-    public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
+    public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo,float puntuacio) throws IOException {
         int estat;
 
         //Comprovo si ja hi ha el rappero
@@ -128,7 +128,7 @@ public class Competicio {
         //Si dades rapero OK
         if (estat==0) {
             //Creo rapero i el poso al arrayList
-            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo);
+            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo,puntuacio);
             raperos.add(rapero);
 
             //Afegir el rapero al JSON

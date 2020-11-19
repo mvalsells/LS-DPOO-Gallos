@@ -101,6 +101,7 @@ public class Json {
             String nationality;
             int level;
             String photo;
+            float puntuacio = 0;
 
             //Executar
             JsonObject jsonRappers = jsonElement.getAsJsonObject();
@@ -113,7 +114,7 @@ public class Json {
 
 
             //guardar arraylist raperos
-            Rapero rapero = new Rapero(realName, stageName, birth,nationality, level, photo);
+            Rapero rapero = new Rapero(realName, stageName, birth,nationality, level, photo,puntuacio);
             raperos.add(rapero);
 
             //Registrar rapero, si el nom artístic ja existeix és mostra un error

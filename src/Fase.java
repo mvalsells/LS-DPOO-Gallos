@@ -10,4 +10,5 @@ public class Fase {
         this.budget = budget;
         this.pais = pais;
     }
+
 }

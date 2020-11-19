@@ -58,22 +58,26 @@ public class ControllerCompeticio {
                         int fase =0;
                         int random = 0;
                         String contrincant = new String();
+                        int totalfase;
                         String login = menu.obtenirLogin();
                         if(competicio.ferLogin(login)) {
 
+                            fase = competicio.faseActual();
+                            totalfase = competicio.numFases();
                             /*competicio.faseActual();
+
 
                             if(faseActual(fase)==1){
 
                                 competicio.numParticipants(login,fase, random, contrincant);
                                 menu.Registrat();
                             }*/
-                            menu.Registrat();
+                            menu.Registrat(totalfase, fase);
                             do {
                                 opcio = menu.demanaOpcio();
                                 if (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4){
                                     menu.display("Number introduced not corresponding to the menu");
-                                    menu.Registrat();
+                                    menu.Registrat(totalfase, fase);
                                 }
                             } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4);
 
@@ -92,7 +96,7 @@ public class ControllerCompeticio {
                                         menu.leaveCompetition();
                                         break;
                                 }
-                                menu.Registrat();
+                                menu.Registrat(totalfase, fase);
                                 opcio = menu.demanaOpcio();
                             }while (opcio!=4);
 
@@ -127,6 +131,7 @@ public class ControllerCompeticio {
         String nivell = dadesUsuari.get(4);
         int level = Integer.parseInt(nivell);
         String photo = dadesUsuari.get(5);
+        float puntuacio = 0;
 
 
 
@@ -134,7 +139,7 @@ public class ControllerCompeticio {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate birthLocalDate = LocalDate.parse(birthInput, formatter);
             String birth = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
+            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
         } else {
             estat = 2;
         }

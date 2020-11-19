@@ -14,16 +14,18 @@ public class Rapero {
 
     //canvi de URL-->string
     private String photo;
+    private float puntuacio;
 
     //Constructor
 
-    public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
+    public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
         this.realName = realName;
         this.stageName = stageName;
         this.birth = birth;
         this.nationality = nationality;
         this.level = level;
         this.photo = photo;
+        this.puntuacio = puntuacio;
     }
 
     public String getRealName() {
@@ -77,6 +79,7 @@ public class Rapero {
     public LocalDate getBirthLocalDate(){
         return LocalDate.parse(birth);
     }
+
 
     @Override
     public String toString() {

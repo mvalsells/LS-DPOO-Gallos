@@ -127,7 +127,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(){
+    public void Registrat(int totalFase, int fase){
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -135,10 +135,11 @@ public class Menu {
         System.out.println(sb.toString());*/
         System.out.println("--------------------------------------------------");
         StringBuilder sb = new StringBuilder();
-        sb.append("Phases: \"");
-        //sb.append(contrincant);
-        sb.append("/\"");
-        //sb.append(fases);
+        sb.append("Phases: ");
+        sb.append(fase);
+        sb.append("/");
+        sb.append(totalFase);
+
         System.out.println(sb.toString());
         System.out.println("--------------------------------------------------");
 
