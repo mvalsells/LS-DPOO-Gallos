@@ -139,6 +139,16 @@ public class Menu {
         sb.append(fase);
         sb.append("/");
         sb.append(totalFase);
+        sb.append(" | Score:");
+        //sb.append(score);
+        sb.append(" | Battle ");
+        //sb.append(battlenow)
+        sb.append("/");
+        sb.append("2:");
+        //sb.append(tiposbatalla);
+        sb.append(" | Rival:");
+        //sb.append(rival);
+
 
         System.out.println(sb.toString());
         System.out.println("--------------------------------------------------");
