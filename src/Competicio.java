@@ -2,6 +2,7 @@ import com.google.gson.JsonObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -174,7 +175,7 @@ public class Competicio {
         return raperos.size();
     }
 
-    public int numParticipants(String login, int fase, int random, String contrincant){
+    /*public int numParticipants(String login, int fase, int random, String contrincant){
         if(faseActual()==1){
              random = 0;
 
@@ -191,12 +192,13 @@ public class Competicio {
 
 
         return raperos.size();
-    }
+    }*/
 
     /*public int faseActual(){
         return 2;
     }*/
     public int faseActual(){
+
 
         return 1;
     }
@@ -212,12 +214,21 @@ public class Competicio {
         }
     }
 
-    public int comencarfase1(){
-        if(numParticipants()%2!=0){
-            //numParticipants(login,fase, random, contrincant);
+    public int treureParticipants(String login){
+        if(faseActual()==1){
+            if(numParticipants()%2!=0){
 
+                int random = 1;
+                while(raperos.get(random).getStageName().equals(login)){
+                    random = (int) (Math.random() * raperos.size());
+                }
+                raperos.remove(random);
+                //numParticipants(login,fase, random, contrincant);
+
+            }
         }
-        return 1;
+
+        return raperos.size();
     }
 
     @Override
@@ -242,6 +253,7 @@ public class Competicio {
             return false;
         }
     }
+    
 
 
     public void mostrarInfo() {

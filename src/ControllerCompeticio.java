@@ -55,7 +55,7 @@ public class ControllerCompeticio {
                         //simularBatalles();
                         //mostrarInfoMenu();
                         //cambiar tot a string no dependencia
-                        int fase =0;
+                        int fase =1;
                         int random = 0;
                         String contrincant = new String();
                         int totalfase;
@@ -63,6 +63,7 @@ public class ControllerCompeticio {
                         if(competicio.ferLogin(login)) {
 
                             fase = competicio.faseActual();
+                            //competicio.comencarfase1();
                             totalfase = competicio.numFases();
                             /*competicio.faseActual();
 
