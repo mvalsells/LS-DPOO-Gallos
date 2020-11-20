@@ -7,6 +7,7 @@ public class Rapero {
     //Atributs
     private String realName = new String();
     private String stageName;
+    private boolean eliminat;
     //private String strBirth;
     private String  birth;
     private String nationality;
@@ -17,7 +18,6 @@ public class Rapero {
     private float puntuacio;
 
     //Constructor
-
     public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
         this.realName = realName;
         this.stageName = stageName;
@@ -26,6 +26,7 @@ public class Rapero {
         this.level = level;
         this.photo = photo;
         this.puntuacio = puntuacio;
+        eliminat=false;
     }
 
     public String getRealName() {

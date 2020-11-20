@@ -1,32 +1,33 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Fase {
     //Atributs
     Pais pais;
     float budget;
     ArrayList<Batalla> batalles = new ArrayList<>();
+    Integer[] participants;
 
     public Fase(float budget, Pais pais) {
         this.budget = budget;
         this.pais = pais;
     }
 
-    public ArrayList<String> aparellament(Competicio competicio, String login){
-        ArrayList<String> rival = new ArrayList<String>();
-        int random1 = 0;
-        int random2 = 0;
-        for(int i=0; i< competicio.treureParticipants(login); i = i+2){
+    //Metodes
+    //Execute fase tipus1
+    //Executa fase tipus 2
+    //executa fase tipus 3
 
-            random1 = (int) (Math.random() * competicio.treureParticipants(login));
-            random2 = (int) (Math.random() * competicio.treureParticipants(login));
-
-
-            //rival.get(i) = (random1, random2);
-            //rival.add(competicio.getRappers().get(random1));||||||||||||algo falla i no se el que
+    public Integer[] aparellament(int numParticipants){
+        participants = new Integer[numParticipants];
+        for (int i=0; i < numParticipants; i++){
+            participants[i]=i+1;
         }
-
-
-        return rival;
+        List<Integer> intList = Arrays.asList(participants);
+        Collections.shuffle(intList);
+        intList.toArray(participants);
+        return participants;
     }
-
 }

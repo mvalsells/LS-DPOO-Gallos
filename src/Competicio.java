@@ -21,6 +21,7 @@ public class Competicio {
     private JsonObject data;
     private Json json = new Json("src/competicio.json", "src/batalles.json");
     private String rappers;
+    int faseActual;
 
     //Constructor
     public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
@@ -33,6 +34,7 @@ public class Competicio {
         this.raperos = raperos;
         temes = json.llegirTemes();
         this.data = data;
+        faseActual = 0;
 
     }
 
@@ -86,23 +88,36 @@ public class Competicio {
         this.raperos = rappers;
     }
 
-    public int getNumFases() { return phases.size();}
-    public int getNumParticipants(){ return raperos.size();}
+    public int getNumFases() {
+        return phases.size();
+    }
+
+    public int getNumParticipants() {
+        return raperos.size();
+    }
+
+    public int getFaseActual() {
+        return faseActual;
+    }
+
+    public void setFaseActual(int faseActual) {
+        this.faseActual = faseActual;
+    }
 
     //Metodes
-    public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo,float puntuacio) throws IOException {
+    public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
         int estat;
 
         //Comprovo si ja hi ha el rappero
-        boolean existeixR=false;
-        for(Rapero rapero : raperos){
-            if (stageName.equals(rapero.getStageName())){
-                existeixR=true;
+        boolean existeixR = false;
+        for (Rapero rapero : raperos) {
+            if (stageName.equals(rapero.getStageName())) {
+                existeixR = true;
                 break;
             }
         }
 
-        if (existeixR){
+        if (existeixR) {
             estat = 1;
         } else {
             //Comprobo que la data de neixament no sigui més tard que avui
@@ -113,7 +128,7 @@ public class Competicio {
                 //Comprobo si existeix el pais
                 boolean existeixP = false;
                 for (String pais : countries) {
-                    if (nationality.equals(pais)){
+                    if (nationality.equals(pais)) {
                         existeixP = true;
                         break;
                     }
@@ -127,9 +142,9 @@ public class Competicio {
         }
 
         //Si dades rapero OK
-        if (estat==0) {
+        if (estat == 0) {
             //Creo rapero i el poso al arrayList
-            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo,puntuacio);
+            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
             raperos.add(rapero);
 
             //Afegir el rapero al JSON
@@ -149,10 +164,10 @@ public class Competicio {
         */
     }
 
-    public boolean ferLogin(String login){
+    public boolean ferLogin(String login) {
         boolean existex = false;
-        for (Rapero rapero : raperos){
-            if (login.equals(rapero.getStageName())){
+        for (Rapero rapero : raperos) {
+            if (login.equals(rapero.getStageName())) {
                 existex = true;
                 break;
             }
@@ -165,70 +180,37 @@ public class Competicio {
     }
 
 
-    public int numFases(){
+    public int numFases() {
         return phases.size();
     }
 
-    public int numParticipants(){
-
-
+    public int numParticipants() {
         return raperos.size();
     }
 
-    /*public int numParticipants(String login, int fase, int random, String contrincant){
-        if(faseActual()==1){
-             random = 0;
 
-            while(raperos.get(random).getStageName().equals(login)){
-                random = (int) (Math.random() * raperos.size());
-            }
-            raperos.remove(random);
-        }
-        random = 0;
-        while(raperos.get(random).getStageName().equals(login)){
-            random = (int) (Math.random() * raperos.size());
-        }
-        contrincant = raperos.get(random).getStageName();
-
-
-        return raperos.size();
-    }*/
-
-    /*public int faseActual(){
-        return 2;
-    }*/
-    public int faseActual(){
-
-
-        return 1;
-    }
-
-
-
-    public boolean haAcabat(){
+    public boolean haAcabat() {
         LocalDate avui = LocalDate.now();
-        if(avui.isAfter(endDate)){
+        if (avui.isAfter(endDate)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    public int treureParticipants(String login){
-        if(faseActual()==1){
-            if(numParticipants()%2!=0){
+    public void treureParticipants(String login) {
+             if (numParticipants() % 2 != 0) {
 
-                int random = 1;
-                while(raperos.get(random).getStageName().equals(login)){
+                int random = (int) (Math.random() * raperos.size());
+                while (raperos.get(random).getStageName().equals(login)) {
                     random = (int) (Math.random() * raperos.size());
                 }
                 raperos.remove(random);
-                //numParticipants(login,fase, random, contrincant);
-
             }
-        }
+    }
 
-        return raperos.size();
+    public void aparellament(int numFase){
+        phases.get(numFase-1).aparellament(numParticipants());
     }
 
     @Override
@@ -245,34 +227,27 @@ public class Competicio {
                 '}';
     }
 
-    public boolean haComencat(){
+    public boolean haComencat() {
         LocalDate avui = LocalDate.now();
-        if(avui.isAfter(startDate)){
+        if (avui.isAfter(startDate)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
-
-
-    public void mostrarInfo() {
-        System.out.println("Nom: " + name);
-        System.out.println("Start date: " + startDate);
-        System.out.println("End date: " + endDate);
-        System.out.println("Array countries: " + countries);
-        System.out.println("Fases: " + phases);
-    }
 
     public int estat() {
-        if (!haComencat()){
+        if (!haComencat()) {
             return 0;
-        } else if (!haAcabat()){
+        } else if (!haAcabat()) {
             return 1;
         } else {
             return 2;
         }
     }
 
-}
+    public void seguentFase() {
+        faseActual++;
+    }
 
+}

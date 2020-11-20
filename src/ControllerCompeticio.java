@@ -48,9 +48,10 @@ public class ControllerCompeticio {
                         menu.resultatRegistre(estatRegistre);
                     } else {
                         //Login
-
+                        //Obtenir nom artistic
+                        String login = menu.obtenirLogin();
                         //crearParelles();
-
+                        competicio.aparellament(1);
 
                         //simularBatalles();
                         //mostrarInfoMenu();
@@ -59,10 +60,10 @@ public class ControllerCompeticio {
                         int random = 0;
                         String contrincant = new String();
                         int totalfase;
-                        String login = menu.obtenirLogin();
+
                         if(competicio.ferLogin(login)) {
 
-                            fase = competicio.faseActual();
+                            fase = competicio.getFaseActual();
                             //competicio.comencarfase1();
                             totalfase = competicio.numFases();
                             /*competicio.faseActual();
@@ -134,8 +135,6 @@ public class ControllerCompeticio {
         String photo = dadesUsuari.get(5);
         float puntuacio = 0;
 
-
-
         if (validarFecha(birthInput)) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate birthLocalDate = LocalDate.parse(birthInput, formatter);
@@ -152,29 +151,5 @@ public class ControllerCompeticio {
             2 -> Data neixament no valida
             3 -> País no existeix
             */
-    }
-
-    /*public int registreUsuariCompeticio(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
-        return competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
-    }*/
-
-    public int numFase() {
-        return competicio.numFases();
-    }
-
-    public int numParticipants() {
-        return competicio.numParticipants();
-    }
-
-    public boolean haAcabat() {
-        return competicio.haAcabat();
-    }
-
-    public int faseActual(int fase) {
-        return competicio.faseActual();
-    }
-
-    public boolean haComencat() {
-        return competicio.haComencat();
     }
 }
