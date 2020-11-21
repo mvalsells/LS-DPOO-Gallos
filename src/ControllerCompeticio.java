@@ -50,9 +50,9 @@ public class ControllerCompeticio {
                         //Login
                         //Obtenir nom artistic
                         String login = menu.obtenirLogin();
+                        String contrincant = new String();
                         //crearParelles();
                         competicio.preFase(login);
-
                         //simularBatalles();
                         //mostrarInfoMenu();
 
@@ -61,8 +61,10 @@ public class ControllerCompeticio {
                         //cambiar tot a string no dependencia
                         int fase =1;
                         int random = 0;
-                        String contrincant = new String();
+
                         int totalfase;
+                        String enemy = new String();
+
 
                         if(competicio.ferLogin(login)) {
 
@@ -77,12 +79,13 @@ public class ControllerCompeticio {
                                 competicio.numParticipants(login,fase, random, contrincant);
                                 menu.Registrat();
                             }*/
-                            menu.Registrat(totalfase, fase);
+                            enemy = competicio.preFase(login);
+                            menu.Registrat(totalfase, fase, enemy);
                             do {
                                 opcio = menu.demanaOpcio();
                                 if (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4){
                                     menu.display("Number introduced not corresponding to the menu");
-                                    menu.Registrat(totalfase, fase);
+                                    menu.Registrat(totalfase, fase,enemy);
                                 }
                             } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4);
 
@@ -101,7 +104,7 @@ public class ControllerCompeticio {
                                         menu.leaveCompetition();
                                         break;
                                 }
-                                menu.Registrat(totalfase, fase);
+                                menu.Registrat(totalfase, fase,enemy);
                                 opcio = menu.demanaOpcio();
                             }while (opcio!=4);
 

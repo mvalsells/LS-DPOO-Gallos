@@ -127,7 +127,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase){
+    public void Registrat(int totalFase, int fase, String rival){
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -146,8 +146,8 @@ public class Menu {
         sb.append("/");
         sb.append("2:");
         //sb.append(tiposbatalla);
-        sb.append(" | Rival:");
-        //sb.append(rival);
+        sb.append(" | Rival: ");
+        sb.append(rival);
 
 
         System.out.println(sb.toString());

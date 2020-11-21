@@ -49,9 +49,11 @@ public class Fase {
         }
     }
 
-    public void preFase1(String login) throws FileNotFoundException {
+    public Integer preFase1(String login) throws FileNotFoundException {
+        Integer contrincant;
         participantsParells(login);
-        simularBatalles(login);
+        contrincant = simularBatalles(login)[1];
+        return contrincant;
     }
     public void preFase2(String login){
 
@@ -66,10 +68,10 @@ public class Fase {
         usuariIparella[0]=-1;
         usuariIparella[1] = -1;
         for (int i=0; i<raperos.size();i=i+2){
-            if (raperos.get(i).getStageName() == login){
+            if (raperos.get(i).getStageName().equals(login)){
                 usuariIparella[1] = i+1;
                 usuariIparella[0] = i;
-            } else if (raperos.get(i+1).getStageName() == login){
+            } else if (raperos.get(i + 1).getStageName().equals(login)){
                 usuariIparella[1] = i;
                 usuariIparella[0] = i+1;
             } else

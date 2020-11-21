@@ -248,12 +248,17 @@ public class Competicio {
     }
 
 
-    public void preFase(String login) throws FileNotFoundException {
+
+    public String preFase(String login) throws FileNotFoundException {
+        String rival = new String();
+        int contrincant;
         if (numFases() == 3){
             // 3 Fases
             switch (faseActual){
                 case 1:
-                    phases.get(0).preFase1(login);
+                    contrincant = phases.get(0).preFase1(login);
+                    rival = raperos.get(contrincant).getStageName();
+
                     break;
                 case 2:
                     phases.get(1).preFase2(login);
@@ -279,5 +284,6 @@ public class Competicio {
                     break;
             }
         }
+        return rival;
     }
 }
