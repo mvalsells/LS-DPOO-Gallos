@@ -76,6 +76,7 @@ public class Fase {
                 usuariIparella[0] = i+1;
             } else
                 {
+
                 Batalla batalla = new Batalla(raperos.get(i), raperos.get(i+1));
                 batalla.simularBatalla(); //Falta mirar el tema gunyador/puntuacio
                 batalles.add(batalla);
