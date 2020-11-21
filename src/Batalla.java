@@ -75,6 +75,4 @@ public class Batalla {
         }
         return numRimes;
     }
-
-
 }

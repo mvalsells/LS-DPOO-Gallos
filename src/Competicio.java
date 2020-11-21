@@ -2,11 +2,9 @@ import com.google.gson.JsonObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Competicio {
 
@@ -26,7 +24,6 @@ public class Competicio {
 
     //Constructor
     public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
-        //this.competition=competition;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -44,48 +41,12 @@ public class Competicio {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     public LocalDate getEndDate() {
         return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public ArrayList<String> getCountries() {
-        return countries;
-    }
-
-    public void setCountries(ArrayList<String> countries) {
-        this.countries = countries;
-    }
-
-    public ArrayList<Fase> getPhases() {
-        return phases;
-    }
-
-    public void setPhases(ArrayList<Fase> phases) {
-        this.phases = phases;
-    }
-
-    public ArrayList<Rapero> getRappers() {
-        return raperos;
-    }
-
-    public void setRappers(ArrayList<Rapero> rappers) {
-        this.raperos = rappers;
     }
 
     public int getNumFases() {
@@ -99,12 +60,6 @@ public class Competicio {
     public int getFaseActual() {
         return faseActual;
     }
-
-    public void setFaseActual(int faseActual) {
-        this.faseActual = faseActual;
-    }
-
-
 
     //Metodes
     public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
@@ -196,6 +151,7 @@ public class Competicio {
         }
     }
 
+    /* //Ho HE PASSAT A FASES -> a l'espra del tema raperos i fases
     public void participantsParells(String login) {
              if (numParticipants() % 2 != 0) {
                 int random = (int) (Math.random() * raperos.size());
@@ -204,11 +160,7 @@ public class Competicio {
                 }
                 raperos.remove(random);
             }
-    }
-
-    public void aparellament(int numFase){
-        phases.get(numFase-1).aparellament(numParticipants());
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -247,14 +199,12 @@ public class Competicio {
         faseActual++;
     }
 
-
-
     public String preFase(String login) throws FileNotFoundException {
         String rival = new String();
         int contrincant;
-        if (numFases() == 3){
+        if (numFases() == 3) {
             // 3 Fases
-            switch (faseActual){
+            switch (faseActual) {
                 case 1:
                     contrincant = phases.get(0).preFase1(login);
                     rival = raperos.get(contrincant).getStageName();
@@ -272,7 +222,7 @@ public class Competicio {
             }
         } else {
             // 2 Fases
-            switch (faseActual){
+            switch (faseActual) {
                 case 1:
                     phases.get(0).preFase1(login);
                     break;

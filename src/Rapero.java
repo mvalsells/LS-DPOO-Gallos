@@ -29,14 +29,6 @@ public class Rapero {
         eliminat=false;
     }
 
-    public String getRealName() {
-        return realName;
-    }
-
-    public void setRealName(String realName) {
-        this.realName = realName;
-    }
-
     public String getStageName() {
         return stageName;
     }

@@ -1,10 +1,8 @@
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    private Scanner scanner; // agafem dades menu
+    private final Scanner scanner; // agafem dades menu
 
     public Menu() {
         this.scanner = new Scanner(System.in);
@@ -38,7 +36,7 @@ public class Menu {
         sb.append(" participants");
         System.out.println(sb.toString());
 
-        switch (estat){
+        switch (estat) {
             case 0:
                 //No ha començat
                 System.out.println("\nCompetition hasn't started yet. Do you want to:");
@@ -64,7 +62,7 @@ public class Menu {
         }
     }
 
-    public int demanaOpcio(){
+    public int demanaOpcio() {
         System.out.print("\nChoose an option: ");
         int opcio = scanner.nextInt();
         scanner.nextLine();
@@ -89,7 +87,7 @@ public class Menu {
         return userData;
     }
 
-    public void resultatRegistre (int estat) {
+    public void resultatRegistre(int estat) {
         System.out.println();
         switch (estat) {
             case 0:
@@ -112,12 +110,13 @@ public class Menu {
     }
 
     //Obtenir Login
-    public String obtenirLogin(){
+    public String obtenirLogin() {
         System.out.print("Enter your artistic name: ");
         return scanner.nextLine();
     }
+
     //Login no registrat
-    public void noRegistrat(String login){
+    public void noRegistrat(String login) {
         StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(login);
@@ -127,7 +126,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase, String rival){
+    public void Registrat(int totalFase, int fase, String rival) {
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -159,6 +158,7 @@ public class Menu {
         System.out.print("\n4. Leave competition ");
 
     }
+
     public void doBattle(int coin) throws InterruptedException {
         System.out.println("--------------------------------------------------");
         System.out.println("Topic:");
@@ -166,7 +166,7 @@ public class Menu {
 
         System.out.println("\nA coin is tossed in the air and...");
         Thread.sleep(1000);
-        switch (coin){
+        switch (coin) {
             case 0:
                 System.out.println("your turn! Drop it!");
                 System.out.println("\n\nYour turn!");
@@ -180,14 +180,15 @@ public class Menu {
 
 
     }
-    public void showRanking(){
+
+    public void showRanking() {
         System.out.println("---------------------------------");
         System.out.println("Pos.  |  Name  |  Score");
         System.out.println("---------------------------------");
         scanner.nextLine();
     }
 
-    public void createProfile(){
+    public void createProfile() {
         System.out.println("Yo' bro, you're not ready for this yet");
         scanner.nextLine();
     }
@@ -195,16 +196,17 @@ public class Menu {
     public void leaveCompetition() throws InterruptedException {
         System.out.println("And the winer is...");
         //Ponemos a "Dormir" el programa durante los ms que queremos
-        Thread.sleep(2*1000);
+        Thread.sleep(2 * 1000);
         System.out.println("albert");
         scanner.nextLine();
     }
 
-    private void enterMainMenu(){
+    private void enterMainMenu() {
         System.out.println("--------------------------------------------------");
         System.out.println("Press enter to go back to the main menu");
         scanner.nextLine();
     }
+
     // Mètode per a mostrar un missatge per pantalla
     public void display(String s) {
         System.out.println(s);

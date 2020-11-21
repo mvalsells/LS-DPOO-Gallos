@@ -1,7 +1,6 @@
 import com.google.gson.*;
 
 import java.io.*;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +15,7 @@ public class Json {
     String fitxerBatalla;
 
     //Constructor
-    public Json (String fitxerCompeticio, String fitxerBatalla){
+    public Json(String fitxerCompeticio, String fitxerBatalla) {
         this.fitxerCompeticio = fitxerCompeticio;
         this.fitxerBatalla = fitxerBatalla;
     }
@@ -53,7 +52,7 @@ public class Json {
 
         //Execució
         //data = JsonParser.parseReader(read).getAsJsonObject();
-        data=llegirData();
+        data = llegirData();
         //jsonCompeticio = data.get("competition").getAsJsonObject();
         jsonCompeticio = competicioJsonObject(data);
         name = jsonCompeticio.get("name").getAsString();
@@ -66,7 +65,7 @@ public class Json {
         array = jsonCompeticio.get("phases").getAsJsonArray();
 
         //Llegir fases
-        for (JsonElement jsonElement: array) {
+        for (JsonElement jsonElement : array) {
             float budget;
             String strPais;
             JsonObject jsonPhase;
@@ -83,7 +82,7 @@ public class Json {
 
         //Array countries
         array = data.get("countries").getAsJsonArray();
-        for(JsonElement jsonElement: array){
+        for (JsonElement jsonElement : array) {
             String pais = jsonElement.getAsString();
             countries.add(pais);
         }
@@ -93,7 +92,7 @@ public class Json {
         ArrayList<Rapero> raperos = new ArrayList<>();
 
         //escriureRapero(realName, );
-        for(JsonElement jsonElement : array){
+        for (JsonElement jsonElement : array) {
             //Atributs
             String realName;
             String stageName;
@@ -115,7 +114,7 @@ public class Json {
 
 
             //guardar arraylist raperos
-            Rapero rapero = new Rapero(realName, stageName, birth,nationality, level, photo,puntuacio);
+            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
             raperos.add(rapero);
 
             //Registrar rapero, si el nom artístic ja existeix és mostra un error
@@ -125,14 +124,14 @@ public class Json {
             }*/
         }
 
-        for (Fase fase: phases){
+        for (Fase fase : phases) {
             fase.setRapperos(raperos);
         }
 
         //Creació d'una competició amb les dades llegides
-        competicio = new Competicio(name, startDate, endDate, countries, phases, raperos,data);
+        competicio = new Competicio(name, startDate, endDate, countries, phases, raperos, data);
 
-        return  competicio;
+        return competicio;
 
     }
 
@@ -158,7 +157,7 @@ public class Json {
 
             nom = jsonTema.get("name").getAsString();
             arrayRhymes = jsonTema.get("rhymes").getAsJsonArray();
-            for(JsonElement jsonRhymesE : arrayRhymes) {
+            for (JsonElement jsonRhymesE : arrayRhymes) {
                 JsonObject jsonRhymes = jsonRhymesE.getAsJsonObject();
                 JsonArray rhymesN1 = jsonRhymes.get("1").getAsJsonArray();
                 for (JsonElement rhymesN1E : rhymesN1) {

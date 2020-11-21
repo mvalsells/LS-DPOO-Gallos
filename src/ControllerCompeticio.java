@@ -20,8 +20,6 @@ public class ControllerCompeticio {
     public static boolean validarFecha(String bir) {
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
-            //SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY/MM/dd");
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
         } catch (ParseException e) {
@@ -36,7 +34,8 @@ public class ControllerCompeticio {
             System.exit(0);
         }
         int opcio = 0;
-        while (opcio != 2 && opcio !=4) {
+
+        while (opcio != 2 && opcio != 4) {
             //mostra menu i demana opcio
             opcio = menu.demanaOpcio();
             switch (opcio) {
@@ -50,27 +49,18 @@ public class ControllerCompeticio {
                         //Login
                         //Obtenir nom artistic
                         String login = menu.obtenirLogin();
-                        String contrincant = new String();
-                        //crearParelles();
+                        String contrincant = "";
+                        //preFase -> Crear parelles + simular batalla
                         competicio.preFase(login);
-                        //simularBatalles();
+
                         //mostrarInfoMenu();
 
 
+                        if (competicio.ferLogin(login)) {
 
-                        //cambiar tot a string no dependencia
-                        int fase =1;
-                        int random = 0;
-
-                        int totalfase;
-                        String enemy = new String();
-
-
-                        if(competicio.ferLogin(login)) {
-
-                            fase = competicio.getFaseActual();
+                            int fase = competicio.getFaseActual();
                             //competicio.comencarfase1();
-                            totalfase = competicio.numFases();
+                            int totalfase = competicio.numFases();
                             /*competicio.faseActual();
 
 
@@ -79,18 +69,18 @@ public class ControllerCompeticio {
                                 competicio.numParticipants(login,fase, random, contrincant);
                                 menu.Registrat();
                             }*/
-                            enemy = competicio.preFase(login);
+                            String enemy = competicio.preFase(login);
                             menu.Registrat(totalfase, fase, enemy);
                             do {
                                 opcio = menu.demanaOpcio();
-                                if (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4){
+                                if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                                     menu.display("Number introduced not corresponding to the menu");
-                                    menu.Registrat(totalfase, fase,enemy);
+                                    menu.Registrat(totalfase, fase, enemy);
                                 }
-                            } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio !=4);
+                            } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
 
                             do {
-                                switch (opcio){
+                                switch (opcio) {
                                     case 1:
                                         menu.doBattle(0);
                                         break;
@@ -104,9 +94,9 @@ public class ControllerCompeticio {
                                         menu.leaveCompetition();
                                         break;
                                 }
-                                menu.Registrat(totalfase, fase,enemy);
+                                menu.Registrat(totalfase, fase, enemy);
                                 opcio = menu.demanaOpcio();
-                            }while (opcio!=4);
+                            } while (opcio != 4);
 
 
                             //Anar Lobby
@@ -116,8 +106,6 @@ public class ControllerCompeticio {
                             menu.noRegistrat(login);
                         }
                     }
-                    //menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
-                    //opcio = 0;
                     break;
                 case 2:
                     System.exit(0);
