@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public class Fase {
         }
     }
 
-    public void preFase1(String login){
+    public void preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
         simularBatalles(login);
     }
@@ -59,17 +60,18 @@ public class Fase {
 
     }
 
-    private void simularBatalles(String login){
+    private Integer[] simularBatalles(String login) throws FileNotFoundException {
         Collections.shuffle(raperos);
-        int parellaUsuari=-1;
-        int usuari = -1;
+        Integer [] usuariIparella = new Integer[2]; //Posició 0 -> Usuari; Posicio 1 -> Parella
+        usuariIparella[0]=-1;
+        usuariIparella[1] = -1;
         for (int i=0; i<raperos.size();i=i+2){
             if (raperos.get(i).getStageName() == login){
-                parellaUsuari = i+1;
-                usuari = i;
+                usuariIparella[1] = i+1;
+                usuariIparella[0] = i;
             } else if (raperos.get(i+1).getStageName() == login){
-                parellaUsuari = i;
-                usuari = i+1;
+                usuariIparella[1] = i;
+                usuariIparella[0] = i+1;
             } else
                 {
                 Batalla batalla = new Batalla(raperos.get(i), raperos.get(i+1));
@@ -77,7 +79,6 @@ public class Fase {
                 batalles.add(batalla);
             }
         }
-        Batalla batalla = new Batalla(raperos.get(usuari),raperos.get(parellaUsuari));
-        batalla.ferBatalla(); //Falta mirar el tema gunyador/puntuacio
+       return  usuariIparella;
     }
 }

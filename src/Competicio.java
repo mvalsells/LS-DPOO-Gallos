@@ -33,9 +33,8 @@ public class Competicio {
         this.countries = countries;
         this.phases = phases;
         this.raperos = raperos;
-        temes = json.llegirTemes();
         this.data = data;
-        faseActual = 0;
+        faseActual = 1;
 
     }
 
@@ -249,7 +248,7 @@ public class Competicio {
     }
 
 
-    public void preFase(String login){
+    public void preFase(String login) throws FileNotFoundException {
         if (numFases() == 3){
             // 3 Fases
             switch (faseActual){

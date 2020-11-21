@@ -51,9 +51,7 @@ public class ControllerCompeticio {
                         //Obtenir nom artistic
                         String login = menu.obtenirLogin();
                         //crearParelles();
-                        competicio.aparellament(1);
-
-                       // competicio.preFase(login);
+                        competicio.preFase(login);
 
                         //simularBatalles();
                         //mostrarInfoMenu();
