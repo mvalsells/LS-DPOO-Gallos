@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.Random;
 
 public class Batalla {
     //Atributs
@@ -14,6 +13,11 @@ public class Batalla {
         this.raperos[1]=rapero2;
         tema = json.llegirTema();
     }
+
+    public Float[] puntuacio(int Rimes){
+        Float[] puntuacio = new Float[2];
+        return puntuacio;
+    };
 
     public int simularBatalla(){
         //int pR1 = raperos[1].getPuntuacio() + 4040;
