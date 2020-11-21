@@ -53,8 +53,13 @@ public class ControllerCompeticio {
                         //crearParelles();
                         competicio.aparellament(1);
 
+                       // competicio.preFase(login);
+
                         //simularBatalles();
                         //mostrarInfoMenu();
+
+
+
                         //cambiar tot a string no dependencia
                         int fase =1;
                         int random = 0;

@@ -124,6 +124,9 @@ public class Json {
             }*/
         }
 
+        for (Fase fase: phases){
+            fase.setRapperos(raperos);
+        }
 
         //Creació d'una competició amb les dades llegides
         competicio = new Competicio(name, startDate, endDate, countries, phases, raperos,data);

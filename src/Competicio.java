@@ -6,6 +6,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Competicio {
 
@@ -21,7 +22,7 @@ public class Competicio {
     private JsonObject data;
     private Json json = new Json("src/competicio.json", "src/batalles.json");
     private String rappers;
-    int faseActual;
+    private int faseActual;
 
     //Constructor
     public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
@@ -104,6 +105,8 @@ public class Competicio {
         this.faseActual = faseActual;
     }
 
+
+
     //Metodes
     public int registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
         int estat;
@@ -148,11 +151,7 @@ public class Competicio {
             raperos.add(rapero);
 
             //Afegir el rapero al JSON
-            try {
-                json.escriureRapero(countries, raperos);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            json.escriureRapero(countries, raperos);
         }
 
         return estat;
@@ -198,9 +197,8 @@ public class Competicio {
         }
     }
 
-    public void treureParticipants(String login) {
+    public void participantsParells(String login) {
              if (numParticipants() % 2 != 0) {
-
                 int random = (int) (Math.random() * raperos.size());
                 while (raperos.get(random).getStageName().equals(login)) {
                     random = (int) (Math.random() * raperos.size());
@@ -250,4 +248,37 @@ public class Competicio {
         faseActual++;
     }
 
+
+    public void preFase(String login){
+        if (numFases() == 3){
+            // 3 Fases
+            switch (faseActual){
+                case 1:
+                    phases.get(0).preFase1(login);
+                    break;
+                case 2:
+                    phases.get(1).preFase2(login);
+                    break;
+                case 3:
+                    phases.get(2).preFase3(login);
+                    break;
+                default:
+                    System.out.println("Numero de fase no és 1, 2 o 3");
+                    break;
+            }
+        } else {
+            // 2 Fases
+            switch (faseActual){
+                case 1:
+                    phases.get(0).preFase1(login);
+                    break;
+                case 2:
+                    phases.get(1).preFase3(login);
+                    break;
+                default:
+                    System.out.println("Numero de fase no és 1 o 2");
+                    break;
+            }
+        }
+    }
 }

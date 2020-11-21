@@ -81,6 +81,21 @@ public class Rapero {
         return LocalDate.parse(birth);
     }
 
+    public boolean isEliminat() {
+        return eliminat;
+    }
+
+    public void setEliminat(boolean eliminat) {
+        this.eliminat = eliminat;
+    }
+
+    public float getPuntuacio() {
+        return puntuacio;
+    }
+
+    public void setPuntuacio(float puntuacio) {
+        this.puntuacio = puntuacio;
+    }
 
     @Override
     public String toString() {
