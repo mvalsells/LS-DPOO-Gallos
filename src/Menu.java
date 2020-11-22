@@ -168,12 +168,13 @@ public class Menu {
         Thread.sleep(1000);
         switch (coin) {
             case 0:
-                System.out.println("your turn! Drop it!");
+
+                System.out.println("your turn, Verse! Drop it!");
                 System.out.println("\n\nYour turn!");
                 System.out.println("Enter your verse:");
                 scanner.next();
                 scanner.nextLine();
-                System.out.println("\n...");
+                System.out.println("\nTimeeeeeeeeee");
                 scanner.nextLine();
 
         }
@@ -196,7 +197,11 @@ public class Menu {
     public void leaveCompetition() throws InterruptedException {
         System.out.println("And the winer is...");
         //Ponemos a "Dormir" el programa durante los ms que queremos
-        Thread.sleep(2 * 1000);
+        for(int i=3; i>0; i--){
+            Thread.sleep(1500);
+            System.out.println(i);
+        }
+        Thread.sleep(1000);
         System.out.println("albert");
         scanner.nextLine();
     }

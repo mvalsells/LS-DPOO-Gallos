@@ -7,9 +7,11 @@ public class Acapella extends Batalla{
     }
     public Float[] puntuacio(int Rimes){
         Float [] punts = new Float[2];
-
-
         return punts;
-
+    }
+    public String treuTema(){
+        String temaBatalla = new String();
+        temaBatalla = tema.getNom();
+        return temaBatalla;
     }
 }

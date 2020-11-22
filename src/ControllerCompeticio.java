@@ -71,6 +71,7 @@ public class ControllerCompeticio {
                             }*/
                             String enemy = competicio.preFase(login);
                             menu.Registrat(totalfase, fase, enemy);
+                            do{
                             do {
                                 opcio = menu.demanaOpcio();
                                 if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
@@ -79,7 +80,6 @@ public class ControllerCompeticio {
                                 }
                             } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
 
-                            do {
                                 switch (opcio) {
                                     case 1:
                                         menu.doBattle(0);
@@ -92,11 +92,12 @@ public class ControllerCompeticio {
                                         break;
                                     case 4:
                                         menu.leaveCompetition();
+                                         //ok=1;
                                         break;
                                 }
                                 menu.Registrat(totalfase, fase, enemy);
-                                opcio = menu.demanaOpcio();
-                            } while (opcio != 4);
+                                //opcio = menu.demanaOpcio();
+                            } while (opcio != 4 );
 
 
                             //Anar Lobby

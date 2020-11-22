@@ -39,9 +39,14 @@ public class Batalla {
                 //Escrita
                 break;
         }
-        //int pR1 = raperos[1].getPuntuacio() + 4040;
+        //int pR1 = raperos[1].getPuntuacio() + numRimes(vers);
         //raperos[1].setPuntuacio(pR1);
         return 1;
+    }
+    public String treuTema(){
+        String temaBatalla = new String();
+        temaBatalla = tema.getNom();
+        return temaBatalla;
     }
     public int ferBatalla(){
         return 1;
