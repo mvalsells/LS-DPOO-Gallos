@@ -1,13 +1,10 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public abstract class Batalla {
     //Atributs
     Rapero[] raperos = new Rapero[2];
-    Tema tema;
+    ArrayList<Tema> tema;
     Json json = new Json("src/competicio.json", "src/batalles.json");
 
 
@@ -24,10 +21,25 @@ public abstract class Batalla {
          return 1;
     }
 
-    public String treuTema(){
+
+    public String treuTema(Rapero rapero1){
         String temaBatalla = new String();
-        temaBatalla = tema.getNom();
+        Collections.shuffle(tema);
+
+        temaBatalla = tema.get(0).getNom();
+        eleccioEstrofaR1(rapero1, tema.get(0).getEstrofesN1());
         return temaBatalla;
+    }
+    public String eleccioEstrofaR1(Rapero rapero1, ArrayList<String> estrofa1){
+        String verso = new String();
+        if(rapero1.getLevel()==1){
+            Collections.shuffle(tema);
+            verso = estrofa1.get(0);
+        }
+
+
+        return verso;
+
     }
     public int ferBatalla(){
         return 1;

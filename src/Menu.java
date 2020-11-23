@@ -194,7 +194,7 @@ public class Menu {
         scanner.nextLine();
     }
 
-    public void leaveCompetition() throws InterruptedException {
+    public void leaveCompetition(String guanyador) throws InterruptedException {
         System.out.println("And the winer is...");
         //Ponemos a "Dormir" el programa durante los ms que queremos
         for(int i=3; i>0; i--){
@@ -202,7 +202,7 @@ public class Menu {
             System.out.println(i);
         }
         Thread.sleep(1000);
-        System.out.println("albert");
+        System.out.println(guanyador);
         scanner.nextLine();
     }
 

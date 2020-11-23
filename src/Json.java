@@ -3,7 +3,6 @@ import com.google.gson.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -136,7 +135,7 @@ public class Json {
     }
 
     //Llegir temes
-    public Tema llegirTema() throws FileNotFoundException {
+    public ArrayList<Tema> llegirTema() throws FileNotFoundException {
         //Atributs llegir JSON
         Reader read = new FileReader(fitxerBatalla);
         JsonObject data;
@@ -173,10 +172,10 @@ public class Json {
 
         }
 
-        Collections.shuffle(temes);
+        //Collections.shuffle(temes);
 
 
-        return temes.get(0);
+        return temes;
 
     }
 

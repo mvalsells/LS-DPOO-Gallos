@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ControllerCompeticio {
     //Atributs
@@ -17,11 +18,23 @@ public class ControllerCompeticio {
         menu = new Menu();
     }
 
-    public static boolean validarFecha(String bir) {
+    public boolean validarFecha(String bir) {
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            //Date dataok;
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
+
+
+
+
+            /*if(dataok>competicio.getEndDate()){
+                return false;
+            }
+            if(competicio.getEndDate().isBefore(dataok){
+                return false;
+            }*/
+
         } catch (ParseException e) {
             return false;
         }
@@ -51,16 +64,19 @@ public class ControllerCompeticio {
                         String login = menu.obtenirLogin();
                         String contrincant = "";
                         //preFase -> Crear parelles + simular batalla
-                        competicio.preFase(login);
+
 
                         //mostrarInfoMenu();
 
 
                         if (competicio.ferLogin(login)) {
+                            competicio.preFase(login);
 
                             int fase = competicio.getFaseActual();
                             //competicio.comencarfase1();
                             int totalfase = competicio.numFases();
+                            String guanyador = new String();
+                            guanyador = competicio.nomGuanyador();
                             /*competicio.faseActual();
 
 
@@ -69,6 +85,7 @@ public class ControllerCompeticio {
                                 competicio.numParticipants(login,fase, random, contrincant);
                                 menu.Registrat();
                             }*/
+
                             String enemy = competicio.preFase(login);
                             menu.Registrat(totalfase, fase, enemy);
                             do{
@@ -91,7 +108,7 @@ public class ControllerCompeticio {
                                         menu.createProfile();
                                         break;
                                     case 4:
-                                        menu.leaveCompetition();
+                                        menu.leaveCompetition(guanyador);
                                          //ok=1;
                                         break;
                                 }

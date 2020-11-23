@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.util.Collection;
+import java.util.Collections;
 
 public class Acapella extends Batalla{
 
@@ -10,7 +12,8 @@ public class Acapella extends Batalla{
     }
     public String treuTema(){
         String temaBatalla = new String();
-        temaBatalla = tema.getNom();
+        Collections.shuffle(tema);
+        temaBatalla = tema.get(0).getNom();
         return temaBatalla;
     }
 }
