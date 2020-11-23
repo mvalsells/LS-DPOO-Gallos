@@ -1,8 +1,5 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Fase {
     //Atributs
@@ -73,7 +70,20 @@ public class Fase {
                 usuariIparella[1] = i;
                 usuariIparella[0] = i + 1;
             } else {
-                Batalla batalla = new Batalla(raperos.get(i), raperos.get(i + 1));
+                Batalla batalla;
+                Random rand = new Random();
+                int tipus = rand.nextInt(3);
+                switch (tipus){
+                    case 0:
+                        batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
+                        break;
+                    case 1:
+                        batalla = new Sangre(raperos.get(i), raperos.get(i + 1));
+                        break;
+                    default:
+                        batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
+                        break;
+                }
                 batalla.simularBatalla(); //Falta mirar el tema gunyador/puntuacio
                 batalles.add(batalla);
             }

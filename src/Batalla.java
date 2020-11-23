@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class Batalla {
+public abstract class Batalla {
     //Atributs
     Rapero[] raperos = new Rapero[2];
     Tema tema;
@@ -18,31 +18,12 @@ public class Batalla {
         tema = json.llegirTema();
     }
 
-    public Float[] puntuacio(int Rimes){
-        Float[] puntuacio = new Float[2];
-        return puntuacio;
-    };
+    public abstract double puntuacio(int rimes);
 
     public int simularBatalla() throws FileNotFoundException {
-        Random rand = new Random();
-        int tipus = rand.nextInt(3);
-        switch (tipus){
-            case 0:
-                //Acapella
-                Acapella acapella = new Acapella(this.raperos[0],this.raperos[1]);
-
-                break;
-            case 1:
-                //Sangre
-                break;
-            case 2:
-                //Escrita
-                break;
-        }
-        //int pR1 = raperos[1].getPuntuacio() + numRimes(vers);
-        //raperos[1].setPuntuacio(pR1);
-        return 1;
+         return 1;
     }
+
     public String treuTema(){
         String temaBatalla = new String();
         temaBatalla = tema.getNom();
@@ -56,6 +37,8 @@ public class Batalla {
         int numRimes=0;
         ArrayList<String> finalsLinies = new ArrayList<>();
         String[] split = vers.split(",");
+        //Eliminem el punt de l'últim vers
+        split[split.length-1] = split[split.length-1].replace(".","");
         //Obtenir tots els finals de linies
         for (String linia : split){
             String ultimesLletres = linia.substring(linia.length()-2,linia.length());

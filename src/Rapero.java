@@ -12,12 +12,14 @@ public class Rapero {
     private String  birth;
     private String nationality;
     private int level;
-
     //canvi de URL-->string
     private String photo;
     private float puntuacio;
 
     //Constructor
+
+    public Rapero(){};
+
     public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
         this.realName = realName;
         this.stageName = stageName;
