@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControllerCompeticio {
     //Atributs
@@ -24,7 +23,7 @@ public class ControllerCompeticio {
             //Date dataok;
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
-            if(bir.length()> 9){
+            if(bir.length() != 10){
                 return false;
             }
 
@@ -47,10 +46,7 @@ public class ControllerCompeticio {
             switch (opcio) {
                 case 1:
                     if (!competicio.haComencat()) {
-                        //Demano dades registre
-                        int estatRegistre = registrarUsuari();
-                        //Mostro el resultat del registre
-                        menu.resultatRegistre(estatRegistre);
+                        registrarUsuari();
                     } else {
                         //Login
                         //Obtenir nom artistic
@@ -128,28 +124,47 @@ public class ControllerCompeticio {
         }
     }
 
-    public int registrarUsuari() throws IOException {
-        int estat = -1;
-        ArrayList<String> dadesUsuari = menu.demanaInfoUser();
-        String realName = dadesUsuari.get(0);
-        String stageName = dadesUsuari.get(1);
-        String birthInput = dadesUsuari.get(2);
-        String nationality = dadesUsuari.get(3);
-        String nivell = dadesUsuari.get(4);
-        int level = Integer.parseInt(nivell);
-        String photo = dadesUsuari.get(5);
-        float puntuacio = 0;
+    public void registrarUsuari() throws IOException {
+        boolean primercop = true;
+        Boolean[] estat = new Boolean[3];
+        ArrayList<String> dadesUsuari = new ArrayList<>();
+        do {
+            if (primercop){
+                dadesUsuari = menu.demanaInfoUser();
+                primercop = false;
+            } else {
+                dadesUsuari = menu.demanaInfoUser(dadesUsuari);
+            }
 
-        if (validarFecha(birthInput)) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate birthLocalDate = LocalDate.parse(birthInput, formatter);
-            String birth = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
-        } else {
-            estat = 2;
-        }
+            String realName = dadesUsuari.get(0);
+            String stageName = dadesUsuari.get(1);
+            String birthInput = dadesUsuari.get(2);
+            String nationality = dadesUsuari.get(3);
+            String nivell = dadesUsuari.get(4);
+            int level = Integer.parseInt(nivell);
+            String photo = dadesUsuari.get(5);
+            float puntuacio = 0;
 
-        return estat;
+            if (validarFecha(birthInput)) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate birthLocalDate = LocalDate.parse(birthInput, formatter);
+                String birth = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
+            } else {
+                estat = 2;
+            }
+            menu.resultatRegistre(estat);
+            switch (estat) {
+                case 1:
+                    dadesUsuari.set(1, null);
+                    break;
+                case 2:
+                    dadesUsuari.set(2, null);
+                    break;
+            }
+        } while (estat != 0 && estat != 3);
+
+//        return estat;
             /* Llegenda return
             0 -> Dades correctes i guardat al JSON
             1 -> Nom artístic ja existeix

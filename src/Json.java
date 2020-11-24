@@ -198,7 +198,6 @@ public class Json {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio.json"))) {
             bw.write(json);
-            System.out.println("Fichero creado");
         } catch (IOException ex) {
             Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -423,6 +423,26 @@
       "level": 1,
       "photo": "https://www.instagram.com/p/CFpqv5nnM20/",
       "puntuacio": 0.0
+    },
+    {
+      "realName": "Marc",
+      "stageName": "Clari",
+      "eliminat": false,
+      "birth": "2001-10-20",
+      "nationality": "Spain",
+      "level": 2,
+      "photo": "ded",
+      "puntuacio": 0.0
+    },
+    {
+      "realName": "Marc",
+      "stageName": "Claro",
+      "eliminat": false,
+      "birth": "2001-12-10",
+      "nationality": "Spain",
+      "level": 2,
+      "photo": "ed",
+      "puntuacio": 0.0
     }
   ]
 }

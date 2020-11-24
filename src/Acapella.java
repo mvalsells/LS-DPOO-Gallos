@@ -10,10 +10,5 @@ public class Acapella extends Batalla{
     public double puntuacio(int rimes){
         return (6*Math.sqrt(rimes)+3)/2;
     }
-    public String treuTema(){
-        String temaBatalla = new String();
-        Collections.shuffle(tema);
-        temaBatalla = tema.get(0).getNom();
-        return temaBatalla;
-    }
+
 }

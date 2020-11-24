@@ -87,6 +87,39 @@ public class Menu {
         return userData;
     }
 
+    public ArrayList<String> demanaInfoUser(ArrayList<String> userData) {
+        System.out.println("--------------------------------------------------");
+        System.out.print("- Full name: ");
+        System.out.println(userData.get(0));
+        System.out.print("- Artistic name: ");
+        if (userData.get(1)==null) {
+            userData.set(1, scanner.nextLine());
+        } else {
+            System.out.println(userData.get(1));
+        }
+        System.out.print("- Birth date (dd/MM/YYYY): ");
+        if (userData.get(2)==null) {
+            userData.set(2, scanner.nextLine());
+        } else {
+            System.out.println(userData.get(2));
+        }
+        System.out.print("- Country: ");
+        System.out.println(userData.get(3));
+        System.out.print("- Level: ");
+        if (userData.get(4)==null) {
+            userData.set(4, scanner.nextLine());
+        } else {
+            System.out.println(userData.get(4));
+        }
+        System.out.print("- Photo URL: ");
+        if (userData.get(5)==null) {
+            userData.set(5, scanner.nextLine());
+        } else {
+            System.out.println(userData.get(5));
+        }
+        return userData;
+    }
+
     public void resultatRegistre(int estat) {
         System.out.println();
         switch (estat) {
@@ -106,7 +139,6 @@ public class Menu {
                 System.out.println("The registration process returned an unexpected estat number");
                 break;
         }
-        enterMainMenu();
     }
 
     //Obtenir Login

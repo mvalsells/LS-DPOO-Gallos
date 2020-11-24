@@ -208,7 +208,6 @@ public class Competicio {
                 case 1:
                     contrincant = phases.get(0).preFase1(login);
                     rival = raperos.get(contrincant).getStageName();
-
                     break;
                 case 2:
                     phases.get(1).preFase2(login);

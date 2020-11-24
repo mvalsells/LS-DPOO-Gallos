@@ -4,7 +4,7 @@ import java.util.*;
 public abstract class Batalla {
     //Atributs
     Rapero[] raperos = new Rapero[2];
-    ArrayList<Tema> tema;
+    Tema tema;
     Json json = new Json("src/competicio.json", "src/batalles.json");
 
 
@@ -12,36 +12,41 @@ public abstract class Batalla {
     public Batalla(Rapero rapero1, Rapero rapero2) throws FileNotFoundException {
         this.raperos[0]=rapero1;
         this.raperos[1]=rapero2;
-        tema = json.llegirTema();
+        ArrayList<Tema> temes = json.llegirTema();
+        Collections.shuffle(temes);
+        tema = temes.get(0);
     }
 
     public abstract double puntuacio(int rimes);
 
     public int simularBatalla() throws FileNotFoundException {
-         return 1;
+        String estrofaR1 = eleccioEstrofa(raperos[0],tema);
+        int rimesR1 = numRimes(estrofaR1);
+        String estrofaR2 = eleccioEstrofa(raperos[1],tema);
+        int rimesR2 = numRimes(estrofaR2);
+
+        return 1;
     }
 
 
-    public String treuTema(Rapero rapero1, Rapero rapero2){
+    /*public String treuTema(Rapero rapero1, Rapero rapero2){
         String temaBatalla = new String();
-        Collections.shuffle(tema);
 
-        temaBatalla = tema.get(0).getNom();
-        eleccioEstrofaR1(rapero1, tema.get(0).getEstrofesN1(), tema.get(0).getEstrofesN2());
+        temaBatalla = tema.getNom();
+        eleccioEstrofaR1(rapero1, tema.getEstrofesN1(), tema.getEstrofesN2());
         //eleccioEstrofaR2(rapero2, tema.get(0).getEstrofesN1(), tema.get(0).getEstrofesN2());
         return temaBatalla;
-    }
-    public void eleccioEstrofaR1(Rapero rapero1, ArrayList<String> estrofa1, ArrayList<String> estrofa2){
+    }*/
+    public String eleccioEstrofa(Rapero rapero, Tema tema){
         String verso = new String();
-        if(rapero1.getLevel()==1){
-            Collections.shuffle(estrofa1);
-            verso = estrofa1.get(0);
+        if(rapero.getLevel()==1){
+            Collections.shuffle(tema.getEstrofesN1());
+            verso = tema.getEstrofesN1().get(0);
         }else{
-            Collections.shuffle(estrofa2);
-            verso = estrofa2.get(0);
+            Collections.shuffle(tema.getEstrofesN2());
+            verso = tema.getEstrofesN2().get(0);
         }
-        numRimes(verso);
-
+       return verso;
     }
 
     /* !!!!!!!!!!!!!!!!!!!!Codi eleccioestrofar2, estic pensant en una especie de bucle perque primer faci la estrofa del rapero 1, calculi la puntuacio, i despres
