@@ -22,25 +22,47 @@ public abstract class Batalla {
     }
 
 
-    public String treuTema(Rapero rapero1){
+    public String treuTema(Rapero rapero1, Rapero rapero2){
         String temaBatalla = new String();
         Collections.shuffle(tema);
 
         temaBatalla = tema.get(0).getNom();
-        eleccioEstrofaR1(rapero1, tema.get(0).getEstrofesN1());
+        eleccioEstrofaR1(rapero1, tema.get(0).getEstrofesN1(), tema.get(0).getEstrofesN2());
+        //eleccioEstrofaR2(rapero2, tema.get(0).getEstrofesN1(), tema.get(0).getEstrofesN2());
         return temaBatalla;
     }
-    public String eleccioEstrofaR1(Rapero rapero1, ArrayList<String> estrofa1){
+    public void eleccioEstrofaR1(Rapero rapero1, ArrayList<String> estrofa1, ArrayList<String> estrofa2){
         String verso = new String();
         if(rapero1.getLevel()==1){
-            Collections.shuffle(tema);
+            Collections.shuffle(estrofa1);
             verso = estrofa1.get(0);
+        }else{
+            Collections.shuffle(estrofa2);
+            verso = estrofa2.get(0);
         }
-
-
-        return verso;
+        numRimes(verso);
 
     }
+
+    /* !!!!!!!!!!!!!!!!!!!!Codi eleccioestrofar2, estic pensant en una especie de bucle perque primer faci la estrofa del rapero 1, calculi la puntuacio, i despres
+    faci el mateix amb el de rapero 2
+
+     */
+   /* public void eleccioEstrofaR2(Rapero rapero2, ArrayList<String> estrofa1, ArrayList<String> estrofa2){
+        String verso = new String();
+        if(rapero2.getLevel()==1){
+            Collections.shuffle(estrofa1);
+            verso = estrofa1.get(0);
+        }else{
+            Collections.shuffle(estrofa2);
+            verso = estrofa2.get(0);
+        }
+        numRimes(verso);
+
+    }*/
+
+
+
     public int ferBatalla(){
         return 1;
     }

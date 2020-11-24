@@ -7,10 +7,14 @@ public class Main {
         controllerCompeticio.executaMenu();
         /*Rapero a = new Rapero();
         Batalla aca = new Acapella(a,a);
-        int numRimes = aca.numRimes("Tiene los faros cuadrados,\nde intermitentes dos flores,\nlos asientos son de rayas,\nde muchísimos colores.");
+        String tema = aca.treuTema(a);
+        String verso = aca.eleccioEstrofaR1(estrofa1, estrofa2);
+        int numRimes = aca.numRimes(vers);
         System.out.println("Rimes: " + numRimes + " Puntuacio: " + aca.puntuacio(numRimes));
 
          */
+
+
     }
 
 }
