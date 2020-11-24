@@ -24,16 +24,9 @@ public class ControllerCompeticio {
             //Date dataok;
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
-
-
-
-
-            /*if(dataok>competicio.getEndDate()){
+            if(bir.length()> 9){
                 return false;
             }
-            if(competicio.getEndDate().isBefore(dataok){
-                return false;
-            }*/
 
         } catch (ParseException e) {
             return false;
