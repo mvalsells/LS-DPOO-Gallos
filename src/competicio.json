@@ -443,6 +443,26 @@
       "level": 2,
       "photo": "ed",
       "puntuacio": 0.0
+    },
+    {
+      "realName": "MArr",
+      "stageName": "Pepito Grillo",
+      "eliminat": false,
+      "birth": "20/10/2019",
+      "nationality": "Spain",
+      "level": 2,
+      "photo": "faefe",
+      "puntuacio": 0.0
+    },
+    {
+      "realName": "Marc Valsells",
+      "stageName": "Valsells",
+      "eliminat": false,
+      "birth": "20/10/2020",
+      "nationality": "Spain",
+      "level": 2,
+      "photo": "fr",
+      "puntuacio": 0.0
     }
   ]
 }

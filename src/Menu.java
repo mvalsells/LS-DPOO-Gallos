@@ -71,7 +71,7 @@ public class Menu {
 
     public ArrayList<String> demanaInfoUser() {
         ArrayList<String> userData = new ArrayList<>();
-        System.out.println("--------------------------------------------------");
+        mostrarLiniaSeparadora();
         System.out.print("- Full name: ");
         userData.add(scanner.nextLine());
         System.out.print("- Artistic name: ");
@@ -88,7 +88,7 @@ public class Menu {
     }
 
     public ArrayList<String> demanaInfoUser(ArrayList<String> userData) {
-        System.out.println("--------------------------------------------------");
+        mostrarLiniaSeparadora();
         System.out.print("- Full name: ");
         System.out.println(userData.get(0));
         System.out.print("- Artistic name: ");
@@ -120,25 +120,29 @@ public class Menu {
         return userData;
     }
 
-    public void resultatRegistre(int estat) {
-        System.out.println();
-        switch (estat) {
-            case 0:
-                System.out.println("Registration completed!");
-                break;
-            case 1:
+    public void resultatRegistre(Boolean [] estat) {
+
+        /* Llegenda
+        estat[0] -> Nom artístic OK/NO OK
+        estat[1] -> Data neixament OK/NO OK
+        estat[2] -> País acceptat OK/No OK
+        estat[3] -> Totes les dades OK/NO OK
+        */
+
+        if (estat[3]) {
+            System.out.println("Registration completed!");
+        } else {
+            if (!estat[0]) {
                 System.out.println("A rapper with this artistic name already exists");
-                break;
-            case 2:
+            }
+            if (!estat[1]) {
                 System.out.println("Birth date is invalid");
-                break;
-            case 3:
+            }
+            if (!estat[2]) {
                 System.out.println("Country is not accepted in this competition");
-                break;
-            default:
-                System.out.println("The registration process returned an unexpected estat number");
-                break;
+            }
         }
+        mostrarLiniaSeparadora();
     }
 
     //Obtenir Login
@@ -164,7 +168,7 @@ public class Menu {
         sb.append(fase);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());*/
-        System.out.println("--------------------------------------------------");
+        mostrarLiniaSeparadora();
         StringBuilder sb = new StringBuilder();
         sb.append("Phases: ");
         sb.append(fase);
@@ -182,7 +186,7 @@ public class Menu {
 
 
         System.out.println(sb.toString());
-        System.out.println("--------------------------------------------------");
+        mostrarLiniaSeparadora();
 
         System.out.print("\n1. Start the battle ");
         System.out.print("\n2. Show ranking ");
@@ -191,8 +195,12 @@ public class Menu {
 
     }
 
-    public void doBattle(int coin) throws InterruptedException {
+    private void mostrarLiniaSeparadora() {
         System.out.println("--------------------------------------------------");
+    }
+
+    public void doBattle(int coin) throws InterruptedException {
+        mostrarLiniaSeparadora();
         System.out.println("Topic:");
 
 
@@ -239,7 +247,7 @@ public class Menu {
     }
 
     private void enterMainMenu() {
-        System.out.println("--------------------------------------------------");
+        mostrarLiniaSeparadora();
         System.out.println("Press enter to go back to the main menu");
         scanner.nextLine();
     }

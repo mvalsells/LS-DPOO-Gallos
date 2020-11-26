@@ -1,4 +1,5 @@
 import com.google.gson.*;
+import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -187,7 +188,14 @@ public class Json {
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
+/*
+        JsonWriter jsonWriter = gson.newJsonWriter(fitxerCompeticio);
 
+
+        jsonWriter.name("competition");
+        jsonWriter.beginObject();
+        jsonWriter.name("name");
+        jsonWriter.value();*/
 
         JsonObject tot = new JsonObject();
         tot.add("competition", jsonCompeticio);
