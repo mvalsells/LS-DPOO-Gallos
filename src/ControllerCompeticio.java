@@ -69,12 +69,15 @@ public class ControllerCompeticio {
         ArrayList<String> dadesUsuari = new ArrayList<>();
         do {
             if (primercop){
+                //Primer cop -> Demano totes les dades
                 dadesUsuari = menu.demanaInfoUser();
                 primercop = false;
             } else {
+                //No primer cop -> Demano les dades incorrectes
                 dadesUsuari = menu.demanaInfoUser(dadesUsuari);
             }
 
+            //Extrect les dades
             String realName = dadesUsuari.get(0);
             String stageName = dadesUsuari.get(1);
             String birth = dadesUsuari.get(2);
@@ -83,8 +86,10 @@ public class ControllerCompeticio {
             int level = Integer.parseInt(nivell);
             String photo = dadesUsuari.get(5);
             float puntuacio = 0;
-            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
 
+            //Creo el usuari
+            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
+            //Mostro si s'ha creat o hi han errors
             menu.resultatRegistre(estat);
 
             //Si el nom no és correcte el borrem

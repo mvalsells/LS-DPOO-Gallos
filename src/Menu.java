@@ -142,7 +142,6 @@ public class Menu {
                 System.out.println("Country is not accepted in this competition");
             }
         }
-        mostrarLiniaSeparadora();
     }
 
     //Obtenir Login
