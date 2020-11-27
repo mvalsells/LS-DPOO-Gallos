@@ -17,13 +17,17 @@ public abstract class Batalla {
         tema = temes.get(0);
     }
 
-    public abstract double puntuacio(int rimes);
+    public abstract double puntuacio(int numRimes);
 
     public int simularBatalla() throws FileNotFoundException {
         String estrofaR1 = eleccioEstrofa(raperos[0],tema);
         int rimesR1 = numRimes(estrofaR1);
         String estrofaR2 = eleccioEstrofa(raperos[1],tema);
         int rimesR2 = numRimes(estrofaR2);
+        double puntuacioR1 = puntuacio(rimesR1);
+        double puntuacioR2 = puntuacio(rimesR2);
+
+
 
         return 1;
     }
