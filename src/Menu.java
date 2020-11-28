@@ -198,7 +198,7 @@ public class Menu {
         System.out.println("--------------------------------------------------");
     }
 
-    public void doBattle(int coin) throws InterruptedException {
+    public void doBattle(int coin, String parrrafada) throws InterruptedException {
         mostrarLiniaSeparadora();
         System.out.println("Topic:");
 
@@ -209,14 +209,25 @@ public class Menu {
             case 0:
 
                 System.out.println("your turn, Verse! Drop it!");
+                //codi contrincant
                 System.out.println("\n\nYour turn!");
                 System.out.println("Enter your verse:");
-                scanner.next();
-                scanner.nextLine();
-                System.out.println("\nTimeeeeeeeeee");
+                scanner.next(parrrafada);
                 scanner.nextLine();
 
+            case 1:
+                System.out.println("your turn, Verse! Drop it!");
+                System.out.println("Enter your verse:");
+                scanner.next(parrrafada);
+                scanner.nextLine();
+
+                System.out.println("\n\nYour turn!");
+                //codi contrincant
+
+
         }
+        System.out.println("\nTimeeeeeeeeee");
+        scanner.nextLine();
 
 
     }

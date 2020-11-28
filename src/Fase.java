@@ -63,17 +63,38 @@ public class Fase {
         usuariIparella[0] = -1;
         usuariIparella[1] = -1;
         for (int i = 0; i < raperos.size(); i = i + 2) {
+            boolean a = false;
+            Batalla batalla;
+            Random rand = new Random();
+            int tipus = rand.nextInt(3);
+
             if (raperos.get(i).getStageName().equals(login)) {
                 usuariIparella[1] = i + 1;
                 usuariIparella[0] = i;
+                a = true;
             } else if (raperos.get(i + 1).getStageName().equals(login)) {
                 usuariIparella[1] = i;
                 usuariIparella[0] = i + 1;
+                a = true;
+            }
+
+            if (a) {
+                switch (tipus) {
+                    case 0:
+                        batalla = new Escrita(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
+                        break;
+                    case 1:
+                        batalla = new Sangre(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
+                        break;
+                    default:
+                        batalla = new Acapella(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
+                        break;
+                }
+                batalla.ferBatalla(i);
             } else {
-                Batalla batalla;
-                Random rand = new Random();
-                int tipus = rand.nextInt(3);
-                switch (tipus){
+
+
+                switch (tipus) {
                     case 0:
                         batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
                         break;
@@ -84,9 +105,11 @@ public class Fase {
                         batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
                         break;
                 }
-                batalla.simularBatalla(); //Falta mirar el tema gunyador/puntuacio
-                batalles.add(batalla);
+                batalla.simularBatalla();
+
             }
+             //Falta mirar el tema gunyador/puntuacio
+            batalles.add(batalla);
         }
         return usuariIparella;
     }

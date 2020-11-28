@@ -80,11 +80,50 @@ public abstract class Batalla {
     }
 
 
-    public int ferBatalla() {
+    public void ferBatalla(int i) {
+
+        while (i<tema.length) {
+
+            int posicioNivell1 = 0;
+            int posicioNivell2 = 0;
+
+            for (int j = 0; j < raperos.length; j++) {
+
+                int nivellRapero = raperos[j].getLevel();
+                double puntuacio = 0;
+
+                /*if(j==0){
+                    String estrofaUser =
+                }*/
+
+                /*String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell1);
+                if (estrofa.length() == 0) {
+                    puntuacio = 0;
+                    break;
+                } else {
+                    if (nivellRapero == 1) {
+                        posicioNivell1++;
+                    } else {
+                        posicioNivell2++;
+                    }
+                    int rimes = numRimes(estrofa);
+                    puntuacio = puntuacio(rimes);
+                }
+                */
+
+
+
+
+                raperos[j].setPuntuacio(raperos[j].getPuntuacio() + puntuacio);
+
+            }
+
+
+        }
 
         // igual que simular batalka pero en el for en comptes de agafar estrofes aleatories
         //he de agafar per pantalla
-        return 1;
+
     }
 
     public int numRimes(String vers) {

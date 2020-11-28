@@ -137,6 +137,7 @@ public class ControllerCompeticio {
                             }*/
 
             String enemy = competicio.preFase(login);
+            String parrafada = new String();
             menu.Registrat(totalfase, fase, enemy);
             do{
                 do {
@@ -149,7 +150,7 @@ public class ControllerCompeticio {
 
                 switch (opcio) {
                     case 1:
-                        menu.doBattle(0);
+                        menu.doBattle(0, parrafada);
                         break;
                     case 2:
                         menu.showRanking();

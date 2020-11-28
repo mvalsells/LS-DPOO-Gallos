@@ -202,6 +202,7 @@ public class Competicio {
         faseActual++;
     }
 
+
     public String preFase(String login) throws FileNotFoundException {
         String rival = "";
         int contrincant;
