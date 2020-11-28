@@ -14,7 +14,7 @@ public class Rapero {
     private int level;
     //canvi de URL-->string
     private String photo;
-    private float puntuacio;
+    private double puntuacio;
 
     //Constructor
 
@@ -83,11 +83,11 @@ public class Rapero {
         this.eliminat = eliminat;
     }
 
-    public float getPuntuacio() {
+    public double getPuntuacio() {
         return puntuacio;
     }
 
-    public void setPuntuacio(float puntuacio) {
+    public void setPuntuacio(double puntuacio) {
         this.puntuacio = puntuacio;
     }
 
