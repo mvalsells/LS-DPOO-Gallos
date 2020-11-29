@@ -38,7 +38,7 @@ public abstract class Batalla {
                 double puntuacio = 0;
 
                 //Obtenim la estrofa
-                String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell1);
+                String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell2);
                 if (estrofa.length() == 0) {
                     //Si la estrofa és buida, el rapero fa el ridicul i s'acaba la batalla
                     break;
@@ -80,48 +80,24 @@ public abstract class Batalla {
     }
 
 
-
-    public void ferBatalla(int i) {
-
-        while (i<tema.length) {
-
-            int posicioNivell1 = 0;
-            int posicioNivell2 = 0;
-
-            for (int j = 0; j < raperos.length; j++) {
-
-                int nivellRapero = raperos[j].getLevel();
-                double puntuacio = 0;
-
-                /*if(j==0){
-                    String estrofaUser =
-                }*/
-
-                /*String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell1);
-                if (estrofa.length() == 0) {
-                    puntuacio = 0;
-                    break;
-                } else {
-                    if (nivellRapero == 1) {
-                        posicioNivell1++;
-                    } else {
-                        posicioNivell2++;
-                    }
-                    int rimes = numRimes(estrofa);
-                    puntuacio = puntuacio(rimes);
-                }
-                */
-
-                raperos[j].setPuntuacio(raperos[j].getPuntuacio() + puntuacio);
-
-            }
-
-
+    public void ferBatalla(String estrofaLogin, String estrofaContrincant) {
+        double puntuacio=0;
+        //Si el Login no fa el ridicul calculem les rimes i la puntuació
+        if (!(estrofaLogin.length() == 0)) {
+            int rimes = numRimes(estrofaLogin);
+            puntuacio = puntuacio(rimes);
         }
+        //Actualitzem la puntuació
+        raperos[0].setPuntuacio(raperos[0].getPuntuacio() + puntuacio);
 
-        // igual que simular batalka pero en el for en comptes de agafar estrofes aleatories
-        //he de agafar per pantalla
-
+        puntuacio=0;
+        //Si el contrincant no fa el ridicul calculem les rimes i la puntuació
+        if (!(estrofaContrincant.length() == 0)) {
+            int rimes = numRimes(estrofaLogin);
+            puntuacio = puntuacio(rimes);
+        }
+        //Actualitzem la puntuació
+        raperos[1].setPuntuacio(raperos[1].getPuntuacio() + puntuacio);
     }
 
     public int numRimes(String vers) {
@@ -155,23 +131,27 @@ public abstract class Batalla {
         return numRimes;
     }
 
-    public ArrayList<String> infoTema(int temaPos){
-       ArrayList<String> info = new ArrayList<>();
-       ArrayList<String> estrofes;
-       //Primera posició el tema
-       info.add(tema[temaPos].getNom());
+    public ArrayList<String> infoTema(int temaPos) {
+        ArrayList<String> info = new ArrayList<>();
+        ArrayList<String> estrofes;
+        //Primera posició el tema
+        info.add(tema[temaPos].getNom());
 
-       //Agafos les estrofes del segon rapero i el seu nivell
-       if (raperos[1].getLevel()==1){
-           estrofes = tema[temaPos].getEstrofesN1();
-       } else {
-           estrofes = tema[temaPos].getEstrofesN2();
-       }
-
-       //Afegeixo les estrofes al array list
-        for (String estrofa : estrofes){
-            info.add(estrofa);
+        //Agafos les estrofes del segon rapero i el seu nivell
+        if (raperos[1].getLevel() == 1) {
+            estrofes = tema[temaPos].getEstrofesN1();
+        } else {
+            estrofes = tema[temaPos].getEstrofesN2();
         }
+
+        if (estrofes.size()==0) {
+            info.add("");
+        } else {
+            Collections.shuffle(estrofes);
+            info.add(estrofes.get(0));
+        }
+
         return info;
-    };
+    }
+
 }

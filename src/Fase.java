@@ -54,7 +54,6 @@ public class Fase {
 
     private String[] simularBatalles(String login) throws FileNotFoundException {
         Collections.shuffle(raperos);
-        Integer[] usuariIparella = new Integer[2]; //Posició 0 -> Usuari; Posicio 1 -> Parella
         String[] info = new String[4];
         for (int i = 0; i < raperos.size(); i = i + 2) {
             Batalla batalla;
@@ -103,7 +102,7 @@ public class Fase {
                 //Guardo puntuacio del login
                 info[2] = Double.toString(raperos.get(i+1).getPuntuacio());
                 //Guardo posició de la batalla al array
-                info[3] = Integer.toString(i);
+                info[3] = Integer.toString(i/2);
             } else {
                 switch (tipus) {
                     case 0:
@@ -126,7 +125,7 @@ public class Fase {
         return info;
         /*Array
         [0] -> Nom contrincant
-        [1] -> Tipus de batalls
+        [1] -> Tipus de batalla
         [2] -> Puntuació usuari
         [3] -> Posició de la batalla usuari
          */
@@ -134,5 +133,9 @@ public class Fase {
 
     public ArrayList<String> infoTema(int battlePos, int temaPos) {
         return batalles.get(battlePos).infoTema(temaPos);
+    }
+
+    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
     }
 }

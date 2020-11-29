@@ -196,7 +196,7 @@ public class Menu {
         System.out.println("--------------------------------------------------------------------");
     }
 
-    public String doBattle(int coin, String topic, String contrincant, String estrofa1, String estrofa2) throws InterruptedException {
+    public String doBattle(int coin, String topic, String contrincant, String parrafada) throws InterruptedException {
         mostrarLiniaSeparadora();
         System.out.print("Topic: ");
         System.out.println(topic);
@@ -213,12 +213,12 @@ public class Menu {
                 sb.append(" your turn! Drop it!\n\n");
                 sb.append(contrincant);
                 sb.append(":\n\n");
-                sb.append(estrofa1);
+                sb.append(parrafada);
                 sb.append("\n\nYour turn!\n");
                 sb.append("Enter your verse:\n");
                 System.out.println(sb.toString());
 
-                //Llegir 4 estrofes
+                //Llegir 4 versos
                 estrofaLogin = new StringBuilder();
                 for (int i=0; i<4; i++ ){
                     estrofaLogin.append(scanner.nextLine());
@@ -240,7 +240,7 @@ public class Menu {
                 sb = new StringBuilder();
                 sb.append(contrincant);
                 sb.append(":\n\n");
-                sb.append(estrofa1);
+                sb.append(parrafada);
 
         }
         return estrofaLogin.toString();

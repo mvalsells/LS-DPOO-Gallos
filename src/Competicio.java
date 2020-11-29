@@ -204,7 +204,6 @@ public class Competicio {
 
 
     public String[] preFase(String login) throws FileNotFoundException {
-        String rival = "";
         String[] info = new String[4];
         if (numFases() == 3) {
             // 3 Fases
@@ -263,4 +262,7 @@ public class Competicio {
         return phases.get(faseActual).infoTema(battlePos, temaPos);
     }
 
+    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        phases.get(faseActual).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
+    }
 }

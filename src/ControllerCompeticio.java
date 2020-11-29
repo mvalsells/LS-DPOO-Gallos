@@ -149,7 +149,7 @@ public class ControllerCompeticio {
                     switch (opcio) {
                         case 1:
                             //Start the battle
-                            makeBattle(Integer.parseInt(info[3]), contrincant);
+                            makeBattle(Integer.parseInt(info[3]), contrincant, i);
                             break;
                         case 2:
                             //Show ranking
@@ -174,16 +174,13 @@ public class ControllerCompeticio {
         }
     }
 
-    private void makeBattle(int battlePos, String contrincant) throws InterruptedException {
+    private void makeBattle(int battlePos, String contrincant, int temaPos) throws InterruptedException {
         Random rand = new Random();
 
         //Obtinc nom del tema i estrofes del contrincant
-        ArrayList<String> infoTema = competicio.infoTema(battlePos, 0);
-
-
-        //TODO, potser que les estrofes 1 i 2 no estiguin perque el rapero s'hagi quedat en blanc i llavors ha de fer el ridicul. TRY CATCH????
-        menu.doBattle(rand.nextInt(2),contrincant, infoTema.get(0), infoTema.get(1),infoTema.get(2));
-
+        ArrayList<String> infoTema = competicio.infoTema(battlePos, temaPos);
+        String estrofaLogin = menu.doBattle(rand.nextInt(2),contrincant, infoTema.get(0), infoTema.get(1));
+        competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
 
         //menu.doBattle(rand.nextInt(2), );
     }
