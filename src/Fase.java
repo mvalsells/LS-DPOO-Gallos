@@ -21,16 +21,6 @@ public class Fase {
     }
 
     //Metodes
-    public Integer[] aparellament(int numParticipants) {
-        participants = new Integer[numParticipants];
-        for (int i = 0; i < numParticipants; i++) {
-            participants[i] = i;
-        }
-        List<Integer> intList = Arrays.asList(participants);
-        Collections.shuffle(intList);
-        intList.toArray(participants);
-        return participants;
-    }
 
     public void participantsParells(String login) {
         if (raperos.size() % 2 != 0) {
@@ -42,11 +32,16 @@ public class Fase {
         }
     }
 
-    public Integer preFase1(String login) throws FileNotFoundException {
-        Integer contrincant;
+    public String[] preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
-        contrincant = simularBatalles(login)[1];
-        return contrincant;
+        String[] info = simularBatalles(login);
+        return info;
+        /*Array
+        [0] -> Nom contrincant
+        [1] -> Tipus de batalls
+        [2] -> Puntuació usuari
+        [3] -> Posició de la batalla usuari
+         */
     }
 
     public void preFase2(String login) {
@@ -57,61 +52,88 @@ public class Fase {
 
     }
 
-    private Integer[] simularBatalles(String login) throws FileNotFoundException {
+    private String[] simularBatalles(String login) throws FileNotFoundException {
         Collections.shuffle(raperos);
         Integer[] usuariIparella = new Integer[2]; //Posició 0 -> Usuari; Posicio 1 -> Parella
-        usuariIparella[0] = -1;
-        usuariIparella[1] = -1;
+        String[] info = new String[4];
         for (int i = 0; i < raperos.size(); i = i + 2) {
-            boolean a = false;
             Batalla batalla;
             Random rand = new Random();
             int tipus = rand.nextInt(3);
 
+            //Miro si la posició actual i la següent hi ha el usuari que ha fet login
             if (raperos.get(i).getStageName().equals(login)) {
-                usuariIparella[1] = i + 1;
-                usuariIparella[0] = i;
-                a = true;
-            } else if (raperos.get(i + 1).getStageName().equals(login)) {
-                usuariIparella[1] = i;
-                usuariIparella[0] = i + 1;
-                a = true;
-            }
-
-            if (a) {
-                switch (tipus) {
-                    case 0:
-                        batalla = new Escrita(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
-                        break;
-                    case 1:
-                        batalla = new Sangre(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
-                        break;
-                    default:
-                        batalla = new Acapella(raperos.get(usuariIparella[0]), raperos.get(usuariIparella[1]));
-                        break;
-                }
-                batalla.ferBatalla(i);
-            } else {
-
-
                 switch (tipus) {
                     case 0:
                         batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Escrita";
                         break;
                     case 1:
                         batalla = new Sangre(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Sangre";
                         break;
                     default:
                         batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Acapella";
+                        break;
+                }
+                //Guardo nom del contrincant
+                info[0] = raperos.get(i+1).getStageName();
+                //Guardo puntuacio del login
+                info[2] = Double.toString(raperos.get(i).getPuntuacio());
+                //Guardo posició de la batalla al array
+                info[3] = Integer.toString(i);
+            } else if (raperos.get(i + 1).getStageName().equals(login)) {
+                switch (tipus) {
+                    case 0:
+                        batalla = new Escrita(raperos.get(i+1), raperos.get(i));
+                        info[1] = "Escrita";
+                        break;
+                    case 1:
+                        batalla = new Sangre(raperos.get(i+1), raperos.get(i));
+                        info[1] = "Sangre";
+                        break;
+                    default:
+                        batalla = new Acapella(raperos.get(i+1), raperos.get(i));
+                        info[1] = "Acapella";
+                        break;
+                }
+                //Guardo nom del contrincant
+                info[0] = raperos.get(i).getStageName();
+                //Guardo puntuacio del login
+                info[2] = Double.toString(raperos.get(i+1).getPuntuacio());
+                //Guardo posició de la batalla al array
+                info[3] = Integer.toString(i);
+            } else {
+                switch (tipus) {
+                    case 0:
+                        batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Escrita";
+                        break;
+                    case 1:
+                        batalla = new Sangre(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Sangre";
+                        break;
+                    default:
+                        batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
+                        info[1] = "Acapella";
                         break;
                 }
                 batalla.simularBatalla();
-
             }
-             //Falta mirar el tema gunyador/puntuacio
             batalles.add(batalla);
         }
-        return usuariIparella;
+        return info;
+        /*Array
+        [0] -> Nom contrincant
+        [1] -> Tipus de batalls
+        [2] -> Puntuació usuari
+        [3] -> Posició de la batalla usuari
+         */
     }
 
+    public String infoTema(int battlePos, int temaPos) {
+
+        return batalles.get(battlePos).infoTema(temaPos);
+    }
 }

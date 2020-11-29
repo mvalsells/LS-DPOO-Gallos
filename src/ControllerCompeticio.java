@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ControllerCompeticio {
     //Atributs
@@ -108,71 +109,75 @@ public class ControllerCompeticio {
     }
 
     private void login() throws InterruptedException, FileNotFoundException {
-        int opcio;
+
         //Login
         //Obtenir nom artistic
         String login = menu.obtenirLogin();
-        String contrincant = "";
-        //preFase -> Crear parelles + simular batalla
-
-
-        //mostrarInfoMenu();
-
 
         if (competicio.ferLogin(login)) {
-            competicio.preFase(login);
+            //For per simular les dues batalles
+            for (int i=0; i<2; i++){
+                //Crear parelles i simular les batalles
+                String[] info = competicio.preFase(login);
+                /*Array
+                [0] -> Nom contrincant
+                [1] -> Tipus de batalls
+                [2] -> Puntuació usuari
+                [3] -> Posició de la batalla usuari
+                 */
 
-            int fase = competicio.getFaseActual();
-            //competicio.comencarfase1();
-            int totalfase = competicio.numFases();
-            String guanyador = new String();
-            guanyador = competicio.nomGuanyador();
-                            /*competicio.faseActual();
+                //Info menu
+                int totalfase = competicio.numFases();
+                int fase = competicio.getFaseActual();
+                String puntuacio = info[2];
+                String battleType = info[1];
+                String contrincant = info[0];
 
+                int opcio;
+                do{
+                    //Demanem opció fins que sigui correcte
+                    do {
+                        //Mostrar info de la batalla
+                        menu.Registrat(totalfase, fase, puntuacio,i+1, battleType, contrincant);
+                        opcio = menu.demanaOpcio();
+                        if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
+                            menu.display("Number introduced not corresponding to the menu");
+                        }
+                    } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
 
-                            if(faseActual(fase)==1){
-
-                                competicio.numParticipants(login,fase, random, contrincant);
-                                menu.Registrat();
-                            }*/
-
-            String enemy = competicio.preFase(login);
-            String parrafada = new String();
-            menu.Registrat(totalfase, fase, enemy);
-            do{
-                do {
-                    opcio = menu.demanaOpcio();
-                    if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                        menu.display("Number introduced not corresponding to the menu");
-                        menu.Registrat(totalfase, fase, enemy);
+                    //Executem opció
+                    switch (opcio) {
+                        case 1:
+                            //Start the battle
+                            makeBattle(Integer.parseInt(info[3]));
+                            break;
+                        case 2:
+                            //Show ranking
+                            menu.showRanking();
+                            break;
+                        case 3:
+                            //Create profile
+                            menu.createProfile();
+                            break;
+                        case 4:
+                            //Leave competition
+                            String guanyador = new String();
+                            guanyador = competicio.nomGuanyador();
+                            menu.leaveCompetition(guanyador);
+                            //ok=1;
+                            break;
                     }
-                } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
-
-                switch (opcio) {
-                    case 1:
-                        menu.doBattle(0, parrafada);
-                        break;
-                    case 2:
-                        menu.showRanking();
-                        break;
-                    case 3:
-                        menu.createProfile();
-                        break;
-                    case 4:
-                        menu.leaveCompetition(guanyador);
-                        //ok=1;
-                        break;
-                }
-                menu.Registrat(totalfase, fase, enemy);
-                //opcio = menu.demanaOpcio();
-            } while (opcio != 4 );
-
-
-            //Anar Lobby
-
-            //System.out.println("He anat i tornat del loby tant ràpid que ni m'has vist");
+                } while (opcio != 4 );
+            }
         } else {
             menu.noRegistrat(login);
         }
+    }
+
+    private void makeBattle(int battlePos) throws InterruptedException {
+        Random rand = new Random();
+
+        String parrafada = competicio.infoTema(battlePos, 0);
+        menu.doBattle(rand.nextInt(2), parrafada);
     }
 }

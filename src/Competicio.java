@@ -203,15 +203,14 @@ public class Competicio {
     }
 
 
-    public String preFase(String login) throws FileNotFoundException {
+    public String[] preFase(String login) throws FileNotFoundException {
         String rival = "";
-        int contrincant;
+        String[] info = new String[4];
         if (numFases() == 3) {
             // 3 Fases
             switch (faseActual) {
                 case 1:
-                    contrincant = phases.get(0).preFase1(login);
-                    rival = raperos.get(contrincant).getStageName();
+                    info = phases.get(0).preFase1(login);
                     break;
                 case 2:
                     phases.get(1).preFase2(login);
@@ -227,7 +226,7 @@ public class Competicio {
             // 2 Fases
             switch (faseActual) {
                 case 1:
-                    phases.get(0).preFase1(login);
+                    info = phases.get(0).preFase1(login);
                     break;
                 case 2:
                     phases.get(1).preFase3(login);
@@ -237,8 +236,13 @@ public class Competicio {
                     break;
             }
         }
-        return rival;
-    }
+        return info;
+        /*Array
+        [0] -> Nom contrincant
+        [1] -> Tipus de batalls
+        [2] -> Puntuació usuari
+        [3] -> Posició de la batalla usuari
+         */    }
 
     public boolean validarFecha(String bir) {
         try {
@@ -254,6 +258,9 @@ public class Competicio {
             return false;
         }
         return true;
+    }
+    public String infoTema(int battlePos, int temaPos){
+        return phases.get(faseActual).infoTema(battlePos, temaPos);
     }
 
 }

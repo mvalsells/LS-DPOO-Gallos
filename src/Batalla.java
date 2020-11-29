@@ -24,45 +24,45 @@ public abstract class Batalla {
     public abstract double puntuacio(int numRimes);
 
     public void simularBatalla() throws FileNotFoundException {
-
-
+        //Per cada tema
         for (int i = 0; i < tema.length; i++) {
 
             int posicioNivell1 = 0;
             int posicioNivell2 = 0;
 
+            //Per cada rapero
             for (int j = 0; j < raperos.length; j++) {
 
+                //Obtenim el nivell del rapero
                 int nivellRapero = raperos[j].getLevel();
                 double puntuacio = 0;
 
+                //Obtenim la estrofa
                 String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell1);
                 if (estrofa.length() == 0) {
-                    puntuacio = 0;
+                    //Si la estrofa és buida, el rapero fa el ridicul i s'acaba la batalla
                     break;
                 } else {
+                    //Canviem la posició de l'array d'estrofes
                     if (nivellRapero == 1) {
                         posicioNivell1++;
                     } else {
                         posicioNivell2++;
                     }
+
+                    //Calculem les rimes i la puntuació
                     int rimes = numRimes(estrofa);
                     puntuacio = puntuacio(rimes);
                 }
 
-
+                //Actualitzem la puntuació
                 raperos[j].setPuntuacio(raperos[j].getPuntuacio() + puntuacio);
-
             }
-
         }
-
-        System.out.println("hola");
     }
 
     public String eleccioEstrofa(int nivell, Tema tema, int posicioNivell1, int posicioNivell2) {
-        String verso = "";
-
+        String verso;
         try {
             if (nivell == 1) {
 
@@ -78,6 +78,7 @@ public abstract class Batalla {
         }
 
     }
+
 
 
     public void ferBatalla(int i) {
@@ -110,9 +111,6 @@ public abstract class Batalla {
                     puntuacio = puntuacio(rimes);
                 }
                 */
-
-
-
 
                 raperos[j].setPuntuacio(raperos[j].getPuntuacio() + puntuacio);
 
@@ -156,4 +154,13 @@ public abstract class Batalla {
         }
         return numRimes;
     }
+
+    public String infoTema(int temaPos){
+       /* int nivellContrincant = raperos[1].getLevel();
+
+        String[] info = new String[2];
+        info[1] = eleccioEstrofa(nivellContrincant, tema[temaPos], posicioNivell1, posicioNivell1);*/
+        return "a";
+        //[
+    };
 }

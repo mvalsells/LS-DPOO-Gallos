@@ -161,7 +161,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase, String rival) {
+    public void Registrat(int totalFase, int fase, String score, int numBattle, String battleType, String rival) {
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -174,15 +174,13 @@ public class Menu {
         sb.append("/");
         sb.append(totalFase);
         sb.append(" | Score:");
-        //sb.append(score);
+        sb.append(score);
         sb.append(" | Battle ");
-        //sb.append(battlenow)
-        sb.append("/");
-        sb.append("2:");
-        //sb.append(tiposbatalla);
+        sb.append(numBattle);
+        sb.append("/2:");
+        sb.append(battleType);
         sb.append(" | Rival: ");
         sb.append(rival);
-
 
         System.out.println(sb.toString());
         mostrarLiniaSeparadora();
@@ -195,7 +193,7 @@ public class Menu {
     }
 
     private void mostrarLiniaSeparadora() {
-        System.out.println("--------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------");
     }
 
     public void doBattle(int coin, String parrrafada) throws InterruptedException {
