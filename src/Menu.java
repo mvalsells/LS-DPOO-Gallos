@@ -196,38 +196,54 @@ public class Menu {
         System.out.println("--------------------------------------------------------------------");
     }
 
-    public void doBattle(int coin, String parrrafada) throws InterruptedException {
+    public String doBattle(int coin, String topic, String contrincant, String estrofa1, String estrofa2) throws InterruptedException {
         mostrarLiniaSeparadora();
-        System.out.println("Topic:");
-
+        System.out.print("Topic: ");
+        System.out.println(topic);
+        StringBuilder sb;
+        StringBuilder estrofaLogin = new StringBuilder();
 
         System.out.println("\nA coin is tossed in the air and...");
         Thread.sleep(1000);
         switch (coin) {
             case 0:
+                //Primer contrincant
+                sb = new StringBuilder();
+                sb.append(contrincant);
+                sb.append(" your turn! Drop it!\n\n");
+                sb.append(contrincant);
+                sb.append(":\n\n");
+                sb.append(estrofa1);
+                sb.append("\n\nYour turn!\n");
+                sb.append("Enter your verse:\n");
+                System.out.println(sb.toString());
 
-                System.out.println("your turn, Verse! Drop it!");
-                //codi contrincant
-                System.out.println("\n\nYour turn!");
-                System.out.println("Enter your verse:");
-                scanner.next(parrrafada);
-                scanner.nextLine();
+                //Llegir 4 estrofes
+                estrofaLogin = new StringBuilder();
+                for (int i=0; i<4; i++ ){
+                    estrofaLogin.append(scanner.nextLine());
+                }
 
             case 1:
-                System.out.println("your turn, Verse! Drop it!");
-                System.out.println("Enter your verse:");
-                scanner.next(parrrafada);
-                scanner.nextLine();
+                //Primer login
+                sb = new StringBuilder();
+                sb.append("Your turn! Drop it!\n");
+                sb.append("Enter your verse:\n");
+                System.out.println(sb.toString());
 
-                System.out.println("\n\nYour turn!");
-                //codi contrincant
+                //Llegir 4 estrofes
+                estrofaLogin = new StringBuilder();
+                for (int i=0; i<4; i++ ){
+                    estrofaLogin.append(scanner.nextLine());
+                }
 
+                sb = new StringBuilder();
+                sb.append(contrincant);
+                sb.append(":\n\n");
+                sb.append(estrofa1);
 
         }
-        System.out.println("\nTimeeeeeeeeee");
-        scanner.nextLine();
-
-
+        return estrofaLogin.toString();
     }
 
     public void showRanking() {

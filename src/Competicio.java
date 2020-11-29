@@ -259,7 +259,7 @@ public class Competicio {
         }
         return true;
     }
-    public String infoTema(int battlePos, int temaPos){
+    public ArrayList<String> infoTema(int battlePos, int temaPos){
         return phases.get(faseActual).infoTema(battlePos, temaPos);
     }
 

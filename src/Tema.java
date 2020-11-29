@@ -35,4 +35,13 @@ public class Tema {
     public void setEstrofesN2(ArrayList<String> estrofesN2) {
         this.estrofesN2 = estrofesN2;
     }
+
+    @Override
+    public String toString() {
+        return "Tema{" +
+                "nom='" + nom + '\'' +
+                ", estrofesN1=" + estrofesN1 +
+                ", estrofesN2=" + estrofesN2 +
+                '}';
+    }
 }

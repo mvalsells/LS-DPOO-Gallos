@@ -155,12 +155,23 @@ public abstract class Batalla {
         return numRimes;
     }
 
-    public String infoTema(int temaPos){
-       /* int nivellContrincant = raperos[1].getLevel();
+    public ArrayList<String> infoTema(int temaPos){
+       ArrayList<String> info = new ArrayList<>();
+       ArrayList<String> estrofes;
+       //Primera posició el tema
+       info.add(tema[temaPos].getNom());
 
-        String[] info = new String[2];
-        info[1] = eleccioEstrofa(nivellContrincant, tema[temaPos], posicioNivell1, posicioNivell1);*/
-        return "a";
-        //[
+       //Agafos les estrofes del segon rapero i el seu nivell
+       if (raperos[1].getLevel()==1){
+           estrofes = tema[temaPos].getEstrofesN1();
+       } else {
+           estrofes = tema[temaPos].getEstrofesN2();
+       }
+
+       //Afegeixo les estrofes al array list
+        for (String estrofa : estrofes){
+            info.add(estrofa);
+        }
+        return info;
     };
 }
