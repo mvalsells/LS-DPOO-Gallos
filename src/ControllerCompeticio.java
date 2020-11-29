@@ -132,6 +132,7 @@ public class ControllerCompeticio {
                 String puntuacio = info[2];
                 String battleType = info[1];
                 String contrincant = info[0];
+                int posicio = Integer.valueOf(info[3]);
 
                 int opcio;
                 do{
@@ -149,7 +150,7 @@ public class ControllerCompeticio {
                     switch (opcio) {
                         case 1:
                             //Start the battle
-                            makeBattle(Integer.parseInt(info[3]), contrincant, i);
+                            makeBattle(posicio, contrincant, i);
                             break;
                         case 2:
                             //Show ranking

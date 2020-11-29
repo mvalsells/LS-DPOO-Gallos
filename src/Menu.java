@@ -210,7 +210,7 @@ public class Menu {
                 //Primer contrincant
                 sb = new StringBuilder();
                 sb.append(contrincant);
-                sb.append(" your turn! Drop it!\n\n");
+                sb.append(" your turn! Verse Drop it!\n\n");
                 sb.append(contrincant);
                 sb.append(":\n\n");
                 sb.append(parrafada);
@@ -224,10 +224,11 @@ public class Menu {
                     estrofaLogin.append(scanner.nextLine());
                 }
 
+
             case 1:
                 //Primer login
                 sb = new StringBuilder();
-                sb.append("Your turn! Drop it!\n");
+                sb.append("Your turn! Verse Drop it!\n");
                 sb.append("Enter your verse:\n");
                 System.out.println(sb.toString());
 
@@ -243,6 +244,8 @@ public class Menu {
                 sb.append(parrafada);
 
         }
+
+
         return estrofaLogin.toString();
     }
 

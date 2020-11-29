@@ -132,6 +132,7 @@ public class Fase {
     }
 
     public ArrayList<String> infoTema(int battlePos, int temaPos) {
+
         return batalles.get(battlePos).infoTema(temaPos);
     }
 
