@@ -129,17 +129,19 @@ public class ControllerCompeticio {
                 //Info menu
                 int totalfase = competicio.numFases();
                 int fase = competicio.getFaseActual();
-                String puntuacio = info[2];
+                //String puntuacio = info[2];
                 String battleType = info[1];
                 String contrincant = info[0];
                 int posicio = Integer.valueOf(info[3]);
+                int puntuacio = 0;
+
 
                 int opcio;
                 do{
                     //Demanem opció fins que sigui correcte
                     do {
                         //Mostrar info de la batalla
-                        menu.Registrat(totalfase, fase, puntuacio,i+1, battleType, contrincant);
+                        menu.Registrat(totalfase, fase,puntuacio,i+1, battleType, contrincant);
                         opcio = menu.demanaOpcio();
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                             menu.display("Number introduced not corresponding to the menu");
@@ -150,7 +152,7 @@ public class ControllerCompeticio {
                     switch (opcio) {
                         case 1:
                             //Start the battle
-                            makeBattle(posicio, contrincant, i);
+                            puntuacio= (int) makeBattle(posicio, contrincant, i);
                             break;
                         case 2:
                             //Show ranking
@@ -168,6 +170,8 @@ public class ControllerCompeticio {
                             //ok=1;
                             break;
                     }
+                    //puntuacio = makeBattle(posicio, contrincant, i);
+
                 } while (opcio != 4 );
             }
         } else {
@@ -175,13 +179,17 @@ public class ControllerCompeticio {
         }
     }
 
-    private void makeBattle(int battlePos, String contrincant, int temaPos) throws InterruptedException {
+    private double makeBattle(int battlePos, String contrincant, int temaPos) throws InterruptedException {
         Random rand = new Random();
+        double puntuaciologin = 0;
 
         //Obtinc nom del tema i estrofes del contrincant
         ArrayList<String> infoTema = competicio.infoTema(battlePos, temaPos);
-        String estrofaLogin = menu.doBattle(rand.nextInt(2),contrincant, infoTema.get(0), infoTema.get(1));
-        competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
+        String estrofaLogin = menu.doBattle(rand.nextInt(2),infoTema.get(0), contrincant, infoTema.get(1));
+        puntuaciologin = competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
+
+        return puntuaciologin;
+
 
         //menu.doBattle(rand.nextInt(2), );
     }

@@ -161,7 +161,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase, String score, int numBattle, String battleType, String rival) {
+    public void Registrat(int totalFase, int fase, double score, int numBattle, String battleType, String rival) {
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -223,6 +223,7 @@ public class Menu {
                 for (int i=0; i<4; i++ ){
                     estrofaLogin.append(scanner.nextLine());
                 }
+                break;
 
 
             case 1:
@@ -242,6 +243,7 @@ public class Menu {
                 sb.append(contrincant);
                 sb.append(":\n\n");
                 sb.append(parrafada);
+                break;
 
         }
 

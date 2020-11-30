@@ -80,8 +80,9 @@ public abstract class Batalla {
     }
 
 
-    public void ferBatalla(String estrofaLogin, String estrofaContrincant) {
+    public double ferBatalla(String estrofaLogin, String estrofaContrincant) {
         double puntuacio=0;
+        double puntuacioLogin = 0;
         //Si el Login no fa el ridicul calculem les rimes i la puntuació
         if (!(estrofaLogin.length() == 0)) {
             int rimes = numRimes(estrofaLogin);
@@ -89,6 +90,7 @@ public abstract class Batalla {
         }
         //Actualitzem la puntuació
         raperos[0].setPuntuacio(raperos[0].getPuntuacio() + puntuacio);
+        puntuacioLogin = raperos[0].getPuntuacio();
 
         puntuacio=0;
         //Si el contrincant no fa el ridicul calculem les rimes i la puntuació
@@ -98,6 +100,7 @@ public abstract class Batalla {
         }
         //Actualitzem la puntuació
         raperos[1].setPuntuacio(raperos[1].getPuntuacio() + puntuacio);
+        return puntuacioLogin;
     }
 
     public int numRimes(String vers) {

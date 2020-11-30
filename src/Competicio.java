@@ -38,6 +38,7 @@ public class Competicio {
     }
 
 
+
     //Getters & Setters
     public String getName() {
         return name;
@@ -263,7 +264,12 @@ public class Competicio {
         return phases.get(faseActual-1).infoTema(battlePos, temaPos);
     }
 
-    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
-        phases.get(faseActual).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
+
+
+    public double ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        double puntuacioLogin = 0;
+        puntuacioLogin = phases.get(faseActual-1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
+        return puntuacioLogin;
     }
+
 }

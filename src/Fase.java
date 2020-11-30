@@ -148,7 +148,9 @@ public class Fase {
         return this.batalles.get(battlePos).infoTema(temaPos);
     }
 
-    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
-        batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
+    public double ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        double puntuacioLogin = 0;
+        puntuacioLogin = batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
+        return puntuacioLogin;
     }
 }
