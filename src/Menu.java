@@ -161,7 +161,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase, double score, int numBattle, String battleType, String rival) {
+    public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival) {
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -196,15 +196,17 @@ public class Menu {
         System.out.println("--------------------------------------------------------------------");
     }
 
-    public String doBattle(int coin, String topic, String contrincant, String parrafada) throws InterruptedException {
+    public String doBattle(int coin, String topic, String contrincant, String parrafada, boolean monedaLlancada) throws InterruptedException {
         mostrarLiniaSeparadora();
         System.out.print("Topic: ");
         System.out.println(topic);
         StringBuilder sb;
         StringBuilder estrofaLogin = new StringBuilder();
 
-        System.out.println("\nA coin is tossed in the air and...");
-        Thread.sleep(1000);
+        if (!monedaLlancada){
+            System.out.println("\nA coin is tossed in the air and...");
+            Thread.sleep(1000);
+        }
         switch (coin) {
             case 0:
                 //Primer contrincant
@@ -229,7 +231,7 @@ public class Menu {
             case 1:
                 //Primer login
                 sb = new StringBuilder();
-                sb.append("Your turn! Verse Drop it!\n");
+                sb.append("\nYour turn! Verse Drop it!\n");
                 sb.append("Enter your verse:\n");
                 System.out.println(sb.toString());
 
@@ -241,8 +243,10 @@ public class Menu {
 
                 sb = new StringBuilder();
                 sb.append(contrincant);
-                sb.append(":\n\n");
+                sb.append(":\n");
+                sb.append("Your turn!\n\n");
                 sb.append(parrafada);
+                System.out.println(sb.toString());
                 break;
 
         }

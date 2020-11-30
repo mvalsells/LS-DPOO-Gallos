@@ -30,7 +30,7 @@ public class Rapero {
         this.puntuacio = puntuacio;
         eliminat=false;
     }
-
+    //Getters and Setters
     public String getStageName() {
         return stageName;
     }
@@ -91,6 +91,7 @@ public class Rapero {
         this.puntuacio = puntuacio;
     }
 
+    //Metodes
     @Override
     public String toString() {
         return "Rapero{" +

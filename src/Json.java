@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class Json {
 
     //Atributs
-    String fitxerCompeticio;
-    String fitxerBatalla;
+    private String fitxerCompeticio;
+    private String fitxerBatalla;
 
     //Constructor
     public Json(String fitxerCompeticio, String fitxerBatalla) {

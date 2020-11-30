@@ -2,10 +2,10 @@ import java.net.URL;
 
 public class Pais {
     //Atributs
-    String nomAngles;
-    int habitants;
-    String regio;
-    URL bandera;
+    private String nomAngles;
+    private int habitants;
+    private String regio;
+    private URL bandera;
 
 
     //Constructor

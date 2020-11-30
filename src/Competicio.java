@@ -64,6 +64,17 @@ public class Competicio {
         return faseActual;
     }
 
+    //Getters and Setter de Fase
+    public int getBatallaActual(){
+        return phases.get(faseActual-1).getBatallaActual();
+    }
+    public void setBatallaActual(int num){
+        phases.get(faseActual-1).setBatallaActual(num);
+    }
+    public double getPuntuacioRapero(String login){
+        return phases.get(faseActual-1).getPuntuacioRapero(login);
+    }
+
     //Metodes
     public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
         Boolean[] estat = new Boolean[4];
@@ -266,10 +277,8 @@ public class Competicio {
 
 
 
-    public double ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
-        double puntuacioLogin = 0;
-        puntuacioLogin = phases.get(faseActual-1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
-        return puntuacioLogin;
+    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        phases.get(faseActual-1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
     }
 
 }

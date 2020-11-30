@@ -3,11 +3,12 @@ import java.util.*;
 
 public class Fase {
     //Atributs
-    Pais pais;
-    float budget;
-    ArrayList<Batalla> batalles;
-    Integer[] participants;
-    ArrayList<Rapero> raperos;
+    private Pais pais;
+    private float budget;
+    private ArrayList<Batalla> batalles;
+    private Integer[] participants;
+    private ArrayList<Rapero> raperos;
+    private int batallaActual;
 
 
 
@@ -17,6 +18,7 @@ public class Fase {
         this.pais = pais;
         raperos = new ArrayList<>();
         batalles = new ArrayList<>();
+        batallaActual=0;
     }
 
     public void setRapperos(ArrayList<Rapero> raperos) {
@@ -43,7 +45,32 @@ public class Fase {
             raperos.remove(random);
         }
     }
+    
+    
+    //Getters and setters
 
+
+    public int getBatallaActual() {
+        return batallaActual;
+    }
+
+    public void setBatallaActual(int batallaActual) {
+        this.batallaActual = batallaActual;
+    }
+
+    //Getters and setters de raperos
+    public double getPuntuacioRapero(String login){
+        int pos=-1;
+        for (int i=0; i<raperos.size(); i++){
+           if (raperos.get(i).getStageName().equals(login)){
+               pos = i;
+               break;
+           }
+        }
+        return raperos.get(pos).getPuntuacio();
+    }
+
+    //Metodes
     public String[] preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
         String[] info = simularBatalles(login);
@@ -148,9 +175,7 @@ public class Fase {
         return this.batalles.get(battlePos).infoTema(temaPos);
     }
 
-    public double ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
-        double puntuacioLogin = 0;
-        puntuacioLogin = batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
-        return puntuacioLogin;
+    public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
+        batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
     }
 }

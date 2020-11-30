@@ -18,8 +18,6 @@ public class Main {
         ArrayList<Tema> temes = json.llegirTema();
         Tema tema = temes.get(0);
         System.out.println(tema.toString());*/
-
-
     }
 
 }

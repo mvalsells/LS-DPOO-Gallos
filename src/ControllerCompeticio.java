@@ -2,7 +2,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,7 +24,7 @@ public class ControllerCompeticio {
             //Date dataok;
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
-            if(bir.length() != 10){
+            if (bir.length() != 10) {
                 return false;
             }
 
@@ -69,7 +68,7 @@ public class ControllerCompeticio {
         Boolean[] estat;
         ArrayList<String> dadesUsuari = new ArrayList<>();
         do {
-            if (primercop){
+            if (primercop) {
                 //Primer cop -> Demano totes les dades
                 dadesUsuari = menu.demanaInfoUser();
                 primercop = false;
@@ -103,7 +102,7 @@ public class ControllerCompeticio {
                 dadesUsuari.set(2, null);
             }
 
-        // Anar demanant mentres el nom del rapero no sigui vàlid i la data no sigui valida i el pais sigui correcte
+            // Anar demanant mentres el nom del rapero no sigui vàlid i la data no sigui valida i el pais sigui correcte
         } while ((!estat[0] || !estat[1]) && estat[2]);
 
     }
@@ -115,8 +114,9 @@ public class ControllerCompeticio {
         String login = menu.obtenirLogin();
 
         if (competicio.ferLogin(login)) {
-            //For per simular les dues batalles
-            for (int i=0; i<2; i++){
+            //Anem fent el menu fins que no tinguem opció 4
+            int opcio;
+            do {
                 //Crear parelles i simular les batalles
                 String[] info = competicio.preFase(login);
                 /*Array
@@ -135,62 +135,60 @@ public class ControllerCompeticio {
                 int posicio = Integer.valueOf(info[3]);
                 int puntuacio = 0;
 
-
-                int opcio;
-                do{
-                    //Demanem opció fins que sigui correcte
-                    do {
-                        //Mostrar info de la batalla
-                        menu.Registrat(totalfase, fase,puntuacio,i+1, battleType, contrincant);
-                        opcio = menu.demanaOpcio();
-                        if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                            menu.display("Number introduced not corresponding to the menu");
-                        }
-                    } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
-
-                    //Executem opció
-                    switch (opcio) {
-                        case 1:
-                            //Start the battle
-                            puntuacio= (int) makeBattle(posicio, contrincant, i);
-                            break;
-                        case 2:
-                            //Show ranking
-                            menu.showRanking();
-                            break;
-                        case 3:
-                            //Create profile
-                            menu.createProfile();
-                            break;
-                        case 4:
-                            //Leave competition
-                            String guanyador = new String();
-                            guanyador = competicio.nomGuanyador();
-                            menu.leaveCompetition(guanyador);
-                            //ok=1;
-                            break;
+                //Demanem opció fins que sigui correcte
+                do {
+                    //Mostrar info de la batalla
+                    menu.Registrat(totalfase, fase, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual()+1, battleType, contrincant);
+                    opcio = menu.demanaOpcio();
+                    if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
+                        menu.display("Number introduced not corresponding to the menu");
                     }
-                    //puntuacio = makeBattle(posicio, contrincant, i);
+                } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
 
-                } while (opcio != 4 );
-            }
+                //Executem opció
+                switch (opcio) {
+                    case 1:
+                        //Start the battle
+                        Random rand = new Random();
+                        int coin = rand.nextInt(2);
+                        makeBattle(posicio, contrincant, 0, coin);
+                        Thread.sleep(2000);
+                        makeBattle(posicio, contrincant, 1, coin);
+                        competicio.setBatallaActual(competicio.getBatallaActual()+1);
+                        break;
+                    case 2:
+                        //Show ranking
+                        menu.showRanking();
+                        break;
+                    case 3:
+                        //Create profile
+                        menu.createProfile();
+                        break;
+                    case 4:
+                        //Leave competition
+                        String guanyador = "";
+                        guanyador = competicio.nomGuanyador();
+                        menu.leaveCompetition(guanyador);
+                        //ok=1;
+                        break;
+                }
+
+            } while (opcio != 4);
         } else {
             menu.noRegistrat(login);
         }
     }
 
-    private double makeBattle(int battlePos, String contrincant, int temaPos) throws InterruptedException {
-        Random rand = new Random();
-        double puntuaciologin = 0;
-
+    private void makeBattle(int battlePos, String contrincant, int temaPos, int coin) throws InterruptedException {
         //Obtinc nom del tema i estrofes del contrincant
         ArrayList<String> infoTema = competicio.infoTema(battlePos, temaPos);
-        String estrofaLogin = menu.doBattle(rand.nextInt(2),infoTema.get(0), contrincant, infoTema.get(1));
-        puntuaciologin = competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
 
-        return puntuaciologin;
-
-
-        //menu.doBattle(rand.nextInt(2), );
+        //Miro si ja he llençat la moneda o no
+        boolean monedaLlancada = false;
+        if (temaPos==1){
+            monedaLlancada = true;
+        }
+        String estrofaLogin = menu.doBattle(1, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
+        competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
     }
 }
