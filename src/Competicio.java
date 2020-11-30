@@ -207,14 +207,14 @@ public class Competicio {
         String[] info = new String[4];
         if (numFases() == 3) {
             // 3 Fases
-            switch (faseActual) {
-                case 1:
+            switch (faseActual-1) {
+                case 0:
                     info = phases.get(0).preFase1(login);
                     break;
-                case 2:
+                case 1:
                     phases.get(1).preFase2(login);
                     break;
-                case 3:
+                case 2:
                     phases.get(2).preFase3(login);
                     break;
                 default:
@@ -224,10 +224,10 @@ public class Competicio {
         } else {
             // 2 Fases
             switch (faseActual) {
-                case 1:
+                case 0:
                     info = phases.get(0).preFase1(login);
                     break;
-                case 2:
+                case 1:
                     phases.get(1).preFase3(login);
                     break;
                 default:
@@ -235,6 +235,7 @@ public class Competicio {
                     break;
             }
         }
+
         return info;
         /*Array
         [0] -> Nom contrincant
@@ -259,7 +260,7 @@ public class Competicio {
         return true;
     }
     public ArrayList<String> infoTema(int battlePos, int temaPos){
-        return phases.get(faseActual).infoTema(battlePos, temaPos);
+        return phases.get(faseActual-1).infoTema(battlePos, temaPos);
     }
 
     public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {

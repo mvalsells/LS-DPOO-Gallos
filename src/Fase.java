@@ -5,9 +5,12 @@ public class Fase {
     //Atributs
     Pais pais;
     float budget;
-    ArrayList<Batalla> batalles = new ArrayList<>();
+    ArrayList<Batalla> batalles;
     Integer[] participants;
     ArrayList<Rapero> raperos;
+
+
+
 
     public Fase(float budget, Pais pais) {
         this.budget = budget;
@@ -19,6 +22,15 @@ public class Fase {
     public void setRapperos(ArrayList<Rapero> raperos) {
         this.raperos = raperos;
     }
+
+    public ArrayList<Batalla> getBatalles() {
+        return batalles;
+    }
+
+    public void setBatalles(ArrayList<Batalla> batalles) {
+        this.batalles = batalles;
+    }
+
 
     //Metodes
 
@@ -120,7 +132,7 @@ public class Fase {
                 }
                 batalla.simularBatalla();
             }
-            batalles.add(batalla);
+           batalles.add(batalla);
         }
         return info;
         /*Array
@@ -133,7 +145,7 @@ public class Fase {
 
     public ArrayList<String> infoTema(int battlePos, int temaPos) {
 
-        return batalles.get(battlePos).infoTema(temaPos);
+        return this.batalles.get(battlePos).infoTema(temaPos);
     }
 
     public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
