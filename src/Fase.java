@@ -120,7 +120,7 @@ public class Fase {
                 //Guardo puntuacio del login
                 info[2] = Double.toString(raperos.get(i).getPuntuacio());
                 //Guardo posició de la batalla al array
-                info[3] = Integer.toString(i);
+                info[3] = Integer.toString(i/2);
             } else if (raperos.get(i + 1).getStageName().equals(login)) {
                 switch (tipus) {
                     case 0:
