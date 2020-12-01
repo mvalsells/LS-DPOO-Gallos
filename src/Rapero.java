@@ -82,15 +82,7 @@ public class Rapero {
     }
 
     //Metodes
-    @Override
-    public String toString() {
-        return "Rapero{" +
-                "realName='" + realName + '\'' +
-                ", stageName='" + stageName + '\'' +
-                ", birth=" + birth +
-                ", nationality='" + nationality + '\'' +
-                ", level=" + level +
-                ", photo=" + photo +
-                '}';
+    public double compareTo(Rapero rapero) {
+        return this.getPuntuacio()-rapero.getPuntuacio();
     }
 }

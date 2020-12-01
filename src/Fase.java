@@ -58,6 +58,13 @@ public class Fase {
         this.batallaActual = batallaActual;
     }
 
+    public ArrayList<Rapero> getRaperos() {
+        return raperos;
+    }
+    public void setRaperos(ArrayList<Rapero> raperos){
+        this.raperos=raperos;
+    }
+
     //Getters and setters de raperos
     public double getPuntuacioRapero(String login){
         int pos=-1;

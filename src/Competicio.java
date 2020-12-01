@@ -7,6 +7,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+
 
 public class Competicio {
 
@@ -224,8 +228,10 @@ public class Competicio {
                     info = phases.get(0).preFase1(login);
                     break;
                 case 1:
+                    ArrayList<Rapero> raperosF2 = new ArrayList<>(phases.get(0).getRaperos());
+                    Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.compareTo(r2);
+                    Collections.sort(raperosF2, compararPuntuacio);
                     phases.get(1).preFase2(login);
-
                     break;
                 case 2:
                     phases.get(2).preFase3(login);
