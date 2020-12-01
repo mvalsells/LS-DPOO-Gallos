@@ -7,7 +7,6 @@ public class Rapero {
     //Atributs
     private String realName = new String();
     private String stageName;
-    private boolean eliminat;
     //private String strBirth;
     private String  birth;
     private String nationality;
@@ -28,7 +27,6 @@ public class Rapero {
         this.level = level;
         this.photo = photo;
         this.puntuacio = puntuacio;
-        eliminat=false;
     }
     //Getters and Setters
     public String getStageName() {
@@ -73,14 +71,6 @@ public class Rapero {
 
     public LocalDate getBirthLocalDate(){
         return LocalDate.parse(birth);
-    }
-
-    public boolean isEliminat() {
-        return eliminat;
-    }
-
-    public void setEliminat(boolean eliminat) {
-        this.eliminat = eliminat;
     }
 
     public double getPuntuacio() {

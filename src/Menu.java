@@ -175,20 +175,27 @@ public class Menu {
         sb.append(totalFase);
         sb.append(" | Score:");
         sb.append(score);
-        sb.append(" | Battle ");
-        sb.append(numBattle);
-        sb.append("/2:");
-        sb.append(battleType);
-        sb.append(" | Rival: ");
-        sb.append(rival);
+        if (!(numBattle==3)) {
+            sb.append(" | Battle ");
+            sb.append(numBattle);
+            sb.append("/2:");
+            sb.append(battleType);
+            sb.append(" | Rival: ");
+            sb.append(rival);
+        } else {
+            sb.append(" | Waiting to go to the next phase");
+        }
 
         System.out.println(sb.toString());
         mostrarLiniaSeparadora();
-
-        System.out.print("\n1. Start the battle ");
-        System.out.print("\n2. Show ranking ");
-        System.out.print("\n3. Create profile ");
-        System.out.print("\n4. Leave competition ");
+        if (!(numBattle==3)) {
+            System.out.println("1. Start the battle ");
+        } else {
+            System.out.println("1. Go to the next phase");
+        }
+        System.out.println("2. Show ranking ");
+        System.out.println("3. Create profile ");
+        System.out.println("4. Leave competition ");
 
     }
 
@@ -222,9 +229,12 @@ public class Menu {
 
                 //Llegir 4 versos
                 estrofaLogin = new StringBuilder();
-                for (int i=0; i<4; i++ ){
+                for (int i=0; i<3; i++ ){
                     estrofaLogin.append(scanner.nextLine());
+                    estrofaLogin.append(",");
                 }
+                estrofaLogin.append(scanner.nextLine());
+                estrofaLogin.append(".");
                 break;
 
 
@@ -237,9 +247,12 @@ public class Menu {
 
                 //Llegir 4 estrofes
                 estrofaLogin = new StringBuilder();
-                for (int i=0; i<4; i++ ){
+                for (int i=0; i<3; i++ ){
                     estrofaLogin.append(scanner.nextLine());
+                    estrofaLogin.append(",");
                 }
+                estrofaLogin.append(scanner.nextLine());
+                estrofaLogin.append(".");
 
                 sb = new StringBuilder();
                 sb.append(contrincant);

@@ -149,12 +149,18 @@ public class ControllerCompeticio {
                 switch (opcio) {
                     case 1:
                         //Start the battle
-                        Random rand = new Random();
-                        int coin = rand.nextInt(2);
-                        makeBattle(posicio, contrincant, 0, coin);
-                        Thread.sleep(2000);
-                        makeBattle(posicio, contrincant, 1, coin);
-                        competicio.setBatallaActual(competicio.getBatallaActual()+1);
+                        if ((competicio.getBatallaActual()+1)==3){
+                            // Si ja he fet les 2 batalles canvi de fase
+                            competicio.nextPhase();
+                        } else {
+                            //Si encara he de fer batalles fer-les
+                            Random rand = new Random();
+                            int coin = rand.nextInt(2);
+                            makeBattle(posicio, contrincant, 0, coin);
+                            Thread.sleep(2000);
+                            makeBattle(posicio, contrincant, 1, coin);
+                            competicio.setBatallaActual(competicio.getBatallaActual() + 1);
+                        }
                         break;
                     case 2:
                         //Show ranking
@@ -188,7 +194,7 @@ public class ControllerCompeticio {
         if (temaPos==1){
             monedaLlancada = true;
         }
-        String estrofaLogin = menu.doBattle(1, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
+        String estrofaLogin = menu.doBattle(coin, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
         competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
     }
 }

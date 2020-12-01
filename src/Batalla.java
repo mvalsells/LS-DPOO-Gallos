@@ -107,6 +107,7 @@ public abstract class Batalla {
         //Eliminem el punt de l'últim vers
         split[split.length - 1] = split[split.length - 1].replace(".", "");
         //Obtenir tots els finals de linies
+       //TODO controlar linies de menys de 2 caracters o tot enters vuits
         for (String linia : split) {
             String ultimesLletres = linia.substring(linia.length() - 2);
             finalsLinies.add(ultimesLletres);

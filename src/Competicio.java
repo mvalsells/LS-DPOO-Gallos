@@ -225,6 +225,7 @@ public class Competicio {
                     break;
                 case 1:
                     phases.get(1).preFase2(login);
+
                     break;
                 case 2:
                     phases.get(2).preFase3(login);
@@ -281,4 +282,7 @@ public class Competicio {
         phases.get(faseActual-1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
     }
 
+    public void nextPhase() {
+        faseActual++;
+    }
 }

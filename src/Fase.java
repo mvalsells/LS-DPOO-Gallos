@@ -70,6 +70,7 @@ public class Fase {
         return raperos.get(pos).getPuntuacio();
     }
 
+
     //Metodes
     public String[] preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
@@ -171,7 +172,6 @@ public class Fase {
     }
 
     public ArrayList<String> infoTema(int battlePos, int temaPos) {
-
         return this.batalles.get(battlePos).infoTema(temaPos);
     }
 
