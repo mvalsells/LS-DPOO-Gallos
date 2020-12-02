@@ -51,8 +51,10 @@ public abstract class Batalla {
                     }
 
                     //Calculem les rimes i la puntuació
-                    int rimes = numRimes(estrofa);
-                    puntuacio = puntuacio(rimes);
+                        int rimes = numRimes(estrofa);
+                        puntuacio = puntuacio(rimes);
+
+
                 }
 
                 //Actualitzem la puntuació
@@ -84,8 +86,10 @@ public abstract class Batalla {
         double puntuacio = 0;
         //Si el Login no fa el ridicul calculem les rimes i la puntuació
         if (!(estrofaLogin.length() == 0)) {
-            int rimes = numRimes(estrofaLogin);
-            puntuacio = puntuacio(rimes);
+
+                int rimes = numRimes(estrofaLogin);
+                puntuacio = puntuacio(rimes);
+
         }
         //Actualitzem la puntuació
         raperos[0].setPuntuacio(raperos[0].getPuntuacio() + puntuacio);
@@ -93,14 +97,16 @@ public abstract class Batalla {
         puntuacio = 0;
         //Si el contrincant no fa el ridicul calculem les rimes i la puntuació
         if (!(estrofaContrincant.length() == 0)) {
-            int rimes = numRimes(estrofaLogin);
-            puntuacio = puntuacio(rimes);
+                int rimes = numRimes(estrofaLogin);
+                puntuacio = puntuacio(rimes);
+
+
         }
         //Actualitzem la puntuació
         raperos[1].setPuntuacio(raperos[1].getPuntuacio() + puntuacio);
     }
 
-    public int numRimes(String vers) {
+    public int numRimes(String vers){
         int numRimes = 0;
         ArrayList<String> finalsLinies = new ArrayList<>();
         String[] split = vers.split(",");
@@ -109,9 +115,15 @@ public abstract class Batalla {
         //Obtenir tots els finals de linies
        //TODO controlar linies de menys de 2 caracters o tot enters vuits
         for (String linia : split) {
-            String ultimesLletres = linia.substring(linia.length() - 2);
-            finalsLinies.add(ultimesLletres);
+            try{
+                String ultimesLletres = linia.substring(linia.length() - 2);
+                finalsLinies.add(ultimesLletres);
+            }catch (StringIndexOutOfBoundsException e){
+
+            }
+
         }
+
         //Agafo els finals unics
         Set<String> set = new HashSet<>(finalsLinies);
         ArrayList<String> finalsLiniesUnics = new ArrayList<>(set);
