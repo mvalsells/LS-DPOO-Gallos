@@ -167,32 +167,49 @@ public class Menu {
         sb.append(fase);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());*/
-        mostrarLiniaSeparadora();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Phases: ");
-        sb.append(fase);
-        sb.append("/");
-        sb.append(totalFase);
-        sb.append(" | Score:");
-        sb.append(score);
-        if (!(numBattle==3)) {
-            sb.append(" | Battle ");
-            sb.append(numBattle);
-            sb.append("/2:");
-            sb.append(battleType);
-            sb.append(" | Rival: ");
-            sb.append(rival);
-        } else {
-            sb.append(" | Waiting to go to the next phase");
+        if(numBattle!=5){
+            mostrarLiniaSeparadora();
+            StringBuilder sb = new StringBuilder();
+            sb.append("Phases: ");
+            sb.append(fase);
+            sb.append("/");
+            sb.append(totalFase);
+            sb.append(" | Score:");
+            sb.append(score);
+            if (!(numBattle==3)) {
+                sb.append(" | Battle ");
+                sb.append(numBattle);
+                sb.append("/2:");
+                sb.append(battleType);
+                sb.append(" | Rival: ");
+                sb.append(rival);
+            } else {
+                sb.append(" | Waiting to go to the next phase");
+            }
+
+            System.out.println(sb.toString());
+            mostrarLiniaSeparadora();
+            if (!(numBattle==3)) {
+                System.out.println("1. Start the battle ");
+            } else {
+                System.out.println("1. Go to the next phase");
+            }
+        }else{
+            mostrarLiniaSeparadora();
+            StringBuilder sb = new StringBuilder();
+            sb.append("Phases: ");
+            sb.append(fase);
+            sb.append("/");
+            sb.append(totalFase);
+            sb.append(" | Score:");
+            sb.append(score);
+            sb.append(" |  You've lost kid, I'm sure you'll do better next time...");
+            System.out.println(sb.toString());
+            mostrarLiniaSeparadora();
+
+            System.out.println("1. Go to the next phase   (desactivated)");
         }
 
-        System.out.println(sb.toString());
-        mostrarLiniaSeparadora();
-        if (!(numBattle==3)) {
-            System.out.println("1. Start the battle ");
-        } else {
-            System.out.println("1. Go to the next phase");
-        }
         System.out.println("2. Show ranking ");
         System.out.println("3. Create profile ");
         System.out.println("4. Leave competition ");
