@@ -82,7 +82,7 @@ public class Rapero {
     }
 
     //Metodes
-    public double compareTo(Rapero rapero) {
+    public double comparePuntuacio(Rapero rapero) {
         return this.getPuntuacio()-rapero.getPuntuacio();
     }
 }

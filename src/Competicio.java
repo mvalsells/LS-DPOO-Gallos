@@ -221,6 +221,11 @@ public class Competicio {
 
     public String[] preFase(String login) throws FileNotFoundException {
         String[] info = new String[4];
+        //Mirem fins a 3 deciamls d'exactitud
+        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.comparePuntuacio(r2)*1000;
+        ArrayList<Rapero> raperosF1 = new ArrayList<>();
+        ArrayList<Rapero> raperosF2 = new ArrayList<>();
+        ArrayList<Rapero> raperosF3 = new ArrayList<>();
         if (numFases() == 3) {
             // 3 Fases
             switch (faseActual-1) {
@@ -228,12 +233,17 @@ public class Competicio {
                     info = phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    ArrayList<Rapero> raperosF2 = new ArrayList<>(phases.get(0).getRaperos());
-                    Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.compareTo(r2);
-                    Collections.sort(raperosF2, compararPuntuacio);
-                    phases.get(1).preFase2(login);
+                    raperosF2 = new ArrayList<>(phases.get(0).getRaperos());
+                    Collections.sort(raperosF2, compararPuntuacio.reversed());
+                    phases.get(1).setRapperos(raperosF2);
+                    info = phases.get(1).preFase2(login);
                     break;
                 case 2:
+                    raperosF2 = phases.get(1).getRaperos();
+                    Collections.sort(raperosF2, compararPuntuacio);
+                    raperosF3.add(raperosF2.get(0));
+                    raperosF3.add(raperosF2.get(1));
+                    phases.get(2).setRapperos(raperosF3);
                     phases.get(2).preFase3(login);
                     break;
                 default:
@@ -247,6 +257,11 @@ public class Competicio {
                     info = phases.get(0).preFase1(login);
                     break;
                 case 1:
+                    raperosF1 = phases.get(0).getRaperos();
+                    Collections.sort(raperosF2, compararPuntuacio);
+                    raperosF3.add(raperosF1.get(0));
+                    raperosF3.add(raperosF1.get(1));
+                    phases.get(1).setRapperos(raperosF3);
                     phases.get(1).preFase3(login);
                     break;
                 default:

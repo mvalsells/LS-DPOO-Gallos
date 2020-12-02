@@ -91,8 +91,16 @@ public class Fase {
          */
     }
 
-    public void preFase2(String login) {
-
+    public String[] preFase2(String login) throws FileNotFoundException {
+        //Eliminar la meitat dels participants
+        int pos=raperos.size();
+        int originalSize= raperos.size();
+        while (pos>=(originalSize/2)){
+            raperos.remove(pos-1);
+            pos--;
+        }
+        String[] info = simularBatalles(login);
+        return info;
     }
 
     public void preFase3(String login) {
