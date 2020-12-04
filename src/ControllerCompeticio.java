@@ -194,7 +194,15 @@ public class ControllerCompeticio {
                     case 2:
                         //Show ranking
                         competicio.ordenarRaperos();
+                        ArrayList<String>nom = new ArrayList<>();
+                        ArrayList<Integer>puntuacions = new ArrayList<>();
 
+
+
+                        for (int i=0; i<competicio.getNumParticipants(); i++){
+                            nom.add(competicio.nameRapper(i));
+                            puntuacions.add((int) competicio.getScoreRappers(i));
+                        }
                         /*
                         Array -> noms
                         getPuntuacios rapero
@@ -204,7 +212,7 @@ public class ControllerCompeticio {
                         noms[]
                         Arrays -> puntuacio
                          */
-                        menu.showRanking();
+                        menu.showRanking(nom, puntuacions);
                         break;
                     case 3:
                         //Create profile

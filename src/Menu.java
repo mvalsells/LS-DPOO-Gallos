@@ -285,9 +285,23 @@ public class Menu {
         return estrofaLogin.toString();
     }
 
-    public void showRanking() {
+    public void showRanking(ArrayList<String> nom, ArrayList<Integer> score) {
+
+        StringBuilder sb = new StringBuilder();
         System.out.println("---------------------------------");
         System.out.println("Pos.  |  Name  |  Score");
+        for(int i=0; i<nom.size(); i++){
+            sb.append(i);
+            sb.append("    |   ");
+            sb.append(nom.get(i));
+            sb.append("  |  ");
+            sb.append(score.get(i));
+            sb.append("\n");
+
+        }
+        System.out.println(sb.toString());
+
+
         System.out.println("---------------------------------");
         scanner.nextLine();
     }

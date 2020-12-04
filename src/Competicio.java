@@ -270,4 +270,13 @@ public class Competicio {
     public void ordenarRaperos(){
         Fase.ordenarRaperos();
     }
+
+    public String nameRapper(int i){
+        return Fase.getNameRapper(i);
+
+    }
+    public double getScoreRappers(int i){
+        return Fase.getScoreRappers(i);
+
+    }
 }

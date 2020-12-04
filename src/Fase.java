@@ -32,12 +32,15 @@ public class Fase {
     }
 
 
+
+
     //Metodes
 
     public static void ordenarRaperos(){
         Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.comparePuntuacio(r2)*1000;
         Collections.sort(raperos, compararPuntuacio.reversed());
     }
+
 
     public void participantsParells(String login) {
         if (raperos.size() % 2 != 0) {
@@ -48,6 +51,16 @@ public class Fase {
             raperos.remove(random);
         }
     }
+
+    public static String getNameRapper(int i){
+        return raperos.get(i).getStageName();
+
+    }
+    public static double getScoreRappers(int i){
+        return raperos.get(i).getPuntuacio();
+
+    }
+
     
     
     //Getters and setters
