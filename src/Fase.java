@@ -7,10 +7,8 @@ public class Fase {
     private float budget;
     private ArrayList<Batalla> batalles;
     private Integer[] participants;
-    private ArrayList<Rapero> raperos;
+    private static ArrayList<Rapero> raperos;
     private int batallaActual;
-
-
 
 
     public Fase(float budget, Pais pais) {
@@ -35,6 +33,11 @@ public class Fase {
 
 
     //Metodes
+
+    public static void ordenarRaperos(){
+        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.comparePuntuacio(r2)*1000;
+        Collections.sort(raperos, compararPuntuacio.reversed());
+    }
 
     public void participantsParells(String login) {
         if (raperos.size() % 2 != 0) {
@@ -65,6 +68,10 @@ public class Fase {
         this.raperos=raperos;
     }
 
+    public static int getNumParticipants(){
+        return raperos.size();
+    }
+
     //Getters and setters de raperos
     public double getPuntuacioRapero(String login){
         int pos=-1;
@@ -77,8 +84,29 @@ public class Fase {
         return raperos.get(pos).getPuntuacio();
     }
 
+    public static String getStageNameRapero(int pos){
+        return raperos.get(pos).getStageName();
+    }
 
     //Metodes
+
+    public static void afegirRapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio){
+        Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
+        raperos.add(rapero);
+    }
+
+    //Fer login
+    public static boolean ferLogin(String login) {
+        boolean existex = false;
+        for (Rapero rapero : raperos) {
+            if (login.equals(rapero.getStageName())) {
+                existex = true;
+                break;
+            }
+        }
+        return existex;
+    }
+
     public String[] preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
         String[] info = simularBatalles(login);
@@ -92,6 +120,8 @@ public class Fase {
     }
 
     public String[] preFase2(String login) throws FileNotFoundException {
+
+        ordenarRaperos();
         //Eliminar la meitat dels participants
         int pos=raperos.size();
         int originalSize= raperos.size();
@@ -104,6 +134,10 @@ public class Fase {
     }
 
     public void preFase3(String login) {
+        ordenarRaperos();
+        for (int i = raperos.size()-1; i > 1 ; i--) {
+            raperos.remove(i);
+        }
 
     }
 
@@ -113,69 +147,51 @@ public class Fase {
         for (int i = 0; i < raperos.size(); i = i + 2) {
             Batalla batalla;
             Random rand = new Random();
-            int tipus = rand.nextInt(3);
+            int posR1=i;
+            int posR2=i+1;
 
-            //Miro si la posició actual i la següent hi ha el usuari que ha fet login
+            //Si el que ha fet login està a la segona posició el canvio i el poso a la primera
+            if(raperos.get(i + 1).getStageName().equals(login)) {
+                posR1=i+1;
+                posR2=i;
+            }
+
+            //Crear batalla
+            switch (rand.nextInt(3)) {
+                case 0:
+                    batalla = new Escrita(raperos.get(posR1), raperos.get(posR2));
+                    info[1] = "Escrita";
+                    break;
+                case 1:
+                    batalla = new Sangre(raperos.get(posR1), raperos.get(posR2));
+                    info[1] = "Sangre";
+                    break;
+                default:
+                    batalla = new Acapella(raperos.get(posR1), raperos.get(posR2));
+                    info[1] = "Acapella";
+                    break;
+            }
+
+            //Si hi ha el rapero login guardo info
             if (raperos.get(i).getStageName().equals(login)) {
-                switch (tipus) {
-                    case 0:
-                        batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Escrita";
-                        break;
-                    case 1:
-                        batalla = new Sangre(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Sangre";
-                        break;
-                    default:
-                        batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Acapella";
-                        break;
-                }
-                //Guardo nom del contrincant
+                //Nom del contrincant
                 info[0] = raperos.get(i+1).getStageName();
-                //Guardo puntuacio del login
+                //Puntuacio del login
                 info[2] = Double.toString(raperos.get(i).getPuntuacio());
-                //Guardo posició de la batalla al array
-                info[3] = Integer.toString(i/2);
+                //Com que encara no he afegit la batalla al arraylist, la mida dle arraylist serà la posició de la nova batalla
+                info[3] = Integer.toString(batalles.size());
             } else if (raperos.get(i + 1).getStageName().equals(login)) {
-                switch (tipus) {
-                    case 0:
-                        batalla = new Escrita(raperos.get(i+1), raperos.get(i));
-                        info[1] = "Escrita";
-                        break;
-                    case 1:
-                        batalla = new Sangre(raperos.get(i+1), raperos.get(i));
-                        info[1] = "Sangre";
-                        break;
-                    default:
-                        batalla = new Acapella(raperos.get(i+1), raperos.get(i));
-                        info[1] = "Acapella";
-                        break;
-                }
-                //Guardo nom del contrincant
+                //Nom del contrincant
                 info[0] = raperos.get(i).getStageName();
-                //Guardo puntuacio del login
+                //Puntuacio del login
                 info[2] = Double.toString(raperos.get(i+1).getPuntuacio());
-                //Guardo posició de la batalla al array
-                info[3] = Integer.toString(i/2);
+                //Com que encara no he afegit la batalla al arraylist, la mida dle arraylist serà la posició de la nova batalla
+                info[3] = Integer.toString(batalles.size());
             } else {
-                switch (tipus) {
-                    case 0:
-                        batalla = new Escrita(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Escrita";
-                        break;
-                    case 1:
-                        batalla = new Sangre(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Sangre";
-                        break;
-                    default:
-                        batalla = new Acapella(raperos.get(i), raperos.get(i + 1));
-                        info[1] = "Acapella";
-                        break;
-                }
+                //Si no és el rapero de login, simula la batalla
                 batalla.simularBatalla();
             }
-           batalles.add(batalla);
+            batalles.add(batalla);
         }
         return info;
         /*Array

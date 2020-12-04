@@ -193,6 +193,17 @@ public class ControllerCompeticio {
                         break;
                     case 2:
                         //Show ranking
+                        competicio.ordenarRaperos();
+
+                        /*
+                        Array -> noms
+                        getPuntuacios rapero
+                        for int i, length raperos/num part{
+                        noms[i] = raper(i)..getnoms
+
+                        noms[]
+                        Arrays -> puntuacio
+                         */
                         menu.showRanking();
                         break;
                     case 3:

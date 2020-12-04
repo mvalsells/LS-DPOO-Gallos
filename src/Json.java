@@ -210,6 +210,17 @@ public class Json {
             Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+/*
+    0- Dades inici
+            1, 2, 3 -> Guardar dades
+    
+    1- Llegir info Competicio;
+    2- Llegir countries
+    3- Llegir raperos;
 
+    Guardar raperos
+            1, 2, 3, + info rapero a afegir*/
+
+    //TODO Try and Catch file not found
 
 }

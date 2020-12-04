@@ -1,5 +1,4 @@
 import com.google.gson.JsonObject;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -7,9 +6,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 
 public class Competicio {
@@ -21,7 +17,7 @@ public class Competicio {
     private final LocalDate endDate;
     private final ArrayList<String> countries;
     private final ArrayList<Fase> phases;
-    private final ArrayList<Rapero> raperos;
+   // private final ArrayList<Rapero> raperos;
     private ArrayList<Tema> temes;
     private final JsonObject data;
     private final Json json = new Json("src/competicio.json", "src/batalles.json");
@@ -35,7 +31,7 @@ public class Competicio {
         this.endDate = endDate;
         this.countries = countries;
         this.phases = phases;
-        this.raperos = raperos;
+        //this.raperos = raperos;
         this.data = data;
         faseActual = 1;
 
@@ -61,7 +57,7 @@ public class Competicio {
     }
 
     public int getNumParticipants() {
-        return raperos.size();
+        return Fase.getNumParticipants();
     }
 
     public int getFaseActual() {
@@ -87,8 +83,8 @@ public class Competicio {
         }
 
         //Comprovo si ja hi ha el rappero
-        for (Rapero rapero : raperos) {
-            if (stageName.equals(rapero.getStageName())) {
+        for (int i=0; i<Fase.getNumParticipants(); i++) {
+            if (stageName.equals(Fase.getStageNameRapero(i))) {
                 estat[0] = false;
                 break;
             }
@@ -128,11 +124,12 @@ public class Competicio {
 
         if (estat[3]) {
             //Creo rapero i el poso al arrayList
-            Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
-            raperos.add(rapero);
+            Fase.afegirRapero(realName, stageName, birth, nationality, level, photo, puntuacio);
 
             //Afegir el rapero al JSON
-            json.escriureRapero(countries, raperos);
+            //TODO Reescriure el JSON
+
+            //json.escriureRapero(countries, raperos);
         }
 
         return estat;
@@ -145,14 +142,7 @@ public class Competicio {
     }
 
     public boolean ferLogin(String login) {
-        boolean existex = false;
-        for (Rapero rapero : raperos) {
-            if (login.equals(rapero.getStageName())) {
-                existex = true;
-                break;
-            }
-        }
-        return existex;
+        return Fase.ferLogin(login);
     }
 
     public String nomGuanyador() {
@@ -164,26 +154,11 @@ public class Competicio {
         return phases.size();
     }
 
-    public int numParticipants() {
-        return raperos.size();
-    }
-
 
     public boolean haAcabat() {
         LocalDate avui = LocalDate.now();
         return avui.isAfter(endDate);
     }
-
-    /* //Ho HE PASSAT A FASES -> a l'espra del tema raperos i fases
-    public void participantsParells(String login) {
-             if (numParticipants() % 2 != 0) {
-                int random = (int) (Math.random() * raperos.size());
-                while (raperos.get(random).getStageName().equals(login)) {
-                    random = (int) (Math.random() * raperos.size());
-                }
-                raperos.remove(random);
-            }
-    }*/
 
     @Override
     public String toString() {
@@ -193,7 +168,6 @@ public class Competicio {
                 ", endDate=" + endDate +
                 ", countries=" + countries +
                 ", phases=" + phases +
-                ", raperos=" + raperos +
                 ", temes=" + temes +
                 ", json=" + json +
                 '}';
@@ -221,8 +195,7 @@ public class Competicio {
 
     public String[] preFase(String login) throws FileNotFoundException {
         String[] info = new String[4];
-        //Mirem fins a 3 deciamls d'exactitud
-        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.comparePuntuacio(r2)*1000;
+
         ArrayList<Rapero> raperosF1 = new ArrayList<>();
         ArrayList<Rapero> raperosF2 = new ArrayList<>();
         ArrayList<Rapero> raperosF3 = new ArrayList<>();
@@ -233,17 +206,9 @@ public class Competicio {
                     info = phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    raperosF2 = new ArrayList<>(phases.get(0).getRaperos());
-                    Collections.sort(raperosF2, compararPuntuacio.reversed());
-                    phases.get(1).setRapperos(raperosF2);
                     info = phases.get(1).preFase2(login);
                     break;
                 case 2:
-                    raperosF2 = phases.get(1).getRaperos();
-                    Collections.sort(raperosF2, compararPuntuacio);
-                    raperosF3.add(raperosF2.get(0));
-                    raperosF3.add(raperosF2.get(1));
-                    phases.get(2).setRapperos(raperosF3);
                     phases.get(2).preFase3(login);
                     break;
                 default:
@@ -257,11 +222,6 @@ public class Competicio {
                     info = phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    raperosF1 = phases.get(0).getRaperos();
-                    Collections.sort(raperosF2, compararPuntuacio);
-                    raperosF3.add(raperosF1.get(0));
-                    raperosF3.add(raperosF1.get(1));
-                    phases.get(1).setRapperos(raperosF3);
                     phases.get(1).preFase3(login);
                     break;
                 default:
@@ -305,5 +265,9 @@ public class Competicio {
 
     public void nextPhase() {
         faseActual++;
+    }
+
+    public void ordenarRaperos(){
+        Fase.ordenarRaperos();
     }
 }
