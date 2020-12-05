@@ -34,9 +34,8 @@ public class Fase {
 
 
     //Metodes
-
     public static void ordenarRaperos(){
-        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) r1.comparePuntuacio(r2)*1000;
+        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) (r1.comparePuntuacio(r2)*1000000);
         Collections.sort(raperos, compararPuntuacio.reversed());
     }
 
