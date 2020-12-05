@@ -42,11 +42,12 @@ public class Fase {
 
     public void participantsParells(String login) {
         if (raperos.size() % 2 != 0) {
-            int random = (int) (Math.random() * raperos.size());
-            while (raperos.get(random).getStageName().equals(login)) {
-                random = (int) (Math.random() * raperos.size());
+            Random rand = new Random();
+            int posRandom=rand.nextInt(raperos.size()-1);
+            while (raperos.get(posRandom).getStageName().equals(login)) {
+                posRandom=rand.nextInt(raperos.size()-1);
             }
-            raperos.remove(random);
+            raperos.remove(posRandom);
         }
     }
 
@@ -118,10 +119,10 @@ public class Fase {
         return existex;
     }
 
-    public String[] preFase1(String login) throws FileNotFoundException {
+    public void preFase1(String login) throws FileNotFoundException {
         participantsParells(login);
-        String[] info = simularBatalles(login);
-        return info;
+        // String[] info = simularBatalles(login);
+        //return info;
         /*Array
         [0] -> Nom contrincant
         [1] -> Tipus de batalls
@@ -130,7 +131,7 @@ public class Fase {
          */
     }
 
-    public String[] preFase2(String login) throws FileNotFoundException {
+    public void preFase2(String login) throws FileNotFoundException {
         participantsParells(login);
         ordenarRaperos();
         //Eliminar la meitat dels participants
@@ -140,8 +141,8 @@ public class Fase {
             raperos.remove(pos-1);
             pos--;
         }
-        String[] info = simularBatalles(login);
-        return info;
+        //String[] info = simularBatalles(login);
+        //return info;
     }
 
     public void preFase3(String login) {
@@ -150,10 +151,9 @@ public class Fase {
         for (int i = raperos.size()-1; i > 1 ; i--) {
             raperos.remove(i);
         }
-
     }
 
-    private String[] simularBatalles(String login) throws FileNotFoundException {
+    public String[] simularBatalles(String login) throws FileNotFoundException {
         Collections.shuffle(raperos);
         String[] info = new String[4];
         for (int i = 0; i < raperos.size(); i = i + 2) {

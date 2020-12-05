@@ -118,9 +118,10 @@ public class ControllerCompeticio {
         if (competicio.ferLogin(login)) {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
+            competicio.preFase(login); //PreFase1
             do {
                 //Crear parelles i simular les batalles
-                String[] info = competicio.preFase(login);
+                String[] info = competicio.simularBatalles(login);
                 /*Array
                 [0] -> Nom contrincant
                 [1] -> Tipus de batalls
@@ -169,7 +170,6 @@ public class ControllerCompeticio {
 
                 //Demanem opció fins que sigui correcte
 
-
                 //Executem opció
                 switch (opcio) {
                     case 1:
@@ -179,6 +179,7 @@ public class ControllerCompeticio {
                              puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
+                            competicio.preFase(login);
                         }else{
                             //Si encara he de fer batalles fer-les
                             Random rand = new Random();

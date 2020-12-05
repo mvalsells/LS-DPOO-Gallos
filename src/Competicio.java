@@ -193,7 +193,7 @@ public class Competicio {
     }
 
 
-    public String[] preFase(String login) throws FileNotFoundException {
+    public void preFase(String login) throws FileNotFoundException {
         String[] info = new String[4];
 
         ArrayList<Rapero> raperosF1 = new ArrayList<>();
@@ -203,10 +203,12 @@ public class Competicio {
             // 3 Fases
             switch (faseActual-1) {
                 case 0:
-                    info = phases.get(0).preFase1(login);
+                    //info = phases.get(0).preFase1(login);
+                    phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    info = phases.get(1).preFase2(login);
+                    //info = phases.get(1).preFase2(login);
+                    phases.get(1).preFase2(login);
                     break;
                 case 2:
                     phases.get(2).preFase3(login);
@@ -219,7 +221,8 @@ public class Competicio {
             // 2 Fases
             switch (faseActual) {
                 case 0:
-                    info = phases.get(0).preFase1(login);
+                    //info = phases.get(0).preFase1(login);
+                    phases.get(0).preFase1(login);
                     break;
                 case 1:
                     phases.get(1).preFase3(login);
@@ -230,7 +233,7 @@ public class Competicio {
             }
         }
 
-        return info;
+        //return info;
         /*Array
         [0] -> Nom contrincant
         [1] -> Tipus de batalls
@@ -278,5 +281,9 @@ public class Competicio {
     public double getScoreRappers(int i){
         return Fase.getScoreRappers(i);
 
+    }
+
+    public String[] simularBatalles(String login) throws FileNotFoundException {
+        return phases.get(faseActual-1).simularBatalles(login);
     }
 }
