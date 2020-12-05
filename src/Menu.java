@@ -285,21 +285,54 @@ public class Menu {
         return estrofaLogin.toString();
     }
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+
     public void showRanking(ArrayList<String> nom, ArrayList<Integer> score) {
 
         StringBuilder sb = new StringBuilder();
-        System.out.println("---------------------------------");
-        System.out.println("Pos.  |  Name  |  Score");
-        for(int i=0; i<nom.size(); i++){
+        StringBuilder sb2 = new StringBuilder();
+        StringBuilder sb1 = new StringBuilder();
+        int maxsize = 0;
+        System.out.println("--------------------------------------");
+        System.out.println("Pos.    |       Name      |      Score");
+        /*for(int i=0; i<nom.size(); i++){
+            if(Integer.parseInt(nom.get(i))>=maxsize){
+                maxsize = Integer.parseInt(nom.get(i));
+            }
+        }*/
+        for(int i=0; i<10; i++){
             sb.append(i);
-            sb.append("    |   ");
+            sb.append("       |   ");
             sb.append(nom.get(i));
+
             sb.append("  |  ");
             sb.append(score.get(i));
             sb.append("\n");
 
         }
-        System.out.println(sb.toString());
+        for(int i=10; i<nom.size()/2; i++){
+            sb1.append(i);
+            sb1.append("      |   ");
+            sb1.append(nom.get(i));
+            sb1.append("  |  ");
+            sb1.append(score.get(i));
+            sb1.append("\n");
+
+        }
+
+
+        for(int i=(nom.size()/2); i<nom.size(); i++){
+            sb2.append(i);
+            sb2.append("      |   ");
+            sb2.append(nom.get(i));
+            sb2.append("  |  ");
+            sb2.append(score.get(i));
+            sb2.append("\n");
+        }
+        System.out.print((sb.toString()));
+        System.out.print((sb1.toString()));
+        System.out.println(ANSI_RED + (sb2.toString())+ANSI_RESET);
 
 
         System.out.println("---------------------------------");
