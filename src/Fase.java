@@ -6,7 +6,6 @@ public class Fase {
     private Pais pais;
     private float budget;
     private ArrayList<Batalla> batalles;
-    private Integer[] participants;
     private static ArrayList<Rapero> raperos;
     private int batallaActual;
 
@@ -133,7 +132,7 @@ public class Fase {
     }
 
     public String[] preFase2(String login) throws FileNotFoundException {
-
+        participantsParells(login);
         ordenarRaperos();
         //Eliminar la meitat dels participants
         int pos=raperos.size();
@@ -147,6 +146,7 @@ public class Fase {
     }
 
     public void preFase3(String login) {
+        participantsParells(login);
         ordenarRaperos();
         for (int i = raperos.size()-1; i > 1 ; i--) {
             raperos.remove(i);

@@ -51,6 +51,7 @@ public class ControllerCompeticio {
                         registrarUsuari();
                     } else {
                         login();
+                        //TODO controlar que hi hagin 0 participiants
                     }
                     break;
                 case 2:
@@ -197,8 +198,6 @@ public class ControllerCompeticio {
                         ArrayList<String>nom = new ArrayList<>();
                         ArrayList<Integer>puntuacions = new ArrayList<>();
 
-
-
                         for (int i=0; i<competicio.getNumParticipants(); i++){
                             nom.add(competicio.nameRapper(i));
                             puntuacions.add((int) competicio.getScoreRappers(i));
@@ -212,7 +211,7 @@ public class ControllerCompeticio {
                         noms[]
                         Arrays -> puntuacio
                          */
-                        menu.showRanking(nom, puntuacions);
+                        menu.showRanking(nom, puntuacions, login, competicio.getNumFases()-competicio.getFaseActual());
                         break;
                     case 3:
                         //Create profile

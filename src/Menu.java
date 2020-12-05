@@ -288,54 +288,64 @@ public class Menu {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    public void showRanking(ArrayList<String> nom, ArrayList<Integer> score) {
+    public void showRanking(ArrayList<String> noms, ArrayList<Integer> scores, String login, int fasesRestants) {
+        System.out.println("-------------------------------------");
+        System.out.println("Pos. | Name | Score");
+        System.out.println("-------------------------------------");
 
-        StringBuilder sb = new StringBuilder();
-        StringBuilder sb2 = new StringBuilder();
-        StringBuilder sb1 = new StringBuilder();
-        int maxsize = 0;
-        System.out.println("--------------------------------------");
-        System.out.println("Pos.    |       Name      |      Score");
-        /*for(int i=0; i<nom.size(); i++){
-            if(Integer.parseInt(nom.get(i))>=maxsize){
-                maxsize = Integer.parseInt(nom.get(i));
+        StringBuilder colorNormal = new StringBuilder();
+        StringBuilder colorVermell = new StringBuilder();
+
+        if (fasesRestants==2){
+            //La meitat veremell
+            for (int i=0; i<noms.size()/2; i++) {
+                colorNormal.append(i+1);
+                colorNormal.append(" ");
+                colorNormal.append(noms.get(i));
+                colorNormal.append(" - ");
+                colorNormal.append(scores.get(i));
+                if(noms.get(i).equals(login)){
+                    colorNormal.append(" <-- You");
+                }
+                colorNormal.append("\n");
             }
-        }*/
-        for(int i=0; i<10; i++){
-            sb.append(i);
-            sb.append("       |   ");
-            sb.append(nom.get(i));
 
-            sb.append("  |  ");
-            sb.append(score.get(i));
-            sb.append("\n");
+            for (int i=(noms.size()/2); i<noms.size(); i++){
+                colorVermell.append(i+1);
+                colorVermell.append(" ");
+                colorVermell.append(noms.get(i));
+                colorVermell.append(" - ");
+                colorVermell.append(scores.get(i));
+                if(noms.get(i).equals(login)){
+                    colorVermell.append(" <-- You");
+                }
+                colorVermell.append("\n");
+            }
+        } else {
+            //Tots menys els dos primer vermells
+            for (int i=0; i<2; i++) {
+                colorNormal.append(i+1);
+                colorNormal.append(" ");
+                colorNormal.append(noms.get(i));
+                colorNormal.append(" - ");
+                colorNormal.append(scores.get(i));
+                colorNormal.append("\n");
+            }
 
+            for (int i=2; i<noms.size(); i++){
+                colorVermell.append(i+1);
+                colorVermell.append(" ");
+                colorVermell.append(noms.get(i));
+                colorVermell.append(" - ");
+                colorVermell.append(scores.get(i));
+                colorVermell.append("\n");
+            }
         }
-        for(int i=10; i<nom.size()/2; i++){
-            sb1.append(i);
-            sb1.append("      |   ");
-            sb1.append(nom.get(i));
-            sb1.append("  |  ");
-            sb1.append(score.get(i));
-            sb1.append("\n");
 
-        }
+        System.out.print((colorNormal.toString()));
+        System.out.println(ANSI_RED + (colorVermell.toString())+ANSI_RESET);
 
-
-        for(int i=(nom.size()/2); i<nom.size(); i++){
-            sb2.append(i);
-            sb2.append("      |   ");
-            sb2.append(nom.get(i));
-            sb2.append("  |  ");
-            sb2.append(score.get(i));
-            sb2.append("\n");
-        }
-        System.out.print((sb.toString()));
-        System.out.print((sb1.toString()));
-        System.out.println(ANSI_RED + (sb2.toString())+ANSI_RESET);
-
-
-        System.out.println("---------------------------------");
+        mostrarLiniaSeparadora();
         scanner.nextLine();
     }
 
