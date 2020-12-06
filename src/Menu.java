@@ -168,7 +168,7 @@ public class Menu {
         sb.append(fase);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());*/
-        if(numBattle!=5){
+        if(numBattle!=5 && numBattle !=6){
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("Phases: ");
@@ -195,7 +195,7 @@ public class Menu {
             } else {
                 System.out.println("1. Go to the next phase");
             }
-        }else{
+        }else if(numBattle != 6){
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("Phases: ");
@@ -205,6 +205,17 @@ public class Menu {
             sb.append(" | Score:");
             sb.append(score);
             sb.append(" |  You've lost kid, I'm sure you'll do better next time...");
+            System.out.println(sb.toString());
+            mostrarLiniaSeparadora();
+
+            System.out.println("1. Go to the next phase   (desactivated)");
+        }else {
+            mostrarLiniaSeparadora();
+            StringBuilder sb = new StringBuilder();
+            sb.append("END");
+            sb.append(" | Score:");
+            sb.append(score);
+            sb.append(" |  You've win, I'm sure you'll win the next time!!!");
             System.out.println(sb.toString());
             mostrarLiniaSeparadora();
 

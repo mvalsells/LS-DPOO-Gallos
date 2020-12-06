@@ -65,7 +65,7 @@ public class Fase {
     //Getters and setters
 
 
-    public int getBatallaActual() {
+    public int getBatallaActual(){
         return batallaActual;
     }
 
@@ -141,6 +141,9 @@ public class Fase {
             raperos.remove(pos-1);
             pos--;
         }
+        for (Rapero rapero : raperos) {
+            rapero.setPuntuacio(0);
+        }
         //String[] info = simularBatalles(login);
         //return info;
     }
@@ -150,6 +153,9 @@ public class Fase {
         ordenarRaperos();
         for (int i = raperos.size()-1; i > 1 ; i--) {
             raperos.remove(i);
+        }
+        for (Rapero rapero : raperos) {
+            rapero.setPuntuacio(0);
         }
     }
 

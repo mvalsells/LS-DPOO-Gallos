@@ -193,7 +193,7 @@ public class Competicio {
     }
 
 
-    public void preFase(String login) throws FileNotFoundException {
+    public void preFase(String login) throws FileNotFoundException, IndexOutOfBoundsException {
         String[] info = new String[4];
 
         ArrayList<Rapero> raperosF1 = new ArrayList<>();

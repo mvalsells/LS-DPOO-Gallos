@@ -120,14 +120,20 @@ public class ControllerCompeticio {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
             boolean showrankingnext = true;
+            boolean Final = false;
             competicio.preFase(login); //PreFase1
             do {
                 //Crear parelles i simular les batalles
 
-                if(showrankingnext && (competicio.getBatallaActual()+1)<3){
-                    info = competicio.simularBatalles(login);
-                    showrankingnext = false;
+                try {
+                    if(showrankingnext && (competicio.getBatallaActual()+1)<3){
+                        info = competicio.simularBatalles(login);
+                        showrankingnext = false;
+                    }
+                }catch (IndexOutOfBoundsException e){
+                    Final = true;
                 }
+
 
                 /*Array
                 [0] -> Nom contrincant
@@ -144,6 +150,7 @@ public class ControllerCompeticio {
                 String contrincant = info[0];
                 int posicio=0;
 
+            if(!Final){
                 try{
                     posicio = Integer.valueOf(info[3]);
                     do {
@@ -159,10 +166,13 @@ public class ControllerCompeticio {
                             menu.display("Number introduced not corresponding to the menu");
                         }
                     } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
+
                 }catch (NumberFormatException e){
 
                     fase = fase-1;
+
                     competicio.setBatallaActual(4);
+
                     do {
                         //Mostrar info de la batalla
                         menu.Registrat(totalfase, fase, puntuacioLouser, competicio.getBatallaActual()+1, battleType, contrincant);
@@ -183,6 +193,28 @@ public class ControllerCompeticio {
                     } while (opcio != 2 && opcio != 3 && opcio != 4);
 
                 }
+            }else{
+                fase = fase-1;
+                do {
+                    //Mostrar info de la batalla
+                    menu.Registrat(totalfase, fase, puntuacioLouser, 6, battleType, contrincant);
+                    try{
+                        opcio = menu.demanaOpcio();
+                    }catch (InputMismatchException exception){
+                        menu.display("Opcion introduced not corresponding to the menu");
+                        opcio = menu.demanaOpcio();
+                    }
+
+                    if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
+                        menu.display("Number introduced not corresponding to the menu");
+                    }
+                    else if (opcio ==1){
+                        menu.display("Number introduced is desactivated");
+                    }
+
+                } while (opcio != 2 && opcio != 3 && opcio != 4);
+            }
+
 
                 int puntuacio = 0;
 
@@ -197,7 +229,12 @@ public class ControllerCompeticio {
                              puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
-                            competicio.preFase(login);
+                            try{
+                                competicio.preFase(login);
+                            }catch (IndexOutOfBoundsException e){
+                                Final = true;
+                            }
+
                         }else{
                             //Si encara he de fer batalles fer-les
                             Random rand = new Random();
