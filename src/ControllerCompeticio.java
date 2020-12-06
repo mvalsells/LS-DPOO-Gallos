@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class ControllerCompeticio {
@@ -114,14 +115,20 @@ public class ControllerCompeticio {
         //Obtenir nom artistic
         int puntuacioLouser = 0;
         String login = menu.obtenirLogin();
-
+        String[] info =  new String[4];
         if (competicio.ferLogin(login)) {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
+            boolean showrankingnext = true;
             competicio.preFase(login); //PreFase1
             do {
                 //Crear parelles i simular les batalles
-                String[] info = competicio.simularBatalles(login);
+
+                if(showrankingnext && (competicio.getBatallaActual()+1)<3){
+                    info = competicio.simularBatalles(login);
+                    showrankingnext = false;
+                }
+
                 /*Array
                 [0] -> Nom contrincant
                 [1] -> Tipus de batalls
@@ -142,7 +149,12 @@ public class ControllerCompeticio {
                     do {
                         //Mostrar info de la batalla
                         menu.Registrat(totalfase, fase, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual()+1, battleType, contrincant);
-                        opcio = menu.demanaOpcio();
+                        try{
+                            opcio = menu.demanaOpcio();
+                        }catch (InputMismatchException exception){
+                            menu.display("Opcion introduced not corresponding to the menu");
+                            opcio = menu.demanaOpcio();
+                        }
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                             menu.display("Number introduced not corresponding to the menu");
                         }
@@ -154,7 +166,13 @@ public class ControllerCompeticio {
                     do {
                         //Mostrar info de la batalla
                         menu.Registrat(totalfase, fase, puntuacioLouser, competicio.getBatallaActual()+1, battleType, contrincant);
-                        opcio = menu.demanaOpcio();
+                        try{
+                            opcio = menu.demanaOpcio();
+                        }catch (InputMismatchException exception){
+                            menu.display("Opcion introduced not corresponding to the menu");
+                            opcio = menu.demanaOpcio();
+                        }
+
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                             menu.display("Number introduced not corresponding to the menu");
                         }
@@ -188,6 +206,7 @@ public class ControllerCompeticio {
                             Thread.sleep(2000);
                             makeBattle(posicio, contrincant, 1, coin);
                             competicio.setBatallaActual(competicio.getBatallaActual() + 1);
+                            showrankingnext = true;
                         }
 
 

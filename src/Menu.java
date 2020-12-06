@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -62,7 +63,7 @@ public class Menu {
         }
     }
 
-    public int demanaOpcio() {
+    public int demanaOpcio() throws InputMismatchException {
         System.out.print("\nChoose an option: ");
         int opcio = scanner.nextInt();
         scanner.nextLine();

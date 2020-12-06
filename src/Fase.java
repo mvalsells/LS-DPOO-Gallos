@@ -211,6 +211,7 @@ public class Fase {
         [1] -> Tipus de batalla
         [2] -> Puntuació usuari
         [3] -> Posició de la batalla usuari
+
          */
     }
 
