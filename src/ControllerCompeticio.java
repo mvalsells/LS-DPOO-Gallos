@@ -110,7 +110,7 @@ public class ControllerCompeticio {
 
     }
 
-    private void login() throws InterruptedException, FileNotFoundException {
+    private void login() throws InterruptedException{
 
         //Login
         //Obtenir nom artistic
@@ -121,7 +121,7 @@ public class ControllerCompeticio {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
             boolean showrankingnext = true;
-            boolean Final = false;
+            boolean finalCompeticio = false;
             String guanyador = new String();
             competicio.preFase(login); //PreFase1
             do {
@@ -134,7 +134,7 @@ public class ControllerCompeticio {
                     }
                 }catch (IndexOutOfBoundsException e){
 
-                    Final = true;
+                    finalCompeticio = true;
                     guanyador = competicio.nomGuanyador();
                 }
 
@@ -165,7 +165,7 @@ public class ControllerCompeticio {
                     perdedor = true;
                 }*/
 
-            if(!Final /*|| perdedor*/){
+            if(!finalCompeticio /*|| perdedor*/){
                 try{
                     posicio = Integer.valueOf(info[3]);
                     do {
@@ -300,7 +300,7 @@ public class ControllerCompeticio {
                                 }
                             }catch (IndexOutOfBoundsException e){
                                 guanyador = competicio.nomGuanyador();
-                                Final = true;
+                                finalCompeticio = true;
                                 menu.leaveCompetition(guanyador);
                                 break;
                             }
@@ -333,5 +333,17 @@ public class ControllerCompeticio {
         }
         String estrofaLogin = menu.doBattle(coin, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
         competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
+    }
+
+    private void simularCompeticioRestant(){
+        for (int i = competicio.getFaseActual()-1; i < competicio.numFases()-1; i++) {
+            if((competicio.getBatallaActual() + 1)==1){
+                competicio.simularBatalles("");
+            }else{
+                for(int j=0; j<2;j++){
+                    competicio.simularBatalles("");
+                }
+            }
+        }
     }
 }

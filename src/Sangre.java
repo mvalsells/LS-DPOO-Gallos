@@ -1,7 +1,7 @@
 import java.io.FileNotFoundException;
 
 public class Sangre extends Batalla {
-    public Sangre(Rapero rapero1, Rapero rapero2) throws FileNotFoundException {
+    public Sangre(Rapero rapero1, Rapero rapero2) {
         super(rapero1, rapero2);
     }
 

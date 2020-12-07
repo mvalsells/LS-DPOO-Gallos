@@ -195,7 +195,7 @@ public class Competicio {
     }
 
 
-    public void preFase(String login) throws FileNotFoundException, IndexOutOfBoundsException {
+    public void preFase(String login) throws IndexOutOfBoundsException {
         String[] info = new String[4];
 
         ArrayList<Rapero> raperosF1 = new ArrayList<>();
@@ -285,7 +285,7 @@ public class Competicio {
 
     }
 
-    public String[] simularBatalles(String login) throws FileNotFoundException {
+    public String[] simularBatalles(String login) {
         return phases.get(faseActual-1).simularBatalles(login);
     }
 }

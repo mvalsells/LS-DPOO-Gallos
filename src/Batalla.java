@@ -12,7 +12,7 @@ public abstract class Batalla {
 
 
     //Constructor
-    public Batalla(Rapero rapero1, Rapero rapero2) throws FileNotFoundException {
+    public Batalla(Rapero rapero1, Rapero rapero2) {
         this.raperos[0] = rapero1;
         this.raperos[1] = rapero2;
         ArrayList<Tema> temes = json.llegirTema();
@@ -23,7 +23,7 @@ public abstract class Batalla {
 
     public abstract double puntuacio(int numRimes);
 
-    public void simularBatalla() throws FileNotFoundException {
+    public void simularBatalla() {
         //Per cada tema
         for (int i = 0; i < tema.length; i++) {
 

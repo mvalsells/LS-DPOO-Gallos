@@ -4,7 +4,7 @@ import java.util.Collections;
 
 public class Acapella extends Batalla{
 
-    public Acapella(Rapero rapero1, Rapero rapero2) throws FileNotFoundException {
+    public Acapella(Rapero rapero1, Rapero rapero2) {
         super(rapero1, rapero2);
     }
     public double puntuacio(int rimes){
