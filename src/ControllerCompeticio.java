@@ -39,7 +39,8 @@ public class ControllerCompeticio {
         int opcio;
         do {
             //mostra menu i demana opcio
-            menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
+            //TODO he hagut de treure el nom guanyador del welcome sino petava
+            menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), "PP", competicio.estat());
 
             if (competicio.haAcabat()) {
                 //TODO Mostrar guanyador
@@ -131,6 +132,7 @@ public class ControllerCompeticio {
                         showrankingnext = false;
                     }
                 }catch (IndexOutOfBoundsException e){
+                    //TODO peta aqui i no se perque
                     Final = true;
                 }
 
@@ -146,6 +148,7 @@ public class ControllerCompeticio {
                 int totalfase = competicio.numFases();
                 int fase = competicio.getFaseActual();
                 //String puntuacio = info[2];
+                String guanyador = new String();
                 String battleType = info[1];
                 String contrincant = info[0];
                 int posicio=0;
@@ -197,7 +200,7 @@ public class ControllerCompeticio {
                 fase = fase-1;
                 do {
                     //Mostrar info de la batalla
-                    menu.Registrat(totalfase, fase, puntuacioLouser, 6, battleType, contrincant);
+                    menu.Registrat(totalfase, fase, puntuacioLouser, 6, battleType, guanyador);
                     try{
                         opcio = menu.demanaOpcio();
                     }catch (InputMismatchException exception){
@@ -229,11 +232,8 @@ public class ControllerCompeticio {
                              puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
-                            try{
-                                competicio.preFase(login);
-                            }catch (IndexOutOfBoundsException e){
-                                Final = true;
-                            }
+                            competicio.preFase(login);
+
 
                         }else{
                             //Si encara he de fer batalles fer-les
@@ -276,8 +276,29 @@ public class ControllerCompeticio {
                         break;
                     case 4:
                         //Leave competition
-                        String guanyador = "";
-                        guanyador = competicio.nomGuanyador();
+                        //String guanyador = "";
+                        //TODO funcio afegida avans de petar
+                        while(fase<=totalfase){
+                            try{
+                                if((competicio.getBatallaActual() + 1)==1){
+                                    info = competicio.simularBatalles(login);
+                                }else{
+                                    for(int i=0; i<2; i++){
+                                        info = competicio.simularBatalles(login);
+                                    }
+                                }
+                            }catch (IndexOutOfBoundsException e){
+                                guanyador = competicio.nomGuanyador();
+                                Final = true;
+                                menu.leaveCompetition(guanyador);
+                                break;
+                            }
+
+                            competicio.nextPhase();
+
+                            competicio.preFase(login);
+
+                        }
                         menu.leaveCompetition(guanyador);
                         //ok=1;
                         break;

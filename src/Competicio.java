@@ -145,8 +145,11 @@ public class Competicio {
         return Fase.ferLogin(login);
     }
 
+    //TODO funcio afegida avans de petar
     public String nomGuanyador() {
-        return "Pepito Grillo";
+
+        return  phases.get(2).winner();
+        //return "PP";
     }
 
 
@@ -219,7 +222,7 @@ public class Competicio {
             }
         } else {
             // 2 Fases
-            switch (faseActual) {
+            switch (faseActual-1) {
                 case 0:
                     //info = phases.get(0).preFase1(login);
                     phases.get(0).preFase1(login);

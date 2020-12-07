@@ -158,6 +158,13 @@ public class Fase {
             rapero.setPuntuacio(0);
         }
     }
+    //TODO funcio afegida ara avans de que oetes
+    public String winner (){
+        ordenarRaperos();
+        raperos.remove(1);
+
+        return raperos.get(0).getStageName();
+    }
 
     public String[] simularBatalles(String login) throws FileNotFoundException {
         Collections.shuffle(raperos);

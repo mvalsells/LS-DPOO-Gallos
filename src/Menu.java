@@ -215,7 +215,7 @@ public class Menu {
             sb.append("END");
             sb.append(" | Score:");
             sb.append(score);
-            sb.append(" |  You've win, I'm sure you'll win the next time!!!");
+            sb.append(" |  You've win");
             System.out.println(sb.toString());
             mostrarLiniaSeparadora();
 
