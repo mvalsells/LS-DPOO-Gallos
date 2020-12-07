@@ -158,7 +158,6 @@ public class Fase {
             rapero.setPuntuacio(0);
         }
     }
-    //TODO funcio afegida ara avans de que oetes
     public String winner (){
         ordenarRaperos();
         raperos.remove(1);

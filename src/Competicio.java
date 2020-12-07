@@ -145,7 +145,6 @@ public class Competicio {
         return Fase.ferLogin(login);
     }
 
-    //TODO funcio afegida avans de petar
     public String nomGuanyador() {
 
         return  phases.get(2).winner();

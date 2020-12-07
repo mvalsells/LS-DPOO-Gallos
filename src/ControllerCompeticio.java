@@ -122,6 +122,7 @@ public class ControllerCompeticio {
             int opcio;
             boolean showrankingnext = true;
             boolean Final = false;
+            String guanyador = new String();
             competicio.preFase(login); //PreFase1
             do {
                 //Crear parelles i simular les batalles
@@ -132,8 +133,9 @@ public class ControllerCompeticio {
                         showrankingnext = false;
                     }
                 }catch (IndexOutOfBoundsException e){
-                    //TODO peta aqui i no se perque
+
                     Final = true;
+                    guanyador = competicio.nomGuanyador();
                 }
 
 
@@ -148,12 +150,22 @@ public class ControllerCompeticio {
                 int totalfase = competicio.numFases();
                 int fase = competicio.getFaseActual();
                 //String puntuacio = info[2];
-                String guanyador = new String();
+
                 String battleType = info[1];
                 String contrincant = info[0];
                 int posicio=0;
+                boolean perdedor = false;
 
-            if(!Final){
+                //TODO funcio per fer que si perd a la final surti que ha perdut
+                /*try {
+                    if(competicio.nomGuanyador().equals(login)){
+                       perdedor = false;
+                    }
+                }catch (IndexOutOfBoundsException e){
+                    perdedor = true;
+                }*/
+
+            if(!Final /*|| perdedor*/){
                 try{
                     posicio = Integer.valueOf(info[3]);
                     do {
@@ -277,7 +289,6 @@ public class ControllerCompeticio {
                     case 4:
                         //Leave competition
                         //String guanyador = "";
-                        //TODO funcio afegida avans de petar
                         while(fase<=totalfase){
                             try{
                                 if((competicio.getBatallaActual() + 1)==1){
