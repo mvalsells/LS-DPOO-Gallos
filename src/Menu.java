@@ -63,10 +63,23 @@ public class Menu {
         }
     }
 
-    public int demanaOpcio() throws InputMismatchException {
+    public int demanaOpcio() {
+        do {
+            String input = scanner.nextLine();
+            try {
+                System.out.print("\nChoose an option: ");
+                int opcio = Integer.parseInt(input);
+                return opcio;
+            } catch (NumberFormatException e){
+                System.out.println("Please enter a valid number");
+            }
+        } while (true);
+    }
+
+    public String demanaOpcioString() throws InputMismatchException {
         System.out.print("\nChoose an option: ");
-        int opcio = scanner.nextInt();
-        scanner.nextLine();
+        String opcio = scanner.nextLine();
+        // scanner.nextLine();
         return opcio;
     }
 
@@ -387,5 +400,9 @@ public class Menu {
     // Mètode per a mostrar un missatge per pantalla
     public void display(String s) {
         System.out.println(s);
+    }
+
+    public void clearBufferLine() {
+        scanner.nextLine();
     }
 }

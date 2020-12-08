@@ -1,4 +1,5 @@
 import com.google.gson.JsonObject;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -17,10 +18,10 @@ public class Competicio {
     private final LocalDate endDate;
     private final ArrayList<String> countries;
     private final ArrayList<Fase> phases;
-   // private final ArrayList<Rapero> raperos;
-    private ArrayList<Tema> temes;
     private final JsonObject data;
     private final Json json = new Json("src/competicio.json", "src/batalles.json");
+    // private final ArrayList<Rapero> raperos;
+    private ArrayList<Tema> temes;
     private String rappers;
     private int faseActual;
 
@@ -36,7 +37,6 @@ public class Competicio {
         faseActual = 1;
 
     }
-
 
 
     //Getters & Setters
@@ -65,25 +65,27 @@ public class Competicio {
     }
 
     //Getters and Setter de Fase
-    public int getBatallaActual(){
-        return phases.get(faseActual-1).getBatallaActual();
+    public int getBatallaActual() {
+        return phases.get(faseActual - 1).getBatallaActual();
     }
-    public void setBatallaActual(int num){
-        phases.get(faseActual-1).setBatallaActual(num);
+
+    public void setBatallaActual(int num) {
+        phases.get(faseActual - 1).setBatallaActual(num);
     }
-    public double getPuntuacioRapero(String login){
-        return phases.get(faseActual-1).getPuntuacioRapero(login);
+
+    public double getPuntuacioRapero(String login) {
+        return phases.get(faseActual - 1).getPuntuacioRapero(login);
     }
 
     //Metodes
     public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
         Boolean[] estat = new Boolean[4];
-        for (int i = 0; i<estat.length; i++) {
+        for (int i = 0; i < estat.length; i++) {
             estat[i] = true;
         }
 
         //Comprovo si ja hi ha el rappero
-        for (int i=0; i<Fase.getNumParticipants(); i++) {
+        for (int i = 0; i < Fase.getNumParticipants(); i++) {
             if (stageName.equals(Fase.getStageNameRapero(i))) {
                 estat[0] = false;
                 break;
@@ -147,7 +149,7 @@ public class Competicio {
 
     public String nomGuanyador() {
 
-        return  phases.get(2).winner();
+        return phases.get(2).winner();
         //return "PP";
     }
 
@@ -196,24 +198,17 @@ public class Competicio {
 
 
     public void preFase(String login) throws IndexOutOfBoundsException {
-        String[] info = new String[4];
-
-        ArrayList<Rapero> raperosF1 = new ArrayList<>();
-        ArrayList<Rapero> raperosF2 = new ArrayList<>();
-        ArrayList<Rapero> raperosF3 = new ArrayList<>();
         if (numFases() == 3) {
             // 3 Fases
-            switch (faseActual-1) {
+            switch (faseActual - 1) {
                 case 0:
-                    //info = phases.get(0).preFase1(login);
                     phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    //info = phases.get(1).preFase2(login);
                     phases.get(1).preFase2(login);
                     break;
                 case 2:
-                    phases.get(2).preFase3(login);
+                    phases.get(2).preFase3();
                     break;
                 default:
                     System.out.println("Numero de fase no és 1, 2 o 3");
@@ -221,13 +216,12 @@ public class Competicio {
             }
         } else {
             // 2 Fases
-            switch (faseActual-1) {
+            switch (faseActual - 1) {
                 case 0:
-                    //info = phases.get(0).preFase1(login);
                     phases.get(0).preFase1(login);
                     break;
                 case 1:
-                    phases.get(1).preFase3(login);
+                    phases.get(1).preFase3();
                     break;
                 default:
                     System.out.println("Numero de fase no és 1 o 2");
@@ -235,13 +229,7 @@ public class Competicio {
             }
         }
 
-        //return info;
-        /*Array
-        [0] -> Nom contrincant
-        [1] -> Tipus de batalls
-        [2] -> Puntuació usuari
-        [3] -> Posició de la batalla usuari
-         */    }
+    }
 
     public boolean validarFecha(String bir) {
         try {
@@ -249,7 +237,7 @@ public class Competicio {
             //Date dataok;
             formatoFecha.setLenient(false);
             formatoFecha.parse(bir);
-            if(bir.length() != 10){
+            if (bir.length() != 10) {
                 return false;
             }
 
@@ -258,34 +246,35 @@ public class Competicio {
         }
         return true;
     }
-    public ArrayList<String> infoTema(int battlePos, int temaPos){
-        return phases.get(faseActual-1).infoTema(battlePos, temaPos);
+
+    public ArrayList<String> infoTema(int battlePos, int temaPos) {
+        return phases.get(faseActual - 1).infoTema(battlePos, temaPos);
     }
 
 
-
     public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
-        phases.get(faseActual-1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
+        phases.get(faseActual - 1).ferBatalla(battlePos, estrofaLogin, estrofaContrincant);
     }
 
     public void nextPhase() {
         faseActual++;
     }
 
-    public void ordenarRaperos(){
+    public void ordenarRaperos() {
         Fase.ordenarRaperos();
     }
 
-    public String nameRapper(int i){
+    public String nameRapper(int i) {
         return Fase.getNameRapper(i);
 
     }
-    public double getScoreRappers(int i){
+
+    public double getScoreRappers(int i) {
         return Fase.getScoreRappers(i);
 
     }
 
     public String[] simularBatalles(String login) {
-        return phases.get(faseActual-1).simularBatalles(login);
+        return phases.get(faseActual - 1).simularBatalles(login);
     }
 }

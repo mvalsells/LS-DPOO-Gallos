@@ -148,8 +148,7 @@ public class Fase {
         //return info;
     }
 
-    public void preFase3(String login) {
-        participantsParells(login);
+    public void preFase3() {
         ordenarRaperos();
         for (int i = raperos.size()-1; i > 1 ; i--) {
             raperos.remove(i);
@@ -165,7 +164,7 @@ public class Fase {
         return raperos.get(0).getStageName();
     }
 
-    public String[] simularBatalles(String login) /*throws FileNotFoundException*/ {
+    public String[] simularBatalles(String login) {
         Collections.shuffle(raperos);
         String[] info = new String[4];
         for (int i = 0; i < raperos.size(); i = i + 2) {
