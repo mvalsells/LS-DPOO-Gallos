@@ -66,12 +66,14 @@ public class Menu {
         do {
             System.out.print("\nChoose an option: ");
             String input = scanner.nextLine();
+            int opcio = 0;
             try {
-                int opcio = Integer.parseInt(input);
-                return opcio;
+                 opcio = Integer.parseInt(input);
+
             } catch (NumberFormatException e){
-                System.out.println("Please enter a valid number");
+                opcio = 5;
             }
+            return opcio;
         } while (true);
     }
 
@@ -174,7 +176,7 @@ public class Menu {
     }
 
     //login si registrat
-    public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival) {
+    public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
         /*StringBuilder sb = new StringBuilder();
         sb.append("Yo' bro, there's no \"");
         sb.append(fase);
@@ -214,6 +216,17 @@ public class Menu {
             sb.append(fase);
             sb.append("/");
             sb.append(totalFase);
+            sb.append(" | Score:");
+            sb.append(score);
+            sb.append(" |  You've lost kid, I'm sure you'll do better next time...");
+            System.out.println(sb.toString());
+            mostrarLiniaSeparadora();
+
+            System.out.println("1. Go to the next phase   (desactivated)");
+        }else if(!perdedor){
+            mostrarLiniaSeparadora();
+            StringBuilder sb = new StringBuilder();
+            sb.append("END");
             sb.append(" | Score:");
             sb.append(score);
             sb.append(" |  You've lost kid, I'm sure you'll do better next time...");

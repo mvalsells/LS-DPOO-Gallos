@@ -38,13 +38,17 @@ public class ControllerCompeticio {
         int opcio;
         do {
             //mostra menu i demana opcio
-            //TODO he hagut de treure el nom guanyador del welcome sino petava
-            menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), "PP", competicio.estat());
+
 
             if (competicio.haAcabat()) {
-                //TODO Mostrar guanyador
+                simularCompeticioRestant();
+                menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
                 System.exit(0);
+            }else{
+                menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), "pp", competicio.estat());
             }
+
+
             opcio = menu.demanaOpcio();
             switch (opcio) {
                 case 1:
@@ -123,7 +127,7 @@ public class ControllerCompeticio {
         if (competicio.ferLogin(login)) {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
-            boolean showrankingnext = true;
+            boolean showrankingnext = false;
             boolean finalCompeticio = false;
             String guanyador = "";
             competicio.preFase(login); //PreFase1
@@ -151,21 +155,21 @@ public class ControllerCompeticio {
 
                 int posicio = 0;
 
-                //TODO funcio per fer que si perd a la final surti que ha perdut
-                /*try {
+                boolean perdedor = false;
+                try {
                     if(competicio.nomGuanyador().equals(login)){
                        perdedor = false;
                     }
                 }catch (IndexOutOfBoundsException e){
                     perdedor = true;
-                }*/
+                }
 
                 if (!finalCompeticio /*|| perdedor*/) {
                     try {
                         posicio = Integer.valueOf(info[3]);
                         do {
                             //Mostrar info de la batalla
-                            menu.Registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual() + 1, battleType, contrincant);
+                            menu.Registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
 
                             opcio = menu.demanaOpcio();
 
@@ -182,7 +186,7 @@ public class ControllerCompeticio {
 
                         do {
                             //Mostrar info de la batalla
-                            menu.Registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual() + 1, battleType, contrincant);
+                            menu.Registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
                             opcio = menu.demanaOpcio();
                             if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                                 menu.display("Number introduced not corresponding to the menu");
@@ -197,7 +201,7 @@ public class ControllerCompeticio {
                     faseActual = faseActual - 1;
                     do {
                         //Mostrar info de la batalla
-                        menu.Registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador);
+                        menu.Registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador, perdedor);
                         opcio = menu.demanaOpcio();
 
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
@@ -222,7 +226,12 @@ public class ControllerCompeticio {
 
                             competicio.nextPhase();
                             competicio.preFase(login);
-                            info = competicio.simularBatalles(login);
+                            try {
+                                info = competicio.simularBatalles(login);
+                            }catch (IndexOutOfBoundsException e){
+                                finalCompeticio = true;
+                            }
+
                         } else {
                             //Si encara he de fer batalles fer-les
                             Random rand = new Random();
@@ -232,8 +241,8 @@ public class ControllerCompeticio {
                             Thread.sleep(2000);
                             makeBattle(posicio, contrincant, 1, coin);
                             competicio.setBatallaActual(competicio.getBatallaActual() + 1);
-                            info = competicio.simularBatalles(login);
-                            //showrankingnext = true;
+                            //info = competicio.simularBatalles(login);
+                            showrankingnext = true;
                         }
                         break;
                     case 2:
@@ -256,7 +265,14 @@ public class ControllerCompeticio {
                     case 4:
                         //Leave competition
                         //String guanyador = "";
-                        simularCompeticioRestant();
+                        try {
+                            simularCompeticioRestant();
+                        }catch (IndexOutOfBoundsException e){
+                            finalCompeticio = true;
+                            menu.leaveCompetition(competicio.nomGuanyador());
+                            break;
+                        }
+
                         finalCompeticio = true;
                         menu.leaveCompetition(competicio.nomGuanyador());
                         break;
@@ -282,7 +298,7 @@ public class ControllerCompeticio {
         competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
     }
 
-    private void simularCompeticioRestant() throws InterruptedException {
+    private void simularCompeticioRestant() throws IndexOutOfBoundsException{
         do{
             for (int i = competicio.getBatallaActual(); i<2; i++){
                 competicio.simularBatalles("");
