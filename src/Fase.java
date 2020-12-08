@@ -159,8 +159,6 @@ public class Fase {
     }
     public String winner (){
         ordenarRaperos();
-        raperos.remove(1);
-
         return raperos.get(0).getStageName();
     }
 

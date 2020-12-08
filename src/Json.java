@@ -136,7 +136,7 @@ public class Json {
             StringBuilder sb = new StringBuilder();
             sb.append("File ");
             sb.append(fitxerCompeticio);
-            sb.append(" not found, can not load battles\nExiting program");
+            sb.append(" not found, can not load competition\nExiting program");
             System.out.println(sb.toString());
             System.exit(1);
             return null;

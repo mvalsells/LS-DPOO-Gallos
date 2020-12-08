@@ -55,8 +55,7 @@ public class Menu {
                 sb.append("The winner is: ");
                 sb.append(nomGuanyador);
                 System.out.println(sb.toString());
-                System.out.println("Press enter to exit");
-                scanner.nextLine(); //No ser perquè s'han de fer 2 enters
+                pressEnterToContinue();
                 break;
             default:
                 System.out.println("Valor d'estat inesperat!!!!, Espero 0, 1 o 2");
@@ -65,9 +64,9 @@ public class Menu {
 
     public int demanaOpcio() {
         do {
+            System.out.print("\nChoose an option: ");
             String input = scanner.nextLine();
             try {
-                System.out.print("\nChoose an option: ");
                 int opcio = Integer.parseInt(input);
                 return opcio;
             } catch (NumberFormatException e){
@@ -79,7 +78,6 @@ public class Menu {
     public String demanaOpcioString() throws InputMismatchException {
         System.out.print("\nChoose an option: ");
         String opcio = scanner.nextLine();
-        // scanner.nextLine();
         return opcio;
     }
 
@@ -171,7 +169,8 @@ public class Menu {
         sb.append(login);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());
-        enterMainMenu();
+        mostrarLiniaSeparadora();
+        pressEnterToContinue();
     }
 
     //login si registrat
@@ -371,12 +370,12 @@ public class Menu {
         System.out.println(ANSI_RED + (colorVermell.toString())+ANSI_RESET);
 
         mostrarLiniaSeparadora();
-        scanner.nextLine();
+        pressEnterToContinue();
     }
 
     public void createProfile() {
         System.out.println("Yo' bro, you're not ready for this yet");
-        scanner.nextLine();
+        pressEnterToContinue();
     }
 
     public void leaveCompetition(String guanyador) throws InterruptedException {
@@ -388,13 +387,8 @@ public class Menu {
         }
         Thread.sleep(1000);
         System.out.println(guanyador);
-        scanner.nextLine();
-    }
-
-    private void enterMainMenu() {
-        mostrarLiniaSeparadora();
-        System.out.println("Press enter to go back to the main menu");
-        scanner.nextLine();
+        System.out.println();
+        pressEnterToContinue();
     }
 
     // Mètode per a mostrar un missatge per pantalla
@@ -402,7 +396,9 @@ public class Menu {
         System.out.println(s);
     }
 
-    public void clearBufferLine() {
+
+    private void pressEnterToContinue(){
+        System.out.print("Press enter to continue");
         scanner.nextLine();
     }
 }

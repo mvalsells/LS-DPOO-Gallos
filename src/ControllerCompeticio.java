@@ -11,13 +11,13 @@ public class ControllerCompeticio {
     private final Menu menu;              // Menu, interfície gràfica
 
     //Constructor
-    public ControllerCompeticio() throws IOException {
+    public ControllerCompeticio() {
         Json json = new Json("src/competicio.json", "src/batalles.json");
         competicio = json.llegirCompeticio();
         menu = new Menu();
     }
 
-    public boolean validarFecha(String bir) {
+    /*public boolean validarFecha(String bir) {
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             //Date dataok;
@@ -31,7 +31,7 @@ public class ControllerCompeticio {
             return false;
         }
         return true;
-    }
+    }*/
 
 
     public void executaMenu() throws IOException, InterruptedException {
@@ -51,8 +51,12 @@ public class ControllerCompeticio {
                     if (!competicio.haComencat()) {
                         registrarUsuari();
                     } else {
-                        login();
-                        //TODO controlar que hi hagin 0 participiants
+                        if (competicio.getNumParticipants() > 0) {
+                            login();
+                            System.exit(0);
+                        } else {
+                            menu.display("There aren't any users registered so it is not possbile to make login");
+                        }
                     }
                     break;
                 case 2:
@@ -62,10 +66,10 @@ public class ControllerCompeticio {
                     menu.display("Please enter a right option! (1 or 2)");
                     break;
             }
-        } while (opcio != 2 && opcio != 4);
+        } while (true);
     }
 
-    public void registrarUsuari() throws IOException {
+    private void registrarUsuari() throws IOException {
         boolean primercop = true;
         Boolean[] estat;
         ArrayList<String> dadesUsuari = new ArrayList<>();
@@ -109,24 +113,24 @@ public class ControllerCompeticio {
 
     }
 
-    private void login() throws InterruptedException{
+    private void login() throws InterruptedException {
 
         //Login
         //Obtenir nom artistic
         int puntuacioLouser = 0;
         String login = menu.obtenirLogin();
-        String[] info =  new String[4];
+        String[] info = new String[4];
         if (competicio.ferLogin(login)) {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
             boolean showrankingnext = true;
             boolean finalCompeticio = false;
-            String guanyador = new String();
+            String guanyador = "";
             competicio.preFase(login); //PreFase1
             info = competicio.simularBatalles(login);//Simular fase 1 batalla 1
             do {
 
-              /*  try {
+                try {
                     if(showrankingnext && (competicio.getBatallaActual()+1)<3){
                         info = competicio.simularBatalles(login);
                         showrankingnext = false;
@@ -135,7 +139,7 @@ public class ControllerCompeticio {
 
                     finalCompeticio = true;
                     guanyador = competicio.nomGuanyador();
-                }*/
+                }
 
 
                 //Info menu
@@ -145,7 +149,7 @@ public class ControllerCompeticio {
                 String battleType = info[1];
                 String contrincant = info[0];
 
-                int posicio=0;
+                int posicio = 0;
 
                 //TODO funcio per fer que si perd a la final surti que ha perdut
                 /*try {
@@ -156,74 +160,70 @@ public class ControllerCompeticio {
                     perdedor = true;
                 }*/
 
-                if(!finalCompeticio /*|| perdedor*/){
-                try{
-                    posicio = Integer.valueOf(info[3]);
+                if (!finalCompeticio /*|| perdedor*/) {
+                    try {
+                        posicio = Integer.valueOf(info[3]);
+                        do {
+                            //Mostrar info de la batalla
+                            menu.Registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual() + 1, battleType, contrincant);
+
+                            opcio = menu.demanaOpcio();
+
+                            if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
+                                menu.display("Number introduced not corresponding to the menu");
+                            }
+                        } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
+
+                    } catch (NumberFormatException e) {
+
+                        faseActual = faseActual - 1;
+
+                        competicio.setBatallaActual(4);
+
+                        do {
+                            //Mostrar info de la batalla
+                            menu.Registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual() + 1, battleType, contrincant);
+                            opcio = menu.demanaOpcio();
+                            if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
+                                menu.display("Number introduced not corresponding to the menu");
+                            } else if (opcio == 1) {
+                                menu.display("Number introduced is desactivated");
+                            }
+
+                        } while (opcio != 2 && opcio != 3 && opcio != 4);
+
+                    }
+                } else {
+                    faseActual = faseActual - 1;
                     do {
                         //Mostrar info de la batalla
-                        menu.Registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual()+1, battleType, contrincant);
-
+                        menu.Registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador);
                         opcio = menu.demanaOpcio();
 
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                             menu.display("Number introduced not corresponding to the menu");
-                        }
-                    } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
-
-                }catch (NumberFormatException e){
-
-                    faseActual = faseActual-1;
-
-                    competicio.setBatallaActual(4);
-
-                    do {
-                        //Mostrar info de la batalla
-                        menu.Registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual()+1, battleType, contrincant);
-                        opcio = menu.demanaOpcio();
-                        if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                            menu.display("Number introduced not corresponding to the menu");
-                        }
-                        else if (opcio ==1){
+                        } else if (opcio == 1) {
                             menu.display("Number introduced is desactivated");
                         }
 
                     } while (opcio != 2 && opcio != 3 && opcio != 4);
-
                 }
-            }else{
-                faseActual = faseActual-1;
-                do {
-                    //Mostrar info de la batalla
-                    menu.Registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador);
-                    opcio = menu.demanaOpcio();
-
-                    if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                        menu.display("Number introduced not corresponding to the menu");
-                    }
-                    else if (opcio ==1){
-                        menu.display("Number introduced is desactivated");
-                    }
-
-                } while (opcio != 2 && opcio != 3 && opcio != 4);
-            }
 
 
                 int puntuacio = 0;
-
-                //Demanem opció fins que sigui correcte
 
                 //Executem opció
                 switch (opcio) {
                     case 1:
                         //Start the battle
-                        if ((competicio.getBatallaActual()+1)==3){
+                        if ((competicio.getBatallaActual() + 1) == 3) {
                             // Si ja he fet les 2 batalles canvi de fase
-                             puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
+                            puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
                             competicio.preFase(login);
                             info = competicio.simularBatalles(login);
-                        }else{
+                        } else {
                             //Si encara he de fer batalles fer-les
                             Random rand = new Random();
                             int coin = rand.nextInt(2);
@@ -239,23 +239,15 @@ public class ControllerCompeticio {
                     case 2:
                         //Show ranking
                         competicio.ordenarRaperos();
-                        ArrayList<String>nom = new ArrayList<>();
-                        ArrayList<Integer>puntuacions = new ArrayList<>();
+                        ArrayList<String> nom = new ArrayList<>();
+                        ArrayList<Integer> puntuacions = new ArrayList<>();
 
-                        for (int i=0; i<competicio.getNumParticipants(); i++){
+                        for (int i = 0; i < competicio.getNumParticipants(); i++) {
                             nom.add(competicio.nameRapper(i));
                             puntuacions.add((int) competicio.getScoreRappers(i));
                         }
-                        /*
-                        Array -> noms
-                        getPuntuacios rapero
-                        for int i, length raperos/num part{
-                        noms[i] = raper(i)..getnoms
 
-                        noms[]
-                        Arrays -> puntuacio
-                         */
-                        menu.showRanking(nom, puntuacions, login, competicio.getNumFases()-competicio.getFaseActual());
+                        menu.showRanking(nom, puntuacions, login, competicio.getNumFases() - competicio.getFaseActual());
                         break;
                     case 3:
                         //Create profile
@@ -264,29 +256,9 @@ public class ControllerCompeticio {
                     case 4:
                         //Leave competition
                         //String guanyador = "";
-                        while(faseActual<=numFases){
-                            try{
-                                if((competicio.getBatallaActual() + 1)==1){
-                                    info = competicio.simularBatalles(login);
-                                }else{
-                                    for(int i=0; i<2; i++){
-                                        info = competicio.simularBatalles(login);
-                                    }
-                                }
-                            }catch (IndexOutOfBoundsException e){
-                                guanyador = competicio.nomGuanyador();
-                                finalCompeticio = true;
-                                menu.leaveCompetition(guanyador);
-                                break;
-                            }
-
-                            competicio.nextPhase();
-
-                            competicio.preFase(login);
-
-                        }
-                        menu.leaveCompetition(guanyador);
-                        //ok=1;
+                        simularCompeticioRestant();
+                        finalCompeticio = true;
+                        menu.leaveCompetition(competicio.nomGuanyador());
                         break;
                 }
 
@@ -303,25 +275,43 @@ public class ControllerCompeticio {
 
         //Miro si ja he llençat la moneda o no
         boolean monedaLlancada = false;
-        if (temaPos==1){
+        if (temaPos == 1) {
             monedaLlancada = true;
         }
         String estrofaLogin = menu.doBattle(coin, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
         competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
     }
 
-    private void simularCompeticioRestant(){
-        for (int i = competicio.getFaseActual(); i <= competicio.numFases(); i++) {
-            if(competicio.getBatallaActual()==0){
-                for(int j=0; j<2;j++){
-                    competicio.simularBatalles("");
-                }
-            }else if (competicio.getBatallaActual()==1){
-                competicio.getBatallaActual();
-            } else {
-                competicio.nextPhase();
+    private void simularCompeticioRestant() throws InterruptedException {
+        do{
+            for (int i = competicio.getBatallaActual(); i<2; i++){
+                competicio.simularBatalles("");
+                competicio.setBatallaActual(competicio.getBatallaActual() + 1);
+            }
+            competicio.nextPhase();
+            if(competicio.getFaseActual()<= competicio.getNumFases()){
                 competicio.preFase("");
             }
-        }
+                            /*
+                            try {
+                                if ((competicio.getBatallaActual() + 1) == 1) {
+                                    competicio.simularBatalles(login);
+                                    competicio.setBatallaActual(competicio.getBatallaActual() + 1);
+                                } else {
+                                    for (int i = 0; i < 2; i++) {
+                                        competicio.simularBatalles(login);
+                                        competicio.setBatallaActual(competicio.getBatallaActual() + 1);
+                                    }
+                                }
+                            } catch (IndexOutOfBoundsException e) {
+                                guanyador = competicio.nomGuanyador();
+                                finalCompeticio = true;
+                                menu.leaveCompetition(guanyador);
+                                break;
+                            }*/
+
+
+
+        } while (competicio.getFaseActual() <= competicio.getNumFases());
     }
 }

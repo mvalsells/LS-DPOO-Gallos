@@ -6,8 +6,6 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         ControllerCompeticio controllerCompeticio = new ControllerCompeticio();
 
-        controllerCompeticio.demanarOpcion(2);
-
         controllerCompeticio.executaMenu();
         /*Rapero a = new Rapero();
         Rapero b = new Rapero();
