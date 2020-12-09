@@ -32,7 +32,6 @@ public class Competicio {
         this.endDate = endDate;
         this.countries = countries;
         this.phases = phases;
-        //this.raperos = raperos;
         this.data = data;
         faseActual = 1;
 
@@ -109,10 +108,10 @@ public class Competicio {
         if (validarFecha(birth)) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate birthLocalDate = LocalDate.parse(birth, formatter);
-            String birthOK = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            birth = birthLocalDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             LocalDate avui = LocalDate.now();
             //Miro si la data de neixament és posterior a avui
-            if (avui.isBefore(LocalDate.parse(birthOK, DateTimeFormatter.ofPattern("yyyy-MM-dd")))) {
+            if (avui.isBefore(LocalDate.parse(birth, DateTimeFormatter.ofPattern("yyyy-MM-dd")))) {
                 estat[1] = false;
             }
         } else {
@@ -175,19 +174,6 @@ public class Competicio {
     public boolean haAcabat() {
         LocalDate avui = LocalDate.now();
         return avui.isAfter(endDate);
-    }
-
-    @Override
-    public String toString() {
-        return "Competicio{" +
-                "name='" + name + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", countries=" + countries +
-                ", phases=" + phases +
-                ", temes=" + temes +
-                ", json=" + json +
-                '}';
     }
 
     public boolean haComencat() {

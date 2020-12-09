@@ -210,12 +210,15 @@ public class Json {
             tot.add("rappers", jsonRappers);
 
             //String strJson = gson.toJson(tot);
-            //BufferedWriter bw = new BufferedWriter(new FileWriter(fitxerCompeticio));
-            //bw.write(strJson);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fitxerCompeticio));
 
+            String jsonTot = gson.toJson(tot);
+
+            bw.write(jsonTot);
+            bw.close();
        // JsonWriter writer = new JsonWriter(new FileWriter(fitxerCompeticio));
-        FileWriter fw = new FileWriter(fitxerCompeticio);
-        fw.write(tot.toString());
+       // FileWriter fw = new FileWriter(fitxerCompeticio);
+        //fw.write(tot.toString());
 
         /*} catch (IOException e) {
             StringBuilder sb = new StringBuilder();
