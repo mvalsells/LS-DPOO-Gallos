@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -225,7 +223,9 @@ public class ControllerCompeticio {
                             puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
-                            competicio.preFase(login);
+                            if(competicio.getFaseActual()<= competicio.getNumFases()){
+                                competicio.preFase(login);
+                            }
                             try {
                                 info = competicio.simularBatalles(login);
                             }catch (IndexOutOfBoundsException e){
@@ -308,26 +308,6 @@ public class ControllerCompeticio {
             if(competicio.getFaseActual()<= competicio.getNumFases()){
                 competicio.preFase("");
             }
-                            /*
-                            try {
-                                if ((competicio.getBatallaActual() + 1) == 1) {
-                                    competicio.simularBatalles(login);
-                                    competicio.setBatallaActual(competicio.getBatallaActual() + 1);
-                                } else {
-                                    for (int i = 0; i < 2; i++) {
-                                        competicio.simularBatalles(login);
-                                        competicio.setBatallaActual(competicio.getBatallaActual() + 1);
-                                    }
-                                }
-                            } catch (IndexOutOfBoundsException e) {
-                                guanyador = competicio.nomGuanyador();
-                                finalCompeticio = true;
-                                menu.leaveCompetition(guanyador);
-                                break;
-                            }*/
-
-
-
         } while (competicio.getFaseActual() <= competicio.getNumFases());
     }
 }
