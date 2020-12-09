@@ -1,12 +1,9 @@
-import com.google.gson.JsonObject;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class Competicio {
@@ -17,18 +14,16 @@ public class Competicio {
     private final LocalDate endDate;
     private final ArrayList<String> countries;
     private final ArrayList<Fase> phases;
-    private final JsonObject data;
     private final Json json;
     private int faseActual;
 
     //Constructor
-    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases, ArrayList<Rapero> raperos, JsonObject data) throws FileNotFoundException {
+    public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.countries = countries;
         this.phases = phases;
-        this.data = data;
         faseActual = 1;
         json = new Json("src/competicio.json", "src/batalles.json");
 
@@ -88,11 +83,9 @@ public class Competicio {
     }
 
     //Metodes
-    public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
+    public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) {
         Boolean[] estat = new Boolean[4];
-        for (int i = 0; i < estat.length; i++) {
-            estat[i] = true;
-        }
+        Arrays.fill(estat, true);
 
         //Comprovo si ja hi ha el rappero
         for (int i = 0; i < Fase.getNumParticipants(); i++) {
@@ -136,12 +129,9 @@ public class Competicio {
 
         if (estat[3]) {
             //Creo rapero i el poso al arrayList
-            // TODO mirar puntuacio
-            Fase.afegirRapero(realName, stageName, birth, nationality, level, photo, puntuacio);
+            Fase.afegirRapero(realName, stageName, birth, nationality, level, photo);
 
             //Afegir el rapero al JSON
-            //TODO Reescriure el JSON
-
             json.escriureRapero(realName, stageName, birth, nationality, level, photo);
         }
 

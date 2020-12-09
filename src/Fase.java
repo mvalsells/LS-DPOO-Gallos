@@ -5,25 +5,25 @@ import java.util.Random;
 
 public class Fase {
     private static ArrayList<Rapero> raperos;
-    //Atributs
-    private final Pais pais;
-    private final float budget;
-    private ArrayList<Batalla> batalles;
+    private final ArrayList<Batalla> batalles;
     private int batallaActual;
+    private Pais pais;
+    private float budget;
 
 
-    public Fase(float budget, Pais pais) {
-        this.budget = budget;
-        this.pais = pais;
+    public Fase(Pais pais, float budget) {
         raperos = new ArrayList<>();
         batalles = new ArrayList<>();
         batallaActual = 0;
     }
 
+    //Getter and setters
+
+
     //Metodes
     public static void ordenarRaperos() {
         Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) (r1.comparePuntuacio(r2) * 1000000);
-        Collections.sort(raperos, compararPuntuacio.reversed());
+        raperos.sort(compararPuntuacio.reversed());
     }
 
     public static String getNameRapper(int i) {
@@ -44,8 +44,8 @@ public class Fase {
         return raperos.get(pos).getStageName();
     }
 
-    public static void afegirRapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
-        Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
+    public static void afegirRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
+        Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo);
         raperos.add(rapero);
     }
 
@@ -64,16 +64,8 @@ public class Fase {
 
     //Getters and setters
 
-    public void setRapperos(ArrayList<Rapero> raperos) {
+    public static void setRapperos(ArrayList<Rapero> raperos) {
         Fase.raperos = raperos;
-    }
-
-    public ArrayList<Batalla> getBatalles() {
-        return batalles;
-    }
-
-    public void setBatalles(ArrayList<Batalla> batalles) {
-        this.batalles = batalles;
     }
 
     public void participantsParells(String login) {
@@ -95,15 +87,7 @@ public class Fase {
         this.batallaActual = batallaActual;
     }
 
-    public ArrayList<Rapero> getRaperos() {
-        return raperos;
-    }
-
     //Metodes
-
-    public void setRaperos(ArrayList<Rapero> raperos) {
-        Fase.raperos = raperos;
-    }
 
     //Getters and setters de raperos
     public double getPuntuacioRapero(String login) {
@@ -119,8 +103,6 @@ public class Fase {
 
     public void preFase1(String login) {
         participantsParells(login);
-        // String[] info = simularBatalles(login);
-        //return info;
         /*Array
         [0] -> Nom contrincant
         [1] -> Tipus de batalls
@@ -142,14 +124,12 @@ public class Fase {
         for (Rapero rapero : raperos) {
             rapero.setPuntuacio(0);
         }
-        //String[] info = simularBatalles(login);
-        //return info;
     }
 
     public void preFase3() {
         ordenarRaperos();
-        for (int i = raperos.size() - 1; i > 1; i--) {
-            raperos.remove(i);
+        if (raperos.size() > 2) {
+            raperos.subList(2, raperos.size()).clear();
         }
         for (Rapero rapero : raperos) {
             rapero.setPuntuacio(0);

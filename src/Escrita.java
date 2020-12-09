@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 public class Escrita extends Batalla{
     public Escrita(Rapero rapero1, Rapero rapero2) {
         super(rapero1, rapero2);

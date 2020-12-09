@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,24 +14,8 @@ public class ControllerCompeticio {
         menu = new Menu();
     }
 
-    /*public boolean validarFecha(String bir) {
-        try {
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            //Date dataok;
-            formatoFecha.setLenient(false);
-            formatoFecha.parse(bir);
-            if (bir.length() != 10) {
-                return false;
-            }
 
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
-    }*/
-
-
-    public void executaMenu() throws IOException, InterruptedException {
+    public void executaMenu() throws InterruptedException {
         int opcio;
         do {
             //mostra menu i demana opcio
@@ -71,7 +54,7 @@ public class ControllerCompeticio {
         } while (true);
     }
 
-    private void registrarUsuari() throws IOException {
+    private void registrarUsuari() {
         boolean primercop = true;
         Boolean[] estat;
         ArrayList<String> dadesUsuari = new ArrayList<>();
@@ -96,7 +79,7 @@ public class ControllerCompeticio {
             float puntuacio = 0;
 
             //Creo el usuari
-            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo, puntuacio);
+            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
             //Mostro si s'ha creat o hi han errors
             menu.resultatRegistre(estat);
 
@@ -121,7 +104,7 @@ public class ControllerCompeticio {
         //Obtenir nom artistic
         int puntuacioLouser = 0;
         String login = menu.obtenirLogin();
-        String[] info = new String[4];
+        String[] info;
         if (competicio.ferLogin(login)) {
             //Anem fent el menu fins que no tinguem opció 4
             int opcio;
@@ -155,9 +138,7 @@ public class ControllerCompeticio {
 
                 boolean perdedor = false;
                 try {
-                    if(competicio.nomGuanyador().equals(login)){
-                       perdedor = false;
-                    }
+                    competicio.nomGuanyador().equals(login);
                 }catch (IndexOutOfBoundsException e){
                     perdedor = true;
                 }
@@ -210,9 +191,6 @@ public class ControllerCompeticio {
 
                     } while (opcio != 2 && opcio != 3 && opcio != 4);
                 }
-
-
-                int puntuacio = 0;
 
                 //Executem opció
                 switch (opcio) {

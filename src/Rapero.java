@@ -1,27 +1,23 @@
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class Rapero {
 
     //Atributs
     private String realName;
     private String stageName;
     private String  birth;
-    private String nationality;
+    private Pais nationality;
     private int level;
     private String photo;
     private double puntuacio;
 
     //Constructor
-    public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
+    public Rapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
         this.realName = realName;
         this.stageName = stageName;
         this.birth = birth;
-        this.nationality = nationality;
+        this.nationality = new Pais(nationality);
         this.level = level;
         this.photo = photo;
-        this.puntuacio = puntuacio;
+        puntuacio = 0.0f;
     }
     //Getters and Setters
     public String getStageName() {

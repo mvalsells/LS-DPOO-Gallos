@@ -6,6 +6,7 @@ public class Pais {
     private int habitants;
     private String regio;
     private URL bandera;
+    private Llengua llengua;
 
 
     //Constructor

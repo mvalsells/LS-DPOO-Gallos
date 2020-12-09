@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -66,7 +65,7 @@ public class Menu {
         do {
             System.out.print("\nChoose an option: ");
             String input = scanner.nextLine();
-            int opcio = 0;
+            int opcio;
             try {
                  opcio = Integer.parseInt(input);
 
@@ -75,12 +74,6 @@ public class Menu {
             }
             return opcio;
         } while (true);
-    }
-
-    public String demanaOpcioString() throws InputMismatchException {
-        System.out.print("\nChoose an option: ");
-        String opcio = scanner.nextLine();
-        return opcio;
     }
 
     public ArrayList<String> demanaInfoUser() {
@@ -177,11 +170,6 @@ public class Menu {
 
     //login si registrat
     public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
-        /*StringBuilder sb = new StringBuilder();
-        sb.append("Yo' bro, there's no \"");
-        sb.append(fase);
-        sb.append("\" in ma' list.");
-        System.out.println(sb.toString());*/
         if(numBattle!=5 && numBattle !=6){
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();

@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -6,9 +5,9 @@ import java.util.Set;
 
 public abstract class Batalla {
     //Atributs
-    private Rapero[] raperos = new Rapero[2];
-    private Tema[] tema = new Tema[2];
-    private Json json = new Json("src/competicio.json", "src/batalles.json");
+    private final Rapero[] raperos = new Rapero[2];
+    private final Tema[] temas = new Tema[2];
+    private final Json json = new Json("src/competicio.json", "src/batalles.json");
 
 
     //Constructor
@@ -17,28 +16,28 @@ public abstract class Batalla {
         this.raperos[1] = rapero2;
         ArrayList<Tema> temes = json.llegirTema();
         Collections.shuffle(temes);
-        tema[0] = temes.get(0);
-        tema[1] = temes.get(1);
+        temas[0] = temes.get(0);
+        temas[1] = temes.get(1);
     }
 
     public abstract double puntuacio(int numRimes);
 
     public void simularBatalla() {
         //Per cada tema
-        for (int i = 0; i < tema.length; i++) {
+        for (Tema tema : temas) {
 
             int posicioNivell1 = 0;
             int posicioNivell2 = 0;
 
             //Per cada rapero
-            for (int j = 0; j < raperos.length; j++) {
+            for (Rapero rapero : raperos) {
 
                 //Obtenim el nivell del rapero
-                int nivellRapero = raperos[j].getLevel();
-                double puntuacio = 0;
+                int nivellRapero = rapero.getLevel();
+                double puntuacio;
 
                 //Obtenim la estrofa
-                String estrofa = eleccioEstrofa(nivellRapero, tema[i], posicioNivell1, posicioNivell2);
+                String estrofa = eleccioEstrofa(nivellRapero, tema, posicioNivell1, posicioNivell2);
                 if (estrofa.length() == 0) {
                     //Si la estrofa és buida, el rapero fa el ridicul i s'acaba la batalla
                     break;
@@ -51,14 +50,14 @@ public abstract class Batalla {
                     }
 
                     //Calculem les rimes i la puntuació
-                        int rimes = numRimes(estrofa);
-                        puntuacio = puntuacio(rimes);
+                    int rimes = numRimes(estrofa);
+                    puntuacio = puntuacio(rimes);
 
 
                 }
 
                 //Actualitzem la puntuació
-                raperos[j].setPuntuacio(raperos[j].getPuntuacio() + puntuacio);
+                rapero.setPuntuacio(rapero.getPuntuacio() + puntuacio);
             }
         }
     }
@@ -118,7 +117,7 @@ public abstract class Batalla {
                 String ultimesLletres = linia.substring(linia.length() - 2);
                 finalsLinies.add(ultimesLletres);
             }catch (StringIndexOutOfBoundsException e){
-
+                return 0;
             }
 
         }
@@ -147,13 +146,13 @@ public abstract class Batalla {
         ArrayList<String> info = new ArrayList<>();
         ArrayList<String> estrofes;
         //Primera posició el tema
-        info.add(tema[temaPos].getNom());
+        info.add(temas[temaPos].getNom());
 
         //Agafos les estrofes del segon rapero i el seu nivell
         if (raperos[1].getLevel() == 1) {
-            estrofes = tema[temaPos].getEstrofesN1();
+            estrofes = temas[temaPos].getEstrofesN1();
         } else {
-            estrofes = tema[temaPos].getEstrofesN2();
+            estrofes = temas[temaPos].getEstrofesN2();
         }
 
         if (estrofes.size() == 0) {

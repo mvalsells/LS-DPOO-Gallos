@@ -1,5 +1,4 @@
 import com.google.gson.*;
-import com.google.gson.stream.JsonWriter;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -9,8 +8,8 @@ import java.util.ArrayList;
 public class Json {
 
     //Atributs
-    private String fitxerCompeticio;
-    private String fitxerBatalla;
+    private final String fitxerCompeticio;
+    private final String fitxerBatalla;
 
     //Constructor
     public Json(String fitxerCompeticio, String fitxerBatalla) {
@@ -53,14 +52,12 @@ public class Json {
                 float budget;
                 String strPais;
                 JsonObject jsonPhase;
-                StringBuilder sb;
-                sb = new StringBuilder();
                 jsonPhase = jsonElement.getAsJsonObject();
 
                 budget = jsonPhase.get("budget").getAsFloat();
                 strPais = jsonPhase.get("country").getAsString();
                 Pais pais = new Pais(strPais);
-                Fase fase = new Fase(budget, pais);
+                Fase fase = new Fase(pais, budget);
                 phases.add(fase);
             }
 
@@ -80,12 +77,10 @@ public class Json {
                 //Atributs
                 String realName;
                 String stageName;
-                String strBirth;
                 String birth;
                 String nationality;
                 int level;
                 String photo;
-                float puntuacio = 0;
 
                 //Executar
                 JsonObject jsonRappers = jsonElement.getAsJsonObject();
@@ -98,23 +93,16 @@ public class Json {
 
 
                 //guardar arraylist raperos
-                Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
+                Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo);
                 raperos.add(rapero);
 
                 //Registrar rapero, si el nom artístic ja existeix és mostra un error
-            /*if (!competicio.registraUsuari(realName, stageName, birth, nationality, level, photo)){
-                //Mirar com tractar correctament aquest error, aixo va a rapero no aqui
-                System.out.println("ERROR: Ja existeix usuari amb aquest nom artístic");
-            }*/
             }
 
-            //TODO posar static a fases
-            for (Fase fase : phases) {
-                fase.setRapperos(raperos);
-            }
+            Fase.setRapperos(raperos);
 
             //Creació d'una competició amb les dades llegides
-            competicio = new Competicio(name, startDate, endDate, countries, phases, raperos, data);
+            competicio = new Competicio(name, startDate, endDate, countries, phases);
 
             return competicio;
         }catch (FileNotFoundException e){
@@ -179,7 +167,7 @@ public class Json {
         }
     }
 
-    public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
+    public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
 
 
 
@@ -187,7 +175,7 @@ public class Json {
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
 
-       // try {
+       try {
             Reader read = new FileReader(fitxerCompeticio);
             JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
             JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
@@ -216,19 +204,15 @@ public class Json {
 
             bw.write(jsonTot);
             bw.close();
-       // JsonWriter writer = new JsonWriter(new FileWriter(fitxerCompeticio));
-       // FileWriter fw = new FileWriter(fitxerCompeticio);
-        //fw.write(tot.toString());
 
-        /*} catch (IOException e) {
+        } catch (IOException e) {
             StringBuilder sb = new StringBuilder();
             sb.append("Error while processing ");
             sb.append(fitxerCompeticio);
             sb.append("\nExiting program");
             System.out.println(sb.toString());
-            System.out.println(e.getCause());
             System.exit(1);
-        }*/
+        }
 
     }
 }

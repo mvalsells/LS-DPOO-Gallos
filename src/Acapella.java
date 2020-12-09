@@ -1,7 +1,3 @@
-import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.Collections;
-
 public class Acapella extends Batalla{
 
     public Acapella(Rapero rapero1, Rapero rapero2) {
