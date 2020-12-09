@@ -78,6 +78,18 @@ public class Competicio {
     }
 
     //Metodes
+
+    /**
+     *
+     * @param realName
+     * @param stageName
+     * @param birth
+     * @param nationality
+     * @param level
+     * @param photo
+     * @param puntuacio
+     * @return
+     */
     public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) throws IOException {
         Boolean[] estat = new Boolean[4];
         for (int i = 0; i < estat.length; i++) {
@@ -126,12 +138,13 @@ public class Competicio {
 
         if (estat[3]) {
             //Creo rapero i el poso al arrayList
+            // TODO mirar puntuacio
             Fase.afegirRapero(realName, stageName, birth, nationality, level, photo, puntuacio);
 
             //Afegir el rapero al JSON
             //TODO Reescriure el JSON
 
-            //json.escriureRapero(countries, raperos);
+            json.escriureRapero(realName, stageName, birth, nationality, level, photo);
         }
 
         return estat;

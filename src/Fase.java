@@ -1,12 +1,14 @@
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Random;
 
 public class Fase {
-    //Atributs
-    private Pais pais;
-    private float budget;
-    private ArrayList<Batalla> batalles;
     private static ArrayList<Rapero> raperos;
+    //Atributs
+    private final Pais pais;
+    private final float budget;
+    private ArrayList<Batalla> batalles;
     private int batallaActual;
 
 
@@ -15,94 +17,34 @@ public class Fase {
         this.pais = pais;
         raperos = new ArrayList<>();
         batalles = new ArrayList<>();
-        batallaActual=0;
+        batallaActual = 0;
     }
-
-    public void setRapperos(ArrayList<Rapero> raperos) {
-        this.raperos = raperos;
-    }
-
-    public ArrayList<Batalla> getBatalles() {
-        return batalles;
-    }
-
-    public void setBatalles(ArrayList<Batalla> batalles) {
-        this.batalles = batalles;
-    }
-
-
-
 
     //Metodes
-    public static void ordenarRaperos(){
-        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) (r1.comparePuntuacio(r2)*1000000);
+    public static void ordenarRaperos() {
+        Comparator<Rapero> compararPuntuacio = (Rapero r1, Rapero r2) -> (int) (r1.comparePuntuacio(r2) * 1000000);
         Collections.sort(raperos, compararPuntuacio.reversed());
     }
 
-
-    public void participantsParells(String login) {
-        if (raperos.size() % 2 != 0) {
-            Random rand = new Random();
-            int posRandom=rand.nextInt(raperos.size()-1);
-            while (raperos.get(posRandom).getStageName().equals(login)) {
-                posRandom=rand.nextInt(raperos.size()-1);
-            }
-            raperos.remove(posRandom);
-        }
-    }
-
-    public static String getNameRapper(int i){
+    public static String getNameRapper(int i) {
         return raperos.get(i).getStageName();
 
     }
-    public static double getScoreRappers(int i){
+
+    public static double getScoreRappers(int i) {
         return raperos.get(i).getPuntuacio();
 
     }
 
-    
-    
-    //Getters and setters
-
-
-    public int getBatallaActual(){
-        return batallaActual;
-    }
-
-    public void setBatallaActual(int batallaActual) {
-        this.batallaActual = batallaActual;
-    }
-
-    public ArrayList<Rapero> getRaperos() {
-        return raperos;
-    }
-    public void setRaperos(ArrayList<Rapero> raperos){
-        this.raperos=raperos;
-    }
-
-    public static int getNumParticipants(){
+    public static int getNumParticipants() {
         return raperos.size();
     }
 
-    //Getters and setters de raperos
-    public double getPuntuacioRapero(String login){
-        int pos=-1;
-        for (int i=0; i<raperos.size(); i++){
-           if (raperos.get(i).getStageName().equals(login)){
-               pos = i;
-               break;
-           }
-        }
-        return raperos.get(pos).getPuntuacio();
-    }
-
-    public static String getStageNameRapero(int pos){
+    public static String getStageNameRapero(int pos) {
         return raperos.get(pos).getStageName();
     }
 
-    //Metodes
-
-    public static void afegirRapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio){
+    public static void afegirRapero(String realName, String stageName, String birth, String nationality, int level, String photo, float puntuacio) {
         Rapero rapero = new Rapero(realName, stageName, birth, nationality, level, photo, puntuacio);
         raperos.add(rapero);
     }
@@ -117,6 +59,62 @@ public class Fase {
             }
         }
         return existex;
+    }
+
+
+    //Getters and setters
+
+    public void setRapperos(ArrayList<Rapero> raperos) {
+        Fase.raperos = raperos;
+    }
+
+    public ArrayList<Batalla> getBatalles() {
+        return batalles;
+    }
+
+    public void setBatalles(ArrayList<Batalla> batalles) {
+        this.batalles = batalles;
+    }
+
+    public void participantsParells(String login) {
+        if (raperos.size() % 2 != 0) {
+            Random rand = new Random();
+            int posRandom = rand.nextInt(raperos.size() - 1);
+            while (raperos.get(posRandom).getStageName().equals(login)) {
+                posRandom = rand.nextInt(raperos.size() - 1);
+            }
+            raperos.remove(posRandom);
+        }
+    }
+
+    public int getBatallaActual() {
+        return batallaActual;
+    }
+
+    public void setBatallaActual(int batallaActual) {
+        this.batallaActual = batallaActual;
+    }
+
+    public ArrayList<Rapero> getRaperos() {
+        return raperos;
+    }
+
+    //Metodes
+
+    public void setRaperos(ArrayList<Rapero> raperos) {
+        Fase.raperos = raperos;
+    }
+
+    //Getters and setters de raperos
+    public double getPuntuacioRapero(String login) {
+        int pos = -1;
+        for (int i = 0; i < raperos.size(); i++) {
+            if (raperos.get(i).getStageName().equals(login)) {
+                pos = i;
+                break;
+            }
+        }
+        return raperos.get(pos).getPuntuacio();
     }
 
     public void preFase1(String login) {
@@ -135,10 +133,10 @@ public class Fase {
         participantsParells(login);
         ordenarRaperos();
         //Eliminar la meitat dels participants
-        int pos=raperos.size();
-        int originalSize= raperos.size();
-        while (pos>=(originalSize/2)){
-            raperos.remove(pos-1);
+        int pos = raperos.size();
+        int originalSize = raperos.size();
+        while (pos >= (originalSize / 2)) {
+            raperos.remove(pos - 1);
             pos--;
         }
         for (Rapero rapero : raperos) {
@@ -150,14 +148,15 @@ public class Fase {
 
     public void preFase3() {
         ordenarRaperos();
-        for (int i = raperos.size()-1; i > 1 ; i--) {
+        for (int i = raperos.size() - 1; i > 1; i--) {
             raperos.remove(i);
         }
         for (Rapero rapero : raperos) {
             rapero.setPuntuacio(0);
         }
     }
-    public String winner (){
+
+    public String winner() {
         ordenarRaperos();
         return raperos.get(0).getStageName();
     }
@@ -168,13 +167,13 @@ public class Fase {
         for (int i = 0; i < raperos.size(); i = i + 2) {
             Batalla batalla;
             Random rand = new Random();
-            int posR1=i;
-            int posR2=i+1;
+            int posR1 = i;
+            int posR2 = i + 1;
 
             //Si el que ha fet login està a la segona posició el canvio i el poso a la primera
-            if(raperos.get(i + 1).getStageName().equals(login)) {
-                posR1=i+1;
-                posR2=i;
+            if (raperos.get(i + 1).getStageName().equals(login)) {
+                posR1 = i + 1;
+                posR2 = i;
             }
 
             //Crear batalla
@@ -196,7 +195,7 @@ public class Fase {
             //Si hi ha el rapero login guardo info
             if (raperos.get(i).getStageName().equals(login)) {
                 //Nom del contrincant
-                info[0] = raperos.get(i+1).getStageName();
+                info[0] = raperos.get(i + 1).getStageName();
                 //Puntuacio del login
                 info[2] = Double.toString(raperos.get(i).getPuntuacio());
                 //Com que encara no he afegit la batalla al arraylist, la mida dle arraylist serà la posició de la nova batalla
@@ -205,7 +204,7 @@ public class Fase {
                 //Nom del contrincant
                 info[0] = raperos.get(i).getStageName();
                 //Puntuacio del login
-                info[2] = Double.toString(raperos.get(i+1).getPuntuacio());
+                info[2] = Double.toString(raperos.get(i + 1).getPuntuacio());
                 //Com que encara no he afegit la batalla al arraylist, la mida dle arraylist serà la posició de la nova batalla
                 info[3] = Integer.toString(batalles.size());
             } else {

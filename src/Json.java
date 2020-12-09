@@ -4,8 +4,6 @@ import com.google.gson.stream.JsonWriter;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Json {
@@ -22,16 +20,6 @@ public class Json {
 
     //Mètodes
 
-    private JsonObject competicioJsonObject(JsonObject data) {
-        JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
-        return jsonCompeticio;
-    }
-
-    private JsonObject llegirData() throws FileNotFoundException {
-        Reader read = new FileReader(fitxerCompeticio);
-        JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
-        return data;
-    }
 
     public Competicio llegirCompeticio() {
         try {
@@ -44,17 +32,13 @@ public class Json {
             ArrayList<Fase> phases = new ArrayList<>();
 
             //Atributs llegir JSON
-            //Reader read = new FileReader(fitxerCompeticio);
-            JsonObject data;
-            JsonObject jsonCompeticio;
             String strDate;
             JsonArray array;
 
             //Execució
-            //data = JsonParser.parseReader(read).getAsJsonObject();
-            data = llegirData();
-            //jsonCompeticio = data.get("competition").getAsJsonObject();
-            jsonCompeticio = competicioJsonObject(data);
+            Reader read = new FileReader(fitxerCompeticio);
+            JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
+            JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
             name = jsonCompeticio.get("name").getAsString();
 
             //Llegir dades competició
@@ -124,6 +108,7 @@ public class Json {
             }*/
             }
 
+            //TODO posar static a fases
             for (Fase fase : phases) {
                 fase.setRapperos(raperos);
             }
@@ -194,47 +179,53 @@ public class Json {
         }
     }
 
-    public void escriureRapero(ArrayList<String> countries, ArrayList<Rapero> raperos) throws IOException {
+    public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) throws IOException {
 
-        JsonObject data = llegirData();
-        JsonObject jsonCompeticio = competicioJsonObject(data);
+
 
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
-/*
-        JsonWriter jsonWriter = gson.newJsonWriter(fitxerCompeticio);
 
+       // try {
+            Reader read = new FileReader(fitxerCompeticio);
+            JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
+            JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
+            JsonArray jsonCountries = data.get("countries").getAsJsonArray();
+            JsonArray jsonRappers = data.get("rappers").getAsJsonArray();
 
-        jsonWriter.name("competition");
-        jsonWriter.beginObject();
-        jsonWriter.name("name");
-        jsonWriter.value();*/
+            JsonObject aRapper = new JsonObject();
+            aRapper.addProperty("realName", realName);
+            aRapper.addProperty("stageName", stageName);
+            aRapper.addProperty("birth", birth);
+            aRapper.addProperty("nationality", nationality);
+            aRapper.addProperty("level", level);
+            aRapper.addProperty("photo", photo);
 
-        JsonObject tot = new JsonObject();
-        tot.add("competition", jsonCompeticio);
-        tot.add("countries", gson.toJsonTree(countries));
-        tot.add("rappers", gson.toJsonTree(raperos));
+            jsonRappers.add(aRapper);
 
-        String json = gson.toJson(tot);
+            JsonObject tot = new JsonObject();
+            tot.add("competition", jsonCompeticio);
+            tot.add("countries", jsonCountries);
+            tot.add("rappers", jsonRappers);
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/competicio.json"))) {
-            bw.write(json);
-        } catch (IOException ex) {
-            Logger.getLogger(Json.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            //String strJson = gson.toJson(tot);
+            //BufferedWriter bw = new BufferedWriter(new FileWriter(fitxerCompeticio));
+            //bw.write(strJson);
+
+       // JsonWriter writer = new JsonWriter(new FileWriter(fitxerCompeticio));
+        FileWriter fw = new FileWriter(fitxerCompeticio);
+        fw.write(tot.toString());
+
+        /*} catch (IOException e) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("Error while processing ");
+            sb.append(fitxerCompeticio);
+            sb.append("\nExiting program");
+            System.out.println(sb.toString());
+            System.out.println(e.getCause());
+            System.exit(1);
+        }*/
+
     }
-/*
-    0- Dades inici
-            1, 2, 3 -> Guardar dades
-    
-    1- Llegir info Competicio;
-    2- Llegir countries
-    3- Llegir raperos;
-
-    Guardar raperos
-            1, 2, 3, + info rapero a afegir*/
-
-    //TODO Try and Catch file not found
-
 }
