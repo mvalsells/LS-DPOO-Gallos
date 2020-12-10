@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -12,10 +11,10 @@ import java.util.Scanner;
  */
 public class Menu {
 
-    //Campos de la clase
-    private final Scanner scanner; // agafem dades menu
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
+    //Campos de la clase
+    private final Scanner scanner; // agafem dades menu
 
     /**
      * Constructor del menu
@@ -28,13 +27,14 @@ public class Menu {
      * Método que nos permite mostrar la información de la competición, si ha empezado o ha acbado o que dia empieza. Tambien,
      * nos indica, si ha acbado, el nombre del ganado. Por otro lado, nos muestra las diferentes opciones a elegir, ya sea registrarse,
      * login o leave competition.
-     * @param name define el nombre de la competición.
-     * @param startDate define la fecha inicial de la competición.
-     * @param endDate define la fecha final de la competición.
-     * @param numFases define el número de fases de la competición.
+     *
+     * @param name            define el nombre de la competición.
+     * @param startDate       define la fecha inicial de la competición.
+     * @param endDate         define la fecha final de la competición.
+     * @param numFases        define el número de fases de la competición.
      * @param numParticipants define el número de participantes que actualmente hay en la competición.
-     * @param nomGuanyador indica el nombre del ganador si la competición ha finalizado.
-     * @param estat nos indica en que estado se encuentra la competición ya sea por empezar, empezada o finalizada.
+     * @param nomGuanyador    indica el nombre del ganador si la competición ha finalizado.
+     * @param estat           nos indica en que estado se encuentra la competición ya sea por empezar, empezada o finalizada.
      */
 
     public void welcome(String name, String startDate, String endDate, int numFases, int numParticipants, String nomGuanyador, int estat) {
@@ -92,6 +92,7 @@ public class Menu {
 
     /**
      * Método que pide por pantalla una opción a escoger y debuelve la opción.
+     *
      * @return El número de la opción que el usuario ha escrito por pantalla.
      */
 
@@ -103,7 +104,7 @@ public class Menu {
             try {
                 opcio = Integer.parseInt(input);
 
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 opcio = 5;
             }
             return opcio;
@@ -112,6 +113,7 @@ public class Menu {
 
     /**
      * Método que sirve al momento de registrar el usuario, para que él pueda poner sus datos.
+     *
      * @return El array donde figura toda su documentación para la competición.
      */
 
@@ -136,6 +138,7 @@ public class Menu {
     /**
      * Método que se ejecuta si la información intriducida por el usuario es incorrecta, de esa manera el participante solo habrá que
      * reescribir la información incorrecta, la correcta ya se mostrará por pantalla.
+     *
      * @param userData Array on conte la informació del usuari, si un String es null vol dir que s'ha de tornar a escriure la infomració.
      * @return El array ja modificat del usauri.
      */
@@ -145,7 +148,7 @@ public class Menu {
         System.out.print("- Full name: ");
         System.out.println(userData.get(0));
 
-        if (userData.get(1)==null) {
+        if (userData.get(1) == null) {
             System.err.print("- Artistic name: ");
             userData.set(1, scanner.nextLine());
         } else {
@@ -153,7 +156,7 @@ public class Menu {
             System.out.println(userData.get(1));
         }
 
-        if (userData.get(2)==null) {
+        if (userData.get(2) == null) {
             System.err.print("- Birth date (dd/MM/YYYY): ");
             userData.set(2, scanner.nextLine());
         } else {
@@ -163,7 +166,7 @@ public class Menu {
         System.out.print("- Country: ");
         System.out.println(userData.get(3));
 
-        if (userData.get(4)==null) {
+        if (userData.get(4) == null) {
             System.err.print("- Level: ");
             userData.set(4, scanner.nextLine());
         } else {
@@ -171,7 +174,7 @@ public class Menu {
             System.out.println(userData.get(4));
         }
 
-        if (userData.get(5)==null) {
+        if (userData.get(5) == null) {
             System.err.print("- Photo URL: ");
             userData.set(5, scanner.nextLine());
         } else {
@@ -183,10 +186,11 @@ public class Menu {
 
     /**
      * Método que nos indica si el usuario se ha registrado correctamente o por lo contrario que errores hemos cometido al inscribirnos.
+     *
      * @param estat El parámetro estat nos sirve para poder identificar el error cometido.
      */
 
-    public void resultatRegistre(Boolean [] estat) {
+    public void resultatRegistre(Boolean[] estat) {
 
         /* Llegenda
         estat[0] -> Nom artístic OK/NO OK
@@ -213,6 +217,7 @@ public class Menu {
 
     /**
      * Método para obtención del aristic name del usuario.
+     *
      * @return El nombre introducido por pantalla.
      */
     public String obtenirLogin() {
@@ -222,6 +227,7 @@ public class Menu {
 
     /**
      * Método que nos muestra por pantalla una frase indicandonos que el usuario no esta en la lista de participantes.
+     *
      * @param login El parámetro login corresponde al nombre artístico del usuario.
      */
     public void noRegistrat(String login) {
@@ -236,13 +242,14 @@ public class Menu {
 
     /**
      * Método que nos muestra la tanto la información de la fase actual, al igual que sus respectivas opciones, como la información de si hemos ganado o perdido.
-     * @param totalFase El parámetro totalFase indica el número total de fases.
-     * @param fase El parámetro fase indica la fase actual en la que nos encontramos.
-     * @param score El parámetro score indica la puntuación actual que tiene el usuario.
-     * @param numBattle El parámetro numBattle indica el número de batallas que en el que nos encotnramos.
+     *
+     * @param totalFase  El parámetro totalFase indica el número total de fases.
+     * @param fase       El parámetro fase indica la fase actual en la que nos encontramos.
+     * @param score      El parámetro score indica la puntuación actual que tiene el usuario.
+     * @param numBattle  El parámetro numBattle indica el número de batallas que en el que nos encotnramos.
      * @param battleType El parámetro battleType indica el tipo de batalla que realizaremos.
-     * @param rival El parámetro rival nos muestra nuestro siguiente oponente.
-     * @param perdedor El parámetro perdedor, nos sirve para poder identificar si el usuario ha perdido o no en la fase final.
+     * @param rival      El parámetro rival nos muestra nuestro siguiente oponente.
+     * @param perdedor   El parámetro perdedor, nos sirve para poder identificar si el usuario ha perdido o no en la fase final.
      */
 
     public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
@@ -251,7 +258,7 @@ public class Menu {
         sb.append(fase);
         sb.append("\" in ma' list.");
         System.out.println(sb.toString());*/
-        if(numBattle!=5 && numBattle !=6){
+        if (numBattle != 5 && numBattle != 6) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("Phases: ");
@@ -260,7 +267,7 @@ public class Menu {
             sb.append(totalFase);
             sb.append(" | Score:");
             sb.append(score);
-            if (!(numBattle==3)) {
+            if (!(numBattle == 3)) {
                 sb.append(" | Battle ");
                 sb.append(numBattle);
                 sb.append("/2:");
@@ -273,12 +280,12 @@ public class Menu {
 
             System.out.println(sb.toString());
             mostrarLiniaSeparadora();
-            if (!(numBattle==3)) {
+            if (!(numBattle == 3)) {
                 System.out.println("1. Start the battle ");
             } else {
                 System.out.println("1. Go to the next phase");
             }
-        }else if(numBattle != 6){
+        } else if (numBattle != 6) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("Phases: ");
@@ -292,7 +299,7 @@ public class Menu {
             mostrarLiniaSeparadora();
 
             System.out.println("1. Go to the next phase   (desactivated)");
-        }else if(!perdedor){
+        } else if (!perdedor) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("END");
@@ -303,7 +310,7 @@ public class Menu {
             mostrarLiniaSeparadora();
 
             System.out.println("1. Go to the next phase   (desactivated)");
-        }else {
+        } else {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("END");
@@ -333,10 +340,11 @@ public class Menu {
     /**
      * Método que se usa al momento en el que el usuario hace una batalla, aquí se motrará tanto quien empieza el combate, las frases del adversario, y los versos
      * escritos por pantalla del usuario.
-     * @param coin El parámetro coin sirve para saber quien empieza la batalla.
-     * @param topic El parámetro topic nos idica que tema es el tratado en la batalla.
-     * @param contrincant El parámetro comtrincant nos muestra nuestro rival.
-     * @param parrafada El parámetro parrafada nos muestra los versos del adversario.
+     *
+     * @param coin           El parámetro coin sirve para saber quien empieza la batalla.
+     * @param topic          El parámetro topic nos idica que tema es el tratado en la batalla.
+     * @param contrincant    El parámetro comtrincant nos muestra nuestro rival.
+     * @param parrafada      El parámetro parrafada nos muestra los versos del adversario.
      * @param monedaLlancada El parámetro monedaLlançada nos permite saber si la moneda ha sido lanzada una vez o no, para determinar el orden de la batalla.
      * @return La estrofa escrita por el usuario.
      * @throws InterruptedException Nos sirve para controlar si hay un error en el tiempo.
@@ -349,7 +357,7 @@ public class Menu {
         StringBuilder sb;
         StringBuilder estrofaLogin = new StringBuilder();
 
-        if (!monedaLlancada){
+        if (!monedaLlancada) {
             System.out.println("\nA coin is tossed in the air and...");
             Thread.sleep(1000);
         }
@@ -368,7 +376,7 @@ public class Menu {
 
                 //Llegir 4 versos
                 estrofaLogin = new StringBuilder();
-                for (int i=0; i<3; i++ ){
+                for (int i = 0; i < 3; i++) {
                     estrofaLogin.append(scanner.nextLine());
                     estrofaLogin.append(",");
                 }
@@ -386,7 +394,7 @@ public class Menu {
 
                 //Llegir 4 estrofes
                 estrofaLogin = new StringBuilder();
-                for (int i=0; i<3; i++ ){
+                for (int i = 0; i < 3; i++) {
                     estrofaLogin.append(scanner.nextLine());
                     estrofaLogin.append(",");
                 }
@@ -407,9 +415,10 @@ public class Menu {
 
     /**
      * Método que nos muestra el ranking actual de la competición, al igual que la diferenciación de cuales están por ahora clasificados y cuales no.
-     * @param noms El parámetro noms nos dice el nombre del rapero.
-     * @param scores El parámetro scores nos muestra la puntuación del rapero.
-     * @param login El parámetro login nos muestra donde se encuentra el login.
+     *
+     * @param noms          El parámetro noms nos dice el nombre del rapero.
+     * @param scores        El parámetro scores nos muestra la puntuación del rapero.
+     * @param login         El parámetro login nos muestra donde se encuentra el login.
      * @param fasesRestants El parámetro fasesRestants nos permite diferenciar en cuantos raperos estarán clasificados y cuantos no.
      */
     public void showRanking(ArrayList<String> noms, ArrayList<Integer> scores, String login, int fasesRestants) {
@@ -420,35 +429,35 @@ public class Menu {
         StringBuilder colorNormal = new StringBuilder();
         StringBuilder colorVermell = new StringBuilder();
 
-        if (fasesRestants==2){
+        if (fasesRestants == 2) {
             //La meitat veremell
-            for (int i=0; i<noms.size()/2; i++) {
-                colorNormal.append(i+1);
+            for (int i = 0; i < noms.size() / 2; i++) {
+                colorNormal.append(i + 1);
                 colorNormal.append(" ");
                 colorNormal.append(noms.get(i));
                 colorNormal.append(" - ");
                 colorNormal.append(scores.get(i));
-                if(noms.get(i).equals(login)){
+                if (noms.get(i).equals(login)) {
                     colorNormal.append(" <-- You");
                 }
                 colorNormal.append("\n");
             }
 
-            for (int i=(noms.size()/2); i<noms.size(); i++){
-                colorVermell.append(i+1);
+            for (int i = (noms.size() / 2); i < noms.size(); i++) {
+                colorVermell.append(i + 1);
                 colorVermell.append(" ");
                 colorVermell.append(noms.get(i));
                 colorVermell.append(" - ");
                 colorVermell.append(scores.get(i));
-                if(noms.get(i).equals(login)){
+                if (noms.get(i).equals(login)) {
                     colorVermell.append(" <-- You");
                 }
                 colorVermell.append("\n");
             }
         } else {
             //Tots menys els dos primer vermells
-            for (int i=0; i<2; i++) {
-                colorNormal.append(i+1);
+            for (int i = 0; i < 2; i++) {
+                colorNormal.append(i + 1);
                 colorNormal.append(" ");
                 colorNormal.append(noms.get(i));
                 colorNormal.append(" - ");
@@ -456,8 +465,8 @@ public class Menu {
                 colorNormal.append("\n");
             }
 
-            for (int i=2; i<noms.size(); i++){
-                colorVermell.append(i+1);
+            for (int i = 2; i < noms.size(); i++) {
+                colorVermell.append(i + 1);
                 colorVermell.append(" ");
                 colorVermell.append(noms.get(i));
                 colorVermell.append(" - ");
@@ -467,7 +476,7 @@ public class Menu {
         }
 
         System.out.print((colorNormal.toString()));
-        System.out.println(ANSI_RED + (colorVermell.toString())+ANSI_RESET);
+        System.out.println(ANSI_RED + (colorVermell.toString()) + ANSI_RESET);
 
         mostrarLiniaSeparadora();
         pressEnterToContinue();
@@ -484,13 +493,14 @@ public class Menu {
 
     /**
      * Método que muestra cual es el ganador de la competición si el usuario abandona la competición.
+     *
      * @param guanyador El parámetro guanyador nos muestra el ganador de la competición
      * @throws InterruptedException El parámetro InterruptedException sirve para identificar un problema con el tiempo
      */
     public void leaveCompetition(String guanyador) throws InterruptedException {
         System.out.println("And the winer is...");
         //Ponemos a "Dormir" el programa durante los ms que queremos
-        for(int i=3; i>0; i--){
+        for (int i = 3; i > 0; i--) {
             Thread.sleep(1500);
             System.out.println(i);
         }
@@ -504,6 +514,7 @@ public class Menu {
 
     /**
      * Método para mostrar un mensaje por pantalla
+     *
      * @param s El parámetro s sirve para saber que es lo que se debe mostrar por pantalla
      */
 
@@ -514,7 +525,7 @@ public class Menu {
     /**
      * Método que se usa cada vez que el usuario deba salir de una pagina, deberá oprimir la tecla enter
      */
-    private void pressEnterToContinue(){
+    private void pressEnterToContinue() {
         System.out.print("Press enter to continue");
         scanner.nextLine();
     }//Cierre del método
