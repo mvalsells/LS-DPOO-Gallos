@@ -2,19 +2,34 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Esta clase sirve para controlar lo que sucede en competicion al igual que será un intermediario entre las clases competición y menú.
+ *
+ * @ author: Marc Valsells y Albert Clarimón.
+ * @ version: 10/12/2020.
+ */
+
 public class ControllerCompeticio {
-    //Atributs
+
+    //Campos de la clase
     private final Competicio competicio;        // Model de dades
     private final Menu menu;              // Menu, interfície gràfica
 
-    //Constructor
+    /**
+     * Contructor de ControllerCompeticio
+     */
     public ControllerCompeticio() {
         Json json = new Json("src/competicio.json", "src/batalles.json");
         competicio = json.llegirCompeticio();
         menu = new Menu();
-    }
+    }//Cierre del constructor
 
-
+    /**
+     * Método que nos permite ejecutar el menú de bienvenida para saber si ha empezado o no, al igual que nos dara la diferenciacion entre los proximos métodos
+     * dependiendo de si ha empezado la competicion, o no.
+     *
+     * @throws InterruptedException
+     */
     public void executaMenu() throws InterruptedException {
         int opcio;
         do {
@@ -25,10 +40,9 @@ public class ControllerCompeticio {
                 simularCompeticioRestant();
                 menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), competicio.nomGuanyador(), competicio.estat());
                 System.exit(0);
-            }else{
+            } else {
                 menu.welcome(competicio.getName(), competicio.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), competicio.getNumFases(), competicio.getNumParticipants(), "pp", competicio.estat());
             }
-
 
             opcio = menu.demanaOpcio();
             switch (opcio) {
@@ -52,7 +66,12 @@ public class ControllerCompeticio {
                     break;
             }
         } while (true);
-    }
+    }//Cierre del método
+
+    /**
+     * Metodo en el cual controlaremos si el usuario se ha registrado o no. En el primer caso, pediremos directamente las dadas al menu,
+     * en el segundo simplemente pediremos las que estan mal. Para controlar eso, guardamos la inofmración y la que esté erronea la pondremos a null
+     */
 
     private void registrarUsuari() {
         boolean primercop = true;
@@ -96,12 +115,16 @@ public class ControllerCompeticio {
             // Anar demanant mentres el nom del rapero no sigui vàlid i la data no sigui valida i el pais sigui correcte
         } while ((!estat[0] || !estat[1]) && estat[2]);
 
-    }
+    }//Cierre del método
 
+    /**
+     * Método que usaremos una vez la competicion haya empezado, en el controlaremos desde si el usuario existe o no, hasta los diferntes menus que se irán
+     * mostrando durante el transcurso de la batalla, ya sean los de la batalla misma, los del ranking, los de las fases o si el usuario pierde.
+     * Tambien controlaremos si la moneda se ha lanzado, si se han ya completado las dos batallas.
+     * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
+     */
     private void login() throws InterruptedException {
 
-        //Login
-        //Obtenir nom artistic
         int puntuacioLouser = 0;
         String login = menu.obtenirLogin();
         String[] info;
@@ -116,11 +139,11 @@ public class ControllerCompeticio {
             do {
 
                 try {
-                    if(showrankingnext && (competicio.getBatallaActual()+1)<3){
+                    if (showrankingnext && (competicio.getBatallaActual() + 1) < 3) {
                         info = competicio.simularBatalles(login);
                         showrankingnext = false;
                     }
-                }catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
 
                     finalCompeticio = true;
                     guanyador = competicio.nomGuanyador();
@@ -139,7 +162,7 @@ public class ControllerCompeticio {
                 boolean perdedor = false;
                 try {
                     competicio.nomGuanyador().equals(login);
-                }catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     perdedor = true;
                 }
 
@@ -201,12 +224,12 @@ public class ControllerCompeticio {
                             puntuacioLouser = (int) competicio.getPuntuacioRapero(login);
 
                             competicio.nextPhase();
-                            if(competicio.getFaseActual()<= competicio.getNumFases()){
+                            if (competicio.getFaseActual() <= competicio.getNumFases()) {
                                 competicio.preFase(login);
                             }
                             try {
                                 info = competicio.simularBatalles(login);
-                            }catch (IndexOutOfBoundsException e){
+                            } catch (IndexOutOfBoundsException e) {
                                 finalCompeticio = true;
                             }
 
@@ -245,7 +268,7 @@ public class ControllerCompeticio {
                         //String guanyador = "";
                         try {
                             simularCompeticioRestant();
-                        }catch (IndexOutOfBoundsException e){
+                        } catch (IndexOutOfBoundsException e) {
                             finalCompeticio = true;
                             menu.leaveCompetition(competicio.nomGuanyador());
                             break;
@@ -261,7 +284,17 @@ public class ControllerCompeticio {
         } else {
             menu.noRegistrat(login);
         }
-    }
+    }//Cierre del método
+
+    /**
+     * Método que nos controlara lo que sucede en cada batalla, ya sea en que posición de la batalla se encuentra el usuario, si se ha lanzado la moneda.
+     * Posteriormente nos enviara a competicion la estrofa del login, el tema del que se ha hablado y la posicion de la batalla.
+     * @param battlePos El parámetro battlePos nos idica en que posición del array batalla se encuentra la batalla del login.
+     * @param contrincant El parámetro contrincant nos indica cual es el nombre de nuestro contrincant.
+     * @param temaPos El parámetro temaPos nos indica que en que posición del array temas está el tema que le ha tocado al login.
+     * @param coin El parámetro coin determinará de forma aleatoria quien empieza primero la batalla.
+     * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
+     */
 
     private void makeBattle(int battlePos, String contrincant, int temaPos, int coin) throws InterruptedException {
         //Obtinc nom del tema i estrofes del contrincant
@@ -274,18 +307,26 @@ public class ControllerCompeticio {
         }
         String estrofaLogin = menu.doBattle(coin, infoTema.get(0), contrincant, infoTema.get(1), monedaLlancada);
         competicio.ferBatalla(battlePos, estrofaLogin, infoTema.get(1));
-    }
+    }//Cierre del método
 
-    private void simularCompeticioRestant() throws IndexOutOfBoundsException{
-        do{
-            for (int i = competicio.getBatallaActual(); i<2; i++){
+    /**
+     * Este método se ejecuta en el momento que el usaurio abandona la competición, si eso sucede, este método simulará las batlallas restantes a cuando el usuario
+     * ha abandonado la competición. Cabe decir que si en el momento de inicializar el programa la competición ya ha finalizado, tambien se ejecutará este método para
+     * poder visualizar el ganador.
+     * @throws IndexOutOfBoundsException El parámetro IndexOutOfBoundsexception nos sirve para identificar si ya se ha llegado a las fase 3 y al incrementar la fase,
+     * nos permite mostrar el ganador.
+     */
+
+    private void simularCompeticioRestant() throws IndexOutOfBoundsException {
+        do {
+            for (int i = competicio.getBatallaActual(); i < 2; i++) {
                 competicio.simularBatalles("");
                 competicio.setBatallaActual(competicio.getBatallaActual() + 1);
             }
             competicio.nextPhase();
-            if(competicio.getFaseActual()<= competicio.getNumFases()){
+            if (competicio.getFaseActual() <= competicio.getNumFases()) {
                 competicio.preFase("");
             }
         } while (competicio.getFaseActual() <= competicio.getNumFases());
-    }
-}
+    }//Cierre del método
+}//Cierre de la clase ControllerCompetició
