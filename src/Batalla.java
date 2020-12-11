@@ -3,14 +3,30 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Esta clase nos permite controlar lo que sucede cada una de las batallas: la puntuación, el numero de rimas, simular las batallas, saber el tema.
+ *
+ * @ author: Marc Valsells y Albert Clarimón.
+ * @ version: 10/12/2020.
+ */
+
 public abstract class Batalla {
-    //Atributs
+
+    //Campos de la classe
     private final Rapero[] raperos = new Rapero[2];
     private final Tema[] temas = new Tema[2];
     private final Json json = new Json("src/competicio.json", "src/batalles.json");
 
 
     //Constructor
+
+    /**
+     * Constructor de Batallas
+     *
+     * @param rapero1 información sobre el rapero 1.
+     * @param rapero2 información sobre el rapero 2.
+     */
+
     public Batalla(Rapero rapero1, Rapero rapero2) {
         this.raperos[0] = rapero1;
         this.raperos[1] = rapero2;
@@ -18,9 +34,20 @@ public abstract class Batalla {
         Collections.shuffle(temes);
         temas[0] = temes.get(0);
         temas[1] = temes.get(1);
-    }
+    }//Cierre del constructor
 
-    public abstract double puntuacio(int numRimes);
+    /**
+     * Método que nos indicará cual es la puntuación del rapero en función de sus rimas.
+     *
+     * @param numRimes El parámetro rimas indica cuantas rimas ha hecho el rapero.
+     * @return La puntuación del rapero en función de sus rimas.
+     */
+
+    public abstract double puntuacio(int numRimes);//Cierre del método
+
+    /**
+     * Método que simula todas las batallas menos las del login determinando la putnuación y las rimas dependiendo del nivel.
+     */
 
     public void simularBatalla() {
         //Per cada tema
@@ -60,7 +87,17 @@ public abstract class Batalla {
                 rapero.setPuntuacio(rapero.getPuntuacio() + puntuacio);
             }
         }
-    }
+    }//Cierre del método
+
+    /**
+     * Método que selecciona que estrofa tendrá cada rapero dependiendo de su nivel y tema.
+     *
+     * @param nivell         El parámetro nivel indica que nivel tiene el rapero.
+     * @param tema           El parámetro tema indica que tema es el tratado en esa batalla.
+     * @param posicioNivell1 El parámetro posicioNivell1 indica que la estrofa a escoger es de nivel 1
+     * @param posicioNivell2 El parámetro posicioNivell2 indica que la estrofa a escoger es de nivel 2
+     * @return Que estrofa tendrá cada rapero dependiendo de su nivel y tema.
+     */
 
     public String eleccioEstrofa(int nivell, Tema tema, int posicioNivell1, int posicioNivell2) {
         String verso;
@@ -78,16 +115,22 @@ public abstract class Batalla {
             return "";
         }
 
-    }
+    }//Cierre del método
 
+    /**
+     * Método que simula solamente la batalla donde participa el login.
+     *
+     * @param estrofaLogin       El parámetro estrofaLogin indica la estrofa que se le ha pasado por pantalla.
+     * @param estrofaContrincant El parámetro estrofaContrincant indica que estrofa tiene el contrincante.
+     */
 
     public void ferBatalla(String estrofaLogin, String estrofaContrincant) {
         double puntuacio = 0;
         //Si el Login no fa el ridicul calculem les rimes i la puntuació
         if (!(estrofaLogin.length() == 0)) {
 
-                int rimes = numRimes(estrofaLogin);
-                puntuacio = puntuacio(rimes);
+            int rimes = numRimes(estrofaLogin);
+            puntuacio = puntuacio(rimes);
 
         }
         //Actualitzem la puntuació
@@ -96,16 +139,23 @@ public abstract class Batalla {
         puntuacio = 0;
         //Si el contrincant no fa el ridicul calculem les rimes i la puntuació
         if (!(estrofaContrincant.length() == 0)) {
-                int rimes = numRimes(estrofaLogin);
-                puntuacio = puntuacio(rimes);
+            int rimes = numRimes(estrofaLogin);
+            puntuacio = puntuacio(rimes);
 
 
         }
         //Actualitzem la puntuació
         raperos[1].setPuntuacio(raperos[1].getPuntuacio() + puntuacio);
-    }
+    }//Cierre del método
 
-    public int numRimes(String vers){
+    /**
+     * Método que indica el número de rimas que tiene un rapero dependiendo de la estrofa.
+     *
+     * @param vers El parámetro vers indica la estrofa que ha elegido el rapero.
+     * @return El número de rimas que tiene un rapero dependiendo de la estrofa.
+     */
+
+    public int numRimes(String vers) {
         int numRimes = 0;
         ArrayList<String> finalsLinies = new ArrayList<>();
         String[] split = vers.split(",");
@@ -113,15 +163,14 @@ public abstract class Batalla {
         split[split.length - 1] = split[split.length - 1].replace(".", "");
         //Obtenir tots els finals de linies
         for (String linia : split) {
-            try{
+            try {
                 String ultimesLletres = linia.substring(linia.length() - 2);
                 finalsLinies.add(ultimesLletres);
-            }catch (StringIndexOutOfBoundsException e){
+            } catch (StringIndexOutOfBoundsException e) {
                 return 0;
             }
 
         }
-
         //Agafo els finals unics
         Set<String> set = new HashSet<>(finalsLinies);
         ArrayList<String> finalsLiniesUnics = new ArrayList<>(set);
@@ -140,7 +189,14 @@ public abstract class Batalla {
             }
         }
         return numRimes;
-    }
+    }//Cierre del método
+
+    /**
+     * Método que nos devuelve la informacion del tema del cual el login y su rival estan rapeando.
+     *
+     * @param temaPos El parámetro temaPos indica cual es la posición en el array de temas en la que se situa esta.
+     * @return La información del tema del cual el login y su rival estan rapeando.
+     */
 
     public ArrayList<String> infoTema(int temaPos) {
         ArrayList<String> info = new ArrayList<>();
@@ -163,6 +219,6 @@ public abstract class Batalla {
         }
 
         return info;
-    }
+    }//Cierre del método
 
-}
+}//Cierre de la clase Batalla

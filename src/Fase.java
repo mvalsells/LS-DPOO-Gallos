@@ -319,7 +319,7 @@ public class Fase {
      *
      * @param battlePos El parámetro battlePos indica cual es la posición en el array de batallas en la que se situa esta.
      * @param temaPos   El parámetro temaPos indica cual es la posición en el array de temas en la que se situa esta.
-     * @return La informacion del tema del cual el login y su rival estan rapeando.
+     * @return La información del tema del cual el login y su rival estan rapeando.
      */
 
     public ArrayList<String> infoTema(int battlePos, int temaPos) {
