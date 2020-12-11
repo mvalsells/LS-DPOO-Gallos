@@ -9,7 +9,7 @@ import java.net.URL;
 public class Pais {
 
     //Campos de la clase
-    private String nomAngles;
+    private final String nomAngles;
     private int habitants;
     private String regio;
     private URL bandera;
@@ -20,16 +20,18 @@ public class Pais {
 
     /**
      * Constructor de Pais
+     *
      * @param nomAngles El parámetro de nomAngles nos traduce el nombre del pais al inglés.
      */
-    public Pais(String nomAngles){
-        this.nomAngles=nomAngles;
+    public Pais(String nomAngles) {
+        this.nomAngles = nomAngles;
     }//Cierre del constructor
 
     //Getters and Setters
 
     /**
      * Método que nos coge el nombre en inglés del pais.
+     *
      * @return El nombre en inglés del pais.
      */
 

@@ -19,8 +19,9 @@ public class Json {
 
     /**
      * Constructor de Json
+     *
      * @param fitxerCompeticio El parametro fitxerCompeticio, contiene el fichero json de la competición.
-     * @param fitxerBatalla El parametro fitxerBatalla, contiene el fichero json de la batalla.
+     * @param fitxerBatalla    El parametro fitxerBatalla, contiene el fichero json de la batalla.
      */
 
     public Json(String fitxerCompeticio, String fitxerBatalla) {
@@ -32,6 +33,7 @@ public class Json {
 
     /**
      * Método por el cual se lee el json de competición, una vez leido se separará en competition, countries o rappers.
+     *
      * @return El conntenido que tiene cada competición.
      */
 
@@ -120,7 +122,7 @@ public class Json {
             competicio = new Competicio(name, startDate, endDate, countries, phases);
 
             return competicio;
-        }catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             StringBuilder sb = new StringBuilder();
             sb.append("File ");
             sb.append(fitxerCompeticio);
@@ -136,6 +138,7 @@ public class Json {
 
     /**
      * Método que se utiliza al momento de leer los temas y estrofas que hay en el fichero de batalla.
+     *
      * @return El array de temas donde contiene todos los temas y estrofas.
      */
 
@@ -177,7 +180,7 @@ public class Json {
             }
             return temes;
 
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             StringBuilder sb = new StringBuilder();
             sb.append("File ");
             sb.append(fitxerBatalla);
@@ -190,6 +193,7 @@ public class Json {
 
     /**
      * Método que se usa al momento de escribir un rapero al json, cuando este se inscirbe en la competición.
+     *
      * @param realName    El parámetro realName nos indica el nombre real del rapero
      * @param stageName   El parámetro stageName nos indica el nombre artístico del rapero.
      * @param birth       El parámetro birth nos indica la fecha de nacimiento del rapero.
@@ -204,7 +208,7 @@ public class Json {
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
 
-       try {
+        try {
             Reader read = new FileReader(fitxerCompeticio);
             JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
             JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();

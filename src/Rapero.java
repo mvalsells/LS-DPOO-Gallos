@@ -1,4 +1,3 @@
-
 /**
  * Esta clase nos permite controlar el poryecto en su totalidad, tanto en el momento de ejecutar el menú, como en el de crear el controller.
  *
@@ -9,12 +8,12 @@
 public class Rapero {
 
     //Campos de la clase
-    private String realName;
-    private String stageName;
-    private String  birth;
-    private Pais nationality;
-    private int level;
-    private String photo;
+    private final String realName;
+    private final String stageName;
+    private final String birth;
+    private final Pais nationality;
+    private final int level;
+    private final String photo;
     private double puntuacio;
 
     /**
@@ -80,10 +79,11 @@ public class Rapero {
 
     /**
      * Método que compara la puntuación del rapero.
+     *
      * @param rapero El parámetro rapero contiende la información de rapero.
      * @return La puntuación del rapero.
      */
     public double comparePuntuacio(Rapero rapero) {
-        return this.getPuntuacio()-rapero.getPuntuacio();
+        return this.getPuntuacio() - rapero.getPuntuacio();
     }
 }

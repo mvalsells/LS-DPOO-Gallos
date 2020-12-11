@@ -24,11 +24,12 @@ public class Competicio {
 
     /**
      * Constructor de Competició
-     * @param name El parámetro name nos indiaca el nombre de la competición
+     *
+     * @param name      El parámetro name nos indiaca el nombre de la competición
      * @param startDate El parámetro startDate nos indica la fecha de inicio de la competición.
-     * @param endDate El parámetro endDate nos indica la fecha de fin de la competición
-     * @param countries  El parámetro countries nos muestra el array de countries validas de la competición
-     * @param phases El parámetro phases nos muestra el array de phases que hay en la competición
+     * @param endDate   El parámetro endDate nos indica la fecha de fin de la competición
+     * @param countries El parámetro countries nos muestra el array de countries validas de la competición
+     * @param phases    El parámetro phases nos muestra el array de phases que hay en la competición
      */
 
     public Competicio(String name, LocalDate startDate, LocalDate endDate, ArrayList<String> countries, ArrayList<Fase> phases) {
@@ -46,6 +47,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el nombre de la competición.
+     *
      * @return El nombre de la competición.
      */
 
@@ -55,6 +57,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el dia que empieza la competición.
+     *
      * @return El dia que empieza la competición.
      */
 
@@ -64,6 +67,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el dia que acaba la competición.
+     *
      * @return El dia que acaba la competición.
      */
 
@@ -73,6 +77,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el número de fases que tiene la competición.
+     *
      * @return El número de fases que tiene la competición.
      */
 
@@ -82,6 +87,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el número de participantes que tiene la competición.
+     *
      * @return El número de participantes que tiene la competición.
      */
 
@@ -91,6 +97,7 @@ public class Competicio {
 
     /**
      * Método que devuelve la fase actual en la que estamos.
+     *
      * @return La fase actual en la que estamos.
      */
 
@@ -100,6 +107,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el número de fases, dependiendo del tamaño del array.
+     *
      * @return El número de fases dependiendo del array.
      */
 
@@ -111,6 +119,7 @@ public class Competicio {
 
     /**
      * Método que devuelve la batalla actual en la que estamos, dependiendo de la fases actual en la que estemos.
+     *
      * @return La batalla actual en la que estamos, dependiendo de la fase actual.
      */
 
@@ -120,6 +129,7 @@ public class Competicio {
 
     /**
      * Método que nos indica el numero de la batalla actual.
+     *
      * @param num El parámetro num, indica que batalla es la actual.
      */
 
@@ -129,6 +139,7 @@ public class Competicio {
 
     /**
      * Método que devuelve la puntuación del login.
+     *
      * @param login El parámetro login indica el nombre del usuario
      * @return La puntuación del login
      */
@@ -138,6 +149,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el nombre del rapero.
+     *
      * @param i El parámetro i indica en que posición del array raperos se situa, por tanto que rapero estamos viendo.
      * @return El nombre del rapero.
      */
@@ -149,6 +161,7 @@ public class Competicio {
 
     /**
      * Método que devuelve la puntuacion de cada uno de los raperos.
+     *
      * @param i El parámetro i indica en que posición del array raperos se situa, por tanto que rapero estamos viendo.
      * @return La puntuacion de cada uno de los raperos.
      */
@@ -162,12 +175,13 @@ public class Competicio {
 
     /**
      * Método que nos permote registrar al usuario, comprobando si los datos son correctos o no
-     * @param realName El parámetro realName nos indica el nombre real del rapero
-     * @param stageName El parámetro stageName nos indica el nombre artístico del rapero.
-     * @param birth El parámetro birth nos indica la fecha de nacimiento del rapero.
+     *
+     * @param realName    El parámetro realName nos indica el nombre real del rapero
+     * @param stageName   El parámetro stageName nos indica el nombre artístico del rapero.
+     * @param birth       El parámetro birth nos indica la fecha de nacimiento del rapero.
      * @param nationality El parámetro nationality nos indica la nacionalidad del rapero.
-     * @param level El parámetro level indica cual es el level del usuario.
-     * @param photo El parámetro photo nos indica cual es la foto del rapero.
+     * @param level       El parámetro level indica cual es el level del usuario.
+     * @param photo       El parámetro photo nos indica cual es la foto del rapero.
      * @return Devuelve cual es el estado del registro.
      */
     public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) {
@@ -233,6 +247,7 @@ public class Competicio {
 
     /**
      * Método que devuelve el login del usuario.
+     *
      * @param login El parámetro login indica el nombre artístico del usuario.
      * @return El lógin del usuario.
      */
@@ -243,16 +258,18 @@ public class Competicio {
 
     /**
      * Método que devuelve el nombre del ganador.
+     *
      * @return El nombre del ganador.
      */
 
     public String nomGuanyador() {
 
-        return phases.get(numFases()-1).winner();
+        return phases.get(numFases() - 1).winner();
     }//Cierre del método
 
     /**
      * Método que devuelve si la competición ha acabdo o no.
+     *
      * @return La competición ha acabdo o no.
      */
 
@@ -263,6 +280,7 @@ public class Competicio {
 
     /**
      * Método que devuelve si la competición ha empezado o no.
+     *
      * @return La competición ha empezado o no.
      */
 
@@ -273,6 +291,7 @@ public class Competicio {
 
     /**
      * Método que devuelve si la competición ha empezado o no.
+     *
      * @return Estado de la competición.
      */
 
@@ -288,6 +307,7 @@ public class Competicio {
 
     /**
      * Metodo que indica en que fase nos encontramos y su respectiva información.
+     *
      * @param login El parámetro login indica el nombre artístico del rapero.
      * @throws IndexOutOfBoundsException El parámetro IndexOutOfBoundsException indica si hemos superado el número total de fases
      */
@@ -327,6 +347,7 @@ public class Competicio {
 
     /**
      * Método que nos indica si la fecha introducida es válida.
+     *
      * @param bir El parámetro bir nos indica cual es el contenido de la fecha.
      * @return La fecha introducida es válida.
      */
@@ -348,8 +369,9 @@ public class Competicio {
 
     /**
      * Método que nos devuelve la informacion del tema del cual el login y su rival estan rapeando.
+     *
      * @param battlePos El parámetro battlePos indica cual es la posición en el array de batallas en la que se situa esta.
-     * @param temaPos El parámetro temaPos indica cual es la posición en el array de temas en la que se situa esta.
+     * @param temaPos   El parámetro temaPos indica cual es la posición en el array de temas en la que se situa esta.
      * @return La información del tema del cual el login y su rival estan rapeando.
      */
 
@@ -359,8 +381,9 @@ public class Competicio {
 
     /**
      * Método que nos indica la información que se debe tratar en la batalla del useer contra su rival
-     * @param battlePos El parámetro battlePos indica cual es la posición en el array de batallas en la que se situa esta.
-     * @param estrofaLogin El parámetro estrofaLogin indica cual es la estrofa del login.
+     *
+     * @param battlePos          El parámetro battlePos indica cual es la posición en el array de batallas en la que se situa esta.
+     * @param estrofaLogin       El parámetro estrofaLogin indica cual es la estrofa del login.
      * @param estrofaContrincant El parámetro estrofaContrincant indica cual es la estrofa del contrincante.
      */
 
@@ -386,6 +409,7 @@ public class Competicio {
 
     /**
      * Método que simula todas las batallas incluidas las del login determinando el tipo de batalla y creando las parejas.
+     *
      * @param login El parámetro login indica el nombre artístico del rapero.
      * @return Todas las batallas incluidas las del login determinando el tipo de batalla y creando las parejas.
      */

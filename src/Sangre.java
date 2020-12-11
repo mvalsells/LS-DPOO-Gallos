@@ -1,4 +1,3 @@
-
 /**
  * Esta clase nos indica que la batalla que se ejecuta es Sangre por lo tanto nos dirá cuales son sus normas. Esta clase es una subclasse de Batalla.
  *
@@ -28,6 +27,6 @@ public class Sangre extends Batalla {
 
     @Override
     public double puntuacio(int rimes) {
-        return (Math.PI * Math.pow(rimes,2))/4;
+        return (Math.PI * Math.pow(rimes, 2)) / 4;
     }//Cierre del método
 }//Cierre de la clase Sangre

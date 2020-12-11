@@ -121,6 +121,7 @@ public class ControllerCompeticio {
      * Método que usaremos una vez la competicion haya empezado, en el controlaremos desde si el usuario existe o no, hasta los diferntes menus que se irán
      * mostrando durante el transcurso de la batalla, ya sean los de la batalla misma, los del ranking, los de las fases o si el usuario pierde.
      * Tambien controlaremos si la moneda se ha lanzado, si se han ya completado las dos batallas.
+     *
      * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
      */
     private void login() throws InterruptedException {
@@ -289,10 +290,11 @@ public class ControllerCompeticio {
     /**
      * Método que nos controlara lo que sucede en cada batalla, ya sea en que posición de la batalla se encuentra el usuario, si se ha lanzado la moneda.
      * Posteriormente nos enviara a competicion la estrofa del login, el tema del que se ha hablado y la posicion de la batalla.
-     * @param battlePos El parámetro battlePos nos idica en que posición del array batalla se encuentra la batalla del login.
+     *
+     * @param battlePos   El parámetro battlePos nos idica en que posición del array batalla se encuentra la batalla del login.
      * @param contrincant El parámetro contrincant nos indica cual es el nombre de nuestro contrincant.
-     * @param temaPos El parámetro temaPos nos indica que en que posición del array temas está el tema que le ha tocado al login.
-     * @param coin El parámetro coin determinará de forma aleatoria quien empieza primero la batalla.
+     * @param temaPos     El parámetro temaPos nos indica que en que posición del array temas está el tema que le ha tocado al login.
+     * @param coin        El parámetro coin determinará de forma aleatoria quien empieza primero la batalla.
      * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
      */
 
@@ -313,8 +315,9 @@ public class ControllerCompeticio {
      * Este método se ejecuta en el momento que el usaurio abandona la competición, si eso sucede, este método simulará las batlallas restantes a cuando el usuario
      * ha abandonado la competición. Cabe decir que si en el momento de inicializar el programa la competición ya ha finalizado, tambien se ejecutará este método para
      * poder visualizar el ganador.
+     *
      * @throws IndexOutOfBoundsException El parámetro IndexOutOfBoundsexception nos sirve para identificar si ya se ha llegado a las fase 3 y al incrementar la fase,
-     * nos permite mostrar el ganador.
+     *                                   nos permite mostrar el ganador.
      */
 
     private void simularCompeticioRestant() throws IndexOutOfBoundsException {

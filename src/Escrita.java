@@ -1,4 +1,3 @@
-
 /**
  * Esta clase nos indica que la batalla que se ejecuta es Escrita por lo tanto nos dirá cuales son sus normas. Esta clase es una subclasse de Batalla.
  *
@@ -6,7 +5,7 @@
  * @ version: 10/12/2020.
  */
 
-public class Escrita extends Batalla{
+public class Escrita extends Batalla {
 
     /**
      * Método que nos permite coger los raperos que vienen de la superclasse Batalla
@@ -28,6 +27,6 @@ public class Escrita extends Batalla{
 
     @Override
     public double puntuacio(int rimes) {
-        return 1+3*rimes;
+        return 1 + 3 * rimes;
     }//Cierre del método
 }//Cierre de la classe Escrita

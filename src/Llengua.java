@@ -1,4 +1,3 @@
-
 /**
  * Esta clase nos permite controlar el idioma con el que se hará la batalla.
  *

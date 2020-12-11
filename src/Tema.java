@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Esta clase contiene toda la información del tema y de las estrófas. Esta clse solo guarda la información de un tema.
+ *
  * @ author: Marc Valsells y Albert Clarimón.
  * @ version: 10/12/2020.
  */
@@ -9,13 +10,14 @@ import java.util.ArrayList;
 public class Tema {
 
     //Campos de Tema
-    private String nom;
-    private ArrayList<String> estrofesN1;
-    private ArrayList<String> estrofesN2;
+    private final String nom;
+    private final ArrayList<String> estrofesN1;
+    private final ArrayList<String> estrofesN2;
 
     /**
      * Constructor de Tema.
-     * @param nom El parámetro nom contiene el nombre del tema.
+     *
+     * @param nom        El parámetro nom contiene el nombre del tema.
      * @param estrofesN1 El parámetro estrofaN1 contiene las estrofas de nivel 1.
      * @param estrofesN2 El parámetro estrofaN2 contiene las estrofas de nivel 2.
      */
@@ -28,6 +30,7 @@ public class Tema {
 
     /**
      * Método que coge el nombre del tema.
+     *
      * @return El nombre del tema.
      */
     public String getNom() {
@@ -36,6 +39,7 @@ public class Tema {
 
     /**
      * Método que coge las estrofas de nivel 1
+     *
      * @return Las estrofas de nivel 1
      */
 
@@ -45,6 +49,7 @@ public class Tema {
 
     /**
      * Método que coge las estrofas de nivel 2
+     *
      * @return Las estrofas de nivel 2
      */
 
