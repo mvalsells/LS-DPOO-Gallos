@@ -11,8 +11,8 @@ import java.util.Scanner;
  */
 public class Menu {
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_RESET = "\u001B[0m";
     //Campos de la clase
     private final Scanner scanner; // agafem dades menu
 
@@ -255,7 +255,7 @@ public class Menu {
      * @param perdedor   El parámetro perdedor, nos sirve para poder identificar si el usuario ha perdido o no en la fase final.
      */
 
-    public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
+    public void registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
         if (numBattle != 5 && numBattle != 6) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();

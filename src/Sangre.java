@@ -14,6 +14,8 @@ public class Sangre extends Batalla {
      * @param rapero2 información sobre el rapero 2.
      */
 
+    private String productor;
+
     public Sangre(Rapero rapero1, Rapero rapero2) {
         super(rapero1, rapero2);
     }//Cierre del método

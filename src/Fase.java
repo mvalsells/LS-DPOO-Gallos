@@ -14,9 +14,9 @@ public class Fase {
 
     //Campos de la clase
     private static ArrayList<Rapero> raperos;
-    private final ArrayList<Batalla> batalles;
+    private ArrayList<Batalla> batalles;
     private int batallaActual;
-    private Pais pais;
+    private String pais;
     private float budget;
 
     /**

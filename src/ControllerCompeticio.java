@@ -176,7 +176,7 @@ public class ControllerCompeticio {
                         posicio = Integer.valueOf(info[3]);
                         do {
                             //Mostrar info de la batalla
-                            menu.Registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
+                            menu.registrat(numFases, faseActual, (int) competicio.getPuntuacioRapero(login), competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
 
                             opcio = menu.demanaOpcio();
 
@@ -193,7 +193,7 @@ public class ControllerCompeticio {
 
                         do {
                             //Mostrar info de la batalla
-                            menu.Registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
+                            menu.registrat(numFases, faseActual, puntuacioLouser, competicio.getBatallaActual() + 1, battleType, contrincant, perdedor);
                             opcio = menu.demanaOpcio();
                             if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
                                 menu.display("Number introduced not corresponding to the menu");
@@ -208,7 +208,7 @@ public class ControllerCompeticio {
                     faseActual = faseActual - 1;
                     do {
                         //Mostrar info de la batalla
-                        menu.Registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador, perdedor);
+                        menu.registrat(numFases, faseActual, puntuacioLouser, 6, battleType, guanyador, perdedor);
                         opcio = menu.demanaOpcio();
 
                         if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
