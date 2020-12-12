@@ -22,5 +22,6 @@ public class Main {
 
         controllerCompeticio.executaMenu();
     }//Cierre del método
+    //Fase2OK
 
 }//Cierre de la clase Main
