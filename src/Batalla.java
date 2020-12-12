@@ -46,7 +46,7 @@ public abstract class Batalla {
     public abstract double puntuacio(int numRimes);//Cierre del método
 
     /**
-     * Método que simula todas las batallas menos las del login determinando la putnuación y las rimas dependiendo del nivel.
+     * Método que simula todas las batallas menos las del login determinando la puntuación y las rimas dependiendo del nivel.
      */
 
     public void simularBatalla() {

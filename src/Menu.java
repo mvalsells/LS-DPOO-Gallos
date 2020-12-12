@@ -212,6 +212,9 @@ public class Menu {
             if (!estat[2]) {
                 System.err.println("Country is not accepted in this competition");
             }
+            if(!estat[4]){
+                System.err.println("Level is invalid");
+            }
         }
     }//Cierre del método
 

@@ -70,7 +70,7 @@ public class ControllerCompeticio {
 
     /**
      * Metodo en el cual controlaremos si el usuario se ha registrado o no. En el primer caso, pediremos directamente las dadas al menu,
-     * en el segundo simplemente pediremos las que estan mal. Para controlar eso, guardamos la inofmración y la que esté erronea la pondremos a null
+     * en el segundo simplemente pediremos las que estan mal. Para controlar eso, guardamos la información y la que esté erronea la pondremos a null
      */
 
     private void registrarUsuari() {
@@ -93,12 +93,12 @@ public class ControllerCompeticio {
             String birth = dadesUsuari.get(2);
             String nationality = dadesUsuari.get(3);
             String nivell = dadesUsuari.get(4);
-            int level = Integer.parseInt(nivell);
+            //int level = Integer.parseInt(nivell);
             String photo = dadesUsuari.get(5);
             float puntuacio = 0;
 
             //Creo el usuari
-            estat = competicio.registreUsuari(realName, stageName, birth, nationality, level, photo);
+            estat = competicio.registreUsuari(realName, stageName, birth, nationality, nivell, photo);
             //Mostro si s'ha creat o hi han errors
             menu.resultatRegistre(estat);
 
@@ -112,8 +112,12 @@ public class ControllerCompeticio {
                 dadesUsuari.set(2, null);
             }
 
+            if(!estat[4]){
+                dadesUsuari.set(4,null);
+            }
+
             // Anar demanant mentres el nom del rapero no sigui vàlid i la data no sigui valida i el pais sigui correcte
-        } while ((!estat[0] || !estat[1]) && estat[2]);
+        } while ((!estat[0] || !estat[1] || !estat[4]) && estat[2]);
 
     }//Cierre del método
 
@@ -167,7 +171,7 @@ public class ControllerCompeticio {
                     perdedor = true;
                 }
 
-                if (!finalCompeticio /*|| perdedor*/) {
+                if (!finalCompeticio) {
                     try {
                         posicio = Integer.valueOf(info[3]);
                         do {
@@ -266,7 +270,6 @@ public class ControllerCompeticio {
                         break;
                     case 4:
                         //Leave competition
-                        //String guanyador = "";
                         try {
                             simularCompeticioRestant();
                         } catch (IndexOutOfBoundsException e) {

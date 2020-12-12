@@ -180,13 +180,14 @@ public class Competicio {
      * @param stageName   El parámetro stageName nos indica el nombre artístico del rapero.
      * @param birth       El parámetro birth nos indica la fecha de nacimiento del rapero.
      * @param nationality El parámetro nationality nos indica la nacionalidad del rapero.
-     * @param level       El parámetro level indica cual es el level del usuario.
+     * @param nivell      El parámetro nivell indica cual es el level del usuario.
      * @param photo       El parámetro photo nos indica cual es la foto del rapero.
      * @return Devuelve cual es el estado del registro.
      */
-    public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, int level, String photo) {
-        Boolean[] estat = new Boolean[4];
+    public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, String nivell, String photo) {
+        Boolean[] estat = new Boolean[5];
         Arrays.fill(estat, true);
+        int level=0;
 
         //Comprovo si ja hi ha el rappero
         for (int i = 0; i < Fase.getNumParticipants(); i++) {
@@ -219,6 +220,11 @@ public class Competicio {
                 estat[2] = true;
                 break;
             }
+        }
+        try {
+             level = Integer.parseInt(nivell);
+        }catch (NumberFormatException e){
+            estat[4]=false;
         }
 
         for (boolean b : estat) {

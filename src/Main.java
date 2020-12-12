@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 /**
- * Esta clase nos permite controlar el poryecto en su totalidad, tanto en el momento de ejecutar el menú, como en el de crear el controller.
+ * Esta clase nos permite controlar el proyecto en su totalidad, tanto en el momento de ejecutar el menú, como en el de crear el controller.
  *
  * @ author: Marc Valsells y Albert Clarimón.
  * @ version: 10/12/2020.

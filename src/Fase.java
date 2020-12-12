@@ -315,7 +315,7 @@ public class Fase {
     }//Cierre del método
 
     /**
-     * Método que nos devuelve la informacion del tema del cual el login y su rival estan rapeando.
+     * Método que nos devuelve la información del tema del cual el login y su rival están rapeando.
      *
      * @param battlePos El parámetro battlePos indica cual es la posición en el array de batallas en la que se situa esta.
      * @param temaPos   El parámetro temaPos indica cual es la posición en el array de temas en la que se situa esta.
