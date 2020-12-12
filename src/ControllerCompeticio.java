@@ -112,6 +112,12 @@ public class ControllerCompeticio {
                 dadesUsuari.set(2, null);
             }
 
+            if(estat[3]){
+                Json json = new Json("src/competicio.json", "src/batalles.json");
+                int level = Integer.parseInt(nivell);
+                json.escriureRapero(realName, stageName, birth, nationality, level, photo);
+            }
+
             if(!estat[4]){
                 dadesUsuari.set(4,null);
             }

@@ -14,12 +14,11 @@ import java.util.Arrays;
 public class Competicio {
 
     //Campos de la clase
-    private final String name;
-    private final LocalDate startDate;
-    private final LocalDate endDate;
-    private final ArrayList<String> countries;
-    private final ArrayList<Fase> phases;
-    private final Json json;
+    private String name;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private ArrayList<String> countries;
+    private ArrayList<Fase> phases;
     private int faseActual;
 
     /**
@@ -39,7 +38,6 @@ public class Competicio {
         this.countries = countries;
         this.phases = phases;
         faseActual = 1;
-        json = new Json("src/competicio.json", "src/batalles.json");
 
     }//Cierre del método
 
@@ -237,9 +235,6 @@ public class Competicio {
         if (estat[3]) {
             //Creo rapero i el poso al arrayList
             Fase.afegirRapero(realName, stageName, birth, nationality, level, photo);
-
-            //Afegir el rapero al JSON
-            json.escriureRapero(realName, stageName, birth, nationality, level, photo);
         }
 
         return estat;
