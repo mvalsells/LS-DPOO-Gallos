@@ -6,8 +6,8 @@ import java.util.Scanner;
  * si su registro ha estado de forma satisfactoria o no, en que fase se encuentra, su puntuación y rival, el ranking, y por supuesto
  * la posibilidad, si aun puede, de poner sus versos o por otro lado abandonar la competicion.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 public class Menu {
 
@@ -136,7 +136,7 @@ public class Menu {
     }// Cierre del método
 
     /**
-     * Método que se ejecuta si la información intriducida por el usuario es incorrecta, de esa manera el participante solo habrá que
+     * Método que se ejecuta si la información introducida por el usuario es incorrecta, de esa manera el participante solo habrá que
      * reescribir la información incorrecta, la correcta ya se mostrará por pantalla.
      *
      * @param userData Array on conte la informació del usuari, si un String es null vol dir que s'ha de tornar a escriure la infomració.
@@ -256,11 +256,6 @@ public class Menu {
      */
 
     public void Registrat(int totalFase, int fase, int score, int numBattle, String battleType, String rival, boolean perdedor) {
-        /*StringBuilder sb = new StringBuilder();
-        sb.append("Yo' bro, there's no \"");
-        sb.append(fase);
-        sb.append("\" in ma' list.");
-        System.out.println(sb.toString());*/
         if (numBattle != 5 && numBattle != 6) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();

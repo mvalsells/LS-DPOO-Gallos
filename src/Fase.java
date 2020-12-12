@@ -6,8 +6,8 @@ import java.util.Random;
 /**
  * Esta clase nos permite controlar lo que sucede en cada fase, ya sea los raperos de ella, los temas, las batallas e incluso oendar la clasificacion.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Fase {
@@ -79,8 +79,6 @@ public class Fase {
 
     /**
      * Método que devuelve el número de raperos que tiene la fase.
-     *
-     * @return El número de raperos que tiene la fase.
      */
 
     public static void setRapperos(ArrayList<Rapero> raperos) {

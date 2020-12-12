@@ -3,8 +3,8 @@ import java.net.URL;
 /**
  * Esta clase nos permite controlar toda la información que tiene el pais.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 public class Pais {
 

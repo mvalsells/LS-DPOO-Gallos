@@ -1,8 +1,8 @@
 /**
- * Esta clase nos permite controlar el poryecto en su totalidad, tanto en el momento de ejecutar el menú, como en el de crear el controller.
+ * Esta clase nos permite almacenar información sobre los raperos.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Rapero {

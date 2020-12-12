@@ -7,8 +7,8 @@ import java.util.ArrayList;
 /**
  * Esta clase nos permite tanto leer del json como escribir en él.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Json {

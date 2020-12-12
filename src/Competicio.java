@@ -8,8 +8,8 @@ import java.util.Arrays;
 /**
  * Esta clase nos permite registrar el usuario, controlar las prefases para saber en que fase estamos y a cual iremos, escribir en el json al igual que cojer sus datos,
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 public class Competicio {
 

@@ -1,8 +1,8 @@
 /**
  * Esta clase nos permite controlar el idioma con el que se hará la batalla al igual que ppoder obtener los idiomas de los diferentes paises.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Llengua {

@@ -1,8 +1,8 @@
 /**
  * Esta clase nos indica que la batalla que se ejecuta es Escrita por lo tanto nos dirá cuales son sus normas. Esta clase es una subclasse de Batalla.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Escrita extends Batalla {

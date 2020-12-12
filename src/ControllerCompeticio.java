@@ -5,8 +5,8 @@ import java.util.Random;
 /**
  * Esta clase sirve para controlar lo que sucede en competicion al igual que será un intermediario entre las clases competición y menú.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class ControllerCompeticio {

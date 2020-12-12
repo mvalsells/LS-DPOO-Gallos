@@ -3,8 +3,8 @@ import java.util.ArrayList;
 /**
  * Esta clase contiene toda la información del tema y de las estrófas. Esta clse solo guarda la información de un tema.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public class Tema {

@@ -6,17 +6,17 @@ import java.util.Set;
 /**
  * Esta clase nos permite controlar lo que sucede cada una de las batallas: la puntuación, el numero de rimas, simular las batallas, saber el tema.
  *
- * @ author: Marc Valsells y Albert Clarimón.
- * @ version: 10/12/2020.
+ * @author Marc Valsells y Albert Clarimón.
+ * @version 10/12/2020.
  */
 
 public abstract class Batalla {
 
     //Campos de la classe
-    private final Rapero[] raperos = new Rapero[2];
-    private final Tema[] temas = new Tema[2];
-    private final Json json = new Json("src/competicio.json", "src/batalles.json");
-
+    private Rapero[] raperos = new Rapero[2];
+    private Tema[] temas = new Tema[2];
+    private Json json = new Json("src/competicio.json", "src/batalles.json");
+    private Llengua llengua;
 
     //Constructor
 
@@ -34,6 +34,7 @@ public abstract class Batalla {
         Collections.shuffle(temes);
         temas[0] = temes.get(0);
         temas[1] = temes.get(1);
+        llengua=null;
     }//Cierre del constructor
 
     /**
