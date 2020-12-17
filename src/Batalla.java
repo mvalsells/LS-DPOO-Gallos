@@ -15,7 +15,7 @@ public abstract class Batalla {
     //Campos de la classe
     private Rapero[] raperos = new Rapero[2];
     private Tema[] temas = new Tema[2];
-    private Json json = new Json("src/competicio.json", "src/batalles.json");
+    private Json json = new Json();
     private Llengua llengua;
 
     //Constructor

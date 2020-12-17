@@ -21,8 +21,8 @@ public class Main {
     //    ControllerCompeticio controllerCompeticio = new ControllerCompeticio();
 
       //  controllerCompeticio.executaMenu();
-        Json json = new Json("a", "a");
-        Pais pais = json.llegirPais("Ireland");
+        Json json = new Json();
+        Pais pais = json.llegirPais("Spain");
         System.out.println(pais.toString());
     }//Cierre del método
     //Fase2OK

@@ -8,8 +8,8 @@
 public class Llengua {
 
     //Campos de la clase
-    private String nomNatiu;
-    private String nomAngles;
+    private String nomIdiomaNatiu;
+    private String nomIdiomaAngles;
 
     /**
      * Método que dirá con que lengua se ejecuta la batalla
@@ -18,16 +18,16 @@ public class Llengua {
     public Llengua() {
     }//Cierre del método
 
-    public Llengua(String nomAngles, String nomNatiu) {
-        this.nomAngles=nomAngles;
-        this.nomNatiu=nomNatiu;
+    public Llengua(String nomIdiomaAngles, String nomIdiomaNatiu) {
+        this.nomIdiomaAngles =nomIdiomaAngles;
+        this.nomIdiomaNatiu=nomIdiomaNatiu;
     }
 
     @Override
     public String toString() {
         return "Llengua{" +
-                "nomNatiu='" + nomNatiu + '\'' +
-                ", nomAngles='" + nomAngles + '\'' +
+                "nomIdiomaNatiu='" + nomIdiomaNatiu + '\'' +
+                ", nomIdiomaAngles='" + nomIdiomaAngles + '\'' +
                 '}';
     }
 }//Cierre de la clase LLengua

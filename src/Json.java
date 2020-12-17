@@ -23,14 +23,11 @@ public class Json {
 
     /**
      * Constructor de Json
-     *
-     * @param fitxerCompeticio El parametro fitxerCompeticio, contiene el fichero json de la competición.
-     * @param fitxerBatalla    El parametro fitxerBatalla, contiene el fichero json de la batalla.
      */
 
-    public Json(String fitxerCompeticio, String fitxerBatalla) {
-        this.fitxerCompeticio = fitxerCompeticio;
-        this.fitxerBatalla = fitxerBatalla;
+    public Json() {
+        this.fitxerCompeticio = "src/competicio.json";
+        this.fitxerBatalla = "src/batalles.json";
     }//Cierre del constructor
 
     //Mètodes
@@ -253,7 +250,7 @@ public class Json {
 
     }//Cierre del método
 
-    public Pais llegirPais(String nomAngles){
+    public Pais llegirPais(String nomAngles)/*thorw Malform... IOexception PropiaException*/{
 
         //Llegir API
         StringBuilder sb = new StringBuilder();
@@ -268,11 +265,11 @@ public class Json {
             conn.connect();
             if (conn.getResponseCode() == 200 ){
                 Scanner scanner = new Scanner(urlAPI.openStream());
-                while (scanner.hasNext()){
+                while (scanner.hasNextLine()){
                     jsonWeb.append(scanner.nextLine());
                 }
             //TODO aquest else if i else segurament és pot fer amb una exception nostra que faci un throws amb el responseCode i ja ho solucionarem que fem si tenim 404 (pais no trobat) o un altre ("eeror servidor" on cridem el metode
-            } else if (conn.getResponseCode() == 400){
+            } else if (conn.getResponseCode() == 404){
                 // pais no trobat
                 System.err.println("Pais no trobat");
             } else {

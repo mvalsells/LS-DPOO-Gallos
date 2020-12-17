@@ -31,7 +31,8 @@ public class Rapero {
         this.realName = realName;
         this.stageName = stageName;
         this.birth = birth;
-        this.nationality = new Pais(nationality);
+        Json json = new Json();
+        this.nationality = json.llegirPais(nationality);
         this.level = level;
         this.photo = photo;
         puntuacio = 0.0f;
