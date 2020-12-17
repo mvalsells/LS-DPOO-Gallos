@@ -1,8 +1,12 @@
 import com.google.gson.*;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Esta clase nos permite tanto leer del json como escribir en él.
@@ -248,4 +252,62 @@ public class Json {
         }
 
     }//Cierre del método
+
+    public Pais llegirPais(String nomAngles){
+
+        //Llegir API
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://restcountries.eu/rest/v2/name/");
+        sb.append(nomAngles.toLowerCase());
+        sb.append("?fullText=true");
+        StringBuilder jsonWeb = new StringBuilder();
+        try {
+            URL urlAPI = new URL(sb.toString());
+            HttpURLConnection conn = (HttpURLConnection)urlAPI.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+            if (conn.getResponseCode() == 200 ){
+                Scanner scanner = new Scanner(urlAPI.openStream());
+                while (scanner.hasNext()){
+                    jsonWeb.append(scanner.nextLine());
+                }
+            //TODO aquest else if i else segurament és pot fer amb una exception nostra que faci un throws amb el responseCode i ja ho solucionarem que fem si tenim 404 (pais no trobat) o un altre ("eeror servidor" on cridem el metode
+            } else if (conn.getResponseCode() == 400){
+                // pais no trobat
+                System.err.println("Pais no trobat");
+            } else {
+                //fer la nostra exception
+                //throws new Respostade la web no esperado o algo similar exception
+            }
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.err.println("The provided URL is not correct");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Could not open connection to the provided URL");
+        }
+        //TODO segurmaent es podrà borrar aquest if quan haguem fet la exception donat que farà el throws abans i mai hi arribarem
+        if (!jsonWeb.toString().isEmpty()) {
+            //Agafo el primer (i unic) element del array que hem retornen com a data
+            JsonObject data = JsonParser.parseString(jsonWeb.toString()).getAsJsonArray().get(0).getAsJsonObject();
+            int habitants = data.get("population").getAsInt();
+            String region = data.get("region").getAsString();
+            String bandera = data.get("flag").getAsString();
+
+            ArrayList<String[]> languages = new ArrayList<>();
+            JsonArray languagesJson = data.get("languages").getAsJsonArray();
+            for (JsonElement languageElement : languagesJson) {
+                JsonObject languageObject = languageElement.getAsJsonObject();
+                String[] language = new String[2];
+                language[0] = languageObject.get("name").getAsString();
+                language[1] = languageObject.get("nativeName").getAsString();
+                languages.add(language);
+            }
+
+            return new Pais(nomAngles, region, habitants, bandera, languages);
+        } else {
+            return null;
+        }
+    }
 }//Cierre de la clase Json

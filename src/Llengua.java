@@ -14,7 +14,20 @@ public class Llengua {
     /**
      * Método que dirá con que lengua se ejecuta la batalla
      */
-
+    //TODO mirar on és cridar el constructor vuit per borrar-ho/canviar-ho el correcte
     public Llengua() {
     }//Cierre del método
+
+    public Llengua(String nomAngles, String nomNatiu) {
+        this.nomAngles=nomAngles;
+        this.nomNatiu=nomNatiu;
+    }
+
+    @Override
+    public String toString() {
+        return "Llengua{" +
+                "nomNatiu='" + nomNatiu + '\'' +
+                ", nomAngles='" + nomAngles + '\'' +
+                '}';
+    }
 }//Cierre de la clase LLengua
