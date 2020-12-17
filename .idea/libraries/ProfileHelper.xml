@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ProfileHelper">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/ProfileHelper.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

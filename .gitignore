@@ -1,4 +1,4 @@
 # Project exclude paths
-LSGallos.iml
-/.idea/libraries/
+#LSGallos.iml
+#/.idea/libraries/
 /out/
