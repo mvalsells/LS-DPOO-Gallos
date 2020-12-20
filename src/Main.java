@@ -18,12 +18,12 @@ public class Main {
      */
 
     public static void main(String[] args) throws IOException, InterruptedException {
-    //    ControllerCompeticio controllerCompeticio = new ControllerCompeticio();
+        ControllerCompeticio controllerCompeticio = new ControllerCompeticio();
 
-      //  controllerCompeticio.executaMenu();
-        Json json = new Json();
+      controllerCompeticio.executaMenu();
+       /* Json json = new Json();
         Pais pais = json.llegirPais("Spain");
-        System.out.println(pais.toString());
+        System.out.println(pais.toString());*/
     }//Cierre del método
     //Fase2OK
 

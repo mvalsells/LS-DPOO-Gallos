@@ -20,8 +20,10 @@ public class ControllerCompeticio {
      */
     public ControllerCompeticio() {
         Json json = new Json();
-        competicio = json.llegirCompeticio();
         menu = new Menu();
+        menu.display("Reading data from JSON file and API...");
+        competicio = json.llegirCompeticio();
+
     }//Cierre del constructor
 
     /**

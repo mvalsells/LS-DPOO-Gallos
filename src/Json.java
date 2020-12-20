@@ -1,12 +1,9 @@
 import com.google.gson.*;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Esta clase nos permite tanto leer del json como escribir en él.
@@ -16,18 +13,11 @@ import java.util.Scanner;
  */
 
 public class Json {
-
-    //Campos de la classe
-    private final String fitxerCompeticio;
-    private final String fitxerBatalla;
-
     /**
      * Constructor de Json
      */
 
     public Json() {
-        this.fitxerCompeticio = "src/competicio.json";
-        this.fitxerBatalla = "src/batalles.json";
     }//Cierre del constructor
 
     //Mètodes
@@ -39,6 +29,7 @@ public class Json {
      */
 
     public Competicio llegirCompeticio() {
+        final String fitxerCompeticio  = "src/competicio.json";
         try {
             //Atributs competició
             Competicio competicio;
@@ -53,8 +44,7 @@ public class Json {
             JsonArray array;
 
             //Execució
-            Reader read = new FileReader(fitxerCompeticio);
-            JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
+            JsonObject data = JsonParser.parseString(FileUtils.readText(fitxerCompeticio)).getAsJsonObject();
             JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
             name = jsonCompeticio.get("name").getAsString();
 
@@ -67,15 +57,12 @@ public class Json {
 
             //Llegir fases
             for (JsonElement jsonElement : array) {
-                float budget;
-                String strPais;
                 JsonObject jsonPhase;
                 jsonPhase = jsonElement.getAsJsonObject();
 
-                budget = jsonPhase.get("budget").getAsFloat();
-                strPais = jsonPhase.get("country").getAsString();
-                Pais pais = new Pais(strPais);
-                Fase fase = new Fase(pais, budget);
+                float budget = jsonPhase.get("budget").getAsFloat();
+                String country = jsonPhase.get("country").getAsString();
+                Fase fase = new Fase(country, budget);
                 phases.add(fase);
             }
 
@@ -144,16 +131,13 @@ public class Json {
      */
 
     public ArrayList<Tema> llegirTema() {
+        final String fitxerBatalla = "src/batalles.json";
         try {
-            //Atributs llegir JSON
-            Reader read = new FileReader(fitxerBatalla);
-            JsonObject data;
-            JsonArray array;
             ArrayList<Tema> temes = new ArrayList<>();
 
             //Obtenir dades
-            data = JsonParser.parseReader(read).getAsJsonObject();
-            array = data.get("themes").getAsJsonArray();
+            JsonObject data = JsonParser.parseString(FileUtils.readText(fitxerBatalla)).getAsJsonObject();
+            JsonArray array = data.get("themes").getAsJsonArray();
 
             for (JsonElement jsonElement : array) {
                 JsonObject jsonTema = jsonElement.getAsJsonObject();
@@ -204,14 +188,13 @@ public class Json {
      */
 
     public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
-
+        final String fitxerCompeticio  = "src/competicio.json";
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
 
         try {
-            Reader read = new FileReader(fitxerCompeticio);
-            JsonObject data = JsonParser.parseReader(read).getAsJsonObject();
+            JsonObject data = JsonParser.parseString(FileUtils.readText(fitxerCompeticio)).getAsJsonObject();
             JsonObject jsonCompeticio = data.get("competition").getAsJsonObject();
             JsonArray jsonCountries = data.get("countries").getAsJsonArray();
             JsonArray jsonRappers = data.get("rappers").getAsJsonArray();
@@ -231,14 +214,8 @@ public class Json {
             tot.add("countries", jsonCountries);
             tot.add("rappers", jsonRappers);
 
-            //String strJson = gson.toJson(tot);
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fitxerCompeticio));
-
             String jsonTot = gson.toJson(tot);
-
-            bw.write(jsonTot);
-            bw.close();
-
+            FileUtils.writeText(fitxerCompeticio, jsonTot);
         } catch (IOException e) {
             StringBuilder sb = new StringBuilder();
             sb.append("Error while processing ");
@@ -253,30 +230,9 @@ public class Json {
     public Pais llegirPais(String nomAngles)/*thorw Malform... IOexception PropiaException*/{
 
         //Llegir API
-        StringBuilder sb = new StringBuilder();
-        sb.append("https://restcountries.eu/rest/v2/name/");
-        sb.append(nomAngles.toLowerCase());
-        sb.append("?fullText=true");
-        StringBuilder jsonWeb = new StringBuilder();
+        String jsonWeb = "";
         try {
-            URL urlAPI = new URL(sb.toString());
-            HttpURLConnection conn = (HttpURLConnection)urlAPI.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-            if (conn.getResponseCode() == 200 ){
-                Scanner scanner = new Scanner(urlAPI.openStream());
-                while (scanner.hasNextLine()){
-                    jsonWeb.append(scanner.nextLine());
-                }
-            //TODO aquest else if i else segurament és pot fer amb una exception nostra que faci un throws amb el responseCode i ja ho solucionarem que fem si tenim 404 (pais no trobat) o un altre ("eeror servidor" on cridem el metode
-            } else if (conn.getResponseCode() == 404){
-                // pais no trobat
-                System.err.println("Pais no trobat");
-            } else {
-                //fer la nostra exception
-                //throws new Respostade la web no esperado o algo similar exception
-            }
-            conn.disconnect();
+            Api.getCountry(nomAngles);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             System.err.println("The provided URL is not correct");
@@ -285,9 +241,9 @@ public class Json {
             System.err.println("Could not open connection to the provided URL");
         }
         //TODO segurmaent es podrà borrar aquest if quan haguem fet la exception donat que farà el throws abans i mai hi arribarem
-        if (!jsonWeb.toString().isEmpty()) {
+        if (!jsonWeb.isEmpty()) {
             //Agafo el primer (i unic) element del array que hem retornen com a data
-            JsonObject data = JsonParser.parseString(jsonWeb.toString()).getAsJsonArray().get(0).getAsJsonObject();
+            JsonObject data = JsonParser.parseString(jsonWeb).getAsJsonArray().get(0).getAsJsonObject();
             int habitants = data.get("population").getAsInt();
             String region = data.get("region").getAsString();
             String bandera = data.get("flag").getAsString();

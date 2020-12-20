@@ -16,19 +16,21 @@ public class Fase {
     private static ArrayList<Rapero> raperos;
     private ArrayList<Batalla> batalles;
     private int batallaActual;
-    private String pais;
+    private String country;
     private float budget;
 
     /**
      * Constructor de Fase
      *
-     * @param pais   El parámetro pais nos indica el pais donde se ejecuta la fase.
+     * @param country   El parámetro country nos indica el pais donde se ejecuta la fase.
      * @param budget El parámetro budget nos indica cual es el presupuesto para esa fase.
      */
-    public Fase(Pais pais, float budget) {
+    public Fase(String country, float budget) {
         raperos = new ArrayList<>();
         batalles = new ArrayList<>();
         batallaActual = 0;
+        this.country = country;
+        this.budget = budget;
     }//Cierre del constructor
 
     //Getter and setters
