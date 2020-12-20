@@ -148,6 +148,7 @@ public class Fase {
             if (raperos.get(i).getStageName().equals(stageName)){
                 ArrayList<String> infoProfile = new ArrayList<>();
                 infoProfile.add(Integer.toString((int)raperos.get(i).getPuntuacio()));
+
                 infoProfile.add(Integer.toString(i+1));
                 infoProfile.add(raperos.get(i).getBandera());
                 infoProfile.add(raperos.get(i).getCountryName());

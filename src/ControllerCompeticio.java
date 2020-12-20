@@ -280,8 +280,8 @@ public class ControllerCompeticio {
                         break;
                     case 3:
                         //Create profile
-                        menu.createProfile();
-                        createProfile();
+                        //menu.createProfile();
+                        createProfile(finalCompeticio);
                         break;
                     case 4:
                         //Leave competition
@@ -305,15 +305,16 @@ public class ControllerCompeticio {
         }
     }//Cierre del método
 
-    private void createProfile() {
+    private void createProfile(boolean finalCompeticio) {
         String rapperName = menu.askForRapper();
         //TODO fer en el catch de l'exception
-        while (rapperName.equals("")){
+
+        String stageName = competicio.findRapper(rapperName);
+        while (stageName.equals("")){
+            stageName = competicio.findRapper(rapperName);
             menu.display("Rapper not found");
             rapperName = menu.askForRapper();
         }
-
-        String stageName = competicio.findRapper(rapperName);
 
         StringBuilder sb = new StringBuilder();
         sb.append("RappersHTMLProfiles/");
@@ -324,16 +325,31 @@ public class ControllerCompeticio {
         Profile profile = ProfileFactory.createProfile(sb.toString(),rapperProfile);
 
         ArrayList<String> infoProfile = competicio.infoProfile(stageName);
+
+        sb = new StringBuilder();
+        sb.append("Getting information about their country of origin (");
+        sb.append(infoProfile.get(3));
+        sb.append(")...");
+        menu.display(sb.toString());
         profile.addExtra("Points", infoProfile.get(0));
-        profile.addExtra("Position", infoProfile.get(1));
+        if (finalCompeticio && infoProfile.get(1).equals("1")){
+            profile.addExtra("Position", "Winner");
+        } else if (finalCompeticio && infoProfile.get(1).equals("2")) {
+            profile.addExtra("Position", "Loser");
+        } else {
+            profile.addExtra("Position", infoProfile.get(1));
+        }
         profile.setFlagUrl(infoProfile.get(2));
         profile.setCountry(infoProfile.get(3));
         for (int i=4; i<infoProfile.size(); i++ ){
             profile.addLanguage(infoProfile.get(i));
         }
 
+        menu.display("Generating HTML file...");
+
         try {
             profile.writeAndOpen();
+            menu.display("Done! The profile will open in your default browser.");
         } catch (IOException e){
             System.err.println("The HTML file can't be created / written to / opened for any reason");
         }
