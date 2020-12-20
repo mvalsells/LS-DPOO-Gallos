@@ -178,11 +178,11 @@ public class ControllerCompeticio {
 
                 int posicio = 0;
 
-                boolean perdedor = false;
+                boolean perdedor = true;
                 try {
                     competicio.nomGuanyador().equals(login);
                 } catch (IndexOutOfBoundsException e) {
-                    perdedor = true;
+                    perdedor = false;
                 }
 
                 if (!finalCompeticio) {

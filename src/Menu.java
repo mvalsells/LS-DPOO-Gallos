@@ -283,7 +283,7 @@ public class Menu {
             } else {
                 System.out.println("1. Go to the next phase");
             }
-        } else if (numBattle != 6) {
+        } else if (numBattle != 6 && !perdedor) {
             mostrarLiniaSeparadora();
             StringBuilder sb = new StringBuilder();
             sb.append("Phases: ");
