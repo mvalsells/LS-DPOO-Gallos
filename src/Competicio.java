@@ -1,3 +1,5 @@
+import edu.salleurl.profile.Profileable;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -418,4 +420,25 @@ public class Competicio {
     public String[] simularBatalles(String login) {
         return phases.get(faseActual - 1).simularBatalles(login);
     }//Cierre del método
+
+    public Profileable rapperProfile(String stageName) {
+        return Fase.rapperProfile(stageName);
+    }
+
+    public String findRapper(String rapperName) {
+        for (int i=0; i<Fase.getNumParticipants(); i++){
+            if (Fase.getNameRapper(i).equals(rapperName)){
+                return Fase.getStageNameRapero(i);
+            }
+            if (Fase.getStageNameRapero(i).equals(rapperName)) {
+                return rapperName;
+            }
+        }
+        //TODO fer amb una exception
+        return "";
+    }
+
+    public ArrayList<String> infoProfile(String stageName) {
+        return Fase.infoProfile(stageName);
+    }
 }//Cierre de la clase Competicio

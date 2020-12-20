@@ -232,7 +232,7 @@ public class Json {
         //Llegir API
         String jsonWeb = "";
         try {
-            Api.getCountry(nomAngles);
+            jsonWeb = Api.getCountry(nomAngles);
         } catch (MalformedURLException e) {
             e.printStackTrace();
             System.err.println("The provided URL is not correct");

@@ -30,4 +30,7 @@ public class Llengua {
                 ", nomIdiomaAngles='" + nomIdiomaAngles + '\'' +
                 '}';
     }
+    public String getNomIdiomaAngles(){
+        return nomIdiomaAngles;
+    }
 }//Cierre de la clase LLengua

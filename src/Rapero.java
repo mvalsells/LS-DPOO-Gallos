@@ -1,3 +1,8 @@
+import edu.salleurl.profile.Profileable;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Esta clase nos permite almacenar información sobre los raperos.
  *
@@ -5,8 +10,7 @@
  * @version 10/12/2020.
  */
 
-public class Rapero {
-
+public class Rapero implements Profileable {
     //Campos de la clase
     private final String realName;
     private final String stageName;
@@ -32,7 +36,8 @@ public class Rapero {
         this.stageName = stageName;
         this.birth = birth;
         Json json = new Json();
-        this.nationality = json.llegirPais(nationality);
+        Pais nation = json.llegirPais(nationality);
+        this.nationality = nation;
         this.level = level;
         this.photo = photo;
         puntuacio = 0.0f;
@@ -86,5 +91,46 @@ public class Rapero {
      */
     public double comparePuntuacio(Rapero rapero) {
         return this.getPuntuacio() - rapero.getPuntuacio();
+    }
+
+    @Override
+    public String getName() {
+        return realName;
+    }
+
+    @Override
+    public String getNickname() {
+        return stageName;
+    }
+
+    @Override
+    public String getBirthdate() {
+        return birth;
+    }
+
+    @Override
+    public String getPictureUrl() {
+        return photo;
+    }
+
+
+    public Object clone(){
+        try {
+            return (Rapero) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Rapero(realName,stageName,birth,nationality.getNomAngles(),level, photo);
+        }
+    }
+
+    public String getBandera() {
+        return nationality.getBandera();
+    }
+
+    public ArrayList<String> getLanguages() {
+        return nationality.getLanguages();
+    }
+
+    public String getCountryName() {
+        return nationality.getNomAngles();
     }
 }

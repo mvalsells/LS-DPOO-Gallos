@@ -1,3 +1,5 @@
+import edu.salleurl.profile.Profileable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -128,6 +130,34 @@ public class Fase {
         }
         return existex;
     }//Cierre del método
+
+    public static Profileable rapperProfile(String stageName) {
+        boolean found = false;
+        for (Rapero rapero : raperos){
+            if (rapero.getStageName().equals(stageName)){
+                return (Profileable) rapero.clone();
+            }
+        }
+        //TODO throws rapper not found
+        return null;
+    }
+
+    public static ArrayList<String> infoProfile(String stageName) {
+        ordenarRaperos();
+        for (int i=0; i<getNumParticipants(); i++) {
+            if (raperos.get(i).getStageName().equals(stageName)){
+                ArrayList<String> infoProfile = new ArrayList<>();
+                infoProfile.add(Integer.toString((int)raperos.get(i).getPuntuacio()));
+                infoProfile.add(Integer.toString(i+1));
+                infoProfile.add(raperos.get(i).getBandera());
+                infoProfile.add(raperos.get(i).getCountryName());
+                infoProfile.addAll(raperos.get(i).getLanguages());
+                return infoProfile;
+            }
+        }
+        //TODO throws rapper not found
+        return null;
+    }
 
     //Metodes
 
@@ -337,4 +367,5 @@ public class Fase {
     public void ferBatalla(int battlePos, String estrofaLogin, String estrofaContrincant) {
         batalles.get(battlePos).ferBatalla(estrofaLogin, estrofaContrincant);
     }//Cierre del método
+
 }//Cierre de la clase Fase

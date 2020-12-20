@@ -1,5 +1,11 @@
+import edu.salleurl.profile.Profile;
+import edu.salleurl.profile.ProfileFactory;
+import edu.salleurl.profile.Profileable;
+
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -275,6 +281,7 @@ public class ControllerCompeticio {
                     case 3:
                         //Create profile
                         menu.createProfile();
+                        createProfile();
                         break;
                     case 4:
                         //Leave competition
@@ -297,6 +304,40 @@ public class ControllerCompeticio {
             menu.noRegistrat(login);
         }
     }//Cierre del método
+
+    private void createProfile() {
+        String rapperName = menu.askForRapper();
+        //TODO fer en el catch de l'exception
+        while (rapperName.equals("")){
+            menu.display("Rapper not found");
+            rapperName = menu.askForRapper();
+        }
+
+        String stageName = competicio.findRapper(rapperName);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("RappersHTMLProfiles/");
+        sb.append(stageName);
+        sb.append(".html");
+
+        Profileable rapperProfile = competicio.rapperProfile(stageName);
+        Profile profile = ProfileFactory.createProfile(sb.toString(),rapperProfile);
+
+        ArrayList<String> infoProfile = competicio.infoProfile(stageName);
+        profile.addExtra("Points", infoProfile.get(0));
+        profile.addExtra("Position", infoProfile.get(1));
+        profile.setFlagUrl(infoProfile.get(2));
+        profile.setCountry(infoProfile.get(3));
+        for (int i=4; i<infoProfile.size(); i++ ){
+            profile.addLanguage(infoProfile.get(i));
+        }
+
+        try {
+            profile.writeAndOpen();
+        } catch (IOException e){
+            System.err.println("The HTML file can't be created / written to / opened for any reason");
+        }
+    }
 
     /**
      * Método que nos controlara lo que sucede en cada batalla, ya sea en que posición de la batalla se encuentra el usuario, si se ha lanzado la moneda.

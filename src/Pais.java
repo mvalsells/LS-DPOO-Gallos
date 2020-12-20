@@ -62,4 +62,16 @@ public class Pais {
                 ", llengues=" + llengues.toString() +
                 '}';
     }
+
+    public String getBandera() {
+        return bandera;
+    }
+
+    public ArrayList<String> getLanguages() {
+        ArrayList<String> lang = new ArrayList<>();
+        for (Llengua llengua:llengues){
+            lang.add(llengua.getNomIdiomaAngles());
+        }
+        return lang;
+    }
 }//Cierre de la clase Pais

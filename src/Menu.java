@@ -527,4 +527,9 @@ public class Menu {
         System.out.print("Press enter to continue");
         scanner.nextLine();
     }//Cierre del método
+
+    public String askForRapper() {
+        System.out.print("Enter the name of the rapper: ");
+        return scanner.nextLine();
+    }
 }//Cierre de la clase Menú
