@@ -4,7 +4,7 @@ import java.io.IOException;
  * Esta clase nos permite controlar el proyecto en su totalidad, tanto en el momento de ejecutar el menú, como en el de crear el controller.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 
 public class Main {
@@ -20,9 +20,8 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         ControllerCompeticio controllerCompeticio = new ControllerCompeticio();
 
-      controllerCompeticio.executaMenu();
+        controllerCompeticio.executaMenu();
 
     }//Cierre del método
-    //Fase2OK
 
 }//Cierre de la clase Main

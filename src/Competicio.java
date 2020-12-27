@@ -12,16 +12,16 @@ import java.util.Arrays;
  * Esta clase nos permite registrar el usuario, controlar las prefases para saber en que fase estamos y a cual iremos, escribir en el json al igual que cojer sus datos,
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 public class Competicio {
 
     //Campos de la clase
-    private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private ArrayList<String> countries;
-    private ArrayList<Fase> phases;
+    private final String name;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final ArrayList<String> countries;
+    private final ArrayList<Fase> phases;
     private int faseActual;
 
     /**
@@ -188,7 +188,7 @@ public class Competicio {
     public Boolean[] registreUsuari(String realName, String stageName, String birth, String nationality, String nivell, String photo) {
         Boolean[] estat = new Boolean[5];
         Arrays.fill(estat, true);
-        int level=0;
+        int level = 0;
 
         //Comprovo si ja hi ha el rappero
         for (int i = 0; i < Fase.getNumParticipants(); i++) {
@@ -223,9 +223,9 @@ public class Competicio {
             }
         }
         try {
-             level = Integer.parseInt(nivell);
-        }catch (NumberFormatException e){
-            estat[4]=false;
+            level = Integer.parseInt(nivell);
+        } catch (NumberFormatException e) {
+            estat[4] = false;
         }
 
         for (boolean b : estat) {
@@ -424,6 +424,7 @@ public class Competicio {
 
     /**
      * Método que se encarga de retornar el nombre del rapero que se ha solicitado en la fase.
+     *
      * @param stageName El parámetro stageName india el nombre artítico del rapreo.
      * @return el nombre del rapero que se ha solicitado en la fase.
      */
@@ -434,15 +435,16 @@ public class Competicio {
 
     /**
      * Método que se encarga de encontrar si el nombre introducido existe.
+     *
      * @param rapperName El parámetro rapperName indica el nombre que usa el rapero en la competición.
      * @return el nombre introducido .
      * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.
      */
 
     public String findRapper(String rapperName) throws RapperNotFoundException {
-        for (int i=0; i<Fase.getNumParticipants(); i++){
+        for (int i = 0; i < Fase.getNumParticipants(); i++) {
             String tmp = Fase.getNameRapper(i);
-            if (tmp.equals(rapperName)){
+            if (tmp.equals(rapperName)) {
                 return Fase.getStageNameRapero(i);
             }
             tmp = Fase.getStageNameRapero(i);
@@ -455,6 +457,7 @@ public class Competicio {
 
     /**
      * Método que se encarga de pasar la información del perfil del rapero seleccionado.
+     *
      * @param stageName El parámetro stageName india el nombre artítico del rapreo.
      * @return La información del perfil del rapero seleccionado.
      * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.

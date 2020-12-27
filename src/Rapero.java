@@ -1,13 +1,10 @@
 import edu.salleurl.profile.Profileable;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  * Esta clase nos permite almacenar información sobre los raperos.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 
 public class Rapero implements Profileable {
@@ -89,48 +86,86 @@ public class Rapero implements Profileable {
      * @param rapero El parámetro rapero contiende la información de rapero.
      * @return La puntuación del rapero.
      */
+
     public double comparePuntuacio(Rapero rapero) {
         return this.getPuntuacio() - rapero.getPuntuacio();
-    }
+    }//cierre del método
+
+    /**
+     * Método que devuelve el nombre real del rapero.
+     *
+     * @return El nombre real del rapero.
+     */
 
     @Override
     public String getName() {
         return realName;
-    }
+    }//Cierre del método
+
+    /**
+     * Método que devuelve el nombre artístico del rapero.
+     *
+     * @return El nombre artístico del rapero.
+     */
 
     @Override
     public String getNickname() {
         return stageName;
-    }
+    }//cierre del método
+
+    /**
+     * Método que devuelve el año de nacimiento del rapero.
+     *
+     * @return El año de nacimiento del rapero.
+     */
 
     @Override
     public String getBirthdate() {
         return birth;
-    }
+    }//Cierre del método
+
+    /**
+     * Método que devuelve la foto del rapero.
+     *
+     * @return La foto del rapero.
+     */
 
     @Override
     public String getPictureUrl() {
         return photo;
-    }
+    }//Cierre del método
 
+    /**
+     * Método que clona la información del rapero a un nuevo array.
+     *
+     * @return la información del rapero clonada.
+     */
 
-    public Object clone(){
+    public Object clone() {
         try {
-            return (Rapero) super.clone();
+            return super.clone();
         } catch (CloneNotSupportedException e) {
-            return new Rapero(realName,stageName,birth,nationality.getNomAngles(),level, photo);
+            return new Rapero(realName, stageName, birth, nationality.getNomAngles(), level, photo);
         }
-    }
+    }//Cierre del método
+
+    /**
+     * Método que devuelve la bandera del pais.
+     *
+     * @return Devuelve la bandera del pais.
+     */
 
     public String getBandera() {
         return nationality.getBandera();
-    }
+    }//cierre del método
 
-    public ArrayList<String> getLanguages() {
-        return nationality.getLanguages();
-    }
+    /**
+     * Método que devuelve el nombre del pais en inglés.
+     *
+     * @return El nombre del pais en inglés.
+     */
 
     public String getCountryName() {
         return nationality.getNomAngles();
-    }
-}
+    }//Cierre del método
+}//Cierre de la clase Rapero

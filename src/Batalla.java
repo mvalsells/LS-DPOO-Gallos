@@ -13,10 +13,10 @@ import java.util.Set;
 public abstract class Batalla {
 
     //Campos de la classe
-    private Rapero[] raperos = new Rapero[2];
-    private Tema[] temas = new Tema[2];
-    private Json json = new Json();
-    private Llengua llengua;
+    private final Rapero[] raperos = new Rapero[2];
+    private final Tema[] temas = new Tema[2];
+    private final Json json = new Json();
+    private final Llengua llengua;
 
     //Constructor
 
@@ -34,7 +34,7 @@ public abstract class Batalla {
         Collections.shuffle(temes);
         temas[0] = temes.get(0);
         temas[1] = temes.get(1);
-        llengua=null;
+        llengua = null;
     }//Cierre del constructor
 
     /**
