@@ -1,4 +1,5 @@
 import edu.salleurl.profile.Profileable;
+import exceptions.RapperNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -142,22 +143,20 @@ public class Fase {
         return null;
     }
 
-    public static ArrayList<String> infoProfile(String stageName) {
+    public static String[] infoProfile(String stageName) throws RapperNotFoundException {
         ordenarRaperos();
         for (int i=0; i<getNumParticipants(); i++) {
             if (raperos.get(i).getStageName().equals(stageName)){
-                ArrayList<String> infoProfile = new ArrayList<>();
-                infoProfile.add(Integer.toString((int)raperos.get(i).getPuntuacio()));
-
-                infoProfile.add(Integer.toString(i+1));
-                infoProfile.add(raperos.get(i).getBandera());
-                infoProfile.add(raperos.get(i).getCountryName());
-                infoProfile.addAll(raperos.get(i).getLanguages());
+                String[] infoProfile = new String[3];
+                infoProfile[0] = Integer.toString((int)raperos.get(i).getPuntuacio()); //Puntuació
+                infoProfile[1] = Integer.toString(i+1); //Posició
+                //infoProfile.add(raperos.get(i).getBandera());
+                infoProfile[2] = raperos.get(i).getCountryName(); //Nom Pais
+                //infoProfile.addAll(raperos.get(i).getLanguages());
                 return infoProfile;
             }
         }
-        //TODO throws rapper not found
-        return null;
+        throw new RapperNotFoundException(stageName);
     }
 
     //Metodes

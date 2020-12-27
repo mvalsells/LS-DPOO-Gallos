@@ -1,6 +1,8 @@
 import edu.salleurl.profile.Profile;
 import edu.salleurl.profile.ProfileFactory;
 import edu.salleurl.profile.Profileable;
+import exceptions.ApiReadException;
+import exceptions.RapperNotFoundException;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -305,16 +307,22 @@ public class ControllerCompeticio {
         }
     }//Cierre del método
 
-    private void createProfile(boolean finalCompeticio) {
-        String rapperName = menu.askForRapper();
-        //TODO fer en el catch de l'exception
+    private void createProfile(boolean finalCompeticio) throws InterruptedException {
 
-        String stageName = competicio.findRapper(rapperName);
-        while (stageName.equals("")){
-            stageName = competicio.findRapper(rapperName);
-            menu.display("Rapper not found");
-            rapperName = menu.askForRapper();
-        }
+        boolean rapperNotFound = true;
+        String rapperName = null;
+        String stageName = null;
+        do {
+            try {
+                rapperName = menu.askForRapper();
+                stageName = competicio.findRapper(rapperName);
+                rapperNotFound = false;
+            } catch (RapperNotFoundException e){
+                menu.displayError("Rapper not found");
+                Thread.sleep(50);
+            }
+        } while (rapperNotFound);
+
 
         StringBuilder sb = new StringBuilder();
         sb.append("RappersHTMLProfiles/");
@@ -323,36 +331,51 @@ public class ControllerCompeticio {
 
         Profileable rapperProfile = competicio.rapperProfile(stageName);
         Profile profile = ProfileFactory.createProfile(sb.toString(),rapperProfile);
-
-        ArrayList<String> infoProfile = competicio.infoProfile(stageName);
-
+        String[] infoProfile = new String[3];
+        try {
+            infoProfile = competicio.infoProfile(stageName);
+        } catch (RapperNotFoundException e){
+            menu.displayError("Rapper not found while trying to get the information");
+        }
         sb = new StringBuilder();
         sb.append("Getting information about their country of origin (");
-        sb.append(infoProfile.get(3));
+        sb.append(infoProfile[2]);
         sb.append(")...");
         menu.display(sb.toString());
-        profile.addExtra("Points", infoProfile.get(0));
-        if (finalCompeticio && infoProfile.get(1).equals("1")){
-            profile.addExtra("Position", "Winner");
-        } else if (finalCompeticio && infoProfile.get(1).equals("2")) {
-            profile.addExtra("Position", "Loser");
-        } else {
-            profile.addExtra("Position", infoProfile.get(1));
-        }
-        profile.setFlagUrl(infoProfile.get(2));
-        profile.setCountry(infoProfile.get(3));
-        for (int i=4; i<infoProfile.size(); i++ ){
-            profile.addLanguage(infoProfile.get(i));
-        }
+            try {
+                ArrayList<String> infoPais = Json.llegirPais(infoProfile[2]);
+                profile.addExtra("Points", infoProfile[0]);
+                if (finalCompeticio && infoProfile[1].equals("1")) {
+                    profile.addExtra("Position", "Winner");
+                } else if (finalCompeticio && infoProfile[1].equals("2")) {
+                    profile.addExtra("Position", "Loser");
+                } else {
+                    profile.addExtra("Position", infoProfile[1]);
+                }
+                profile.setFlagUrl(infoPais.get(2));
+                profile.setCountry(infoProfile[2]);
+                for (int i = 3; i < infoPais.size(); i++) {
+                    profile.addLanguage(infoPais.get(i));
+                }
+                profile.addExtra("Country population", infoPais.get(0));
+                menu.display("Generating HTML file...");
 
-        menu.display("Generating HTML file...");
+                try {
+                    profile.writeAndOpen();
+                    menu.display("Done! The profile will open in your default browser.");
+                } catch (IOException e) {
+                    menu.displayError("The HTML file can't be created / written to / opened for any reason");
+                }
+            } catch (ApiReadException e) {
+                if (e.getHttpCode() == 404) {
+                    menu.displayError("Country not found in the API");
+                } else {
+                    menu.displayError("Error while trying to read the API");
+                }
+            } catch (IOException e) {
+                menu.displayError("Error while trying to read the API");
+            }
 
-        try {
-            profile.writeAndOpen();
-            menu.display("Done! The profile will open in your default browser.");
-        } catch (IOException e){
-            System.err.println("The HTML file can't be created / written to / opened for any reason");
-        }
     }
 
     /**

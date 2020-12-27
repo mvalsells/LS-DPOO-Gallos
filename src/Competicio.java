@@ -1,4 +1,5 @@
 import edu.salleurl.profile.Profileable;
+import exceptions.RapperNotFoundException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -425,7 +426,7 @@ public class Competicio {
         return Fase.rapperProfile(stageName);
     }
 
-    public String findRapper(String rapperName) {
+    public String findRapper(String rapperName) throws RapperNotFoundException {
         for (int i=0; i<Fase.getNumParticipants(); i++){
             if (Fase.getNameRapper(i).equals(rapperName)){
                 return Fase.getStageNameRapero(i);
@@ -434,11 +435,10 @@ public class Competicio {
                 return rapperName;
             }
         }
-        //TODO fer amb una exception
-        return "";
+        throw new RapperNotFoundException(rapperName);
     }
 
-    public ArrayList<String> infoProfile(String stageName) {
+    public String[] infoProfile(String stageName) throws RapperNotFoundException {
         return Fase.infoProfile(stageName);
     }
 }//Cierre de la clase Competicio

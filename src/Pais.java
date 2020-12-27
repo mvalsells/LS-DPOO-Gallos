@@ -23,12 +23,11 @@ public class Pais {
      *
      * @param nomAngles El parámetro de nomAngles nos traduce el nombre del pais al inglés.
      */
-    //TODO mirar on és cridar el constructor vuit per borrar-ho/canviar-ho el correcte
     public Pais(String nomAngles) {
         this.nomAngles = nomAngles;
     }//Cierre del constructor
 
-    public Pais(String nomAngles, String regio, int habitants, String bandera, ArrayList<String[]> languages) {
+ /*   public Pais(String nomAngles, String regio, int habitants, String bandera, ArrayList<String[]> languages) {
         this.nomAngles=nomAngles;
         this.regio=regio;
         this.habitants=habitants;
@@ -38,7 +37,7 @@ public class Pais {
             Llengua language = new Llengua(lang[0], lang[1]);
             llengues.add(language);
         }
-    }
+    }*/
 
     //Getters and Setters
 

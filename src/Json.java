@@ -1,7 +1,10 @@
 import com.google.gson.*;
+import exceptions.ApiReadException;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -22,6 +25,29 @@ public class Json {
 
     //Mètodes
 
+    public static ArrayList<String> llegirPais(String nomAngles) throws ApiReadException, IOException/*thorw Malform... IOexception PropiaException*/ {
+
+        //Llegir API
+        String jsonWeb = Api.getCountry(nomAngles);
+        //Agafo el primer (i unic) element del array que hem retornen com a data
+        JsonObject data = JsonParser.parseString(jsonWeb).getAsJsonArray().get(0).getAsJsonObject();
+        ArrayList<String> infoCountry = new ArrayList();
+        int population = data.get("population").getAsInt();
+        infoCountry.add(String.format("%,d", population));
+        infoCountry.add(data.get("region").getAsString());
+        infoCountry.add(data.get("flag").getAsString());
+
+        JsonArray languagesJson = data.get("languages").getAsJsonArray();
+        for (JsonElement languageElement : languagesJson) {
+            JsonObject languageObject = languageElement.getAsJsonObject();
+            infoCountry.add(languageObject.get("name").getAsString());
+        }
+
+        return infoCountry;
+    }
+
+    //Llegir temes
+
     /**
      * Método por el cual se lee el json de competición, una vez leido se separará en competition, countries o rappers.
      *
@@ -29,7 +55,7 @@ public class Json {
      */
 
     public Competicio llegirCompeticio() {
-        final String fitxerCompeticio  = "src/competicio.json";
+        final String fitxerCompeticio = "src/competicio.json";
         try {
             //Atributs competició
             Competicio competicio;
@@ -122,8 +148,6 @@ public class Json {
 
     }//Cierre del método
 
-    //Llegir temes
-
     /**
      * Método que se utiliza al momento de leer los temas y estrofas que hay en el fichero de batalla.
      *
@@ -188,7 +212,7 @@ public class Json {
      */
 
     public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
-        final String fitxerCompeticio  = "src/competicio.json";
+        final String fitxerCompeticio = "src/competicio.json";
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();
         Gson gson = builder.create();
@@ -226,41 +250,4 @@ public class Json {
         }
 
     }//Cierre del método
-
-    public Pais llegirPais(String nomAngles)/*thorw Malform... IOexception PropiaException*/{
-
-        //Llegir API
-        String jsonWeb = "";
-        try {
-            jsonWeb = Api.getCountry(nomAngles);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            System.err.println("The provided URL is not correct");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.err.println("Could not open connection to the provided URL");
-        }
-        //TODO segurmaent es podrà borrar aquest if quan haguem fet la exception donat que farà el throws abans i mai hi arribarem
-        if (!jsonWeb.isEmpty()) {
-            //Agafo el primer (i unic) element del array que hem retornen com a data
-            JsonObject data = JsonParser.parseString(jsonWeb).getAsJsonArray().get(0).getAsJsonObject();
-            int habitants = data.get("population").getAsInt();
-            String region = data.get("region").getAsString();
-            String bandera = data.get("flag").getAsString();
-
-            ArrayList<String[]> languages = new ArrayList<>();
-            JsonArray languagesJson = data.get("languages").getAsJsonArray();
-            for (JsonElement languageElement : languagesJson) {
-                JsonObject languageObject = languageElement.getAsJsonObject();
-                String[] language = new String[2];
-                language[0] = languageObject.get("name").getAsString();
-                language[1] = languageObject.get("nativeName").getAsString();
-                languages.add(language);
-            }
-
-            return new Pais(nomAngles, region, habitants, bandera, languages);
-        } else {
-            return null;
-        }
-    }
 }//Cierre de la clase Json

@@ -519,6 +519,9 @@ public class Menu {
     public void display(String s) {
         System.out.println(s);
     }//Cierre del método
+    public void displayError(String s) {
+        System.err.println(s);
+    }//Cierre del método
 
     /**
      * Método que se usa cada vez que el usuario deba salir de una pagina, deberá oprimir la tecla enter

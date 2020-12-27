@@ -36,7 +36,7 @@ public class Rapero implements Profileable {
         this.stageName = stageName;
         this.birth = birth;
         Json json = new Json();
-        Pais nation = json.llegirPais(nationality);
+        Pais nation = new Pais(nationality);
         this.nationality = nation;
         this.level = level;
         this.photo = photo;
