@@ -7,7 +7,6 @@ import exceptions.RapperNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -72,7 +71,7 @@ public class ControllerCompeticio {
                     System.exit(0);
                     break;
                 default:
-                    menu.display("Please enter a right option! (1 or 2)");
+                    menu.displayError("Please enter a right option! (1 or 2)");
                     break;
             }
         } while (true);
@@ -197,7 +196,7 @@ public class ControllerCompeticio {
                             opcio = menu.demanaOpcio();
 
                             if (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4) {
-                                menu.display("Number introduced not corresponding to the menu");
+                                menu.displayError("Number introduced not corresponding to the menu");
                             }
                         } while (opcio != 1 && opcio != 2 && opcio != 3 && opcio != 4);
 

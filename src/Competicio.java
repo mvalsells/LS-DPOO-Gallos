@@ -428,10 +428,12 @@ public class Competicio {
 
     public String findRapper(String rapperName) throws RapperNotFoundException {
         for (int i=0; i<Fase.getNumParticipants(); i++){
-            if (Fase.getNameRapper(i).equals(rapperName)){
+            String tmp = Fase.getNameRapper(i);
+            if (tmp.equals(rapperName)){
                 return Fase.getStageNameRapero(i);
             }
-            if (Fase.getStageNameRapero(i).equals(rapperName)) {
+            tmp = Fase.getStageNameRapero(i);
+            if (tmp.equals(rapperName)) {
                 return rapperName;
             }
         }

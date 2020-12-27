@@ -46,7 +46,7 @@ public class Fase {
      */
 
     public static String getNameRapper(int i) {
-        return raperos.get(i).getStageName();
+        return raperos.get(i).getName();
 
     }//Cierre del métodos
 
