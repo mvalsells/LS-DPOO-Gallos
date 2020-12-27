@@ -132,6 +132,12 @@ public class Fase {
         return existex;
     }//Cierre del método
 
+    /**
+     * Método que copia la estructura de rapero i la clona en una estructura auxiliar.
+     * @param stageName El parámetro stageName nos indica el nombre artístico del rapero.
+     * @return La estructura de rapero clonada.
+     */
+
     public static Profileable rapperProfile(String stageName) {
         boolean found = false;
         for (Rapero rapero : raperos){
@@ -139,9 +145,15 @@ public class Fase {
                 return (Profileable) rapero.clone();
             }
         }
-        //TODO throws rapper not found
         return null;
     }
+
+    /**
+     * Método que copia en el string infoProfile toda la infomracion del rapero que queremos, la cual posteriormente se pondra en el HTML
+     * @param stageName El parámetro stageName nos indica el nombre artístico del rapero.
+     * @return toda la infomracion del rapero que queremos en el string infoProfile.
+     * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.
+     */
 
     public static String[] infoProfile(String stageName) throws RapperNotFoundException {
         ordenarRaperos();
@@ -150,14 +162,12 @@ public class Fase {
                 String[] infoProfile = new String[3];
                 infoProfile[0] = Integer.toString((int)raperos.get(i).getPuntuacio()); //Puntuació
                 infoProfile[1] = Integer.toString(i+1); //Posició
-                //infoProfile.add(raperos.get(i).getBandera());
                 infoProfile[2] = raperos.get(i).getCountryName(); //Nom Pais
-                //infoProfile.addAll(raperos.get(i).getLanguages());
                 return infoProfile;
             }
         }
         throw new RapperNotFoundException(stageName);
-    }
+    }//Cierre del método
 
     //Metodes
 

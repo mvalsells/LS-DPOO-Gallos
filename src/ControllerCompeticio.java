@@ -37,7 +37,7 @@ public class ControllerCompeticio {
      * Método que nos permite ejecutar el menú de bienvenida para saber si ha empezado o no, al igual que nos dara la diferenciacion entre los proximos métodos
      * dependiendo de si ha empezado la competicion, o no.
      *
-     * @throws InterruptedException
+     * @throws InterruptedException El parámetro InterrupException controla si hay un fallo en el tiempo.
      */
     public void executaMenu() throws InterruptedException {
         int opcio;
@@ -141,7 +141,7 @@ public class ControllerCompeticio {
      * mostrando durante el transcurso de la batalla, ya sean los de la batalla misma, los del ranking, los de las fases o si el usuario pierde.
      * Tambien controlaremos si la moneda se ha lanzado, si se han ya completado las dos batallas.
      *
-     * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
+     * @throws InterruptedException El parámetro InterrupException controla si hay un fallo en el tiempo.
      */
     private void login() throws InterruptedException {
 
@@ -306,6 +306,12 @@ public class ControllerCompeticio {
         }
     }//Cierre del método
 
+    /**
+     * Método que se encarga de crear el perfil del rapero seleccionado
+     * @param finalCompeticio El parámetro finalCompetició indica si ya se ha llegado al final de la competición o no
+     * @throws InterruptedException El parámetro InterruptedException sirve para identificar un problema con el tiempo
+     */
+
     private void createProfile(boolean finalCompeticio) throws InterruptedException {
 
         boolean rapperNotFound = true;
@@ -375,7 +381,7 @@ public class ControllerCompeticio {
                 menu.displayError("Error while trying to read the API");
             }
 
-    }
+    }//Cierre del método
 
     /**
      * Método que nos controlara lo que sucede en cada batalla, ya sea en que posición de la batalla se encuentra el usuario, si se ha lanzado la moneda.
@@ -385,7 +391,7 @@ public class ControllerCompeticio {
      * @param contrincant El parámetro contrincant nos indica cual es el nombre de nuestro contrincant.
      * @param temaPos     El parámetro temaPos nos indica que en que posición del array temas está el tema que le ha tocado al login.
      * @param coin        El parámetro coin determinará de forma aleatoria quien empieza primero la batalla.
-     * @throws InterruptedException El parámetro InterrupExceotion controla si hay un fallo en el tiempo.
+     * @throws InterruptedException El parámetro InterrupException controla si hay un fallo en el tiempo.
      */
 
     private void makeBattle(int battlePos, String contrincant, int temaPos, int coin) throws InterruptedException {

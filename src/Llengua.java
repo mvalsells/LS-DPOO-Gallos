@@ -14,7 +14,7 @@ public class Llengua {
     /**
      * Método que dirá con que lengua se ejecuta la batalla
      */
-    //TODO mirar on és cridar el constructor vuit per borrar-ho/canviar-ho el correcte
+
     public Llengua() {
     }//Cierre del método
 
