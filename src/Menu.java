@@ -7,7 +7,7 @@ import java.util.Scanner;
  * la posibilidad, si aun puede, de poner sus versos o por otro lado abandonar la competicion.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 public class Menu {
 
@@ -212,7 +212,7 @@ public class Menu {
             if (!estat[2]) {
                 System.err.println("Country is not accepted in this competition");
             }
-            if(!estat[4]){
+            if (!estat[4]) {
                 System.err.println("Level is invalid");
             }
         }
@@ -519,6 +519,13 @@ public class Menu {
     public void display(String s) {
         System.out.println(s);
     }//Cierre del método
+
+    /**
+     * Método para monstrar mensaje de error por pantalla
+     *
+     * @param s El parámetro s sirve para saber que es lo que se debe mostrar por pantalla
+     */
+
     public void displayError(String s) {
         System.err.println(s);
     }//Cierre del método
@@ -526,13 +533,21 @@ public class Menu {
     /**
      * Método que se usa cada vez que el usuario deba salir de una pagina, deberá oprimir la tecla enter
      */
+
     private void pressEnterToContinue() {
         System.out.print("Press enter to continue");
         scanner.nextLine();
     }//Cierre del método
 
+    /**
+     * Método que sirve para pedir un rapero por pantalla.
+     *
+     * @return Nombre del rapero.
+     */
+
     public String askForRapper() {
         System.out.print("Enter the name of the rapper: ");
         return scanner.nextLine();
-    }
+    }//Cierre del método
+
 }//Cierre de la clase Menú

@@ -13,7 +13,7 @@ import java.util.Random;
  * Esta clase sirve para controlar lo que sucede en competicion al igual que será un intermediario entre las clases competición y menú.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 
 public class ControllerCompeticio {
@@ -121,14 +121,14 @@ public class ControllerCompeticio {
                 dadesUsuari.set(2, null);
             }
 
-            if(estat[3]){
+            if (estat[3]) {
                 Json json = new Json();
                 int level = Integer.parseInt(nivell);
                 json.escriureRapero(realName, stageName, birth, nationality, level, photo);
             }
 
-            if(!estat[4]){
-                dadesUsuari.set(4,null);
+            if (!estat[4]) {
+                dadesUsuari.set(4, null);
             }
 
             // Anar demanant mentres el nom del rapero no sigui vàlid i la data no sigui valida i el pais sigui correcte
@@ -308,6 +308,7 @@ public class ControllerCompeticio {
 
     /**
      * Método que se encarga de crear el perfil del rapero seleccionado
+     *
      * @param finalCompeticio El parámetro finalCompetició indica si ya se ha llegado al final de la competición o no
      * @throws InterruptedException El parámetro InterruptedException sirve para identificar un problema con el tiempo
      */
@@ -322,7 +323,7 @@ public class ControllerCompeticio {
                 rapperName = menu.askForRapper();
                 stageName = competicio.findRapper(rapperName);
                 rapperNotFound = false;
-            } catch (RapperNotFoundException e){
+            } catch (RapperNotFoundException e) {
                 menu.displayError("Rapper not found");
                 Thread.sleep(50);
             }
@@ -335,11 +336,11 @@ public class ControllerCompeticio {
         sb.append(".html");
 
         Profileable rapperProfile = competicio.rapperProfile(stageName);
-        Profile profile = ProfileFactory.createProfile(sb.toString(),rapperProfile);
+        Profile profile = ProfileFactory.createProfile(sb.toString(), rapperProfile);
         String[] infoProfile = new String[3];
         try {
             infoProfile = competicio.infoProfile(stageName);
-        } catch (RapperNotFoundException e){
+        } catch (RapperNotFoundException e) {
             menu.displayError("Rapper not found while trying to get the information");
         }
         sb = new StringBuilder();
@@ -347,39 +348,39 @@ public class ControllerCompeticio {
         sb.append(infoProfile[2]);
         sb.append(")...");
         menu.display(sb.toString());
-            try {
-                ArrayList<String> infoPais = Json.llegirPais(infoProfile[2]);
-                profile.addExtra("Points", infoProfile[0]);
-                if (finalCompeticio && infoProfile[1].equals("1")) {
-                    profile.addExtra("Position", "Winner");
-                } else if (finalCompeticio && infoProfile[1].equals("2")) {
-                    profile.addExtra("Position", "Loser");
-                } else {
-                    profile.addExtra("Position", infoProfile[1]);
-                }
-                profile.setFlagUrl(infoPais.get(2));
-                profile.setCountry(infoProfile[2]);
-                for (int i = 3; i < infoPais.size(); i++) {
-                    profile.addLanguage(infoPais.get(i));
-                }
-                profile.addExtra("Country population", infoPais.get(0));
-                menu.display("Generating HTML file...");
+        try {
+            ArrayList<String> infoPais = Json.llegirPais(infoProfile[2]);
+            profile.addExtra("Points", infoProfile[0]);
+            if (finalCompeticio && infoProfile[1].equals("1")) {
+                profile.addExtra("Position", "Winner");
+            } else if (finalCompeticio && infoProfile[1].equals("2")) {
+                profile.addExtra("Position", "Loser");
+            } else {
+                profile.addExtra("Position", infoProfile[1]);
+            }
+            profile.setFlagUrl(infoPais.get(2));
+            profile.setCountry(infoProfile[2]);
+            for (int i = 3; i < infoPais.size(); i++) {
+                profile.addLanguage(infoPais.get(i));
+            }
+            profile.addExtra("Country population", infoPais.get(0));
+            menu.display("Generating HTML file...");
 
-                try {
-                    profile.writeAndOpen();
-                    menu.display("Done! The profile will open in your default browser.");
-                } catch (IOException e) {
-                    menu.displayError("The HTML file can't be created / written to / opened for any reason");
-                }
-            } catch (ApiReadException e) {
-                if (e.getHttpCode() == 404) {
-                    menu.displayError("Country not found in the API");
-                } else {
-                    menu.displayError("Error while trying to read the API");
-                }
+            try {
+                profile.writeAndOpen();
+                menu.display("Done! The profile will open in your default browser.");
             } catch (IOException e) {
+                menu.displayError("The HTML file can't be created / written to / opened for any reason");
+            }
+        } catch (ApiReadException e) {
+            if (e.getHttpCode() == 404) {
+                menu.displayError("Country not found in the API");
+            } else {
                 menu.displayError("Error while trying to read the API");
             }
+        } catch (IOException e) {
+            menu.displayError("Error while trying to read the API");
+        }
 
     }//Cierre del método
 

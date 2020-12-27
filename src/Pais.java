@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Esta clase nos permite controlar toda la información que tiene el pais.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 public class Pais {
 
@@ -51,15 +51,28 @@ public class Pais {
                 '}';
     }
 
+    /**
+     * Método que nos coge la bandera del pais.
+     *
+     * @return La bandera del pais.
+     */
+
     public String getBandera() {
         return bandera;
-    }
+    }//Cierre del método
+
+    /**
+     * Método que nos idica las lenguas que se hablan en el pais y las escirbe en inglés.
+     *
+     * @return Las lenguas que se halan en el pais escrutas en inlgés.
+     */
 
     public ArrayList<String> getLanguages() {
         ArrayList<String> lang = new ArrayList<>();
-        for (Llengua llengua:llengues){
+        for (Llengua llengua : llengues) {
             lang.add(llengua.getNomIdiomaAngles());
         }
         return lang;
-    }
+    }//Cierre del método
+
 }//Cierre de la clase Pais

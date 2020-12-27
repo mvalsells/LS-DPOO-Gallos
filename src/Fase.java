@@ -10,23 +10,23 @@ import java.util.Random;
  * Esta clase nos permite controlar lo que sucede en cada fase, ya sea los raperos de ella, los temas, las batallas e incluso oendar la clasificacion.
  *
  * @author Marc Valsells y Albert Clarimón.
- * @version 10/12/2020.
+ * @version 27/12/2020.
  */
 
 public class Fase {
 
     //Campos de la clase
     private static ArrayList<Rapero> raperos;
-    private ArrayList<Batalla> batalles;
+    private final ArrayList<Batalla> batalles;
     private int batallaActual;
-    private String country;
-    private float budget;
+    private final String country;
+    private final float budget;
 
     /**
      * Constructor de Fase
      *
-     * @param country   El parámetro country nos indica el pais donde se ejecuta la fase.
-     * @param budget El parámetro budget nos indica cual es el presupuesto para esa fase.
+     * @param country El parámetro country nos indica el pais donde se ejecuta la fase.
+     * @param budget  El parámetro budget nos indica cual es el presupuesto para esa fase.
      */
     public Fase(String country, float budget) {
         raperos = new ArrayList<>();
@@ -134,14 +134,15 @@ public class Fase {
 
     /**
      * Método que copia la estructura de rapero i la clona en una estructura auxiliar.
+     *
      * @param stageName El parámetro stageName nos indica el nombre artístico del rapero.
      * @return La estructura de rapero clonada.
      */
 
     public static Profileable rapperProfile(String stageName) {
         boolean found = false;
-        for (Rapero rapero : raperos){
-            if (rapero.getStageName().equals(stageName)){
+        for (Rapero rapero : raperos) {
+            if (rapero.getStageName().equals(stageName)) {
                 return (Profileable) rapero.clone();
             }
         }
@@ -150,6 +151,7 @@ public class Fase {
 
     /**
      * Método que copia en el string infoProfile toda la infomracion del rapero que queremos, la cual posteriormente se pondra en el HTML
+     *
      * @param stageName El parámetro stageName nos indica el nombre artístico del rapero.
      * @return toda la infomracion del rapero que queremos en el string infoProfile.
      * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.
@@ -157,11 +159,11 @@ public class Fase {
 
     public static String[] infoProfile(String stageName) throws RapperNotFoundException {
         ordenarRaperos();
-        for (int i=0; i<getNumParticipants(); i++) {
-            if (raperos.get(i).getStageName().equals(stageName)){
+        for (int i = 0; i < getNumParticipants(); i++) {
+            if (raperos.get(i).getStageName().equals(stageName)) {
                 String[] infoProfile = new String[3];
-                infoProfile[0] = Integer.toString((int)raperos.get(i).getPuntuacio()); //Puntuació
-                infoProfile[1] = Integer.toString(i+1); //Posició
+                infoProfile[0] = Integer.toString((int) raperos.get(i).getPuntuacio()); //Puntuació
+                infoProfile[1] = Integer.toString(i + 1); //Posició
                 infoProfile[2] = raperos.get(i).getCountryName(); //Nom Pais
                 return infoProfile;
             }
