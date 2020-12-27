@@ -27,17 +27,6 @@ public class Pais {
         this.nomAngles = nomAngles;
     }//Cierre del constructor
 
- /*   public Pais(String nomAngles, String regio, int habitants, String bandera, ArrayList<String[]> languages) {
-        this.nomAngles=nomAngles;
-        this.regio=regio;
-        this.habitants=habitants;
-        this.bandera=bandera;
-        this.llengues = new ArrayList<>();
-        for (String[] lang : languages){
-            Llengua language = new Llengua(lang[0], lang[1]);
-            llengues.add(language);
-        }
-    }*/
 
     //Getters and Setters
 

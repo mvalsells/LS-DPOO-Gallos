@@ -422,9 +422,22 @@ public class Competicio {
         return phases.get(faseActual - 1).simularBatalles(login);
     }//Cierre del método
 
+    /**
+     * Método que se encarga de retornar el nombre del rapero que se ha solicitado en la fase.
+     * @param stageName El parámetro stageName india el nombre artítico del rapreo.
+     * @return el nombre del rapero que se ha solicitado en la fase.
+     */
+
     public Profileable rapperProfile(String stageName) {
         return Fase.rapperProfile(stageName);
-    }
+    }//Cierre del método
+
+    /**
+     * Método que se encarga de encontrar si el nombre introducido existe.
+     * @param rapperName El parámetro rapperName indica el nombre que usa el rapero en la competición.
+     * @return el nombre introducido .
+     * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.
+     */
 
     public String findRapper(String rapperName) throws RapperNotFoundException {
         for (int i=0; i<Fase.getNumParticipants(); i++){
@@ -438,9 +451,16 @@ public class Competicio {
             }
         }
         throw new RapperNotFoundException(rapperName);
-    }
+    }//Cierre del método
+
+    /**
+     * Método que se encarga de pasar la información del perfil del rapero seleccionado.
+     * @param stageName El parámetro stageName india el nombre artítico del rapreo.
+     * @return La información del perfil del rapero seleccionado.
+     * @throws RapperNotFoundException El parametro RapperNotFoundException indica que ha habido un error en la busqueda del rapero.
+     */
 
     public String[] infoProfile(String stageName) throws RapperNotFoundException {
         return Fase.infoProfile(stageName);
-    }
+    }//Cierre del método
 }//Cierre de la clase Competicio

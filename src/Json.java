@@ -25,6 +25,14 @@ public class Json {
 
     //Mètodes
 
+    /**
+     * Método que se encarga de leer la información del pais que vamos a tratar de la API.
+     * @param nomAngles El parámetro nomAngles transforma el idioma del nombre del pais que hay guardado en la api al inglés.
+     * @return La información del pais que vamos a tratar de la API.
+     * @throws ApiReadException El parámetro ApiReadException controla si hay un fallo en la lectura de la API.
+     * @throws IOException El parametro IOException controla los errores de la url.
+     */
+
     public static ArrayList<String> llegirPais(String nomAngles) throws ApiReadException, IOException/*thorw Malform... IOexception PropiaException*/ {
 
         //Llegir API
@@ -44,7 +52,7 @@ public class Json {
         }
 
         return infoCountry;
-    }
+    }//Cierre del método
 
     //Llegir temes
 
