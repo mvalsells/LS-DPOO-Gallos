@@ -40,16 +40,6 @@ public class Pais {
         return nomAngles;
     }//Cierre del método
 
-    @Override
-    public String toString() {
-        return "Pais{" +
-                "nomAngles='" + nomAngles + '\'' +
-                ", habitants=" + habitants +
-                ", regio='" + regio + '\'' +
-                ", bandera='" + bandera + '\'' +
-                ", llengues=" + llengues.toString() +
-                '}';
-    }
 
     /**
      * Método que nos coge la bandera del pais.

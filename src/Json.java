@@ -61,7 +61,7 @@ public class Json {
      * @return El conntenido que tiene cada competición.
      */
 
-    public Competicio llegirCompeticio() {
+    public static Competicio llegirCompeticio() {
         final String fitxerCompeticio = "src/competicio.json";
         try {
             //Atributs competició
@@ -161,7 +161,7 @@ public class Json {
      * @return El array de temas donde contiene todos los temas y estrofas.
      */
 
-    public ArrayList<Tema> llegirTema() {
+    public static ArrayList<Tema> llegirTema() {
         final String fitxerBatalla = "src/batalles.json";
         try {
             ArrayList<Tema> temes = new ArrayList<>();
@@ -218,7 +218,7 @@ public class Json {
      * @param photo       El parámetro photo nos indica cual es la foto del rapero.
      */
 
-    public void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
+    public static void escriureRapero(String realName, String stageName, String birth, String nationality, int level, String photo) {
         final String fitxerCompeticio = "src/competicio.json";
         GsonBuilder builder = new GsonBuilder();
         builder.setPrettyPrinting().serializeNulls();

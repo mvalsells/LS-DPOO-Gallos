@@ -31,14 +31,6 @@ public class Llengua {
     public Llengua() {
     }//Cierre del método
 
-    @Override
-    public String toString() {
-        return "Llengua{" +
-                "nomIdiomaNatiu='" + nomIdiomaNatiu + '\'' +
-                ", nomIdiomaAngles='" + nomIdiomaAngles + '\'' +
-                '}';
-    }
-
     /**
      * Método que sirve para canviar el nombre del pais, al nombre del pais escrito en inglés.
      *

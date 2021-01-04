@@ -8,7 +8,7 @@ package exceptions;
  */
 
 public class RapperNotFoundException extends Exception {
-    String stageName;
+    private String stageName;
 
     /**
      * Constructor de la clase

@@ -8,7 +8,7 @@ package exceptions;
  */
 
 public class ApiReadException extends Exception {
-    int httpCode;
+    private int httpCode;
 
     /**
      * Constructor de la clase
