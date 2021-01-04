@@ -15,7 +15,6 @@ public abstract class Batalla {
     //Campos de la classe
     private final Rapero[] raperos = new Rapero[2];
     private final Tema[] temas = new Tema[2];
-    private final Json json = new Json();
     private final Llengua llengua;
 
     //Constructor
@@ -30,7 +29,7 @@ public abstract class Batalla {
     public Batalla(Rapero rapero1, Rapero rapero2) {
         this.raperos[0] = rapero1;
         this.raperos[1] = rapero2;
-        ArrayList<Tema> temes = json.llegirTema();
+        ArrayList<Tema> temes = Json.llegirTema();
         Collections.shuffle(temes);
         temas[0] = temes.get(0);
         temas[1] = temes.get(1);

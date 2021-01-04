@@ -26,10 +26,9 @@ public class ControllerCompeticio {
      * Contructor de ControllerCompeticio
      */
     public ControllerCompeticio() {
-        Json json = new Json();
         menu = new Menu();
         menu.display("Reading data from JSON file and API...");
-        competicio = json.llegirCompeticio();
+        competicio = Json.llegirCompeticio();
 
     }//Cierre del constructor
 
@@ -122,9 +121,8 @@ public class ControllerCompeticio {
             }
 
             if (estat[3]) {
-                Json json = new Json();
                 int level = Integer.parseInt(nivell);
-                json.escriureRapero(realName, stageName, birth, nationality, level, photo);
+                Json.escriureRapero(realName, stageName, birth, nationality, level, photo);
             }
 
             if (!estat[4]) {
