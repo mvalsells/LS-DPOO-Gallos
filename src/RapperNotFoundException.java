@@ -1,5 +1,3 @@
-package exceptions;
-
 /**
  * Esta clase nos permite controlar que no salte el programa si no existe el rapero solicitado.
  *
@@ -8,12 +6,14 @@ package exceptions;
  */
 
 public class RapperNotFoundException extends Exception {
+
+    //Atributos de la exception
     private String stageName;
 
     /**
      * Constructor de la clase
      *
-     * @param stageName El parámetro stageName india el nombre artítico del rapreo.
+     * @param stageName El parámetro stageName india el nombre artístico del rapreo.
      */
 
     public RapperNotFoundException(String stageName) {
@@ -24,7 +24,7 @@ public class RapperNotFoundException extends Exception {
     /**
      * Método que devuelve el nombre del rapero solicitado
      *
-     * @return
+     * @return retorna stageName india el nombre artístico del rapreo.
      */
     public String getStageName() {
         return stageName;

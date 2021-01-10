@@ -1,5 +1,4 @@
 import edu.salleurl.profile.Profileable;
-import exceptions.RapperNotFoundException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,8 +37,8 @@ public class Competicio {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.countries = countries;
-        this.phases = phases;
+        this.countries = (ArrayList<String>) countries.clone();
+        this.phases = (ArrayList<Fase>) phases.clone();
         faseActual = 1;
 
     }//Cierre del método

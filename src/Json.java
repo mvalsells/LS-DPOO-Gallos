@@ -1,5 +1,4 @@
 import com.google.gson.*;
-import exceptions.ApiReadException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,5 +1,3 @@
-package exceptions;
-
 /**
  * Esta clase nos permite controlar que no salte el programa si hay un fallo en la API.
  *
@@ -8,6 +6,8 @@ package exceptions;
  */
 
 public class ApiReadException extends Exception {
+
+    //Atributos de la exception
     private int httpCode;
 
     /**
