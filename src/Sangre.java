@@ -6,15 +6,13 @@
  */
 
 public class Sangre extends Batalla {
-
+    private String productor;
     /**
      * Método que nos permite coger los raperos que vienen de la superclasse Batalla
      *
      * @param rapero1 información sobre el rapero 1.
      * @param rapero2 información sobre el rapero 2.
      */
-
-    private String productor;
 
     public Sangre(Rapero rapero1, Rapero rapero2) {
         super(rapero1, rapero2);

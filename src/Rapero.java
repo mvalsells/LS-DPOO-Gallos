@@ -73,6 +73,7 @@ public class Rapero implements Profileable {
 
     /**
      * Método que coje la puntuaciçón del rapero.
+     * @param puntuacio puntiación a establecer al rapero
      */
     public void setPuntuacio(double puntuacio) {
         this.puntuacio = puntuacio;

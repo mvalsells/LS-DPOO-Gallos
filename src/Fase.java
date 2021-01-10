@@ -1,5 +1,4 @@
 import edu.salleurl.profile.Profileable;
-import exceptions.RapperNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -84,10 +83,11 @@ public class Fase {
 
     /**
      * Método que devuelve el número de raperos que tiene la fase.
+     * @param raperos establecer los raperos detodas las Fases
      */
 
     public static void setRapperos(ArrayList<Rapero> raperos) {
-        Fase.raperos = raperos;
+        Fase.raperos = (ArrayList<Rapero>) raperos.clone();
     }//Cierre del método
 
     /**

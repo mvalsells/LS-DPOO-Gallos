@@ -24,8 +24,8 @@ public class Tema {
 
     public Tema(String nom, ArrayList<String> estrofesN1, ArrayList<String> estrofesN2) {
         this.nom = nom;
-        this.estrofesN1 = estrofesN1;
-        this.estrofesN2 = estrofesN2;
+        this.estrofesN1 = (ArrayList<String>) estrofesN1.clone();
+        this.estrofesN2 = (ArrayList<String>) estrofesN2.clone();
     }//Cierre del constructor
 
     /**
@@ -44,7 +44,7 @@ public class Tema {
      */
 
     public ArrayList<String> getEstrofesN1() {
-        return estrofesN1;
+        return (ArrayList<String>) estrofesN1.clone();
     }//Cierre del método
 
     /**
@@ -54,7 +54,7 @@ public class Tema {
      */
 
     public ArrayList<String> getEstrofesN2() {
-        return estrofesN2;
+        return (ArrayList<String>) estrofesN2.clone();
     }//Cierre del método
 
 }//Cierre de la clase Tema

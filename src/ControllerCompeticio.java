@@ -1,8 +1,6 @@
 import edu.salleurl.profile.Profile;
 import edu.salleurl.profile.ProfileFactory;
 import edu.salleurl.profile.Profileable;
-import exceptions.ApiReadException;
-import exceptions.RapperNotFoundException;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
